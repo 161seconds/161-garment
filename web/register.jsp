@@ -7,7 +7,7 @@
         <div class="card border border-dark-subtle rounded-0 p-4 shadow-sm bg-white">
             <div class="card-body p-2">
                 <div class="text-center mb-4">
-                    <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 text-uppercase" style="letter-spacing: 1px;">161 Garment</span>
+                    <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 text-uppercase" style="letter-spacing: 1px;">ONE61 Garment</span>
                     <h3 class="fw-bold text-uppercase tracking-wide m-0">ĐĂNG KÝ TÀI KHOẢN</h3>
                     <p class="text-muted small mt-1">Tạo tài khoản thành viên để nhận nhiều ưu đãi</p>
                 </div>

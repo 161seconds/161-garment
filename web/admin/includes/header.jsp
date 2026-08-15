@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${param.title != null ? param.title : '161 Garment | Admin Portal'}</title>
+    <title>${param.title != null ? param.title : 'ONE61 Garment | Admin Portal'}</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome 6 -->
@@ -115,7 +115,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-admin sticky-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/admin/dashboard.jsp">
-                <span class="admin-brand-box">161</span>
+                <span class="admin-brand-box">ONE61</span>
                 <span class="fw-bold tracking-wider">GARMENT ADMIN</span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">

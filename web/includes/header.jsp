@@ -6,7 +6,7 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>161 Garment | Thời Trang Tối Giản Cao Cấp</title>
+            <title>ONE61 Garment | Thời Trang Tối Giản Cao Cấp</title>
             <!-- Bootstrap 5 CSS -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
             <!-- FontAwesome 6 -->
@@ -302,7 +302,7 @@
                     <div class="d-flex align-items-center gap-3">
                         <!-- Brand Logo -->
                         <a class="navbar-brand-wrapper me-2" href="home">
-                            <span class="brand-box">161</span>
+                            <span class="brand-box">ONE61</span>
                             <span class="brand-box">GARMENT</span>
                         </a>
 

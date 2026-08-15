@@ -27,7 +27,7 @@
         <!-- Product Details -->
         <div class="col-md-7 d-flex flex-column">
             <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 align-self-start text-uppercase" style="letter-spacing: 1px;">
-                161 Garment Collection
+                ONE61 Garment Collection
             </span>
             <h2 class="fw-bold text-uppercase tracking-tight mb-2">${PRODUCT.name}</h2>
             <div class="text-muted small mb-3">Mã sản phẩm: <strong class="font-monospace text-dark">${PRODUCT.productID}</strong></div>

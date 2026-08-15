@@ -20,7 +20,7 @@
 
             <h2 class="fw-bold text-uppercase tracking-wide mt-2 mb-2">CẢM ƠN BẠN ĐÃ ĐẶT HÀNG!</h2>
             <p class="text-secondary small mb-4">
-                Đơn hàng của bạn đã được tiếp nhận và đang được đội ngũ 161 Garment đóng gói chuẩn bị giao tới bạn.
+                Đơn hàng của bạn đã được tiếp nhận và đang được đội ngũ ONE61 Garment đóng gói chuẩn bị giao tới bạn.
             </p>
 
             <!-- Order Details Summary Box -->

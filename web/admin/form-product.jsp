@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="includes/header.jsp">
-    <jsp:param name="title" value="Thêm Sản Phẩm Mới | 161 Garment Admin" />
+    <jsp:param name="title" value="Thêm Sản Phẩm Mới | ONE61 Garment Admin" />
     <jsp:param name="activeMenu" value="products" />
 </jsp:include>
 

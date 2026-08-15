@@ -9,7 +9,7 @@
                 <!-- Col 1: Brand & About -->
                 <div class="col-lg-4 col-md-6">
                     <div class="navbar-brand-wrapper mb-3">
-                        <span class="brand-box">161</span>
+                        <span class="brand-box">ONE61</span>
                         <span class="brand-box">GARMENT</span>
                     </div>
                     <p class="text-secondary small mb-4 pe-lg-4" style="line-height: 1.7;">
@@ -33,7 +33,7 @@
 
                 <!-- Col 2: About Us -->
                 <div class="col-lg-2 col-md-3 col-6">
-                    <h6 class="fw-bold text-uppercase mb-3 tracking-wide" style="font-size: 0.85rem; letter-spacing: 0.5px;">VỀ 161 GARMENT</h6>
+                    <h6 class="fw-bold text-uppercase mb-3 tracking-wide" style="font-size: 0.85rem; letter-spacing: 0.5px;">VỀ ONE61 GARMENT</h6>
                     <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
                         <li><a href="home" class="text-secondary text-decoration-none hover-link">Trang chủ</a></li>
                         <li><a href="product" class="text-secondary text-decoration-none hover-link">Tất cả sản phẩm</a></li>
@@ -60,7 +60,7 @@
                     <h6 class="fw-bold text-uppercase mb-3 tracking-wide" style="font-size: 0.85rem; letter-spacing: 0.5px;">NHẬN BẢN TIN KHUYẾN MÃI</h6>
                     <p class="text-secondary small mb-3">Đăng ký để nhận thông tin bộ sưu tập mới nhất và voucher giảm giá 10%.</p>
                     
-                    <form class="d-flex mb-3" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận bản tin của 161 Garment!');">
+                    <form class="d-flex mb-3" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký nhận bản tin của ONE61 Garment!');">
                         <input type="email" class="form-control rounded-0 border-dark small" placeholder="Nhập email của bạn..." required>
                         <button type="submit" class="btn btn-danger rounded-0 fw-bold px-3 text-uppercase small" style="background-color: var(--color-primary); letter-spacing: 0.5px;">
                             ĐĂNG KÝ
@@ -79,7 +79,7 @@
         <div class="border-top py-3 bg-light">
             <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted">
                 <div>
-                    &copy; 2026 <strong>161 GARMENT</strong>. All Rights Reserved. PRJ301 Project.
+                    &copy; 2026 <strong>ONE61 GARMENT</strong>. All Rights Reserved. PRJ301 Project.
                 </div>
                 <div class="d-flex align-items-center gap-3 fs-5 text-secondary">
                     <i class="fa-solid fa-qrcode text-danger" title="Chuyển khoản mã VietQR 24/7"></i>
