@@ -163,3 +163,371 @@ footer a {
 footer a:hover {
     color: var(--color-primary);
 }
+
+/* 5 Column Grid Utilities */
+@media (min-width: 1200px) {
+    .row-cols-xl-5 > * {
+        flex: 0 0 auto !important;
+        width: 20% !important;
+    }
+}
+@media (min-width: 992px) {
+    .row-cols-lg-5 > * {
+        flex: 0 0 auto !important;
+        width: 20% !important;
+    }
+}
+.row-cols-5 > * {
+    flex: 0 0 auto !important;
+    width: 20% !important;
+}
+
+/* ==========================================================================
+   ONE61 LUXURY EDITORIAL CATEGORY CARDS
+   ========================================================================== */
+.one61-category-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+    color: inherit !important;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+}
+
+.one61-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    border-color: #CCCCCC;
+}
+
+.category-img-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 3.8;
+    overflow: hidden;
+    background-color: #F6F6F6;
+}
+
+.category-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.one61-category-card:hover .category-img {
+    transform: scale(1.06);
+}
+
+.category-floating-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #111111;
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.75px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+
+.category-info-box {
+    padding: 1.15rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: #FFFFFF;
+}
+
+.category-title {
+    font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #111111;
+    margin: 0 0 0.35rem 0;
+    transition: color 0.2s ease;
+}
+
+.one61-category-card:hover .category-title {
+    color: var(--color-primary, #ED1D24);
+}
+
+.category-subtitle {
+    font-size: 0.8rem;
+    color: #767676;
+    margin: 0 0 0.85rem 0;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.category-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-primary, #ED1D24);
+    transition: gap 0.2s ease;
+}
+
+.one61-category-card:hover .category-action-link {
+    gap: 10px;
+}
+
+/* ==========================================================================
+   ONE61 FULL-BLEED LUXURY PRODUCT CARD STYLES
+   ========================================================================== */
+.one61-catalog-card, .product-card {
+    border: 1px solid #E5E5E5 !important;
+    background: #FFFFFF !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+.one61-catalog-card:hover, .product-card:hover {
+    border-color: #111111 !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-4px) !important;
+}
+
+.one61-img-box, .product-img-wrapper, .image-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 3 / 3.8 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    background-color: #F6F6F6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+}
+
+.one61-img-box img, .product-img-wrapper img, .image-wrapper img, .product-img, .card-img-top {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    display: block !important;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.one61-catalog-card:hover .one61-img-box img,
+.product-card:hover .product-img-wrapper img,
+.product-card:hover .image-wrapper img,
+.product-card:hover .product-img {
+    transform: scale(1.06) !important;
+}
+
+/* ==========================================================================
+   ONE61 LUXURY BACK-TO-TOP BUTTON
+   ========================================================================== */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 46px;
+    height: 46px;
+    background-color: #111111;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    z-index: 1080;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-top-btn i {
+    font-size: 0.95rem;
+    transition: transform 0.25s ease;
+}
+
+.back-to-top-btn .back-to-top-text {
+    font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.back-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top-btn:hover {
+    background-color: var(--color-primary, #ED1D24);
+    border-color: var(--color-primary, #ED1D24);
+    box-shadow: 0 10px 25px rgba(237, 29, 36, 0.35);
+    transform: translateY(-4px);
+}
+
+.back-to-top-btn:hover i {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .back-to-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* ==========================================================================
+   UNIQLO-STYLE VISUAL CATEGORY ICONS SHOWCASE (CLEAN FLOATING ICONS)
+   ========================================================================== */
+.uniqlo-category-section {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 1.25rem 0 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.category-tab-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 1.5px solid #EEEEEE;
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+}
+
+.category-tab-btn {
+    font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888888;
+    background: none;
+    border: none;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+    text-decoration: none !important;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.category-tab-btn:hover {
+    color: #111111;
+}
+
+.category-tab-btn.active {
+    color: #111111;
+    font-weight: 900;
+}
+
+.category-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.95rem;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #111111;
+}
+
+.uniqlo-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1.5rem 0.75rem;
+    justify-items: center;
+    align-items: start;
+}
+
+.uniqlo-cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none !important;
+    color: #111111 !important;
+    padding: 0.5rem 0.25rem;
+    background: transparent !important;
+    width: 100%;
+    max-width: 135px;
+    cursor: pointer;
+    position: relative;
+    transition: none;
+}
+
+.uniqlo-cat-item:hover {
+    transform: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.uniqlo-cat-thumb {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.65rem;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+
+.uniqlo-cat-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.uniqlo-cat-item:hover .uniqlo-cat-thumb img {
+    transform: scale(1.06);
+    opacity: 0.88;
+}
+
+.uniqlo-cat-title {
+    font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #222222;
+    margin: 0;
+    transition: color 0.2s ease;
+    letter-spacing: -0.2px;
+}
+
+.uniqlo-cat-item:hover .uniqlo-cat-title,
+.uniqlo-cat-item.active-item .uniqlo-cat-title {
+    color: var(--color-primary, #ED1D24) !important;
+    text-decoration: underline;
+}
+
+
+
+
