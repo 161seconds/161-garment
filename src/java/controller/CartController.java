@@ -29,6 +29,20 @@ public class CartController extends HttpServlet {
         if (action != null) {
             if (action.equals("add")) {
                 String productID = request.getParameter("id");
+                if (productID == null || productID.isEmpty()) {
+                    productID = request.getParameter("productID");
+                }
+                
+                int addQty = 1;
+                String qtyParam = request.getParameter("quantity");
+                if (qtyParam != null && !qtyParam.isEmpty()) {
+                    try {
+                        addQty = Integer.parseInt(qtyParam);
+                    } catch (Exception e) {
+                        addQty = 1;
+                    }
+                }
+                
                 ProductDAO pDao = new ProductDAO();
                 ProductDTO product = pDao.getProductByID(productID);
                 
@@ -36,14 +50,15 @@ public class CartController extends HttpServlet {
                     boolean exist = false;
                     for (CartItemDTO item : cart) {
                         if (item.getProduct().getProductID().equals(productID)) {
-                            item.setQuantity(item.getQuantity() + 1);
+                            item.setQuantity(item.getQuantity() + addQty);
                             exist = true;
                             break;
                         }
                     }
                     if (!exist) {
-                        cart.add(new CartItemDTO(product, 1));
+                        cart.add(new CartItemDTO(product, addQty));
                     }
+                    session.setAttribute("SUCCESS_MSG", "Đã thêm " + addQty + " sản phẩm [" + product.getName() + "] vào giỏ hàng!");
                 }
             } else if (action.equals("remove")) {
                 String productID = request.getParameter("id");

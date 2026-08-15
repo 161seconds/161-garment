@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản | ONE61 GARMENT</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Pro -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-primary: #ED1D24;
+            --color-dark: #111111;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-dark);
+            background-color: #FAFAFA;
+        }
+
+        .brand-logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+        }
+
+        .brand-box {
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 0.95rem;
+            line-height: 1;
+            letter-spacing: -0.5px;
+            padding: 7px 7px;
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-white border-bottom py-3">
+        <div class="container text-center justify-content-center">
+            <a class="brand-logo-wrap" href="index.html">
+                <span class="brand-box">ONE61</span>
+                <span class="brand-box">GARMENT</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+                <div class="card border border-dark-subtle rounded-0 p-4 shadow-sm bg-white">
+                    <div class="card-body p-2">
+                        <div class="text-center mb-4">
+                            <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 text-uppercase" style="letter-spacing: 1px;">ONE61 Garment</span>
+                            <h3 class="fw-bold text-uppercase tracking-wide m-0">ĐĂNG KÝ TÀI KHOẢN</h3>
+                            <p class="text-muted small mt-1">Tạo tài khoản thành viên để nhận voucher giảm giá 10%</p>
+                        </div>
+
+                        <form onsubmit="handleRegister(event)">
+                            <div class="row g-3">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-uppercase">Tên đăng nhập <span class="text-danger">*</span></label>
+                                    <input type="text" id="regUser" class="form-control rounded-0" placeholder="VD: user123" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-uppercase">Họ và tên <span class="text-danger">*</span></label>
+                                    <input type="text" id="regName" class="form-control rounded-0" placeholder="VD: Nguyễn Văn A" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-uppercase">Địa chỉ Email <span class="text-danger">*</span></label>
+                                <input type="email" id="regEmail" class="form-control rounded-0" placeholder="name@example.com" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-uppercase">Số điện thoại</label>
+                                <input type="tel" id="regPhone" class="form-control rounded-0" placeholder="09xxxxxxxx">
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-uppercase">Mật khẩu <span class="text-danger">*</span></label>
+                                    <input type="password" id="regPass" class="form-control rounded-0" placeholder="Nhập mật khẩu" required>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-bold small text-uppercase">Xác nhận mật khẩu <span class="text-danger">*</span></label>
+                                    <input type="password" id="regConfirm" class="form-control rounded-0" placeholder="Nhập lại mật khẩu" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase mb-3" style="background-color: var(--color-primary); border-color: var(--color-primary); letter-spacing: 1px;">
+                                ĐĂNG KÝ TÀI KHOẢN
+                            </button>
+                            <div class="text-center pt-2 border-top">
+                                <span class="text-muted small">Đã có tài khoản?</span> 
+                                <a href="login.html" class="text-danger text-decoration-none fw-bold small text-uppercase ms-1">Đăng nhập</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-top text-dark py-4 mt-5 text-center small text-secondary">
+        © 2026 ONE61 GARMENT. All Rights Reserved.
+    </footer>
+
+    <script>
+        function handleRegister(e) {
+            e.preventDefault();
+            const pass = document.getElementById('regPass').value;
+            const confirm = document.getElementById('regConfirm').value;
+            if (pass !== confirm) {
+                alert('Mật khẩu xác nhận không khớp!');
+                return;
+            }
+            alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập để tiếp tục.');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

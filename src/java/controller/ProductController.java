@@ -58,7 +58,7 @@ public class ProductController extends HttpServlet {
             request.setAttribute("endPage", endPage);
             request.setAttribute("currentPage", page);
             
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("product.jsp").forward(request, response);
             
         } else if (action.equals("detail")) {
             String productID = request.getParameter("id");

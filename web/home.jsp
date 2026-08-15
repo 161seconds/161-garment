@@ -8,7 +8,7 @@
             <!-- Full Width Edge-to-Edge Hero Video Carousel (100vw) Behind Transparent Header -->
             <div id="heroVideoCarousel" class="carousel slide carousel-fade position-relative w-100 overflow-hidden"
                 data-bs-ride="carousel" data-bs-interval="12000"
-                style="height: 85vh; min-height: 550px; max-height: 850px; background-color: #000; margin-top: 0;">
+                style="height: 95vh; min-height: 680px; max-height: 960px; background-color: #000; margin-top: 0;">
                 <!-- Carousel Indicators (Uniqlo Minimalist Lines) -->
                 <div class="carousel-indicators mb-4" style="z-index: 3;">
                     <button type="button" data-bs-target="#heroVideoCarousel" data-bs-slide-to="0" class="active"
@@ -91,19 +91,6 @@
             <!-- Re-open container for page content -->
             <div class="container my-5 flex-grow-1">
 
-                <!-- Promo Strip -->
-                <div
-                    class="row g-2 mb-4 text-center small text-uppercase fw-bold text-muted border-top border-bottom py-2 bg-light">
-                    <div class="col-md-4 py-1">
-                        <i class="fa-solid fa-truck-fast text-danger me-1"></i> Miễn phí vận chuyển từ 499.000 đ
-                    </div>
-                    <div class="col-md-4 py-1">
-                        <i class="fa-solid fa-rotate-left text-danger me-1"></i> Đổi trả dễ dàng trong 30 ngày
-                    </div>
-                    <div class="col-md-4 py-1">
-                        <i class="fa-solid fa-shield-halved text-danger me-1"></i> Cam kết 100% chất lượng chính hãng
-                    </div>
-                </div>
 
                 <div class="row mt-4">
                     <!-- Sidebar Categories -->

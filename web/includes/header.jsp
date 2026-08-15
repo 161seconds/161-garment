@@ -280,12 +280,8 @@
             <!-- Top Announcement Bar (Hidden when transparent header is active) -->
             <c:if test="${param.transparentHeader ne 'true'}">
                 <div class="top-notification-bar py-1">
-                    <div class="container d-flex justify-content-between align-items-center">
-                        <div class="text-uppercase fw-semibold d-none d-md-block">
-                            <i class="fa-solid fa-truck-fast text-danger me-1"></i> Miễn phí vận chuyển cho đơn hàng từ
-                            499.000 đ
-                        </div>
-                        <div class="ms-auto d-flex gap-3 small">
+                    <div class="container d-flex justify-content-end align-items-center">
+                        <div class="d-flex gap-3 small">
                             <a href="#"><i class="fa-solid fa-location-dot me-1"></i> Tìm cửa hàng</a>
                             <span class="text-secondary">|</span>
                             <a href="#"><i class="fa-solid fa-headset me-1"></i> Hotline: 1900 161 161</a>

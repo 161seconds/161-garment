@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán & Đặt Hàng | ONE61 GARMENT</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Pro -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-primary: #ED1D24;
+            --color-dark: #111111;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-dark);
+            background-color: #FAFAFA;
+        }
+
+        .brand-logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+        }
+
+        .brand-box {
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 0.95rem;
+            line-height: 1;
+            letter-spacing: -0.5px;
+            padding: 7px 7px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .stepper-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .stepper-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            background-color: #E0E0E0;
+            color: #777;
+        }
+
+        .stepper-badge.active {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+
+        .stepper-badge.completed {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .stepper-line {
+            width: 80px;
+            height: 2px;
+            background-color: #E0E0E0;
+            margin: 0 12px;
+        }
+
+        .stepper-line.active {
+            background-color: var(--color-primary);
+        }
+
+        .qr-card-box {
+            border: 2px solid #E0E0E0;
+            border-radius: 0;
+            background: #fff;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .pulse-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #28a745;
+            box-shadow: 0 0 0 rgba(40, 167, 69, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-white border-bottom py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="brand-logo-wrap" href="index.html">
+                <span class="brand-box">ONE61</span>
+                <span class="brand-box">GARMENT</span>
+            </a>
+            <div class="small fw-semibold text-secondary">
+                <i class="fa-solid fa-lock text-success me-1"></i> Thanh toán an toàn 256-bit SSL
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4 flex-grow-1" style="max-width: 1000px;">
+        <!-- Stepper -->
+        <div class="stepper-wrap">
+            <div class="d-flex align-items-center gap-2">
+                <div class="stepper-badge active" id="badgeStep1">1</div>
+                <span class="small fw-bold text-uppercase text-dark" id="textStep1">Giao hàng</span>
+            </div>
+            <div class="stepper-line" id="stepperLine"></div>
+            <div class="d-flex align-items-center gap-2">
+                <div class="stepper-badge" id="badgeStep2">2</div>
+                <span class="small fw-semibold text-uppercase text-muted" id="textStep2">Thanh toán VietQR</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Delivery Information -->
+        <div id="stepDelivery">
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="card border rounded-0 p-4 bg-white shadow-sm">
+                        <h5 class="fw-bold text-uppercase border-bottom pb-3 mb-3">1. THÔNG TIN GIAO HÀNG</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Họ và tên người nhận <span class="text-danger">*</span></label>
+                            <input type="text" id="custName" class="form-control rounded-0" placeholder="VD: Nguyễn Văn Quốc Bảo">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" id="custPhone" class="form-control rounded-0" placeholder="VD: 0822221616">
+                            <div class="form-text text-muted small">Dùng để tạo nội dung chuyển khoản tự động và liên hệ giao hàng.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-uppercase">Địa chỉ giao hàng <span class="text-danger">*</span></label>
+                            <input type="text" id="custAddress" class="form-control rounded-0" placeholder="Số nhà, tên đường, phường/xã, quận/huyện...">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-uppercase">Ghi chú đơn hàng (Tùy chọn)</label>
+                            <textarea id="custNote" class="form-control rounded-0" rows="2" placeholder="Ghi chú thêm cho shipper (nếu có)..."></textarea>
+                        </div>
+
+                        <button type="button" onclick="goToStepPayment()" class="btn btn-dark rounded-0 w-100 py-3 fw-bold text-uppercase small shadow-sm">
+                            TIẾP TỤC ĐẾN BƯỚC THANH TOÁN <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card border rounded-0 p-4 bg-white shadow-sm">
+                        <h5 class="fw-bold text-uppercase border-bottom pb-3 mb-3">TÓM TẮT ĐƠN HÀNG</h5>
+                        <div id="checkoutMiniCart" class="mb-3"></div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span class="text-secondary">Tạm tính:</span>
+                            <strong id="coSubtotal">0 đ</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 small">
+                            <span class="text-secondary">Vận chuyển:</span>
+                            <strong id="coShipping" class="text-success">MIỄN PHÍ</strong>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                            <span class="fw-bold">TỔNG CỘNG:</span>
+                            <span class="fs-4 fw-bold text-danger font-monospace" id="coTotal">0 đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Payment -->
+        <div id="stepPayment" style="display: none;">
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="card border rounded-0 p-4 bg-white shadow-sm">
+                        <h5 class="fw-bold text-uppercase border-bottom pb-3 mb-3">2. PHƯƠNG THỨC THANH TOÁN</h5>
+                        
+                        <div class="form-check p-3 border mb-3 bg-light">
+                            <input class="form-check-input ms-0 me-2" type="radio" name="payMethod" id="payQR" value="QR_CODE" checked>
+                            <label class="form-check-label fw-bold small text-uppercase" for="payQR">
+                                <i class="fa-solid fa-qrcode text-danger me-1"></i> Chuyển khoản VietQR MB Bank (Khuyên dùng - Xử lý tự động)
+                            </label>
+                        </div>
+
+                        <div class="qr-card-box mb-4">
+                            <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                                <span class="pulse-indicator"></span>
+                                <span class="small fw-bold text-success text-uppercase">Hệ thống đang chờ nhận chuyển khoản...</span>
+                            </div>
+
+                            <img id="vietQrImg" src="" alt="Mã VietQR" class="img-fluid border p-2 bg-white mb-3" style="max-width: 250px;">
+
+                            <div class="table-responsive text-start small">
+                                <table class="table table-sm table-bordered mb-0">
+                                    <tbody>
+                                        <tr><td class="bg-light text-secondary">Ngân hàng:</td><td><strong>MB Bank (Quân Đội)</strong></td></tr>
+                                        <tr><td class="bg-light text-secondary">Số tài khoản:</td><td><strong class="text-danger fs-6 font-monospace">08222216167810</strong></td></tr>
+                                        <tr><td class="bg-light text-secondary">Chủ tài khoản:</td><td><strong>NGUYEN VAN QUOC BAO</strong></td></tr>
+                                        <tr><td class="bg-light text-secondary">Số tiền:</td><td><strong class="text-danger fs-6 font-monospace" id="qrAmount">0 đ</strong></td></tr>
+                                        <tr><td class="bg-light text-secondary">Nội dung CK:</td><td><strong class="text-danger fs-6 font-monospace" id="qrContent">161GM ...</strong></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-text text-muted small mt-2">
+                                <i class="fa-solid fa-circle-info me-1"></i> Quét mã bằng App ngân hàng bất kỳ để tự động điền số tiền và nội dung.
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="button" onclick="backToStepDelivery()" class="btn btn-outline-dark rounded-0 px-4 py-2 small fw-bold text-uppercase">
+                                <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
+                            </button>
+                            <button type="button" onclick="confirmPaymentSuccess()" class="btn btn-success rounded-0 flex-grow-1 py-2 small fw-bold text-uppercase">
+                                <i class="fa-solid fa-circle-check me-1"></i> Tôi đã chuyển khoản thành công
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card border rounded-0 p-4 bg-white shadow-sm">
+                        <h5 class="fw-bold text-uppercase border-bottom pb-3 mb-3">NGƯỜI NHẬN HÀNG</h5>
+                        <p class="small mb-1"><strong>Họ tên:</strong> <span id="sumName">...</span></p>
+                        <p class="small mb-1"><strong>SĐT:</strong> <span id="sumPhone">...</span></p>
+                        <p class="small mb-3"><strong>Địa chỉ:</strong> <span id="sumAddress">...</span></p>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">CẦN THANH TOÁN:</span>
+                            <span class="fs-4 fw-bold text-danger font-monospace" id="sumFinalTotal">0 đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top text-dark py-4 mt-5 text-center small text-secondary">
+        © 2026 ONE61 GARMENT. All Rights Reserved.
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const SEPAY_API_TOKEN = atob('SkhOSklQVk1UWEpCWjFKWklDRU9ETEw4QVVWVjBaQUdNR1FSUFZTNTJNNVJPV1VZSVJUMlAzRUY2VUQ4OUFPTg==');
+        let pollingInterval = null;
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('one61_cart') || '[]');
+        }
+
+        function calculateTotals() {
+            const cart = getCart();
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const shipping = subtotal >= 499000 || subtotal === 0 ? 0 : 30000;
+            const total = subtotal + shipping;
+            return { subtotal, shipping, total, cart };
+        }
+
+        function renderCheckoutSummary() {
+            const { subtotal, shipping, total, cart } = calculateTotals();
+            const mini = document.getElementById('checkoutMiniCart');
+            
+            if (cart.length === 0) {
+                mini.innerHTML = '<p class="small text-muted">Giỏ hàng trống.</p>';
+            } else {
+                mini.innerHTML = cart.map(i => `
+                    <div class="d-flex justify-content-between align-items-center mb-2 small">
+                        <div>
+                            <span class="fw-bold text-dark">${i.name}</span>
+                            <div class="text-muted" style="font-size: 0.75rem;">SL: ${i.qty} | ${i.color} - ${i.size}</div>
+                        </div>
+                        <span class="fw-semibold">${(i.price * i.qty).toLocaleString('vi-VN')} đ</span>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('coSubtotal').textContent = subtotal.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('coShipping').textContent = shipping === 0 ? 'MIỄN PHÍ' : shipping.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('coTotal').textContent = total.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('qrAmount').textContent = total.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('sumFinalTotal').textContent = total.toLocaleString('vi-VN') + ' đ';
+        }
+
+        function goToStepPayment() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const addr = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !addr) {
+                alert('Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng!');
+                return;
+            }
+
+            const { total } = calculateTotals();
+            if (total <= 0) {
+                alert('Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm!');
+                window.location.href = 'product.html';
+                return;
+            }
+
+            const cleanPhone = phone.replace(/[^0-9]/g, '');
+            const transferContent = '161GM ' + cleanPhone;
+
+            document.getElementById('sumName').textContent = name;
+            document.getElementById('sumPhone').textContent = phone;
+            document.getElementById('sumAddress').textContent = addr;
+            document.getElementById('qrContent').textContent = transferContent;
+
+            const qrUrl = 'https://qr.sepay.vn/img?acc=08222216167810&bank=MBBank&amount=' + total + '&des=' + encodeURIComponent(transferContent) + '&template=compact';
+            document.getElementById('vietQrImg').src = qrUrl;
+
+            document.getElementById('stepDelivery').style.display = 'none';
+            document.getElementById('stepPayment').style.display = 'block';
+
+            document.getElementById('badgeStep1').className = 'stepper-badge completed';
+            document.getElementById('badgeStep1').innerHTML = '<i class="fa-solid fa-check"></i>';
+            document.getElementById('stepperLine').className = 'stepper-line active';
+            document.getElementById('badgeStep2').className = 'stepper-badge active';
+            document.getElementById('textStep2').className = 'small fw-bold text-uppercase text-dark';
+
+            startPaymentPolling(cleanPhone);
+        }
+
+        function backToStepDelivery() {
+            if (pollingInterval) clearInterval(pollingInterval);
+            document.getElementById('stepPayment').style.display = 'none';
+            document.getElementById('stepDelivery').style.display = 'block';
+
+            document.getElementById('badgeStep1').className = 'stepper-badge active';
+            document.getElementById('badgeStep1').textContent = '1';
+            document.getElementById('stepperLine').className = 'stepper-line';
+            document.getElementById('badgeStep2').className = 'stepper-badge';
+            document.getElementById('textStep2').className = 'small fw-semibold text-uppercase text-muted';
+        }
+
+        function startPaymentPolling(phone) {
+            if (pollingInterval) clearInterval(pollingInterval);
+            const { total } = calculateTotals();
+
+            pollingInterval = setInterval(async () => {
+                try {
+                    const res = await fetch('https://my.sepay.vn/userapi/transactions/list', {
+                        headers: { 'Authorization': 'Bearer ' + SEPAY_API_TOKEN }
+                    });
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    if (!data.transactions) return;
+
+                    const match = data.transactions.find(tx => {
+                        const amountMatch = parseFloat(tx.amount_in || tx.transferAmount || 0) >= total;
+                        const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
+                        return amountMatch && (content.includes('161GM') || content.includes(phone));
+                    });
+
+                    if (match) {
+                        clearInterval(pollingInterval);
+                        confirmPaymentSuccess(match.id);
+                    }
+                } catch (e) {
+                    console.log('Polling check:', e);
+                }
+            }, 3000);
+        }
+
+        function confirmPaymentSuccess(txId) {
+            if (pollingInterval) clearInterval(pollingInterval);
+            const orderId = txId || 'ORD' + Date.now().toString().slice(-6);
+            localStorage.removeItem('one61_cart');
+            window.location.href = 'order-success.html?orderID=' + orderId + '&method=QR_CODE';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCheckoutSummary();
+        });
+    </script>
+</body>
+
+</html>

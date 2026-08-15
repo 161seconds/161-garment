@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm | ONE61 GARMENT</title>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Pro -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-primary: #ED1D24;
+            --color-dark: #111111;
+            --color-gray-light: #F4F4F4;
+            --color-gray-border: #E5E5E5;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-dark);
+            background-color: #FFFFFF;
+        }
+
+        .brand-logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+        }
+
+        .brand-box {
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 0.95rem;
+            line-height: 1;
+            letter-spacing: -0.5px;
+            padding: 7px 7px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .main-nav-link {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #111111 !important;
+            letter-spacing: 0.5px;
+            padding: 8px 16px !important;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .main-nav-link:hover {
+            color: var(--color-primary) !important;
+        }
+
+        .nav-icon-link {
+            color: #111111;
+            font-size: 1.15rem;
+            padding: 8px 10px;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .nav-icon-link:hover {
+            color: var(--color-primary);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: var(--color-primary);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .product-detail-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 4rem 1rem;
+        }
+
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .lookbook-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lookbook-item {
+            position: relative;
+            background-color: #f7f7f7;
+            overflow: hidden;
+            aspect-ratio: 3 / 4;
+        }
+
+        .lookbook-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .lookbook-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .lookbook-tag {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            backdrop-filter: blur(4px);
+        }
+
+        .sticky-product-info {
+            position: sticky;
+            top: 90px;
+            padding-left: 2rem;
+        }
+
+        @media (max-width: 991px) {
+            .sticky-product-info {
+                padding-left: 0;
+                margin-top: 2rem;
+                position: static;
+            }
+        }
+
+        .color-swatch-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            outline: 1px solid #ddd;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s ease;
+        }
+
+        .color-swatch-btn.active {
+            outline: 2px solid #000;
+            transform: scale(1.08);
+        }
+
+        .size-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .size-btn {
+            min-width: 48px;
+            height: 40px;
+            padding: 0 12px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #111;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .size-btn:hover {
+            border-color: #000;
+        }
+
+        .size-btn.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .qty-stepper {
+            display: inline-flex;
+            border: 1px solid #111;
+            height: 48px;
+            align-items: center;
+            background: #fff;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 100%;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .qty-input {
+            width: 45px;
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: transparent;
+        }
+
+        .btn-add-to-cart {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            height: 48px;
+            border-radius: 0;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add-to-cart:hover {
+            background-color: var(--color-primary);
+            color: #ffffff;
+        }
+
+        .btn-wishlist {
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #111;
+            font-weight: 600;
+            font-size: 0.85rem;
+            height: 44px;
+            border-radius: 0;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="border-bottom py-1 small bg-light">
+        <div class="container d-flex justify-content-end align-items-center gap-3">
+            <a href="#" class="text-secondary text-decoration-none"><i class="fa-solid fa-location-dot me-1"></i> Tìm cửa hàng</a>
+            <span class="text-secondary">|</span>
+            <a href="#" class="text-secondary text-decoration-none"><i class="fa-solid fa-headset me-1"></i> Hotline: 1900 161 161</a>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-2">
+        <div class="container">
+            <a class="brand-logo-wrap me-4" href="index.html">
+                <span class="brand-box">ONE61</span>
+                <span class="brand-box">GARMENT</span>
+            </a>
+
+            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="main-nav-link" href="index.html">TRANG CHỦ</a></li>
+                    <li class="nav-item"><a class="main-nav-link" href="product.html">TẤT CẢ SẢN PHẨM</a></li>
+                    <li class="nav-item"><a class="main-nav-link" href="product.html?cat=WOMEN">NỮ</a></li>
+                    <li class="nav-item"><a class="main-nav-link" href="product.html?cat=MEN">NAM</a></li>
+                    <li class="nav-item"><a class="main-nav-link" href="product.html?cat=KIDS">TRẺ EM</a></li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <a href="login.html" class="nav-icon-link" title="Tài khoản"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.html" class="nav-icon-link" title="Giỏ hàng">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="navCartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="border-bottom py-2 bg-white">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 small text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-secondary text-decoration-none">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="product.html" class="text-secondary text-decoration-none">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active text-dark fw-bold" id="breadCat">ONE61</li>
+                    <li class="breadcrumb-item active text-dark fw-bold" id="breadName" aria-current="page">...</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Product Detail Container -->
+    <div class="product-detail-container">
+        <div class="row g-4">
+            <!-- Left: Lookbook 4-Image Grid -->
+            <div class="col-lg-7 col-md-12">
+                <div class="lookbook-grid">
+                    <div class="lookbook-item">
+                        <img id="img1" src="../web/img-prj301/ao-thun-01.avif" alt="Mặt trước" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80';">
+                        <span class="lookbook-tag"><i class="fa-solid fa-camera"></i> Mặt trước</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img id="img2" src="../web/img-prj301/ao-thun-01.avif" alt="Phối đồ" style="filter: brightness(0.98);" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80';">
+                        <span class="lookbook-tag"><i class="fa-solid fa-person"></i> Phối đồ</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img id="img3" src="../web/img-prj301/ao-thun-01.avif" alt="Chi tiết vải" style="filter: contrast(1.05);" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80';">
+                        <span class="lookbook-tag"><i class="fa-solid fa-magnifying-glass"></i> Chi tiết vải</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img id="img4" src="../web/img-prj301/ao-thun-01.avif" alt="Form dáng" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80';">
+                        <span class="lookbook-tag"><i class="fa-solid fa-shirt"></i> Form dáng</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Sticky Product Info -->
+            <div class="col-lg-5 col-md-12">
+                <div class="sticky-product-info">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px;">
+                            ONE61 LIFEWEAR
+                        </span>
+                        <span class="text-muted small font-monospace" id="prodSKU">Mã SP: PROD01</span>
+                    </div>
+
+                    <h1 class="fw-bold text-uppercase tracking-tight mb-2" id="prodName" style="font-size: 1.65rem; line-height: 1.3;">
+                        Áo Thun AIRism Cổ Tròn Ngắn Tay
+                    </h1>
+
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="text-warning small">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="small fw-bold text-dark">4.8</span>
+                        <span class="small text-muted text-decoration-underline">(319 đánh giá)</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="fs-2 fw-bold text-dark font-monospace" id="prodPrice" style="letter-spacing: -0.5px;">
+                            299.000 đ
+                        </div>
+                        <div class="small text-success fw-semibold">
+                            <i class="fa-solid fa-check-circle me-1"></i> Giá đã bao gồm thuế VAT
+                        </div>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <!-- Color Swatches -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="small fw-bold text-uppercase">Màu sắc: <span id="selectedColorName" class="text-secondary fw-normal">32 BEIGE</span></span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="color-swatch-btn active" style="background-color: #D1C2A5;" onclick="selectColor('32 BEIGE', this)" title="32 BEIGE"></button>
+                            <button type="button" class="color-swatch-btn" style="background-color: #F5F2EB;" onclick="selectColor('01 OFF WHITE', this)" title="01 OFF WHITE"></button>
+                            <button type="button" class="color-swatch-btn" style="background-color: #2B3448;" onclick="selectColor('69 NAVY', this)" title="69 NAVY"></button>
+                            <button type="button" class="color-swatch-btn" style="background-color: #1A1A1A;" onclick="selectColor('09 BLACK', this)" title="09 BLACK"></button>
+                        </div>
+                    </div>
+
+                    <!-- Size Selector -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="small fw-bold text-uppercase">Kích thước: <span id="selectedSizeLabel" class="text-secondary fw-normal">M</span></span>
+                            <a href="#" class="small text-dark fw-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#sizeGuideModal">
+                                <i class="fa-solid fa-ruler-horizontal me-1"></i> Bảng quy đổi kích cỡ
+                            </a>
+                        </div>
+                        <div class="size-btn-group">
+                            <button type="button" class="size-btn" onclick="selectSize('XXS', this)">XXS</button>
+                            <button type="button" class="size-btn" onclick="selectSize('XS', this)">XS</button>
+                            <button type="button" class="size-btn" onclick="selectSize('S', this)">S</button>
+                            <button type="button" class="size-btn active" onclick="selectSize('M', this)">M</button>
+                            <button type="button" class="size-btn" onclick="selectSize('L', this)">L</button>
+                            <button type="button" class="size-btn" onclick="selectSize('XL', this)">XL</button>
+                            <button type="button" class="size-btn" onclick="selectSize('XXL', this)">XXL</button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity & Add to Cart -->
+                    <div class="d-flex gap-3 align-items-center mb-3">
+                        <div class="qty-stepper">
+                            <button type="button" class="qty-btn" onclick="changeQuantity(-1)">-</button>
+                            <input type="number" id="productQuantity" class="qty-input" value="1" min="1" max="99" readonly>
+                            <button type="button" class="qty-btn" onclick="changeQuantity(1)">+</button>
+                        </div>
+                        <button type="button" onclick="handleAddToCart()" class="btn btn-add-to-cart flex-grow-1 d-flex align-items-center justify-content-center gap-2">
+                            <i class="fa-solid fa-cart-shopping"></i> THÊM VÀO GIỎ HÀNG
+                        </button>
+                    </div>
+
+                    <!-- Secondary Actions -->
+                    <div class="d-flex gap-2 mb-4">
+                        <button type="button" class="btn btn-wishlist flex-grow-1 d-flex align-items-center justify-content-center gap-2" onclick="toggleWishlist(this)">
+                            <i class="fa-regular fa-heart"></i> THÊM VÀO YÊU THÍCH
+                        </button>
+                        <button type="button" class="btn btn-wishlist px-3" onclick="copyLink()" title="Chia sẻ sản phẩm">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        </button>
+                    </div>
+
+                    <!-- Store Availability -->
+                    <div class="border p-3 bg-light mb-4 small">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <strong class="text-uppercase text-dark"><i class="fa-solid fa-store me-1 text-danger"></i> Tình trạng tại cửa hàng</strong>
+                            <span class="badge bg-success rounded-0">Còn hàng</span>
+                        </div>
+                        <p class="text-muted mb-2" style="font-size: 0.8rem;">Kiểm tra tồn kho tại các showroom ONE61 Garment gần nhất.</p>
+                        <a href="#" class="fw-bold text-dark text-decoration-underline" onclick="alert('Hệ thống showroom ONE61:\n1. Vincom Đồng Khởi, Q.1, TP.HCM\n2. Vincom Bà Triệu, Hai Bà Trưng, Hà Nội'); return false;">
+                            Chọn cửa hàng để xem kho &gt;
+                        </a>
+                    </div>
+
+                    <!-- Accordion Details -->
+                    <div class="accordion border-top border-bottom mb-4" id="detailAccordion">
+                        <div class="accordion-item border-0">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button px-0 bg-transparent fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    TỔNG QUAN SẢN PHẨM
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show">
+                                <div class="accordion-body px-0 pt-0 small text-secondary" id="prodDesc">
+                                    Chất liệu AIRism mềm mịn, làm mát cơ thể tức thì, thấm hút mồ hôi tối ưu.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Size Guide Modal -->
+    <div class="modal fade" id="sizeGuideModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-0">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold text-uppercase small"><i class="fa-solid fa-ruler-combined me-2 text-danger"></i> BẢNG QUY ĐỔI KÍCH CỠ CHUẨN</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <table class="table table-bordered text-center small mb-0">
+                        <thead class="table-dark">
+                            <tr><th>Size</th><th>Chiều cao (cm)</th><th>Cân nặng (kg)</th><th>Vòng ngực (cm)</th><th>Vòng eo (cm)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>XS</strong></td><td>150 - 160</td><td>40 - 48</td><td>76 - 82</td><td>60 - 66</td></tr>
+                            <tr><td><strong>S</strong></td><td>155 - 165</td><td>48 - 55</td><td>80 - 88</td><td>64 - 72</td></tr>
+                            <tr class="table-active"><td><strong>M</strong></td><td>160 - 172</td><td>55 - 65</td><td>86 - 94</td><td>70 - 78</td></tr>
+                            <tr><td><strong>L</strong></td><td>168 - 178</td><td>65 - 75</td><td>92 - 100</td><td>76 - 84</td></tr>
+                            <tr><td><strong>XL</strong></td><td>175 - 185</td><td>75 - 85</td><td>98 - 108</td><td>82 - 92</td></tr>
+                            <tr><td><strong>XXL</strong></td><td>180 - 190</td><td>85 - 95</td><td>106 - 116</td><td>90 - 100</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer border-top">
+                    <button type="button" class="btn btn-dark rounded-0 px-4 small fw-bold text-uppercase" data-bs-dismiss="modal">ĐÓNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top text-dark py-5 mt-5">
+        <div class="container text-center small text-secondary">
+            © 2026 ONE61 GARMENT. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const PRODUCTS_DATA = [
+            { id: 'PROD01', name: 'Áo Thun AIRism Cổ Tròn Ngắn Tay', cat: 'MEN_01', price: 299000, img: '../web/img-prj301/ao-thun-01.avif', desc: 'Chất liệu AIRism mềm mịn, làm mát cơ thể tức thì, thấm hút mồ hôi tối ưu.' },
+            { id: 'PROD02', name: 'Áo Sơ Mi Vải Dạ Kẻ Ca-Rô Dài Tay', cat: 'MEN_02', price: 599000, img: '../web/img-prj301/ao-so-mi-01.avif', desc: 'Chất liệu vải dạ 100% cotton chải kỹ, giữ ấm nhẹ và phom đứng thời trang.' },
+            { id: 'PROD03', name: 'Áo Khoác Parka Chống Thấm Nước (3D Cut)', cat: 'MEN_03', price: 899000, img: '../web/img-prj301/ao-khoac-01.avif', desc: 'Chống thấm nước bền bỉ, cản gió hoàn hảo với đường cắt 3D chuyển động linh hoạt.' },
+            { id: 'PROD04', name: 'Quần Jeans Dáng Suông Ống Rộng', cat: 'MEN_04', price: 799000, img: '../web/img-prj301/quan-jeans-01.avif', desc: 'Chất vải denim 100% cotton mềm mại, phom suông cổ điển phong cách Tokyo.' },
+            { id: 'PROD05', name: 'Áo Thun Dáng Rộng Cổ Tròn Nữ', cat: 'WOMEN_01', price: 349000, img: '../web/img-prj301/ao-thun-02.avif', desc: 'Thiết kế dáng rộng hiện đại, tôn dáng tự nhiên, chất vải cotton dày dặn không bai nhão.' },
+            { id: 'PROD06', name: 'Áo Khoác Chống UV Nữ (UPF 50+)', cat: 'WOMEN_03', price: 499000, img: '../web/img-prj301/ao-khoac-02.avif', desc: 'Chống nắng hiệu quả UPF 50+ bảo vệ làn da, thiết kế gấp gọn bỏ túi tiện lợi.' },
+            { id: 'PROD07', name: 'Quần Smart Pants Ống Đứng Co Giãn', cat: 'MEN_04', price: 699000, img: '../web/img-prj301/quan-dai-01.avif', desc: 'Co giãn 2 chiều thoải mái cả ngày, phom đứng lịch lãm cho môi trường công sở.' },
+            { id: 'PROD08', name: 'Áo Polo Vải Dry Pique Ngắn Tay', cat: 'MEN_01', price: 399000, img: '../web/img-prj301/ao-polo-01.avif', desc: 'Công nghệ Dry thấm hút nhanh khô, cổ áo dệt kim tinh xảo giữ phom chuẩn.' },
+            { id: 'PROD09', name: 'Chân Váy Xếp Ly Dáng Dài Nữ', cat: 'WOMEN_04', price: 599000, img: '../web/img-prj301/vay-nu-01.avif', desc: 'Chân váy xếp ly bay bổng, eo co giãn nhẹ nhàng, phù hợp cả đi làm và dạo phố.' },
+            { id: 'PROD10', name: 'Áo Khoác Lông Cừu Nhân Tạo Kéo Khóa', cat: 'WOMEN_03', price: 699000, img: '../web/img-prj301/ao-long-cuu-01.avif', desc: 'Mềm mại như lông vũ, giữ ấm cực tốt trong những ngày se lạnh mùa đông.' },
+            { id: 'PROD11', name: 'Áo Sơ Mi Vải Rayon Cổ Mở Nữ', cat: 'WOMEN_02', price: 499000, img: '../web/img-prj301/ao-so-mi-02.avif', desc: 'Chất vải Rayon mượt mà chống nhăn sau khi giặt, phong cách thanh lịch hiện đại.' },
+            { id: 'PROD12', name: 'Quần Short Kaki Co Giãn Nam', cat: 'MEN_04', price: 449000, img: '../web/img-prj301/quan-short-01.avif', desc: 'Chất liệu vải Twill co giãn bền chắc, thiết kế năng động cho mùa hè.' }
+        ];
+
+        let selectedProduct = PRODUCTS_DATA[0];
+        let selectedColor = '32 BEIGE';
+        let selectedSize = 'M';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id') || 'PROD01';
+            const found = PRODUCTS_DATA.find(x => x.id === id);
+            if (found) selectedProduct = found;
+
+            document.getElementById('prodSKU').textContent = 'Mã SP: ' + selectedProduct.id;
+            document.getElementById('prodName').textContent = selectedProduct.name;
+            document.getElementById('breadName').textContent = selectedProduct.name;
+            document.getElementById('breadCat').textContent = selectedProduct.cat;
+            document.getElementById('prodPrice').textContent = selectedProduct.price.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('prodDesc').innerHTML = selectedProduct.desc + '<ul class="mt-2 mb-0 ps-3"><li>Phong cách LifeWear tối giản chuẩn Nhật Bản.</li><li>Độ bền cao, hạn chế nhăn xù sau nhiều lần giặt.</li></ul>';
+
+            ['img1', 'img2', 'img3', 'img4'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.src = selectedProduct.img;
+            });
+
+            updateCartBadge();
+        });
+
+        function selectColor(colorName, el) {
+            selectedColor = colorName;
+            document.getElementById('selectedColorName').textContent = colorName;
+            document.querySelectorAll('.color-swatch-btn').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function selectSize(sizeName, el) {
+            selectedSize = sizeName;
+            document.getElementById('selectedSizeLabel').textContent = sizeName;
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function changeQuantity(delta) {
+            const input = document.getElementById('productQuantity');
+            let val = parseInt(input.value) || 1;
+            val += delta;
+            if (val < 1) val = 1;
+            if (val > 99) val = 99;
+            input.value = val;
+        }
+
+        function handleAddToCart() {
+            const qty = parseInt(document.getElementById('productQuantity').value) || 1;
+            let cart = JSON.parse(localStorage.getItem('one61_cart') || '[]');
+            let exist = cart.find(x => x.id === selectedProduct.id && x.color === selectedColor && x.size === selectedSize);
+            if (exist) {
+                exist.qty += qty;
+            } else {
+                cart.push({
+                    id: selectedProduct.id,
+                    name: selectedProduct.name,
+                    price: selectedProduct.price,
+                    img: selectedProduct.img,
+                    qty: qty,
+                    color: selectedColor,
+                    size: selectedSize
+                });
+            }
+            localStorage.setItem('one61_cart', JSON.stringify(cart));
+            updateCartBadge();
+            alert('Đã thêm ' + qty + ' sản phẩm [' + selectedProduct.name + '] vào giỏ hàng!');
+        }
+
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('one61_cart') || '[]');
+            let count = cart.reduce((sum, item) => sum + item.qty, 0);
+            const badge = document.getElementById('navCartCount');
+            if (badge) badge.textContent = count;
+        }
+
+        function toggleWishlist(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fa-regular')) {
+                icon.className = 'fa-solid fa-heart text-danger';
+                btn.innerHTML = '<i class="fa-solid fa-heart text-danger"></i> ĐÃ THÊM VÀO YÊU THÍCH';
+            } else {
+                icon.className = 'fa-regular fa-heart';
+                btn.innerHTML = '<i class="fa-regular fa-heart"></i> THÊM VÀO YÊU THÍCH';
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Đã sao chép liên kết sản phẩm vào bộ nhớ tạm!');
+            });
+        }
+    </script>
+</body>
+
+</html>
