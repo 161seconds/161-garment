@@ -25,8 +25,8 @@ import utils.EnvUtils;
 @WebServlet(name = "SepayWebhookController", urlPatterns = {"/api/sepay-webhook", "/sepay-webhook"})
 public class SepayWebhookController extends HttpServlet {
 
-    // SePay HMAC-SHA256 Secret Key (Loaded dynamically from .env)
-    private static final String SEPAY_WEBHOOK_SECRET = EnvUtils.get("SEPAY_WEBHOOK_SECRET", "whsec_7mLCLdsB2vPQk9gA4djFsERqIiTlZ2HO");
+    // SePay HMAC-SHA256 Secret Key (Loaded strictly from .env via EnvUtils)
+    private static final String SEPAY_WEBHOOK_SECRET = EnvUtils.get("SEPAY_WEBHOOK_SECRET", "");
 
     // Cache to track confirmed transactions in-memory for instant frontend polling
     public static final Set<String> PAID_PHONE_SET = Collections.synchronizedSet(new HashSet<>());

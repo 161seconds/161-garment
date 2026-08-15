@@ -24,7 +24,7 @@ import utils.EnvUtils;
 public class SepayReconciliationController extends HttpServlet {
 
     // Default Token from .env
-    private static final String DEFAULT_API_TOKEN = EnvUtils.get("SEPAY_API_TOKEN", "JHNJIPVMTXJBZ1JZICEODLL8AUVV0ZAGMGQRPVS52M5ROWUYIRT2P3EF6UD89AON");
+    private static final String DEFAULT_API_TOKEN = EnvUtils.get("SEPAY_API_TOKEN", "");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
