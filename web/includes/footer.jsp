@@ -115,10 +115,80 @@
         </div>
     </footer>
 
+    <!-- ONE61 Luxury Back-To-Top Button -->
+    <button type="button" id="backToTopBtn" class="back-to-top-btn" title="Lên đầu trang" aria-label="Lên đầu trang">
+        <i class="fa-solid fa-arrow-up"></i>
+        <span class="back-to-top-text">TOP</span>
+    </button>
+
     <style>
         .hover-link:hover {
             color: var(--color-primary) !important;
             text-decoration: underline !important;
+        }
+
+        /* ONE61 Luxury Back-To-Top Button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 46px;
+            height: 46px;
+            background-color: #111111;
+            color: #FFFFFF !important;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            cursor: pointer;
+            z-index: 1080;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .back-to-top-btn i {
+            font-size: 0.95rem;
+            transition: transform 0.25s ease;
+        }
+
+        .back-to-top-btn .back-to-top-text {
+            font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+            font-size: 0.55rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .back-to-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top-btn:hover {
+            background-color: var(--color-primary, #ED1D24);
+            border-color: var(--color-primary, #ED1D24);
+            box-shadow: 0 10px 25px rgba(237, 29, 36, 0.35);
+            transform: translateY(-4px);
+        }
+
+        .back-to-top-btn:hover i {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 42px;
+                height: 42px;
+            }
         }
     </style>
 
@@ -126,5 +196,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ONE61 Global Alert & Modal System -->
     <script src="${pageContext.request.contextPath}/js/one61-alert.js"></script>
+    <!-- ONE61 Main Global Scripts -->
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
