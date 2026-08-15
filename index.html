@@ -398,7 +398,7 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="cart-badge" id="headerCartCount">2</span>
                     </a>
-                    <a class="header-icon-btn" href="#checkoutModal" data-bs-toggle="modal" title="Thanh toán VietQR">
+                    <a class="header-icon-btn" href="javascript:void(0)" onclick="openCheckoutModal()" title="Thanh toán VietQR">
                         <i class="fa-solid fa-qrcode text-warning"></i>
                     </a>
                 </div>
@@ -601,9 +601,9 @@
                     <span class="fw-bold text-uppercase">TỔNG CỘNG:</span>
                     <span class="fw-bold fs-5 text-danger" id="cartTotalPrice">998.000 đ</span>
                 </div>
-                <button class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm" 
+                <button id="btnProceedCheckout" class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm" 
                         style="background-color: var(--color-primary); letter-spacing: 0.5px;"
-                        data-bs-toggle="modal" data-bs-target="#checkoutModal" data-bs-dismiss="offcanvas">
+                        onclick="openCheckoutModal()">
                     TIẾN HÀNH THANH TOÁN <i class="fa-solid fa-arrow-right ms-1"></i>
                 </button>
             </div>
@@ -871,34 +871,61 @@
             const container = document.getElementById('cartItemsList');
             const headerCount = document.getElementById('headerCartCount');
             const totalPriceEl = document.getElementById('cartTotalPrice');
+            const btnCheckout = document.getElementById('btnProceedCheckout');
             
             let total = 0;
             let count = 0;
             container.innerHTML = '';
 
-            cart.forEach((item, idx) => {
-                total += item.product.price * item.quantity;
-                count += item.quantity;
-
-                const itemRow = document.createElement('div');
-                itemRow.className = 'd-flex align-items-center justify-content-between pb-2 border-bottom';
-                itemRow.innerHTML = `
-                    <div class="d-flex align-items-center gap-2">
-                        <img src="${item.product.img}" width="45" height="45" class="border object-fit-cover">
-                        <div>
-                            <h6 class="small fw-bold mb-0 text-truncate" style="max-width: 140px;">${item.product.name}</h6>
-                            <small class="text-danger fw-bold">${formatVND(item.product.price)} x ${item.quantity}</small>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-1">
-                        <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="changeQty(${idx}, -1)">-</button>
-                        <span class="small fw-bold px-1">${item.quantity}</span>
-                        <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="changeQty(${idx}, 1)">+</button>
-                        <button class="btn btn-sm text-danger ms-1" onclick="removeItem(${idx})"><i class="fa-solid fa-trash"></i></button>
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5 my-auto text-muted">
+                        <i class="fa-solid fa-cart-shopping fs-1 mb-3 text-secondary opacity-50 d-block"></i>
+                        <h6 class="fw-bold text-uppercase text-dark mb-1">Giỏ hàng của bạn đang trống</h6>
+                        <p class="small text-muted mb-4">Bạn chưa chọn sản phẩm nào để thanh toán.</p>
+                        <button class="btn btn-outline-dark btn-sm rounded-0 fw-bold text-uppercase px-3" data-bs-dismiss="offcanvas" onclick="location.href='#storeSection'">
+                            <i class="fa-solid fa-bag-shopping me-1"></i> Mua sắm ngay
+                        </button>
                     </div>
                 `;
-                container.appendChild(itemRow);
-            });
+                if (btnCheckout) {
+                    btnCheckout.disabled = true;
+                    btnCheckout.classList.add('disabled');
+                    btnCheckout.style.opacity = '0.5';
+                    btnCheckout.style.cursor = 'not-allowed';
+                }
+            } else {
+                if (btnCheckout) {
+                    btnCheckout.disabled = false;
+                    btnCheckout.classList.remove('disabled');
+                    btnCheckout.style.opacity = '1';
+                    btnCheckout.style.cursor = 'pointer';
+                }
+
+                cart.forEach((item, idx) => {
+                    total += item.product.price * item.quantity;
+                    count += item.quantity;
+
+                    const itemRow = document.createElement('div');
+                    itemRow.className = 'd-flex align-items-center justify-content-between pb-2 border-bottom';
+                    itemRow.innerHTML = `
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="${item.product.img}" width="45" height="45" class="border object-fit-cover">
+                            <div>
+                                <h6 class="small fw-bold mb-0 text-truncate" style="max-width: 140px;">${item.product.name}</h6>
+                                <small class="text-danger fw-bold">${formatVND(item.product.price)} x ${item.quantity}</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1">
+                            <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="changeQty(${idx}, -1)">-</button>
+                            <span class="small fw-bold px-1">${item.quantity}</span>
+                            <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="changeQty(${idx}, 1)">+</button>
+                            <button class="btn btn-sm text-danger ms-1" onclick="removeItem(${idx})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(itemRow);
+                });
+            }
 
             headerCount.textContent = count;
             totalPriceEl.textContent = formatVND(total);
@@ -908,6 +935,24 @@
             const phone = document.getElementById('mInputPhone').value || '0822221616';
             const qrUrl = 'https://img.vietqr.io/image/MB-08222216167810-compact2.png?amount=' + total + '&addInfo=161GM%20' + encodeURIComponent(phone) + '&accountName=NGUYEN%20VAN%20QUOC%20BAO';
             document.getElementById('mQrImage').src = qrUrl;
+        }
+
+        function openCheckoutModal() {
+            if (!cart || cart.length === 0) {
+                alert('Giỏ hàng của bạn đang trống! Vui lòng chọn ít nhất 1 sản phẩm trước khi tiến hành thanh toán.');
+                // Open offcanvas to show empty state
+                const cartOffcanvasEl = document.getElementById('cartOffcanvas');
+                const bsOffcanvas = new bootstrap.Offcanvas(cartOffcanvasEl);
+                bsOffcanvas.show();
+                return;
+            }
+            const cartOffcanvasEl = document.getElementById('cartOffcanvas');
+            const offcanvasInstance = bootstrap.Offcanvas.getInstance(cartOffcanvasEl);
+            if (offcanvasInstance) offcanvasInstance.hide();
+
+            const checkoutModalEl = document.getElementById('checkoutModal');
+            const modalInstance = new bootstrap.Modal(checkoutModalEl);
+            modalInstance.show();
         }
 
         function addToCart(pid) {

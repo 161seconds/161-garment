@@ -12,33 +12,47 @@
     </ol>
 </nav>
 
-<!-- Checkout Progress Stepper -->
-<div class="row justify-content-center mb-4">
-    <div class="col-lg-10">
-        <div class="d-flex align-items-center justify-content-center gap-2 gap-md-4 py-2">
-            <!-- Step 1 Indicator -->
-            <div class="d-flex align-items-center gap-2" id="step1Indicator">
-                <span class="stepper-badge active-step" id="badgeStep1">1</span>
-                <span class="small fw-bold text-uppercase" id="textStep1">Thông tin giao hàng</span>
-            </div>
-
-            <div class="stepper-line" id="stepperLine"></div>
-
-            <!-- Step 2 Indicator -->
-            <div class="d-flex align-items-center gap-2" id="step2Indicator">
-                <span class="stepper-badge" id="badgeStep2">2</span>
-                <span class="small fw-bold text-uppercase text-muted" id="textStep2">Thanh toán & Mã QR</span>
+<c:choose>
+    <c:when test="${empty sessionScope.CART}">
+        <div class="row justify-content-center my-5 py-4">
+            <div class="col-md-7 text-center py-5 border bg-white shadow-sm">
+                <i class="fa-solid fa-cart-shopping fs-1 text-muted mb-3 d-block opacity-50"></i>
+                <h4 class="mb-2 text-uppercase fw-bold">GIỎ HÀNG CỦA BẠN ĐANG TRỐNG!</h4>
+                <p class="text-muted small mb-4">Vui lòng chọn ít nhất một sản phẩm trước khi tiến hành thanh toán.</p>
+                <a href="product" class="btn btn-danger rounded-0 fw-bold px-4 py-2 text-uppercase" style="background-color: var(--color-primary);">
+                    <i class="fa-solid fa-arrow-left me-1"></i> TIẾP TỤC MUA SẮM
+                </a>
             </div>
         </div>
-    </div>
-</div>
+    </c:when>
+    <c:otherwise>
+        <!-- Checkout Progress Stepper -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <div class="d-flex align-items-center justify-content-center gap-2 gap-md-4 py-2">
+                    <!-- Step 1 Indicator -->
+                    <div class="d-flex align-items-center gap-2" id="step1Indicator">
+                        <span class="stepper-badge active-step" id="badgeStep1">1</span>
+                        <span class="small fw-bold text-uppercase" id="textStep1">Thông tin giao hàng</span>
+                    </div>
 
-<div class="row g-4 my-2 mb-5">
-    <!-- Left Column: Step 1 (Shipping Form) & Step 2 (Payment & QR) -->
-    <div class="col-lg-7 col-md-12">
-        <form id="checkoutForm" action="checkout" method="POST" novalidate>
-            <!-- ================= STEP 1: DELIVERY INFO ================= -->
-            <div class="card border border-dark-subtle rounded-0 p-4 bg-white shadow-sm" id="deliveryStepContainer">
+                    <div class="stepper-line" id="stepperLine"></div>
+
+                    <!-- Step 2 Indicator -->
+                    <div class="d-flex align-items-center gap-2" id="step2Indicator">
+                        <span class="stepper-badge" id="badgeStep2">2</span>
+                        <span class="small fw-bold text-uppercase text-muted" id="textStep2">Thanh toán & Mã QR</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 my-2 mb-5">
+            <!-- Left Column: Step 1 (Shipping Form) & Step 2 (Payment & QR) -->
+            <div class="col-lg-7 col-md-12">
+                <form id="checkoutForm" action="checkout" method="POST" novalidate>
+                    <!-- ================= STEP 1: DELIVERY INFO ================= -->
+                    <div class="card border border-dark-subtle rounded-0 p-4 bg-white shadow-sm" id="deliveryStepContainer">
                 <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
                     <div class="d-flex align-items-center gap-2">
                         <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="letter-spacing: 0.5px;">BƯỚC 1</span>
@@ -305,6 +319,8 @@
         </div>
     </div>
 </div>
+    </c:otherwise>
+</c:choose>
 
 <style>
     /* Stepper Styling */
