@@ -82,10 +82,12 @@
                     &copy; 2026 <strong>161 GARMENT</strong>. All Rights Reserved. PRJ301 Project.
                 </div>
                 <div class="d-flex align-items-center gap-3 fs-5 text-secondary">
+                    <i class="fa-solid fa-qrcode text-danger" title="Chuyển khoản mã VietQR 24/7"></i>
+                    <i class="fa-solid fa-building-columns" title="Chuyển khoản Ngân hàng"></i>
                     <i class="fa-brands fa-cc-visa" title="Visa"></i>
                     <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
                     <i class="fa-solid fa-money-bill-wave" title="Thanh toán khi nhận hàng (COD)"></i>
-                    <i class="fa-solid fa-shield-halved" title="Bảo mật thanh toán"></i>
+                    <i class="fa-solid fa-shield-halved" title="Bảo mật thanh toán SSL"></i>
                 </div>
             </div>
         </div>
