@@ -29,8 +29,9 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=builder /app/web /usr/local/tomcat/webapps/ROOT
 COPY --from=builder /app/web /usr/local/tomcat/webapps/PRJ301-Assignment
 
-# Script to handle Render dynamic $PORT
-RUN printf '#!/bin/sh\nset -e\nPORT=${PORT:-8080}\necho "Starting Tomcat on port $PORT..."\nsed -i "s/port=\\\"8080\\\"/port=\\\"$PORT\\\"/g" /usr/local/tomcat/conf/server.xml\nexec catalina.sh run\n' > /entrypoint.sh && chmod +x /entrypoint.sh
+# Copy and setup entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 8080
 ENTRYPOINT ["/entrypoint.sh"]
