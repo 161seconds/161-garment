@@ -509,18 +509,22 @@
 
     <script>
         const PRODUCTS_DATA = [
-            { id: 'PROD01', name: 'Áo Thun AIRism Cổ Tròn Ngắn Tay', cat: 'MEN_01', price: 299000, img: '../web/img-prj301/ao-thun-01.avif', desc: 'Chất liệu AIRism mềm mịn, làm mát cơ thể tức thì, thấm hút mồ hôi tối ưu.' },
-            { id: 'PROD02', name: 'Áo Sơ Mi Vải Dạ Kẻ Ca-Rô Dài Tay', cat: 'MEN_02', price: 599000, img: '../web/img-prj301/ao-so-mi-01.avif', desc: 'Chất liệu vải dạ 100% cotton chải kỹ, giữ ấm nhẹ và phom đứng thời trang.' },
-            { id: 'PROD03', name: 'Áo Khoác Parka Chống Thấm Nước (3D Cut)', cat: 'MEN_03', price: 899000, img: '../web/img-prj301/ao-khoac-01.avif', desc: 'Chống thấm nước bền bỉ, cản gió hoàn hảo với đường cắt 3D chuyển động linh hoạt.' },
-            { id: 'PROD04', name: 'Quần Jeans Dáng Suông Ống Rộng', cat: 'MEN_04', price: 799000, img: '../web/img-prj301/quan-jeans-01.avif', desc: 'Chất vải denim 100% cotton mềm mại, phom suông cổ điển phong cách Tokyo.' },
-            { id: 'PROD05', name: 'Áo Thun Dáng Rộng Cổ Tròn Nữ', cat: 'WOMEN_01', price: 349000, img: '../web/img-prj301/ao-thun-02.avif', desc: 'Thiết kế dáng rộng hiện đại, tôn dáng tự nhiên, chất vải cotton dày dặn không bai nhão.' },
-            { id: 'PROD06', name: 'Áo Khoác Chống UV Nữ (UPF 50+)', cat: 'WOMEN_03', price: 499000, img: '../web/img-prj301/ao-khoac-02.avif', desc: 'Chống nắng hiệu quả UPF 50+ bảo vệ làn da, thiết kế gấp gọn bỏ túi tiện lợi.' },
-            { id: 'PROD07', name: 'Quần Smart Pants Ống Đứng Co Giãn', cat: 'MEN_04', price: 699000, img: '../web/img-prj301/quan-dai-01.avif', desc: 'Co giãn 2 chiều thoải mái cả ngày, phom đứng lịch lãm cho môi trường công sở.' },
-            { id: 'PROD08', name: 'Áo Polo Vải Dry Pique Ngắn Tay', cat: 'MEN_01', price: 399000, img: '../web/img-prj301/ao-polo-01.avif', desc: 'Công nghệ Dry thấm hút nhanh khô, cổ áo dệt kim tinh xảo giữ phom chuẩn.' },
-            { id: 'PROD09', name: 'Chân Váy Xếp Ly Dáng Dài Nữ', cat: 'WOMEN_04', price: 599000, img: '../web/img-prj301/vay-nu-01.avif', desc: 'Chân váy xếp ly bay bổng, eo co giãn nhẹ nhàng, phù hợp cả đi làm và dạo phố.' },
-            { id: 'PROD10', name: 'Áo Khoác Lông Cừu Nhân Tạo Kéo Khóa', cat: 'WOMEN_03', price: 699000, img: '../web/img-prj301/ao-long-cuu-01.avif', desc: 'Mềm mại như lông vũ, giữ ấm cực tốt trong những ngày se lạnh mùa đông.' },
-            { id: 'PROD11', name: 'Áo Sơ Mi Vải Rayon Cổ Mở Nữ', cat: 'WOMEN_02', price: 499000, img: '../web/img-prj301/ao-so-mi-02.avif', desc: 'Chất vải Rayon mượt mà chống nhăn sau khi giặt, phong cách thanh lịch hiện đại.' },
-            { id: 'PROD12', name: 'Quần Short Kaki Co Giãn Nam', cat: 'MEN_04', price: 449000, img: '../web/img-prj301/quan-short-01.avif', desc: 'Chất liệu vải Twill co giãn bền chắc, thiết kế năng động cho mùa hè.' }
+            { id: "P01", name: "Áo Thun Cổ Tròn Cotton 100%", cat: "MEN_01", cateGroup: "MEN", price: 299000, img: "../web/img-prj301/ao-thun-01.avif", desc: "Chất liệu cotton 100% mềm mại, thoáng mát cả ngày, thấm hút mồ hôi tối ưu." },
+            { id: "P02", name: "Áo Thun AIRism Siêu Thoáng Mát", cat: "WOMEN_01", cateGroup: "WOMEN", price: 349000, img: "../web/img-prj301/ao-thun-02.avif", desc: "Công nghệ sợi vải AIRism mượt mà, làm mát tức thì, chống tia UV hiệu quả." },
+            { id: "P03", name: "Áo Thun Trơn Dáng Rộng Unisex", cat: "MEN_01", cateGroup: "MEN", price: 399000, img: "../web/img-prj301/ao-thun-03.avif", desc: "Form áo Oversize thời thượng, dễ dàng phối nhiều phong cách đường phố." },
+            { id: "P04", name: "Áo Thun Họa Tiết Graphic LifeWear", cat: "MEN_01", cateGroup: "MEN", price: 449000, img: "../web/img-prj301/ao-thun-04.avif", desc: "Họa tiết nghệ thuật đương đại phong cách Tokyo, công nghệ in bền màu." },
+            { id: "P05", name: "Áo Thun Dài Tay Cổ Lọ Nữ", cat: "WOMEN_01", cateGroup: "WOMEN", price: 399000, img: "../web/img-prj301/ao-thun-05.avif", desc: "Thiết kế cổ lọ ấm áp, ôm dáng nhẹ nhàng, chất vải co giãn 4 chiều mềm mại." },
+            { id: "P06", name: "Áo Khoác Parka Chống Nắng UV Protection", cat: "WOMEN_03", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/ao-khoac-01.avif", desc: "Chỉ số chống nắng UPF 50+, chất liệu chống thấm nước bền bỉ, gấp gọn bỏ túi." },
+            { id: "P07", name: "Áo Khoác Gió Siêu Nhẹ Pocketable", cat: "MEN_03", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/ao-khoac-03.avif", desc: "Trọng lượng siêu nhẹ, cản gió và mưa phùn hiệu quả, tiện lợi mang theo hàng ngày." },
+            { id: "P08", name: "Áo Khoác Cardigan Len Mềm", cat: "WOMEN_03", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/ao-khoac-04.avif", desc: "Chất len dệt cao cấp mềm mịn không ngứa, phom suông thanh lịch chuẩn công sở." },
+            { id: "P09", name: "Áo Khoác Bomber Thể Thao", cat: "MEN_03", cateGroup: "MEN", price: 999000, img: "../web/img-prj301/ao-khoac-05.avif", desc: "Thiết kế bo gấu năng động, chất vải gió dày dặn giữ nhiệt và cản gió tốt." },
+            { id: "P10", name: "Áo Khoác Nỉ Hoodie Có Mũ", cat: "KIDS_02", cateGroup: "KIDS", price: 549000, img: "../web/img-prj301/ao-khoac-06.avif", desc: "Chất nỉ bông mềm êm ái, an toàn cho làn da nhạy cảm của bé, giữ ấm ngày lạnh." },
+            { id: "P11", name: "Quần Barrel Pants Phom Rộng Nhật Bản", cat: "WOMEN_04", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/quan-dai-01.avif", desc: "Thiết kế ống cong Barrel tạo điểm nhấn thời thượng, tôn dáng chân dài tự nhiên." },
+            { id: "P12", name: "Quần Smart Ankle Pants Co Giãn", cat: "MEN_04", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/quan-dai-02.avif", desc: "Co giãn 2 chiều cực thoải mái, phom đứng chuẩn mực cho quý ông công sở." },
+            { id: "P13", name: "Quần Chino Ống Suông Cao Cấp", cat: "MEN_04", cateGroup: "MEN", price: 749000, img: "../web/img-prj301/quan-dai-03.avif", desc: "Chất vải cotton Twill dày dặn, đứng phom, phong cách vintage lịch lãm." },
+            { id: "P14", name: "Quần Jeans Dáng Suông Cổ Điển", cat: "WOMEN_04", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/quan-dai-04.avif", desc: "Chất liệu denim 100% cotton chải mềm, màu sắc wash tự nhiên không bai dão." },
+            { id: "P15", name: "Quần Kaki Co Giãn Thoải Mái", cat: "KIDS_03", cateGroup: "KIDS", price: 449000, img: "../web/img-prj301/quan-dai-05.avif", desc: "Lưng thun co giãn mềm mại, thoải mái cho bé chạy nhảy vận động cả ngày." },
+            { id: "P16", name: "Quần Jogger Nỉ Thể Thao", cat: "MEN_04", cateGroup: "MEN", price: 599000, img: "../web/img-prj301/quan-dai-06.avif", desc: "Bo gấu thể thao khỏe khoắn, chất nỉ da cá thoáng khí thích hợp tập luyện và dạo phố." }
         ];
 
         let selectedProduct = PRODUCTS_DATA[0];
@@ -529,7 +533,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id') || 'PROD01';
+            const id = urlParams.get('id') || 'P01';
             const found = PRODUCTS_DATA.find(x => x.id === id);
             if (found) selectedProduct = found;
 
