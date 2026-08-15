@@ -259,6 +259,20 @@
                     padding-left: 1.25rem !important;
                     transition: padding-left 0.15s ease, color 0.15s ease;
                 }
+
+                /* Offcanvas & Modal Layering Fix */
+                .offcanvas {
+                    z-index: 1090 !important;
+                }
+                .offcanvas-backdrop {
+                    z-index: 1085 !important;
+                }
+                .modal {
+                    z-index: 1100 !important;
+                }
+                .modal-backdrop {
+                    z-index: 1095 !important;
+                }
             </style>
         </head>
 
