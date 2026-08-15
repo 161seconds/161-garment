@@ -265,8 +265,17 @@
             z-index: 10;
             color: #FFFFFF;
             max-width: 600px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
             animation: heroTextFadeUp 1s ease;
+        }
+
+        .hero-video-overlay-clean h1,
+        .hero-video-overlay-clean p {
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-video-overlay-clean .btn,
+        .hero-video-overlay-clean .badge {
+            text-shadow: none !important;
         }
 
         @keyframes heroTextFadeUp {
