@@ -53,6 +53,42 @@ function globalAddToCart(prod) {
     }
 }
 
+// Init Back to Top button
+function initBackToTop() {
+    let btn = document.getElementById('backToTopBtn');
+    if (!btn) {
+        btn = document.createElement('button');
+        btn.id = 'backToTopBtn';
+        btn.className = 'back-to-top-btn';
+        btn.title = 'Lên đầu trang';
+        btn.setAttribute('aria-label', 'Lên đầu trang');
+        btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i><span class="back-to-top-text">TOP</span>';
+        document.body.appendChild(btn);
+    }
+
+    const toggleBtn = () => {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (scrollY > 250) {
+            btn.classList.add('show');
+        } else {
+            btn.classList.remove('show');
+        }
+    };
+
+    window.addEventListener('scroll', toggleBtn, { passive: true });
+    toggleBtn();
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     updateGlobalBadges();
+    initBackToTop();
 });
+

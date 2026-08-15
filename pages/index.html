@@ -214,109 +214,136 @@
         </div>
     </div>
 
+    <!-- Featured Category Collections Showcase (4 Visual Lookbook Cards) -->
+    <section class="container my-5 pt-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 pb-2 border-bottom">
+            <div>
+                <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase fw-bold mb-2" style="font-size: 0.68rem; letter-spacing: 1px;">LIFEWEAR COLLECTIONS</span>
+                <h2 class="fw-bold text-uppercase m-0 tracking-tight" style="font-size: 1.75rem;">DANH MỤC NỔI BẬT</h2>
+                <p class="text-muted small mb-0 mt-1">Khám phá các phong cách trang phục tối giản chuẩn Nhật Bản được yêu thích nhất.</p>
+            </div>
+            <a href="product.html" class="btn btn-outline-dark btn-sm rounded-0 fw-bold text-uppercase mt-3 mt-md-0 px-3" style="font-size: 0.75rem;">
+                Xem toàn bộ danh mục <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+        <div class="row g-3 g-lg-4">
+            <!-- 1. WOMEN COLLECTION -->
+            <div class="col-6 col-lg-3">
+                <a href="javascript:void(0)" onclick="filterCategory('WOMEN', true)" class="one61-category-card">
+                    <div class="category-img-box">
+                        <img src="../web/img-prj301/ao-khoac-01.avif" alt="Thời Trang Nữ" class="category-img">
+                        <span class="category-floating-badge">BST NỮ 2026</span>
+                    </div>
+                    <div class="category-info-box">
+                        <h5 class="category-title">THỜI TRANG NỮ</h5>
+                        <p class="category-subtitle">Thanh lịch, dịu mát & tôn dáng tối ưu</p>
+                        <div class="category-action-link">
+                            <span>Khám phá ngay</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 2. MEN COLLECTION -->
+            <div class="col-6 col-lg-3">
+                <a href="javascript:void(0)" onclick="filterCategory('MEN', true)" class="one61-category-card">
+                    <div class="category-img-box">
+                        <img src="../web/img-prj301/ao-khoac-03.avif" alt="Thời Trang Nam" class="category-img">
+                        <span class="category-floating-badge">BST NAM 2026</span>
+                    </div>
+                    <div class="category-info-box">
+                        <h5 class="category-title">THỜI TRANG NAM</h5>
+                        <p class="category-subtitle">Phóng khoáng, chỉn chu & năng động</p>
+                        <div class="category-action-link">
+                            <span>Khám phá ngay</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 3. KIDS COLLECTION -->
+            <div class="col-6 col-lg-3">
+                <a href="javascript:void(0)" onclick="filterCategory('KIDS', true)" class="one61-category-card">
+                    <div class="category-img-box">
+                        <img src="../web/img-prj301/ao-khoac-06.avif" alt="Thời Trang Trẻ Em" class="category-img">
+                        <span class="category-floating-badge">TRẺ EM (KIDS)</span>
+                    </div>
+                    <div class="category-info-box">
+                        <h5 class="category-title">TRẺ EM</h5>
+                        <p class="category-subtitle">Chất liệu 100% an toàn, mềm mại</p>
+                        <div class="category-action-link">
+                            <span>Khám phá ngay</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 4. BARREL PANTS / OUTERWEAR -->
+            <div class="col-6 col-lg-3">
+                <a href="javascript:void(0)" onclick="filterCategory('WOMEN_04', true)" class="one61-category-card">
+                    <div class="category-img-box">
+                        <img src="../web/img-prj301/quan-dai-01.avif" alt="Quần Barrel & Dài" class="category-img">
+                        <span class="category-floating-badge" style="background-color: var(--color-primary, #ED1D24);">HOT TREND</span>
+                    </div>
+                    <div class="category-info-box">
+                        <h5 class="category-title">QUẦN BARREL</h5>
+                        <p class="category-subtitle">Thiết kế phom cong thời thượng</p>
+                        <div class="category-action-link">
+                            <span>Khám phá ngay</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content: Store Catalog -->
     <div class="container mb-5" id="storeSection">
-        <div class="row g-4">
-            <!-- Sidebar Filters -->
-            <div class="col-lg-3 col-md-4">
-                <div class="card border border-dark-subtle rounded-0 bg-white p-3 shadow-sm sticky-top"
-                    style="top: 90px;">
-                    <div class="d-flex justify-content-between align-items-center pb-2 mb-3 border-bottom">
-                        <h6 class="fw-bold text-uppercase m-0 small"><i class="fa-solid fa-sliders me-1"></i> DANH MỤC
-                            SẢN PHẨM</h6>
-                        <span class="badge bg-danger rounded-0 small" id="activeFilterBadge">Tất cả</span>
-                    </div>
-
-                    <!-- Accordion Sidebar -->
-                    <div class="accordion accordion-flush" id="categoryAccordion">
-                        <!-- Nữ -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#accWomen">
-                                    <i class="fa-solid fa-person-dress me-2 text-danger"></i> Thời Trang Nữ
-                                </button>
-                            </h2>
-                            <div id="accWomen" class="accordion-collapse collapse" data-bs-parent="#categoryAccordion">
-                                <div class="accordion-body px-0 py-2 small">
-                                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_01')"
-                                                class="text-secondary text-decoration-none">Áo Thun Nữ</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_02')"
-                                                class="text-secondary text-decoration-none">Áo Sơ Mi Nữ</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_03')"
-                                                class="text-secondary text-decoration-none">Áo Khoác Nữ</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_04')"
-                                                class="text-secondary text-decoration-none">Quần & Váy Nữ</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Nam -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#accMen">
-                                    <i class="fa-solid fa-person me-2 text-primary"></i> Thời Trang Nam
-                                </button>
-                            </h2>
-                            <div id="accMen" class="accordion-collapse collapse" data-bs-parent="#categoryAccordion">
-                                <div class="accordion-body px-0 py-2 small">
-                                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_01')"
-                                                class="text-secondary text-decoration-none">Áo Thun Nam</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_02')"
-                                                class="text-secondary text-decoration-none">Áo Sơ Mi Nam</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_03')"
-                                                class="text-secondary text-decoration-none">Áo Khoác Nam</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_04')"
-                                                class="text-secondary text-decoration-none">Quần Dài Nam</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Trẻ Em -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#accKids">
-                                    <i class="fa-solid fa-child me-2 text-success"></i> Thời Trang Trẻ Em
-                                </button>
-                            </h2>
-                            <div id="accKids" class="accordion-collapse collapse" data-bs-parent="#categoryAccordion">
-                                <div class="accordion-body px-0 py-2 small">
-                                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_01')"
-                                                class="text-secondary text-decoration-none">Áo Trẻ Em</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_02')"
-                                                class="text-secondary text-decoration-none">Áo Khoác Trẻ Em</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_03')"
-                                                class="text-secondary text-decoration-none">Quần Trẻ Em</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Reset Filter Button -->
-                    <button class="btn btn-outline-dark btn-sm rounded-0 w-100 mt-3 fw-bold text-uppercase"
-                        onclick="filterCategory('ALL')">
-                        <i class="fa-solid fa-rotate-left me-1"></i> Xem tất cả sản phẩm
+        <!-- Quick Filter Pills Bar -->
+        <div class="bg-light border p-3 mb-4 shadow-sm">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2 category-pills-bar flex-grow-1">
+                    <span class="small fw-bold text-uppercase text-muted me-2 d-none d-md-inline"><i class="fa-solid fa-sliders me-1 text-danger"></i> Lọc nhanh:</span>
+                    <button class="category-pill-btn active" onclick="filterCategory('ALL')">
+                        <i class="fa-solid fa-border-all"></i> Tất Cả
+                    </button>
+                    <button class="category-pill-btn" onclick="filterCategory('WOMEN')">
+                        <i class="fa-solid fa-person-dress"></i> Nữ
+                    </button>
+                    <button class="category-pill-btn" onclick="filterCategory('MEN')">
+                        <i class="fa-solid fa-person"></i> Nam
+                    </button>
+                    <button class="category-pill-btn" onclick="filterCategory('KIDS')">
+                        <i class="fa-solid fa-child"></i> Trẻ Em
+                    </button>
+                    <button class="category-pill-btn" onclick="filterCategory('MEN_01')">
+                        <i class="fa-solid fa-shirt"></i> Áo Thun
+                    </button>
+                    <button class="category-pill-btn" onclick="filterCategory('WOMEN_03')">
+                        <i class="fa-solid fa-mitten"></i> Áo Khoác
+                    </button>
+                    <button class="category-pill-btn" onclick="filterCategory('MEN_04')">
+                        <i class="fa-solid fa-person-walking"></i> Quần Dài
                     </button>
                 </div>
             </div>
+        </div>
 
-            <!-- Products Grid -->
-            <div class="col-lg-9 col-md-8">
+        <div class="row g-4">
+            <!-- Products Grid (Full Width 5 Columns) -->
+            <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="fw-bold text-uppercase m-0" id="catalogTitle">TẤT CẢ BỘ SƯU TẬP LIFEWEAR</h4>
                     <span class="text-muted small" id="productCountLabel">Đang hiển thị 16 sản phẩm</span>
                 </div>
 
-                <!-- Grid -->
-                <div class="row g-3" id="productsContainer">
+                <!-- Grid (5 Columns) -->
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-3 g-md-4" id="productsContainer">
                     <!-- Dynamic Product Cards will be rendered here by JS -->
                 </div>
             </div>

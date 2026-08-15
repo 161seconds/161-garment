@@ -108,94 +108,25 @@
             </div>
         </div>
 
-        <div class="row g-4">
-            <!-- Left Sidebar -->
-            <div class="col-lg-3 col-md-4">
-                <div class="sticky-top" style="top: 80px; z-index: 10;">
-                    <!-- Category Filter Box -->
-                    <div class="card border border-dark-subtle rounded-0 mb-4 bg-white shadow-sm">
-                        <div class="card-header bg-dark text-white rounded-0 py-3 d-flex align-items-center justify-content-between">
-                            <span class="fw-bold text-uppercase small tracking-wider m-0">
-                                <i class="fa-solid fa-bars-staggered me-2 text-danger"></i> DANH MỤC SẢN PHẨM
-                            </span>
-                        </div>
-                        
-                        <div class="border-bottom">
-                            <a href="javascript:void(0)" onclick="filterCategory('ALL')"
-                               class="sidebar-cate-link active" id="catLinkALL">
-                                <span><i class="fa-solid fa-border-all me-2 text-muted"></i> Tất cả sản phẩm</span>
-                                <i class="fa-solid fa-chevron-right small text-muted"></i>
-                            </a>
-                        </div>
-
-                        <div class="accordion accordion-flush" id="categoryAccordion">
-                            <!-- MEN -->
-                            <div class="accordion-item rounded-0 border-bottom">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button rounded-0 fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMen" style="font-size: 0.88rem;">
-                                        <i class="fa-solid fa-person me-2 text-danger"></i> THỜI TRANG NAM
-                                    </button>
-                                </h2>
-                                <div id="collapseMen" class="accordion-collapse collapse show">
-                                    <div class="list-group list-group-flush rounded-0 bg-light">
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_01')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Thun Nam</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_02')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Sơ Mi Nam</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_03')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Khoác Nam</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_04')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Quần Dài Nam</span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- WOMEN -->
-                            <div class="accordion-item rounded-0 border-bottom">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button rounded-0 fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWomen" style="font-size: 0.88rem;">
-                                        <i class="fa-solid fa-person-dress me-2 text-danger"></i> THỜI TRANG NỮ
-                                    </button>
-                                </h2>
-                                <div id="collapseWomen" class="accordion-collapse collapse show">
-                                    <div class="list-group list-group-flush rounded-0 bg-light">
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_01')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Thun Nữ</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_02')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Sơ Mi Nữ</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_03')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Khoác Nữ</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_04')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Quần & Váy Nữ</span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- KIDS -->
-                            <div class="accordion-item rounded-0">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button rounded-0 fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKids" style="font-size: 0.88rem;">
-                                        <i class="fa-solid fa-children me-2 text-danger"></i> TRẺ EM (KIDS)
-                                    </button>
-                                </h2>
-                                <div id="collapseKids" class="accordion-collapse collapse show">
-                                    <div class="list-group list-group-flush rounded-0 bg-light">
-                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_01')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Trẻ Em</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_02')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Khoác Trẻ Em</span></a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_03')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Quần Trẻ Em</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- VIP Promo Card -->
-                    <div class="p-3 bg-dark text-white rounded-0 border mb-4 text-center">
-                        <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px;">MEMBER EXCLUSIVE</span>
-                        <h6 class="fw-bold text-uppercase mb-1 text-white" style="font-size: 0.85rem;">ƯU ĐÃI THÀNH VIÊN</h6>
-                        <p class="small text-secondary mb-3" style="font-size: 0.78rem;">Đăng ký tài khoản ngay để nhận mã giảm <strong>10%</strong> cho đơn hàng đầu tiên!</p>
-                        <a href="register.html" class="btn btn-danger btn-sm rounded-0 w-100 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px; background-color: var(--color-primary);">
-                            ĐĂNG KÝ NGAY
-                        </a>
-                    </div>
-                </div>
+        <!-- UNIQLO-Style Visual Category Icons Showcase Section -->
+        <div class="uniqlo-category-section shadow-sm rounded-0 mb-4">
+            <!-- Category Group Tabs -->
+            <div class="category-tab-nav" id="categoryTabNav">
+                <button class="category-tab-btn" onclick="switchCategoryTab('WOMEN', this)">NỮ (WOMEN)</button>
+                <button class="category-tab-btn active" onclick="switchCategoryTab('MEN', this)">NAM (MEN)</button>
+                <button class="category-tab-btn" onclick="switchCategoryTab('KIDS', this)">TRẺ EM (KIDS)</button>
             </div>
 
-            <!-- Right: Products Grid -->
-            <div class="col-lg-9 col-md-8">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="productsGrid"></div>
+            <!-- Category Icons Grid -->
+            <div class="uniqlo-category-grid" id="uniqloCategoryGrid">
+                <!-- Dynamically rendered or pre-rendered icon buttons -->
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Full Width Products Grid (5 Columns) -->
+            <div class="col-12">
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-3 g-md-4" id="productsGrid"></div>
             </div>
         </div>
     </main>

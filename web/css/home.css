@@ -23,7 +23,7 @@
 }
 
 .main-nav-link {
-    color: #FFFFFF !important;
+    color: #111111;
     font-weight: 700;
     font-size: 0.88rem;
     text-transform: uppercase;
@@ -32,14 +32,19 @@
     position: relative;
     z-index: 1050;
     text-decoration: none !important;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+    text-shadow: none !important;
     transition: color 0.2s ease;
     cursor: pointer;
 }
 
+.navbar-transparent .main-nav-link {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
 .navbar-main.scrolled .main-nav-link {
     color: #111111 !important;
-    text-shadow: none;
+    text-shadow: none !important;
 }
 
 /* Sliding Magic Underline Bar */
@@ -111,8 +116,8 @@
 
 /* Header Action Icons */
 .header-icon-btn {
-    color: #FFFFFF !important;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+    color: #111111;
+    text-shadow: none !important;
     font-size: 1.15rem;
     text-decoration: none;
     padding: 0.4rem 0.6rem;
@@ -123,30 +128,33 @@
     cursor: pointer;
 }
 
+.navbar-transparent .header-icon-btn {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
 .navbar-main.scrolled .header-icon-btn {
     color: #111111 !important;
-    text-shadow: none;
+    text-shadow: none !important;
 }
 
 .header-icon-btn:hover {
     transform: scale(1.1);
 }
 
-/* Hero Video Section */
+/* Hero Video Section (100% Full Viewport Screen) */
 .hero-video-section {
     position: relative;
     width: 100vw;
-    height: 95vh;
-    min-height: 680px;
-    max-height: 960px;
+    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
     background: #000000;
 }
 
 .hero-carousel-item {
-    height: 95vh;
-    min-height: 680px;
-    max-height: 960px;
+    height: 100vh;
+    min-height: 100vh;
 }
 
 .hero-video-bg {
@@ -154,8 +162,8 @@
     top: 50%;
     left: 50%;
     width: 100vw;
-    height: 100%;
-    min-height: 95vh;
+    height: 100vh;
+    min-height: 100vh;
     object-fit: cover;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -224,3 +232,199 @@
 .product-card:hover .product-img {
     transform: scale(1.05);
 }
+
+/* ==========================================================================
+   PREMIUM CATEGORY SHOWCASE SECTION & QUICK FILTER PILLS
+   ========================================================================== */
+
+/* Visual Category Lookbook Cards */
+.category-showcase-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background-color: #111111;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    display: block;
+    text-decoration: none !important;
+}
+
+.category-showcase-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.16);
+    border-color: #111111;
+}
+
+.category-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+    filter: brightness(0.92);
+}
+
+.category-showcase-card:hover .category-card-bg {
+    transform: scale(1.08);
+    filter: brightness(0.85);
+}
+
+.category-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.05) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    color: #FFFFFF;
+    z-index: 2;
+    transition: background 0.3s ease;
+}
+
+.category-showcase-card:hover .category-card-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.category-tag-badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: fit-content;
+}
+
+.category-showcase-title {
+    font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+    font-weight: 800;
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.2;
+}
+
+.category-showcase-desc {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.category-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.category-showcase-card:hover .category-cta-btn {
+    color: #FF4D4F;
+    gap: 0.75rem;
+}
+
+/* Quick Filter Category Pills */
+.category-pills-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+}
+
+.category-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.15rem;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    color: #333333;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.category-pill-btn:hover {
+    background-color: #111111;
+    color: #FFFFFF;
+    border-color: #111111;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-pill-btn.active {
+    background-color: var(--color-primary, #ED1D24);
+    color: #FFFFFF;
+    border-color: var(--color-primary, #ED1D24);
+    box-shadow: 0 4px 12px rgba(237, 29, 36, 0.25);
+}
+
+/* Enhanced Sidebar Category Styling */
+.category-sidebar-card {
+    border: 1px solid #E5E5E5;
+    background: #FFFFFF;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-category-header {
+    background-color: #111111;
+    color: #FFFFFF;
+    padding: 1rem 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-cate-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    color: #444444;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 0.84rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-cate-link:hover {
+    color: var(--color-primary, #ED1D24);
+    background-color: #FAFAFA;
+    padding-left: 1.5rem;
+}
+
+.sidebar-cate-link.active {
+    color: var(--color-primary, #ED1D24);
+    background-color: #FFF5F5;
+    border-left: 3px solid var(--color-primary, #ED1D24);
+    font-weight: 800;
+}
+

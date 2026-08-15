@@ -131,6 +131,17 @@ function filterCategory(catPrefix) {
         const bcEl = document.getElementById('breadcrumbCurrentCat');
         if (bcEl) bcEl.textContent = title;
     }
+
+    // Sync Quick Filter Pills Active Class
+    document.querySelectorAll('.category-pill-btn').forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`'${catPrefix}'`)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
     renderProducts(currentList);
 }
 
@@ -190,9 +201,64 @@ function toggleQuickWishlist(id, name, price, img, btn) {
     }
 }
 
+// Category Icons Dataset (UNIQLO Style)
+const CATEGORY_ICONS_DATA = {
+    MEN: [
+        { name: 'Áo Thun & Nỉ', icon: '../web/img-prj301/categories/men/t-shirt-icon-men.avif', cat: 'MEN_01' },
+        { name: 'Áo Polo', icon: '../web/img-prj301/categories/men/polos-icon-men.avif', cat: 'MEN_01' },
+        { name: 'Áo Sơ Mi', icon: '../web/img-prj301/categories/men/shirts-icon-men.avif', cat: 'MEN_02' },
+        { name: 'Áo Len', icon: '../web/img-prj301/categories/men/sweaters-icon-men.avif', cat: 'MEN_03' },
+        { name: 'Áo Khoác', icon: '../web/img-prj301/categories/men/outerwear-icon-men.avif', cat: 'MEN_03' },
+        { name: 'Quần Dài', icon: '../web/img-prj301/categories/men/pants-men.avif', cat: 'MEN_04' },
+        { name: 'Quần Jeans', icon: '../web/img-prj301/categories/men/jeans-men.png', cat: 'MEN_04' },
+        { name: 'Quần Shorts', icon: '../web/img-prj301/categories/men/short-men.avif', cat: 'MEN_04' }
+    ],
+    WOMEN: [
+        { name: 'Áo Thun & Nỉ', icon: '../web/img-prj301/categories/women/t-shirt-icon-women.avif', cat: 'WOMEN_01' },
+        { name: 'Sơ Mi & Blouse', icon: '../web/img-prj301/categories/women/shirt-and-blouses-icon-women.avif', cat: 'WOMEN_02' },
+        { name: 'Áo Len', icon: '../web/img-prj301/categories/women/sweaters-icon-women.avif', cat: 'WOMEN_03' },
+        { name: 'Áo Khoác', icon: '../web/img-prj301/categories/women/outerwear-icon-women.avif', cat: 'WOMEN_03' },
+        { name: 'Quần & Váy', icon: '../web/img-prj301/categories/women/bottom-icon-women.jpg', cat: 'WOMEN_04' },
+        { name: 'Shorts & Culottes', icon: '../web/img-prj301/categories/women/shorts-and-culottes-icon.avif', cat: 'WOMEN_04' }
+    ],
+    KIDS: [
+        { name: 'Áo Thun', icon: '../web/img-prj301/categories/kids/t-shirt-icon-kids.avif', cat: 'KIDS_01' },
+        { name: 'Áo Sơ Mi', icon: '../web/img-prj301/categories/kids/shirts-icon-kids.avif', cat: 'KIDS_01' },
+        { name: 'Áo Khoác', icon: '../web/img-prj301/categories/kids/outerwear-icon-kids.avif', cat: 'KIDS_02' },
+        { name: 'Đầm & Váy', icon: '../web/img-prj301/categories/kids/dresses-icon-kids.avif', cat: 'KIDS_03' },
+        { name: 'Quần Dài', icon: '../web/img-prj301/categories/kids/bottoms-icon-kids.avif', cat: 'KIDS_03' },
+        { name: 'Quần Shorts', icon: '../web/img-prj301/categories/kids/shorts-kids.avif', cat: 'KIDS_03' }
+    ]
+};
+
+function renderCategoryGrid(group = 'MEN') {
+    const grid = document.getElementById('uniqloCategoryGrid');
+    if (!grid) return;
+
+    const items = CATEGORY_ICONS_DATA[group] || CATEGORY_ICONS_DATA.MEN;
+
+    grid.innerHTML = items.map(it => `
+        <a href="javascript:void(0)" onclick="filterCategory('${it.cat}')" class="uniqlo-cat-item">
+            <div class="uniqlo-cat-thumb">
+                <img src="${it.icon}" alt="${it.name}" onerror="this.src='../web/img-prj301/ao-thun-01.avif'">
+            </div>
+            <span class="uniqlo-cat-title">${it.name}</span>
+        </a>
+    `).join('');
+}
+
+function switchCategoryTab(group, btn) {
+    document.querySelectorAll('.category-tab-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderCategoryGrid(group);
+    filterCategory(group);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const cat = urlParams.get('cat');
+    const defaultGroup = (cat && cat.startsWith('WOMEN')) ? 'WOMEN' : ((cat && cat.startsWith('KIDS')) ? 'KIDS' : 'MEN');
+    renderCategoryGrid(defaultGroup);
     if (cat) filterCategory(cat);
     else renderProducts(currentList);
 });
