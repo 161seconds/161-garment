@@ -3,4 +3,6 @@ dist/
 nbproject/private/
 .agents/
 *.class
-
+.env
+.env.local
+.env.*.local
