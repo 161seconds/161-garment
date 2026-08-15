@@ -16,9 +16,179 @@
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
                 rel="stylesheet">
+            <!-- ONE61 Modular Stylesheets -->
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
             <!-- ONE61 Global Alert & Modal System -->
             <script src="${pageContext.request.contextPath}/js/one61-alert.js"></script>
             <style>
+                /* ONE61 Luxury Category Cards */
+                .one61-category-card {
+                    display: flex;
+                    flex-direction: column;
+                    text-decoration: none !important;
+                    color: inherit !important;
+                    background: #FFFFFF;
+                    border: 1px solid #E5E5E5;
+                    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                    height: 100%;
+                }
+                .one61-category-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+                    border-color: #CCCCCC;
+                }
+                .category-img-box {
+                    position: relative;
+                    width: 100%;
+                    aspect-ratio: 3 / 3.8;
+                    overflow: hidden;
+                    background-color: #F6F6F6;
+                }
+                .category-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center top;
+                    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .one61-category-card:hover .category-img {
+                    transform: scale(1.06);
+                }
+                .category-floating-badge {
+                    position: absolute;
+                    top: 12px;
+                    left: 12px;
+                    background-color: #111111;
+                    color: #FFFFFF;
+                    font-size: 0.65rem;
+                    font-weight: 800;
+                    letter-spacing: 0.75px;
+                    padding: 3px 8px;
+                    text-transform: uppercase;
+                }
+                .category-info-box {
+                    padding: 1.15rem 1rem 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 1;
+                    background: #FFFFFF;
+                }
+                .category-title {
+                    font-family: var(--font-heading, 'Be Vietnam Pro', sans-serif);
+                    font-weight: 800;
+                    font-size: 1.05rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    color: #111111;
+                    margin: 0 0 0.35rem 0;
+                    transition: color 0.2s ease;
+                }
+                .one61-category-card:hover .category-title {
+                    color: var(--color-primary, #ED1D24);
+                }
+                .category-subtitle {
+                    font-size: 0.8rem;
+                    color: #767676;
+                    margin: 0 0 0.85rem 0;
+                    line-height: 1.4;
+                    flex-grow: 1;
+                }
+                .category-action-link {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    font-size: 0.78rem;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    color: var(--color-primary, #ED1D24);
+                    transition: gap 0.2s ease;
+                }
+                .one61-category-card:hover .category-action-link {
+                    gap: 10px;
+                }
+                .category-pills-bar {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.65rem;
+                    overflow-x: auto;
+                    padding-bottom: 0.5rem;
+                    scrollbar-width: thin;
+                }
+                .category-pill-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0.55rem 1.15rem;
+                    background-color: #FFFFFF;
+                    border: 1px solid #E5E5E5;
+                    color: #333333;
+                    font-size: 0.82rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    text-decoration: none !important;
+                    white-space: nowrap;
+                    transition: all 0.2s ease;
+                    cursor: pointer;
+                }
+                .category-pill-btn:hover {
+                    background-color: #111111;
+                    color: #FFFFFF;
+                    border-color: #111111;
+                    transform: translateY(-2px);
+                }
+                .category-pill-btn.active {
+                    background-color: var(--color-primary, #ED1D24);
+                    color: #FFFFFF;
+                    border-color: var(--color-primary, #ED1D24);
+                }
+                /* Full-Bleed Product Cards */
+                .one61-catalog-card, .product-card {
+                    border: 1px solid #E5E5E5 !important;
+                    background: #FFFFFF !important;
+                    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                    position: relative;
+                    overflow: hidden;
+                    padding: 0 !important;
+                }
+                .one61-catalog-card:hover, .product-card:hover {
+                    border-color: #111111 !important;
+                    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+                    transform: translateY(-4px) !important;
+                }
+                .one61-img-box, .product-img-wrapper, .image-wrapper {
+                    position: relative !important;
+                    width: 100% !important;
+                    aspect-ratio: 3 / 3.8 !important;
+                    height: auto !important;
+                    max-height: none !important;
+                    overflow: hidden !important;
+                    background-color: #F6F6F6 !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    display: block !important;
+                }
+                .one61-img-box img, .product-img-wrapper img, .image-wrapper img, .product-img, .card-img-top {
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    max-height: none !important;
+                    max-width: none !important;
+                    object-fit: cover !important;
+                    object-position: center top !important;
+                    display: block !important;
+                    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                }
+                .one61-catalog-card:hover .one61-img-box img,
+                .product-card:hover .product-img-wrapper img,
+                .product-card:hover .image-wrapper img,
+                .product-card:hover .product-img {
+                    transform: scale(1.06) !important;
+                }
                 :root {
                     --color-primary: #ED1D24;
                     /* ONE61 Red */
@@ -116,6 +286,7 @@
                     position: relative;
                     z-index: 1050;
                     text-decoration: none !important;
+                    text-shadow: none !important;
                     transition: color 0.2s ease;
                     display: inline-block;
                 }
@@ -220,11 +391,15 @@
                     border: none !important;
                 }
 
-                /* Hover dropdown animation & spacing */
+                /* Pure CSS Hover dropdown - Immediately hides on mouse leave */
                 .dropdown-hover:hover>.dropdown-menu {
                     display: block !important;
-                    margin-top: 8px !important;
-                    animation: dropdownFade 0.18s ease-in-out;
+                    margin-top: 4px !important;
+                    animation: dropdownFade 0.15s ease-in-out;
+                }
+
+                .dropdown-hover:not(:hover)>.dropdown-menu {
+                    display: none !important;
                 }
 
                 .dropdown-hover>.dropdown-menu::before {
@@ -319,92 +494,174 @@
                             <!-- NỮ Dropdown -->
                             <li class="nav-item dropdown dropdown-hover">
                                 <a class="nav-link main-nav-link ${param.categoryID.startsWith('WOMEN') ? 'active-cate text-danger fw-bold' : ''}"
-                                    href="product?categoryID=WOMEN_01" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                    href="product?categoryID=WOMEN_01">
                                     NỮ
                                 </a>
-                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
-                                    style="min-width: 210px;">
-                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
-                                        style="font-size: 0.75rem;">Thời Trang Nữ</li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=WOMEN_01"><i
-                                                class="fa-solid fa-shirt me-2 text-muted"></i> Áo Thun Nữ</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=WOMEN_02"><i
-                                                class="fa-solid fa-vest me-2 text-muted"></i> Áo Sơ Mi Nữ</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=WOMEN_03"><i
-                                                class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Nữ</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=WOMEN_04"><i
-                                                class="fa-solid fa-person-dress me-2 text-muted"></i> Quần & Váy Nữ</a>
+                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-3"
+                                    style="min-width: 480px;">
+                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-2 d-flex justify-content-between align-items-center"
+                                        style="font-size: 0.78rem;">
+                                        <span>THỜI TRANG NỮ (WOMEN)</span>
+                                        <a href="product?categoryID=WOMEN_01" class="text-secondary text-decoration-none small fw-normal">Xem tất cả &rarr;</a>
                                     </li>
-                                    <li>
-                                        <hr class="dropdown-divider my-1">
-                                    </li>
-                                    <li><a class="dropdown-item py-1 small fw-bold text-danger" href="product"><i
-                                                class="fa-solid fa-arrow-right me-2"></i> Xem tất cả đồ Nữ</a></li>
+                                    <div class="row row-cols-2 g-2">
+                                        <div class="col">
+                                            <a href="product?categoryID=WOMEN_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/t-shirt-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Thun">
+                                                <span class="small fw-semibold">Áo Thun & Nỉ</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=WOMEN_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shirt-and-blouses-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Sơ Mi">
+                                                <span class="small fw-semibold">Sơ Mi & Blouse</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=WOMEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/sweaters-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Len">
+                                                <span class="small fw-semibold">Áo Len & Cardigan</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=WOMEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/outerwear-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác">
+                                                <span class="small fw-semibold">Áo Khoác Nữ</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=WOMEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/bottom-icon-women.jpg" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần & Váy">
+                                                <span class="small fw-semibold">Quần & Váy Nữ</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=WOMEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Shorts">
+                                                <span class="small fw-semibold">Shorts & Culottes</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </ul>
                             </li>
 
                             <!-- NAM Dropdown -->
                             <li class="nav-item dropdown dropdown-hover">
                                 <a class="nav-link main-nav-link ${param.categoryID.startsWith('MEN') ? 'active-cate text-danger fw-bold' : ''}"
-                                    href="product?categoryID=MEN_01" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                    href="product?categoryID=MEN_01">
                                     NAM
                                 </a>
-                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
-                                    style="min-width: 210px;">
-                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
-                                        style="font-size: 0.75rem;">Thời Trang Nam</li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=MEN_01"><i
-                                                class="fa-solid fa-shirt me-2 text-muted"></i> Áo Thun Nam</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=MEN_02"><i
-                                                class="fa-solid fa-user-tie me-2 text-muted"></i> Áo Sơ Mi Nam</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=MEN_03"><i
-                                                class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Nam</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=MEN_04"><i
-                                                class="fa-solid fa-person me-2 text-muted"></i> Quần Dài Nam</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider my-1">
+                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-3"
+                                    style="min-width: 540px;">
+                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-2 d-flex justify-content-between align-items-center"
+                                        style="font-size: 0.78rem;">
+                                        <span>THỜI TRANG NAM (MEN)</span>
+                                        <a href="product?categoryID=MEN_01" class="text-secondary text-decoration-none small fw-normal">Xem tất cả &rarr;</a>
                                     </li>
-                                    <li><a class="dropdown-item py-1 small fw-bold text-danger" href="product"><i
-                                                class="fa-solid fa-arrow-right me-2"></i> Xem tất cả đồ Nam</a></li>
+                                    <div class="row row-cols-2 g-2">
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/t-shirt-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Thun">
+                                                <span class="small fw-semibold">Áo Thun & Nỉ</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/polos-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Polo">
+                                                <span class="small fw-semibold">Áo Polo</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/shirts-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Sơ Mi">
+                                                <span class="small fw-semibold">Áo Sơ Mi Nam</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/sweaters-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Len">
+                                                <span class="small fw-semibold">Áo Len & Cardigan</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/outerwear-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác">
+                                                <span class="small fw-semibold">Áo Khoác Nam</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/pants-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Dài">
+                                                <span class="small fw-semibold">Quần Dài & Kaki</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/jeans-men.png" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Jeans">
+                                                <span class="small fw-semibold">Quần Jeans</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=MEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/short-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Shorts">
+                                                <span class="small fw-semibold">Quần Shorts Nam</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </ul>
                             </li>
 
                             <!-- TRẺ EM Dropdown -->
                             <li class="nav-item dropdown dropdown-hover">
                                 <a class="nav-link main-nav-link ${param.categoryID.startsWith('KIDS') ? 'active-cate text-danger fw-bold' : ''}"
-                                    href="product?categoryID=KIDS_01" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                    href="product?categoryID=KIDS_01">
                                     TRẺ EM
                                 </a>
-                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
-                                    style="min-width: 210px;">
-                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
-                                        style="font-size: 0.75rem;">Thời Trang Trẻ Em</li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=KIDS_01"><i
-                                                class="fa-solid fa-child me-2 text-muted"></i> Áo Trẻ Em</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=KIDS_02"><i
-                                                class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Trẻ Em</a></li>
-                                    <li><a class="dropdown-item py-2 small fw-semibold"
-                                            href="product?categoryID=KIDS_03"><i
-                                                class="fa-solid fa-shoe-prints me-2 text-muted"></i> Quần Trẻ Em</a>
+                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-3"
+                                    style="min-width: 480px;">
+                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-2 d-flex justify-content-between align-items-center"
+                                        style="font-size: 0.78rem;">
+                                        <span>THỜI TRANG TRẺ EM (KIDS)</span>
+                                        <a href="product?categoryID=KIDS_01" class="text-secondary text-decoration-none small fw-normal">Xem tất cả &rarr;</a>
                                     </li>
-                                    <li>
-                                        <hr class="dropdown-divider my-1">
-                                    </li>
-                                    <li><a class="dropdown-item py-1 small fw-bold text-danger" href="product"><i
-                                                class="fa-solid fa-arrow-right me-2"></i> Xem tất cả đồ Trẻ Em</a></li>
+                                    <div class="row row-cols-2 g-2">
+                                        <div class="col">
+                                            <a href="product?categoryID=KIDS_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/t-shirt-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Thun">
+                                                <span class="small fw-semibold">Áo Thun Trẻ Em</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=KIDS_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shirts-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Sơ Mi">
+                                                <span class="small fw-semibold">Áo Sơ Mi Bé</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=KIDS_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/outerwear-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác">
+                                                <span class="small fw-semibold">Áo Khoác Trẻ Em</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=KIDS_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/dresses-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Đầm Bé Gái">
+                                                <span class="small fw-semibold">Đầm & Váy Bé Gái</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=KIDS_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/bottoms-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Dài">
+                                                <span class="small fw-semibold">Quần Dài Trẻ Em</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="product?categoryID=KIDS_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shorts-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Shorts">
+                                                <span class="small fw-semibold">Quần Shorts Trẻ Em</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </ul>
                             </li>
 
