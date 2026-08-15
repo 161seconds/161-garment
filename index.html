@@ -845,6 +845,14 @@
                             </div>
                         </div>
 
+                        <!-- Real-time Live Payment Waiting Indicator -->
+                        <div class="text-center mb-3">
+                            <div id="paymentWaitingBadge" class="badge bg-light text-dark border border-secondary-subtle py-2 px-3 d-inline-flex align-items-center gap-2">
+                                <span class="spinner-grow spinner-grow-sm text-danger" role="status" style="width: 0.7rem; height: 0.7rem;"></span>
+                                <span id="paymentWaitingText">Đang chờ nhận chuyển khoản từ MB Bank...</span>
+                            </div>
+                        </div>
+
                         <button type="button"
                             class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm"
                             style="background-color: var(--color-primary);" onclick="finishOrderDemo()">
@@ -1078,6 +1086,7 @@
         }
 
         function resetCheckoutModal() {
+            if (typeof stopPaymentPolling === 'function') stopPaymentPolling();
             const deliveryStep = document.getElementById('mDeliveryStep');
             const paymentStep = document.getElementById('mPaymentStep');
             const successStep = document.getElementById('mSuccessStep');
@@ -1199,9 +1208,91 @@
             document.getElementById('mStepperLine').className = 'stepper-line active-line';
             document.getElementById('mBadgeStep2').className = 'stepper-badge active-step';
             document.getElementById('mTextStep2').className = 'small fw-bold text-uppercase text-dark';
+
+            // Start Real-time Auto Payment Detection
+            startPaymentPolling(phone.value.trim());
+        }
+
+        const SEPAY_API_TOKEN = 'JHNJIPVMTXJBZ1JZICEODLL8AUVV0ZAGMGQRPVS52M5ROWUYIRT2P3EF6UD89AON';
+        let paymentPollingInterval = null;
+
+        function startPaymentPolling(phone) {
+            if (paymentPollingInterval) clearInterval(paymentPollingInterval);
+            const cleanPhone = phone.replace(/\s+/g, '');
+
+            const badge = document.getElementById('paymentWaitingBadge');
+            if (badge) {
+                badge.className = 'badge bg-light text-dark border border-secondary-subtle py-2 px-3 d-inline-flex align-items-center gap-2';
+                badge.innerHTML = '<span class="spinner-grow spinner-grow-sm text-danger" role="status" style="width: 0.7rem; height: 0.7rem;"></span><span id="paymentWaitingText">Đang chờ nhận chuyển khoản từ MB Bank...</span>';
+            }
+
+            // Real-time polling via SePay API every 2 seconds
+            paymentPollingInterval = setInterval(async () => {
+                try {
+                    // 1. Direct SePay Transactions API (Works directly on GitHub Pages!)
+                    const res = await fetch('https://my.sepay.vn/userapi/transactions/list', {
+                        headers: {
+                            'Authorization': 'Bearer ' + SEPAY_API_TOKEN,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && data.transactions && Array.isArray(data.transactions)) {
+                            // Find any incoming transfer matching phone number or prefix
+                            const found = data.transactions.slice(0, 15).some(tx => {
+                                const content = ((tx.transaction_content || '') + ' ' + (tx.code || '')).toUpperCase();
+                                const target = cleanPhone.toUpperCase();
+                                return (tx.amount_in && parseFloat(tx.amount_in) > 0) && (content.includes(target) || content.includes('161GM ' + target) || content.includes('161GM'));
+                            });
+
+                            if (found) {
+                                console.log('[SePay] Transaction detected! Redirecting...');
+                                onPaymentSuccess();
+                                return;
+                            }
+                        }
+                    }
+
+                    // 2. Also check local Tomcat endpoint if available
+                    if (window.location.protocol.startsWith('http') && !window.location.hostname.includes('github.io')) {
+                        const localRes = await fetch(`api/check-payment?phone=${encodeURIComponent(cleanPhone)}`);
+                        if (localRes.ok) {
+                            const localData = await localRes.json();
+                            if (localData && localData.paid) {
+                                onPaymentSuccess();
+                                return;
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.log('[SePay Polling Check]:', e);
+                }
+            }, 2000);
+        }
+
+        function stopPaymentPolling() {
+            if (paymentPollingInterval) {
+                clearInterval(paymentPollingInterval);
+                paymentPollingInterval = null;
+            }
+        }
+
+        function onPaymentSuccess() {
+            stopPaymentPolling();
+            const badge = document.getElementById('paymentWaitingBadge');
+            if (badge) {
+                badge.className = 'badge bg-success text-white py-2 px-3 mb-3 d-inline-flex align-items-center gap-2 animate__animated animate__bounceIn';
+                badge.innerHTML = '<i class="fa-solid fa-circle-check fs-6"></i> ĐÃ NHẬN TIỀN MB BANK THÀNH CÔNG! ĐANG CHUYỂN TRANG...';
+            }
+            setTimeout(() => {
+                finishOrderDemo();
+            }, 1200);
         }
 
         function handleModalStepBack() {
+            stopPaymentPolling();
             document.getElementById('mPaymentStep').style.display = 'none';
             document.getElementById('mDeliveryStep').style.display = 'block';
 
@@ -1213,6 +1304,7 @@
         }
 
         function finishOrderDemo() {
+            stopPaymentPolling();
             document.getElementById('mPaymentStep').style.display = 'none';
             document.getElementById('mSuccessStep').style.display = 'block';
             cart = [];
