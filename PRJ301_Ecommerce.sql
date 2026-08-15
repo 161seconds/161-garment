@@ -125,30 +125,38 @@ VALUES ('admin', N'Quản Trị Viên', '5994471abb01112afcc18159f6cc74b4f511b99
 INSERT INTO [User] (userID, fullName, password, email, phone, roleID, status) 
 VALUES ('user1', N'Nguyễn Văn A', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'usera@gmail.com', '0987654321', 'CUS', 1);
 
--- Categories
-INSERT INTO [Category] (categoryID, name, status) VALUES ('CAT01', N'Áo Thun', 1);
-INSERT INTO [Category] (categoryID, name, status) VALUES ('CAT02', N'Áo Sơ Mi', 1);
-INSERT INTO [Category] (categoryID, name, status) VALUES ('CAT03', N'Áo Khoác', 1);
-INSERT INTO [Category] (categoryID, name, status) VALUES ('CAT04', N'Quần & Phụ Kiện', 1);
+-- Categories (Nam, Nữ, Trẻ em)
+INSERT INTO [Category] (categoryID, name, status) VALUES 
+('MEN_01', N'Áo Thun Nam', 1),
+('MEN_02', N'Áo Sơ Mi Nam', 1),
+('MEN_03', N'Áo Khoác Nam', 1),
+('MEN_04', N'Quần Dài Nam', 1),
+('WOMEN_01', N'Áo Thun Nữ', 1),
+('WOMEN_02', N'Áo Sơ Mi Nữ', 1),
+('WOMEN_03', N'Áo Khoác Nữ', 1),
+('WOMEN_04', N'Quần & Váy Nữ', 1),
+('KIDS_01', N'Áo Trẻ Em', 1),
+('KIDS_02', N'Áo Khoác Trẻ Em', 1),
+('KIDS_03', N'Quần Trẻ Em', 1);
 
 -- Products (16 items to match images)
 INSERT INTO [Product] (productID, name, description, price, quantity, image, categoryID, status) VALUES 
-('PROD01', N'Áo Thun Cổ Tròn Ngắn Tay', N'Chất liệu cotton mềm.', 299000, 50, 'ao-thun-01.avif', 'CAT01', 1),
-('PROD02', N'Áo Thun AIRism Trắng', N'Công nghệ AIRism mát lạnh.', 249000, 40, 'ao-thun-02.avif', 'CAT01', 1),
-('PROD03', N'Áo Thun Dáng Rộng', N'Form oversize thoải mái.', 399000, 30, 'ao-thun-03.avif', 'CAT01', 1),
-('PROD04', N'Áo Thun Vải Linen', N'Vải linen cao cấp thấm hút.', 599000, 20, 'ao-thun-04.avif', 'CAT01', 1),
-('PROD05', N'Áo Thun Thể Thao', N'Lịch lãm chốn công sở.', 599000, 25, 'ao-thun-05.avif', 'CAT01', 1),
-('PROD06', N'Áo Khoác Chống UV Nữ', N'Chống nắng hiệu quả UPF 50.', 499000, 40, 'ao-khoac-01.avif', 'CAT03', 1),
-('PROD07', N'Áo Khoác Nỉ Lót Lông', N'Mềm mại, ấm áp.', 699000, 15, 'ao-khoac-03.avif', 'CAT03', 1),
-('PROD08', N'Áo Khoác Gió Nam', N'Chống gió, chống nước tốt.', 599000, 20, 'ao-khoac-04.avif', 'CAT03', 1),
-('PROD09', N'Áo Khoác Thể Thao', N'Mặc nhà hoặc dạo phố.', 199000, 50, 'ao-khoac-05.avif', 'CAT03', 1),
-('PROD10', N'Áo Khoác Phao Dáng Dài', N'Giữ ấm mùa đông cực tốt.', 799000, 30, 'ao-khoac-06.avif', 'CAT03', 1),
-('PROD11', N'Quần Shorts Kaki', N'Thoải mái vận động.', 399000, 35, 'quan-dai-01.avif', 'CAT04', 1),
-('PROD12', N'Quần Jeans Nam', N'Dáng slim fit trẻ trung.', 799000, 40, 'quan-dai-02.avif', 'CAT04', 1),
-('PROD13', N'Quần Âu Ống Suông', N'Phẳng phiu không nhăn.', 699000, 25, 'quan-dai-03.avif', 'CAT04', 1),
-('PROD14', N'Quần Tây Nam Cao Cấp', N'Lịch thiệp, sang trọng.', 899000, 50, 'quan-dai-04.avif', 'CAT04', 1),
-('PROD15', N'Quần Thể Thao Ống Rộng', N'Tiện dụng, dễ mặc.', 299000, 40, 'quan-dai-05.avif', 'CAT04', 1),
-('PROD16', N'Quần Jogger Túi Hộp', N'Phong cách đường phố.', 599000, 15, 'quan-dai-06.avif', 'CAT04', 1);
+('PROD01', N'Áo Thun Cổ Tròn Nam Ngắn Tay', N'Chất liệu cotton mềm, thoáng mát.', 299000, 50, 'ao-thun-01.avif', 'MEN_01', 1),
+('PROD02', N'Áo Thun AIRism Nam Trắng', N'Công nghệ AIRism mát lạnh độc quyền.', 249000, 40, 'ao-thun-02.avif', 'MEN_01', 1),
+('PROD03', N'Áo Thun Dáng Rộng Unisex', N'Form oversize thoải mái cho cả nam và nữ.', 399000, 30, 'ao-thun-03.avif', 'MEN_01', 1),
+('PROD04', N'Áo Thun Vải Linen Cao Cấp', N'Vải linen cao cấp thấm hút mồ hôi tối đa.', 599000, 20, 'ao-thun-04.avif', 'MEN_01', 1),
+('PROD05', N'Áo Polo Thể Thao Nam', N'Lịch lãm chốn công sở và năng động khi dạo phố.', 599000, 25, 'ao-thun-05.avif', 'MEN_01', 1),
+('PROD06', N'Áo Khoác Chống UV Nữ', N'Chống nắng hiệu quả UPF 50+ bảo vệ làn da.', 499000, 40, 'ao-khoac-01.avif', 'WOMEN_03', 1),
+('PROD07', N'Áo Khoác Nỉ Lót Lông Nữ', N'Mềm mại, ấm áp cho ngày se lạnh.', 699000, 15, 'ao-khoac-03.avif', 'WOMEN_03', 1),
+('PROD08', N'Áo Khoác Gió Nam BlockTech', N'Chống gió, chống nước cực tốt.', 599000, 20, 'ao-khoac-04.avif', 'MEN_03', 1),
+('PROD09', N'Áo Khoác Thể Thao Nữ', N'Nhẹ nhàng, tiện lợi mặc tập hoặc dạo phố.', 199000, 50, 'ao-khoac-05.avif', 'WOMEN_03', 1),
+('PROD10', N'Áo Khoác Phao Dáng Dài Nam', N'Giữ ấm mùa đông với lớp bông siêu nhẹ.', 799000, 30, 'ao-khoac-06.avif', 'MEN_03', 1),
+('PROD11', N'Quần Shorts Kaki Nam', N'Thoải mái vận động suốt ngày dài.', 399000, 35, 'quan-dai-01.avif', 'MEN_04', 1),
+('PROD12', N'Quần Jeans Nam Co Giãn', N'Dáng slim fit trẻ trung, tôn dáng.', 799000, 40, 'quan-dai-02.avif', 'MEN_04', 1),
+('PROD13', N'Quần Âu Nữ Ống Suông', N'Phẳng phiu, thanh lịch nơi công sở.', 699000, 25, 'quan-dai-03.avif', 'WOMEN_04', 1),
+('PROD14', N'Quần Tây Nam Cao Cấp', N'Lịch thiệp, sang trọng cho quý ông.', 899000, 50, 'quan-dai-04.avif', 'MEN_04', 1),
+('PROD15', N'Quần Thể Thao Trẻ Em', N'Chất liệu cotton mềm, an toàn cho bé.', 299000, 40, 'quan-dai-05.avif', 'KIDS_03', 1),
+('PROD16', N'Áo Thun Trẻ Em In Họa Tiết', N'Đáng yêu, thoáng mát cả ngày.', 199000, 30, 'ao-thun-01.avif', 'KIDS_01', 1);
 
 -- Product Images
 INSERT INTO [ProductImage] (productID, imageUrl, isPrimary) VALUES 

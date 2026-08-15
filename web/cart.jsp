@@ -9,16 +9,19 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-8">
-        <c:choose>
-            <c:when test="${empty sessionScope.CART}">
-                <div class="text-center py-5 border">
-                    <h5 class="mb-3 text-muted">Giỏ hàng trống!</h5>
-                    <a href="product" class="btn btn-outline-dark rounded-0 fw-bold px-4">TIẾP TỤC MUA SẮM</a>
-                </div>
-            </c:when>
-            <c:otherwise>
+<c:choose>
+    <c:when test="${empty sessionScope.CART}">
+        <div class="row justify-content-center my-5">
+            <div class="col-md-6 text-center py-5 border bg-light">
+                <i class="fa-solid fa-cart-shopping fs-1 text-muted mb-3 d-block"></i>
+                <h5 class="mb-3 text-muted">Giỏ hàng trống!</h5>
+                <a href="product" class="btn btn-outline-dark rounded-0 fw-bold px-4">TIẾP TỤC MUA SẮM</a>
+            </div>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="row">
+            <div class="col-md-8">
                 <div class="card border-0 rounded-0 mb-4">
                     <div class="card-body p-0">
                         <table class="table align-middle mb-0 border-top">
@@ -62,32 +65,30 @@
                         </table>
                     </div>
                 </div>
-            </c:otherwise>
-        </c:choose>
-    </div>
+            </div>
 
-    <c:if test="${not empty sessionScope.CART}">
-        <div class="col-md-4">
-            <div class="card border-0 rounded-0 bg-light">
-                <div class="card-body p-4">
-                    <h5 class="fw-bold border-bottom pb-3 mb-3 text-uppercase fs-6">TỔNG ĐƠN HÀNG</h5>
-                    <div class="d-flex justify-content-between mb-3 fs-6">
-                        <span class="text-dark">Tạm tính:</span>
-                        <span class="fw-bold"><fmt:formatNumber value="${TOTAL}" pattern="#,###"/> đ</span>
+            <div class="col-md-4">
+                <div class="card border-0 rounded-0 bg-light">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold border-bottom pb-3 mb-3 text-uppercase fs-6">TỔNG ĐƠN HÀNG</h5>
+                        <div class="d-flex justify-content-between mb-3 fs-6">
+                            <span class="text-dark">Tạm tính:</span>
+                            <span class="fw-bold"><fmt:formatNumber value="${TOTAL}" pattern="#,###"/> đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4 border-bottom pb-3 fs-6">
+                            <span class="text-dark">Phí vận chuyển:</span>
+                            <span class="fw-bold">0 đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="fw-bold fs-5 text-uppercase">TỔNG CỘNG:</span>
+                            <span class="fw-bold fs-4" style="color: var(--color-accent);"><fmt:formatNumber value="${TOTAL}" pattern="#,###"/> đ</span>
+                        </div>
+                        <a href="checkout" class="btn btn-accent w-100 py-3 fw-bold fs-6">TIẾN HÀNH THANH TOÁN</a>
                     </div>
-                    <div class="d-flex justify-content-between mb-4 border-bottom pb-3 fs-6">
-                        <span class="text-dark">Phí vận chuyển:</span>
-                        <span class="fw-bold">0 đ</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-4">
-                        <span class="fw-bold fs-5 text-uppercase">TỔNG CỘNG:</span>
-                        <span class="fw-bold fs-4" style="color: var(--color-accent);"><fmt:formatNumber value="${TOTAL}" pattern="#,###"/> đ</span>
-                    </div>
-                    <a href="checkout" class="btn btn-accent w-100 py-3 fw-bold fs-6">TIẾN HÀNH THANH TOÁN</a>
                 </div>
             </div>
         </div>
-    </c:if>
-</div>
+    </c:otherwise>
+</c:choose>
 
 <jsp:include page="includes/footer.jsp" />

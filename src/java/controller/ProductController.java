@@ -44,6 +44,13 @@ public class ProductController extends HttpServlet {
                 endPage++;
             }
             
+            if (page < 1) {
+                page = 1;
+            }
+            if (endPage > 0 && page > endPage) {
+                page = endPage;
+            }
+            
             int offset = (page - 1) * pageSize;
             List<ProductDTO> products = pDao.getProductsByPage(categoryID, offset, pageSize);
             
