@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>161 GARMENT | Phong Cách Tối Giản Chuẩn Nhật Bản</title>
-    <meta name="description" content="161 GARMENT - Thương hiệu thời trang phong cách tối giản chuẩn Nhật Bản. LifeWear chất lượng cao, áo thun, sơ mi, quần barrel, áo khoác cho Nữ, Nam và Trẻ em.">
+    <meta name="description"
+        content="161 GARMENT - Thương hiệu thời trang phong cách tối giản chuẩn Nhật Bản. LifeWear chất lượng cao, áo thun, sơ mi, quần barrel, áo khoác cho Nữ, Nam và Trẻ em.">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,7 +15,9 @@
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -35,7 +38,13 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5, h6, .brand-font {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .brand-font {
             font-family: var(--font-heading);
         }
 
@@ -73,7 +82,7 @@
         .navbar-main.scrolled {
             position: fixed;
             background: rgba(255, 255, 255, 0.98) !important;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
             padding: 0.65rem 0;
         }
 
@@ -108,7 +117,7 @@
             left: 0;
             height: 1.5px;
             background-color: #FFFFFF;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
             border-radius: 1px;
             pointer-events: none;
             transition: left 0.25s cubic-bezier(0.25, 1, 0.5, 1), width 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
@@ -122,12 +131,13 @@
         }
 
         /* Dropdown Menus */
-        .dropdown-hover:hover > .dropdown-menu {
+        .dropdown-hover:hover>.dropdown-menu {
             display: block !important;
             margin-top: 8px !important;
             animation: dropdownFade 0.18s ease-in-out;
         }
-        .dropdown-hover > .dropdown-menu::before {
+
+        .dropdown-hover>.dropdown-menu::before {
             content: '';
             position: absolute;
             top: -10px;
@@ -136,17 +146,26 @@
             height: 10px;
             background: transparent;
         }
+
         @keyframes dropdownFade {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .dropdown-menu {
             background-color: #FFFFFF !important;
             border-radius: 0 !important;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.15) !important;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15) !important;
             z-index: 1070 !important;
         }
+
         .dropdown-item:hover {
             background-color: #F8F8F8 !important;
             color: var(--color-primary) !important;
@@ -159,12 +178,15 @@
         .offcanvas {
             z-index: 1090 !important;
         }
+
         .offcanvas-backdrop {
             z-index: 1085 !important;
         }
+
         .modal {
             z-index: 1100 !important;
         }
+
         .modal-backdrop {
             z-index: 1095 !important;
         }
@@ -182,10 +204,12 @@
             transition: transform 0.2s ease;
             cursor: pointer;
         }
+
         .navbar-main.scrolled .header-icon-btn {
             color: #111111 !important;
             text-shadow: none;
         }
+
         .header-icon-btn:hover {
             transform: scale(1.1);
         }
@@ -204,7 +228,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         /* Hero Video Carousel */
@@ -216,10 +240,12 @@
             overflow: hidden;
             background: #000000;
         }
+
         .hero-carousel-item {
             height: 85vh;
             min-height: 550px;
         }
+
         .hero-video-bg {
             position: absolute;
             top: 50%;
@@ -231,6 +257,7 @@
             transform: translate(-50%, -50%);
             z-index: 1;
         }
+
         .hero-video-overlay-clean {
             position: absolute;
             bottom: 6%;
@@ -241,9 +268,17 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
             animation: heroTextFadeUp 1s ease;
         }
+
         @keyframes heroTextFadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Product Cards */
@@ -254,23 +289,27 @@
             transition: all 0.25s ease;
             position: relative;
         }
+
         .product-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transform: translateY(-4px);
             border-color: #CCCCCC;
         }
+
         .product-img-wrapper {
             position: relative;
             overflow: hidden;
             background: #F9F9F9;
             aspect-ratio: 1 / 1;
         }
+
         .product-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
+
         .product-card:hover .product-img {
             transform: scale(1.05);
         }
@@ -289,21 +328,25 @@
             font-size: 0.85rem;
             transition: all 0.3s ease;
         }
+
         .stepper-badge.active-step {
             background-color: var(--color-primary);
             color: #FFFFFF;
             box-shadow: 0 2px 8px rgba(255, 0, 0, 0.35);
         }
+
         .stepper-badge.completed-step {
             background-color: #198754;
             color: #FFFFFF;
         }
+
         .stepper-line {
             flex: 1;
             max-width: 70px;
             height: 2px;
             background-color: #E0E0E0;
         }
+
         .stepper-line.active-line {
             background-color: #198754;
         }
@@ -313,11 +356,13 @@
             border-color: #E5E5E5 !important;
             background-color: #FFFFFF;
         }
+
         .payment-card.selected-method {
             border-color: var(--color-primary) !important;
             background-color: #FFFDFD;
             box-shadow: 0 2px 10px rgba(255, 0, 0, 0.05);
         }
+
         .cursor-pointer {
             cursor: pointer;
         }
@@ -336,41 +381,70 @@
                 </a>
 
                 <!-- Navigation Tabs with Gliding Underline -->
-                <ul class="navbar-nav d-flex flex-row align-items-center mb-0 gap-1 category-nav-wrapper" id="mainCategoryNav">
+                <ul class="navbar-nav d-flex flex-row align-items-center mb-0 gap-1 category-nav-wrapper"
+                    id="mainCategoryNav">
                     <div id="slidingNavIndicator" class="sliding-nav-indicator"></div>
 
                     <!-- NỮ Dropdown -->
                     <li class="nav-item dropdown dropdown-hover">
                         <a class="nav-link main-nav-link" onclick="filterCategory('WOMEN')">NỮ</a>
-                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2" style="min-width: 210px;">
-                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1" style="font-size: 0.75rem;">Thời Trang Nữ</li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('WOMEN_01')"><i class="fa-solid fa-shirt me-2 text-muted"></i> Áo Thun Nữ</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('WOMEN_02')"><i class="fa-solid fa-vest me-2 text-muted"></i> Áo Sơ Mi Nữ</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('WOMEN_03')"><i class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Nữ</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('WOMEN_04')"><i class="fa-solid fa-person-dress me-2 text-muted"></i> Quần & Váy Nữ</a></li>
+                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
+                            style="min-width: 210px;">
+                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
+                                style="font-size: 0.75rem;">Thời Trang Nữ</li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('WOMEN_01')"><i
+                                        class="fa-solid fa-shirt me-2 text-muted"></i> Áo Thun Nữ</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('WOMEN_02')"><i
+                                        class="fa-solid fa-vest me-2 text-muted"></i> Áo Sơ Mi Nữ</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('WOMEN_03')"><i
+                                        class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Nữ</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('WOMEN_04')"><i
+                                        class="fa-solid fa-person-dress me-2 text-muted"></i> Quần & Váy Nữ</a></li>
                         </ul>
                     </li>
 
                     <!-- NAM Dropdown -->
                     <li class="nav-item dropdown dropdown-hover">
                         <a class="nav-link main-nav-link" onclick="filterCategory('MEN')">NAM</a>
-                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2" style="min-width: 210px;">
-                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1" style="font-size: 0.75rem;">Thời Trang Nam</li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('MEN_01')"><i class="fa-solid fa-shirt me-2 text-muted"></i> Áo Thun Nam</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('MEN_02')"><i class="fa-solid fa-user-tie me-2 text-muted"></i> Áo Sơ Mi Nam</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('MEN_03')"><i class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Nam</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('MEN_04')"><i class="fa-solid fa-person me-2 text-muted"></i> Quần Dài Nam</a></li>
+                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
+                            style="min-width: 210px;">
+                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
+                                style="font-size: 0.75rem;">Thời Trang Nam</li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('MEN_01')"><i class="fa-solid fa-shirt me-2 text-muted"></i>
+                                    Áo Thun Nam</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('MEN_02')"><i
+                                        class="fa-solid fa-user-tie me-2 text-muted"></i> Áo Sơ Mi Nam</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('MEN_03')"><i
+                                        class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Nam</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('MEN_04')"><i
+                                        class="fa-solid fa-person me-2 text-muted"></i> Quần Dài Nam</a></li>
                         </ul>
                     </li>
 
                     <!-- TRẺ EM Dropdown -->
                     <li class="nav-item dropdown dropdown-hover">
                         <a class="nav-link main-nav-link" onclick="filterCategory('KIDS')">TRẺ EM</a>
-                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2" style="min-width: 210px;">
-                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1" style="font-size: 0.75rem;">Thời Trang Trẻ Em</li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('KIDS_01')"><i class="fa-solid fa-child me-2 text-muted"></i> Áo Trẻ Em</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('KIDS_02')"><i class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Trẻ Em</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#" onclick="filterCategory('KIDS_03')"><i class="fa-solid fa-shoe-prints me-2 text-muted"></i> Quần Trẻ Em</a></li>
+                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
+                            style="min-width: 210px;">
+                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
+                                style="font-size: 0.75rem;">Thời Trang Trẻ Em</li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('KIDS_01')"><i
+                                        class="fa-solid fa-child me-2 text-muted"></i> Áo Trẻ Em</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('KIDS_02')"><i
+                                        class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Trẻ Em</a></li>
+                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
+                                    onclick="filterCategory('KIDS_03')"><i
+                                        class="fa-solid fa-shoe-prints me-2 text-muted"></i> Quần Trẻ Em</a></li>
                         </ul>
                     </li>
 
@@ -384,21 +458,25 @@
             <!-- Right Box: Search + Icons -->
             <div class="d-flex align-items-center gap-2">
                 <div class="search-box-container d-none d-md-block position-relative" style="width: 230px;">
-                    <input type="text" id="liveSearchInput" class="form-control rounded-pill pe-4 ps-3 py-1 border-0 shadow-sm small" 
-                           placeholder="Tìm kiếm sản phẩm..." oninput="handleSearch(this.value)"
-                           style="font-size: 0.8rem; background-color: rgba(255,255,255,0.95);">
-                    <i class="fa-solid fa-magnifying-glass text-muted position-absolute top-50 end-0 translate-middle-y me-3" style="font-size: 0.8rem;"></i>
+                    <input type="text" id="liveSearchInput"
+                        class="form-control rounded-pill pe-4 ps-3 py-1 border-0 shadow-sm small"
+                        placeholder="Tìm kiếm sản phẩm..." oninput="handleSearch(this.value)"
+                        style="font-size: 0.8rem; background-color: rgba(255,255,255,0.95);">
+                    <i class="fa-solid fa-magnifying-glass text-muted position-absolute top-50 end-0 translate-middle-y me-3"
+                        style="font-size: 0.8rem;"></i>
                 </div>
 
                 <div class="d-flex align-items-center gap-1 ms-2">
                     <a class="header-icon-btn" href="#storeSection" title="Yêu thích">
                         <i class="fa-regular fa-heart"></i>
                     </a>
-                    <a class="header-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Giỏ hàng">
+                    <a class="header-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+                        title="Giỏ hàng">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="cart-badge" id="headerCartCount">2</span>
                     </a>
-                    <a class="header-icon-btn" href="javascript:void(0)" onclick="openCheckoutModal()" title="Thanh toán VietQR">
+                    <a class="header-icon-btn" href="javascript:void(0)" onclick="openCheckoutModal()"
+                        title="Thanh toán VietQR">
                         <i class="fa-solid fa-qrcode text-warning"></i>
                     </a>
                 </div>
@@ -408,23 +486,27 @@
 
     <!-- Edge-to-Edge Hero Video Banner Carousel -->
     <div class="hero-video-section position-relative">
-        <div id="heroVideoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="8000">
+        <div id="heroVideoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+            data-bs-interval="8000">
             <!-- Carousel Indicators -->
             <div class="carousel-indicators mb-4">
-                <button type="button" data-bs-target="#heroVideoCarousel" data-bs-slide-to="0" class="active" aria-current="true" style="width: 35px; height: 3px; border-radius: 2px;"></button>
-                <button type="button" data-bs-target="#heroVideoCarousel" data-bs-slide-to="1" style="width: 35px; height: 3px; border-radius: 2px;"></button>
+                <button type="button" data-bs-target="#heroVideoCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" style="width: 35px; height: 3px; border-radius: 2px;"></button>
+                <button type="button" data-bs-target="#heroVideoCarousel" data-bs-slide-to="1"
+                    style="width: 35px; height: 3px; border-radius: 2px;"></button>
             </div>
 
             <div class="carousel-inner">
                 <!-- Slide 1: Video Barrel Pants -->
                 <div class="carousel-item active hero-carousel-item position-relative">
-                    <video class="hero-video-bg" autoplay loop muted playsinline poster="web/img-prj301/ao-khoac-01.avif">
+                    <video class="hero-video-bg" autoplay loop muted playsinline
+                        poster="web/img-prj301/ao-khoac-01.avif">
                         <source src="web/img-prj301/uniqlo-video.mp4" type="video/mp4">
                         <source src="web/uniqlo-video-01.mp4" type="video/mp4">
                     </video>
                     <div class="hero-video-overlay-clean">
-                        <span class="badge bg-black text-white px-3 py-1 text-uppercase mb-3 rounded-pill fw-bold" 
-                              style="font-size: 0.75rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.3);">
+                        <span class="badge bg-black text-white px-3 py-1 text-uppercase mb-3 rounded-pill fw-bold"
+                            style="font-size: 0.75rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.3);">
                             TRENDING
                         </span>
                         <h1 class="display-5 fw-bold text-uppercase m-0 tracking-tight" style="font-size: 2.3rem;">
@@ -433,7 +515,7 @@
                         <p class="fs-6 mt-2 mb-3 text-light" style="line-height: 1.5; opacity: 0.95;">
                             Thiết kế bo tròn hiện đại, thoải mái khi vận động, dễ phối nhiều phong cách.
                         </p>
-                        <a href="#storeSection" class="btn btn-light rounded-0 px-4 py-2 fw-bold text-uppercase small shadow-sm">
+                        <a href="#storeSection" class="btn btn-light rounded-0 px-4 py-2 fw-bold text-uppercase small">
                             KHÁM PHÁ NGAY <i class="fa-solid fa-arrow-down ms-1"></i>
                         </a>
                     </div>
@@ -441,13 +523,14 @@
 
                 <!-- Slide 2: Video LifeWear 2026 -->
                 <div class="carousel-item hero-carousel-item position-relative">
-                    <video class="hero-video-bg" autoplay loop muted playsinline poster="web/img-prj301/ao-thun-01.avif">
+                    <video class="hero-video-bg" autoplay loop muted playsinline
+                        poster="web/img-prj301/ao-thun-01.avif">
                         <source src="web/img-prj301/uniqlo-video-02.mp4" type="video/mp4">
                         <source src="web/uniqlo-video-02.mp4" type="video/mp4">
                     </video>
                     <div class="hero-video-overlay-clean">
-                        <span class="badge bg-danger text-white px-3 py-1 text-uppercase mb-3 rounded-pill fw-bold" 
-                              style="font-size: 0.75rem; letter-spacing: 1px;">
+                        <span class="badge bg-danger text-white px-3 py-1 text-uppercase mb-3 rounded-pill fw-bold"
+                            style="font-size: 0.75rem; letter-spacing: 1px;">
                             NEW COLLECTION
                         </span>
                         <h1 class="display-5 fw-bold text-uppercase m-0 tracking-tight" style="font-size: 2.3rem;">
@@ -456,7 +539,9 @@
                         <p class="fs-6 mt-2 mb-3 text-light" style="line-height: 1.5; opacity: 0.95;">
                             Chất liệu cao cấp thoáng khí, chuẩn phom dáng cho cuộc sống năng động mỗi ngày.
                         </p>
-                        <a href="#storeSection" class="btn btn-danger rounded-0 px-4 py-2 fw-bold text-uppercase small shadow-sm" style="background-color: var(--color-primary);">
+                        <a href="#storeSection"
+                            class="btn btn-danger rounded-0 px-4 py-2 fw-bold text-uppercase small shadow-sm"
+                            style="background-color: var(--color-primary);">
                             MUA SẮM NGAY <i class="fa-solid fa-arrow-down ms-1"></i>
                         </a>
                     </div>
@@ -464,10 +549,12 @@
             </div>
 
             <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroVideoCarousel" data-bs-slide="prev" style="width: 5%;">
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroVideoCarousel" data-bs-slide="prev"
+                style="width: 5%;">
                 <span class="carousel-control-prev-icon p-3 bg-dark bg-opacity-25 rounded-circle"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroVideoCarousel" data-bs-slide="next" style="width: 5%;">
+            <button class="carousel-control-next" type="button" data-bs-target="#heroVideoCarousel" data-bs-slide="next"
+                style="width: 5%;">
                 <span class="carousel-control-next-icon p-3 bg-dark bg-opacity-25 rounded-circle"></span>
             </button>
         </div>
@@ -493,9 +580,11 @@
         <div class="row g-4">
             <!-- Sidebar Filters -->
             <div class="col-lg-3 col-md-4">
-                <div class="card border border-dark-subtle rounded-0 bg-white p-3 shadow-sm sticky-top" style="top: 90px;">
+                <div class="card border border-dark-subtle rounded-0 bg-white p-3 shadow-sm sticky-top"
+                    style="top: 90px;">
                     <div class="d-flex justify-content-between align-items-center pb-2 mb-3 border-bottom">
-                        <h6 class="fw-bold text-uppercase m-0 small"><i class="fa-solid fa-sliders me-1"></i> DANH MỤC SẢN PHẨM</h6>
+                        <h6 class="fw-bold text-uppercase m-0 small"><i class="fa-solid fa-sliders me-1"></i> DANH MỤC
+                            SẢN PHẨM</h6>
                         <span class="badge bg-danger rounded-0 small" id="activeFilterBadge">Tất cả</span>
                     </div>
 
@@ -504,17 +593,22 @@
                         <!-- Nữ -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#accWomen">
+                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#accWomen">
                                     <i class="fa-solid fa-person-dress me-2 text-danger"></i> Thời Trang Nữ
                                 </button>
                             </h2>
                             <div id="accWomen" class="accordion-collapse collapse" data-bs-parent="#categoryAccordion">
                                 <div class="accordion-body px-0 py-2 small">
                                     <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_01')" class="text-secondary text-decoration-none">Áo Thun Nữ</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_02')" class="text-secondary text-decoration-none">Áo Sơ Mi Nữ</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_03')" class="text-secondary text-decoration-none">Áo Khoác Nữ</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_04')" class="text-secondary text-decoration-none">Quần & Váy Nữ</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_01')"
+                                                class="text-secondary text-decoration-none">Áo Thun Nữ</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_02')"
+                                                class="text-secondary text-decoration-none">Áo Sơ Mi Nữ</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_03')"
+                                                class="text-secondary text-decoration-none">Áo Khoác Nữ</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('WOMEN_04')"
+                                                class="text-secondary text-decoration-none">Quần & Váy Nữ</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -523,17 +617,22 @@
                         <!-- Nam -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#accMen">
+                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#accMen">
                                     <i class="fa-solid fa-person me-2 text-primary"></i> Thời Trang Nam
                                 </button>
                             </h2>
                             <div id="accMen" class="accordion-collapse collapse" data-bs-parent="#categoryAccordion">
                                 <div class="accordion-body px-0 py-2 small">
                                     <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_01')" class="text-secondary text-decoration-none">Áo Thun Nam</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_02')" class="text-secondary text-decoration-none">Áo Sơ Mi Nam</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_03')" class="text-secondary text-decoration-none">Áo Khoác Nam</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_04')" class="text-secondary text-decoration-none">Quần Dài Nam</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_01')"
+                                                class="text-secondary text-decoration-none">Áo Thun Nam</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_02')"
+                                                class="text-secondary text-decoration-none">Áo Sơ Mi Nam</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_03')"
+                                                class="text-secondary text-decoration-none">Áo Khoác Nam</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('MEN_04')"
+                                                class="text-secondary text-decoration-none">Quần Dài Nam</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -542,16 +641,20 @@
                         <!-- Trẻ Em -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#accKids">
+                                <button class="accordion-button collapsed px-0 fw-bold small text-uppercase"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#accKids">
                                     <i class="fa-solid fa-child me-2 text-success"></i> Thời Trang Trẻ Em
                                 </button>
                             </h2>
                             <div id="accKids" class="accordion-collapse collapse" data-bs-parent="#categoryAccordion">
                                 <div class="accordion-body px-0 py-2 small">
                                     <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_01')" class="text-secondary text-decoration-none">Áo Trẻ Em</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_02')" class="text-secondary text-decoration-none">Áo Khoác Trẻ Em</a></li>
-                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_03')" class="text-secondary text-decoration-none">Quần Trẻ Em</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_01')"
+                                                class="text-secondary text-decoration-none">Áo Trẻ Em</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_02')"
+                                                class="text-secondary text-decoration-none">Áo Khoác Trẻ Em</a></li>
+                                        <li><a href="javascript:void(0)" onclick="filterCategory('KIDS_03')"
+                                                class="text-secondary text-decoration-none">Quần Trẻ Em</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -559,7 +662,8 @@
                     </div>
 
                     <!-- Reset Filter Button -->
-                    <button class="btn btn-outline-dark btn-sm rounded-0 w-100 mt-3 fw-bold text-uppercase" onclick="filterCategory('ALL')">
+                    <button class="btn btn-outline-dark btn-sm rounded-0 w-100 mt-3 fw-bold text-uppercase"
+                        onclick="filterCategory('ALL')">
                         <i class="fa-solid fa-rotate-left me-1"></i> Xem tất cả sản phẩm
                     </button>
                 </div>
@@ -583,7 +687,8 @@
     <!-- Offcanvas Shopping Cart Drawer -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="width: 380px;">
         <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title fw-bold text-uppercase small"><i class="fa-solid fa-cart-shopping me-2"></i> GIỎ HÀNG CỦA BẠN</h5>
+            <h5 class="offcanvas-title fw-bold text-uppercase small"><i class="fa-solid fa-cart-shopping me-2"></i> GIỎ
+                HÀNG CỦA BẠN</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
@@ -601,9 +706,10 @@
                     <span class="fw-bold text-uppercase">TỔNG CỘNG:</span>
                     <span class="fw-bold fs-5 text-danger" id="cartTotalPrice">998.000 đ</span>
                 </div>
-                <button id="btnProceedCheckout" class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm" 
-                        style="background-color: var(--color-primary); letter-spacing: 0.5px;"
-                        onclick="openCheckoutModal()">
+                <button id="btnProceedCheckout"
+                    class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm"
+                    style="background-color: var(--color-primary); letter-spacing: 0.5px;"
+                    onclick="openCheckoutModal()">
                     TIẾN HÀNH THANH TOÁN <i class="fa-solid fa-arrow-right ms-1"></i>
                 </button>
             </div>
@@ -615,7 +721,8 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content rounded-0 border-0 shadow-lg">
                 <div class="modal-header border-bottom p-3">
-                    <h5 class="modal-title fw-bold text-uppercase small"><i class="fa-solid fa-shield-check text-danger me-2"></i> THANH TOÁN ĐƠN HÀNG</h5>
+                    <h5 class="modal-title fw-bold text-uppercase small"><i
+                            class="fa-solid fa-shield-check text-danger me-2"></i> THANH TOÁN ĐƠN HÀNG</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -636,24 +743,33 @@
                     <div id="mDeliveryStep">
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold small text-uppercase">Họ tên người nhận <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control rounded-0" id="mInputFullName" value="Nguyễn Văn Quốc Bảo" required placeholder="Họ và tên...">
+                                <label class="form-label fw-bold small text-uppercase">Họ tên người nhận <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control rounded-0" id="mInputFullName"
+                                    value="Nguyễn Văn Quốc Bảo" required placeholder="Họ và tên...">
                                 <div class="text-danger small mt-1 d-none" id="mErrName">Vui lòng nhập họ và tên.</div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-bold small text-uppercase">Số điện thoại <span class="text-danger">*</span></label>
-                                <input type="tel" class="form-control rounded-0" id="mInputPhone" value="0822221616" required placeholder="0987654321">
-                                <div class="text-danger small mt-1 d-none" id="mErrPhone">Vui lòng nhập số điện thoại hợp lệ (10 số).</div>
+                                <label class="form-label fw-bold small text-uppercase">Số điện thoại <span
+                                        class="text-danger">*</span></label>
+                                <input type="tel" class="form-control rounded-0" id="mInputPhone" value="0822221616"
+                                    required placeholder="0987654321">
+                                <div class="text-danger small mt-1 d-none" id="mErrPhone">Vui lòng nhập số điện thoại
+                                    hợp lệ (10 số).</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold small text-uppercase">Địa chỉ nhận hàng <span class="text-danger">*</span></label>
-                            <textarea class="form-control rounded-0" id="mInputAddress" rows="2" required placeholder="Số nhà, tên đường, phường/xã, quận/huyện..."></textarea>
-                            <div class="text-danger small mt-1 d-none" id="mErrAddress">Vui lòng nhập địa chỉ nhận hàng cụ thể.</div>
+                            <label class="form-label fw-bold small text-uppercase">Địa chỉ nhận hàng <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control rounded-0" id="mInputAddress" rows="2" required
+                                placeholder="Số nhà, tên đường, phường/xã, quận/huyện..."></textarea>
+                            <div class="text-danger small mt-1 d-none" id="mErrAddress">Vui lòng nhập địa chỉ nhận hàng
+                                cụ thể.</div>
                         </div>
 
-                        <button type="button" class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase small shadow-sm" 
-                                style="background-color: var(--color-primary);" onclick="handleModalStep1()">
+                        <button type="button"
+                            class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase small shadow-sm"
+                            style="background-color: var(--color-primary);" onclick="handleModalStep1()">
                             TIẾP TỤC ĐẾN BƯỚC QUÉT MÃ QR <i class="fa-solid fa-arrow-right ms-1"></i>
                         </button>
                     </div>
@@ -662,21 +778,25 @@
                     <div id="mPaymentStep" style="display: none;">
                         <div class="bg-light border p-3 mb-3 small d-flex justify-content-between align-items-center">
                             <div>
-                                <span class="badge bg-success rounded-0 mb-1"><i class="fa-solid fa-check me-1"></i> Đã xác nhận giao hàng</span>
+                                <span class="badge bg-success rounded-0 mb-1"><i class="fa-solid fa-check me-1"></i> Đã
+                                    xác nhận giao hàng</span>
                                 <div class="fw-bold" id="mSummaryRecipient">Nguyễn Văn Quốc Bảo • 0822221616</div>
                                 <div class="text-muted" id="mSummaryAddress">Hồ Chí Minh</div>
                             </div>
-                            <button type="button" class="btn btn-outline-dark btn-sm rounded-0" onclick="handleModalStepBack()">Sửa</button>
+                            <button type="button" class="btn btn-outline-dark btn-sm rounded-0"
+                                onclick="handleModalStepBack()">Sửa</button>
                         </div>
 
                         <!-- MB Bank VietQR Box -->
                         <div class="border p-3 mb-3 bg-white shadow-sm">
                             <div class="row align-items-center g-3">
                                 <div class="col-md-5 text-center">
-                                    <img id="mQrImage" src="https://img.vietqr.io/image/MB-08222216167810-compact2.png?amount=998000&addInfo=161GM%200822221616&accountName=NGUYEN%20VAN%20QUOC%20BAO" 
-                                         onerror="this.src='web/img-prj301/mb-bank-qr.png'"
-                                         alt="Mã VietQR MB Bank" class="img-fluid border p-1" style="max-width: 175px;">
-                                    <small class="text-muted d-block mt-1 fw-bold" style="font-size: 0.72rem;">Quét bằng App Ngân hàng bất kỳ</small>
+                                    <img id="mQrImage"
+                                        src="https://img.vietqr.io/image/MB-08222216167810-compact2.png?amount=998000&addInfo=161GM%200822221616&accountName=NGUYEN%20VAN%20QUOC%20BAO"
+                                        onerror="this.src='web/img-prj301/mb-bank-qr.png'" alt="Mã VietQR MB Bank"
+                                        class="img-fluid border p-1" style="max-width: 175px;">
+                                    <small class="text-muted d-block mt-1 fw-bold" style="font-size: 0.72rem;">Quét bằng
+                                        App Ngân hàng bất kỳ</small>
                                 </div>
                                 <div class="col-md-7 small">
                                     <div class="mb-2 pb-1 border-bottom d-flex justify-content-between">
@@ -687,30 +807,39 @@
                                         <span class="text-muted">Chủ tài khoản:</span>
                                         <strong class="text-uppercase">NGUYEN VAN QUOC BAO</strong>
                                     </div>
-                                    <div class="mb-2 pb-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div
+                                        class="mb-2 pb-1 border-bottom d-flex justify-content-between align-items-center">
                                         <span class="text-muted">Số tài khoản:</span>
                                         <div>
                                             <strong class="text-danger fs-6 me-2">08222216167810</strong>
-                                            <button type="button" class="btn btn-outline-secondary btn-sm py-0 px-2 rounded-0" onclick="copyDemo('08222216167810', this)">Sao chép</button>
+                                            <button type="button"
+                                                class="btn btn-outline-secondary btn-sm py-0 px-2 rounded-0"
+                                                onclick="copyDemo('08222216167810', this)">Sao chép</button>
                                         </div>
                                     </div>
-                                    <div class="mb-2 pb-1 border-bottom d-flex justify-content-between align-items-center">
+                                    <div
+                                        class="mb-2 pb-1 border-bottom d-flex justify-content-between align-items-center">
                                         <span class="text-muted">Số tiền:</span>
                                         <strong class="text-danger fw-bold" id="mQrAmountLabel">998.000 đ</strong>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="text-muted">Nội dung CK:</span>
                                         <div>
-                                            <strong class="text-primary me-2" id="mQrContentText">161GM 0822221616</strong>
-                                            <button type="button" class="btn btn-outline-secondary btn-sm py-0 px-2 rounded-0" onclick="copyDemo(document.getElementById('mQrContentText').innerText, this)">Sao chép</button>
+                                            <strong class="text-primary me-2" id="mQrContentText">161GM
+                                                0822221616</strong>
+                                            <button type="button"
+                                                class="btn btn-outline-secondary btn-sm py-0 px-2 rounded-0"
+                                                onclick="copyDemo(document.getElementById('mQrContentText').innerText, this)">Sao
+                                                chép</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm" 
-                                style="background-color: var(--color-primary);" onclick="finishOrderDemo()">
+                        <button type="button"
+                            class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase fs-6 shadow-sm"
+                            style="background-color: var(--color-primary);" onclick="finishOrderDemo()">
                             <i class="fa-solid fa-circle-check me-1"></i> HOÀN TẤT & ĐẶT HÀNG
                         </button>
                     </div>
@@ -719,8 +848,10 @@
                     <div id="mSuccessStep" style="display: none;" class="text-center py-4">
                         <i class="fa-solid fa-circle-check text-success display-3 mb-3"></i>
                         <h4 class="fw-bold text-uppercase text-success">ĐẶT HÀNG THÀNH CÔNG!</h4>
-                        <p class="text-secondary small mb-4">Cảm ơn bạn đã mua sắm tại 161 Garment. Đơn hàng đang được đóng gói chuẩn bị giao tới bạn.</p>
-                        <button type="button" class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fw-bold small" data-bs-dismiss="modal">
+                        <p class="text-secondary small mb-4">Cảm ơn bạn đã mua sắm tại 161 Garment. Đơn hàng đang được
+                            đóng gói chuẩn bị giao tới bạn.</p>
+                        <button type="button" class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fw-bold small"
+                            data-bs-dismiss="modal">
                             TIẾP TỤC MUA SẮM
                         </button>
                     </div>
@@ -739,7 +870,8 @@
                         <span class="brand-box">GARMENT</span>
                     </div>
                     <p class="text-secondary small pe-lg-4">
-                        Thương hiệu thời trang phong cách tối giản chuẩn Nhật Bản. Tinh tế, bền bỉ và tạo cảm giác thoải mái nhất cho người mặc mỗi ngày.
+                        Thương hiệu thời trang phong cách tối giản chuẩn Nhật Bản. Tinh tế, bền bỉ và tạo cảm giác thoải
+                        mái nhất cho người mặc mỗi ngày.
                     </p>
                 </div>
                 <div class="col-lg-2 col-md-3 col-6">
@@ -872,7 +1004,7 @@
             const headerCount = document.getElementById('headerCartCount');
             const totalPriceEl = document.getElementById('cartTotalPrice');
             const btnCheckout = document.getElementById('btnProceedCheckout');
-            
+
             let total = 0;
             let count = 0;
             container.innerHTML = '';
@@ -1080,13 +1212,13 @@
             setTimeout(() => moveTo(activeLink), 100);
 
             navLinks.forEach(link => {
-                link.addEventListener('mouseenter', function() { moveTo(this); });
+                link.addEventListener('mouseenter', function () { moveTo(this); });
             });
-            nav.addEventListener('mouseleave', function() { if (activeLink) moveTo(activeLink); });
+            nav.addEventListener('mouseleave', function () { if (activeLink) moveTo(activeLink); });
         }
 
         // Navbar Scroll Background Toggle
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const navbar = document.getElementById('siteNavbar');
             if (window.scrollY > 80) {
                 navbar.classList.add('scrolled');
@@ -1096,11 +1228,12 @@
         });
 
         // Initialize on DOM load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             renderProducts(PRODUCTS);
             renderCart();
             initSlidingUnderline();
         });
     </script>
 </body>
+
 </html>
