@@ -136,11 +136,108 @@
         color: #ED1D24;
         border-left-color: #ED1D24;
     }
-    .sidebar-cate-link.active {
-        background-color: #FDF2F2;
-        color: #ED1D24;
+    /* Uniqlo Category Icons Clean Flat Aesthetics (No Lifting) */
+    .uniqlo-category-section {
+        background-color: #FFFFFF;
+        border-bottom: 1px solid #EEEEEE;
+        padding: 1.25rem 0 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .category-tab-btn {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #888888;
+        background: none;
+        border: none;
+        padding: 0.35rem 0.6rem;
+        cursor: pointer;
+        position: relative;
+        transition: color 0.2s ease;
+        text-decoration: none !important;
+        white-space: nowrap;
+        display: inline-block;
+    }
+    .category-tab-btn:hover {
+        color: #111111;
+    }
+    .category-tab-btn.active {
+        color: #111111;
+        font-weight: 900;
+    }
+    .category-tab-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: -0.95rem;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #111111;
+    }
+    .uniqlo-category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 1.5rem 0.75rem;
+        justify-items: center;
+        align-items: start;
+    }
+    .uniqlo-cat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        text-decoration: none !important;
+        color: #111111 !important;
+        padding: 0.5rem 0.25rem;
+        background: transparent !important;
+        width: 100%;
+        max-width: 135px;
+        cursor: pointer;
+        position: relative;
+        transition: none;
+    }
+    .uniqlo-cat-item:hover {
+        transform: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    .uniqlo-cat-thumb {
+        width: 90px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.65rem;
+        background: transparent !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+    }
+    .uniqlo-cat-thumb img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .uniqlo-cat-item:hover .uniqlo-cat-thumb img {
+        transform: scale(1.06);
+        opacity: 0.88;
+    }
+    .uniqlo-cat-title {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 0.84rem;
         font-weight: 700;
-        border-left-color: #ED1D24;
+        line-height: 1.3;
+        color: #222222;
+        margin: 0;
+        transition: color 0.2s ease;
+        letter-spacing: -0.2px;
+    }
+    .uniqlo-cat-item:hover .uniqlo-cat-title,
+    .uniqlo-cat-item.active-item .uniqlo-cat-title {
+        color: var(--color-primary, #ED1D24) !important;
+        text-decoration: underline;
     }
 </style>
 
@@ -216,116 +313,156 @@
         <c:remove var="SUCCESS_MSG" scope="session" />
     </c:if>
 
-    <div class="row g-4">
-        <!-- Left Sidebar: Categories & Filters -->
-        <div class="col-lg-3 col-md-4">
-            <div class="sticky-top" style="top: 80px; z-index: 10;">
-                <!-- Category Filter Box -->
-                <div class="card border border-dark-subtle rounded-0 mb-4 bg-white shadow-sm">
-                    <div class="card-header bg-dark text-white rounded-0 py-3 d-flex align-items-center justify-content-between">
-                        <span class="fw-bold text-uppercase small tracking-wider m-0">
-                            <i class="fa-solid fa-bars-staggered me-2 text-danger"></i> DANH MỤC SẢN PHẨM
-                        </span>
-                    </div>
-
-                    <!-- All Products Link -->
-                    <div class="border-bottom">
-                        <a href="product" class="sidebar-cate-link ${empty param.categoryID ? 'active' : ''}">
-                            <span><i class="fa-solid fa-border-all me-2 text-muted"></i> Tất cả sản phẩm</span>
-                            <i class="fa-solid fa-chevron-right small text-muted"></i>
-                        </a>
-                    </div>
-
-                    <!-- Category Accordion -->
-                    <div class="accordion accordion-flush" id="categoryAccordion">
-                        <!-- 1. THỜI TRANG NAM -->
-                        <div class="accordion-item rounded-0 border-bottom">
-                            <h2 class="accordion-header" id="headingMen">
-                                <button class="accordion-button rounded-0 fw-bold py-3 ${param.categoryID.startsWith('MEN') || param.categoryID eq 'CAT01' ? '' : 'collapsed'}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseMen"
-                                        aria-expanded="${param.categoryID.startsWith('MEN') || param.categoryID eq 'CAT01' ? 'true' : 'false'}"
-                                        style="font-size: 0.88rem;">
-                                    <i class="fa-solid fa-person me-2 text-danger"></i> THỜI TRANG NAM
-                                </button>
-                            </h2>
-                            <div id="collapseMen" class="accordion-collapse collapse ${param.categoryID.startsWith('MEN') || param.categoryID eq 'CAT01' ? 'show' : ''}">
-                                <div class="list-group list-group-flush rounded-0 bg-light">
-                                    <c:forEach var="cat" items="${CATEGORIES}">
-                                        <c:if test="${cat.categoryID.startsWith('MEN') || cat.name.contains('Nam') || cat.categoryID eq 'CAT01'}">
-                                            <a href="product?categoryID=${cat.categoryID}"
-                                               class="sidebar-cate-link ps-4 ${param.categoryID eq cat.categoryID ? 'active' : ''}">
-                                                <span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> ${cat.name}</span>
-                                            </a>
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 2. THỜI TRANG NỮ -->
-                        <div class="accordion-item rounded-0 border-bottom">
-                            <h2 class="accordion-header" id="headingWomen">
-                                <button class="accordion-button rounded-0 fw-bold py-3 ${param.categoryID.startsWith('WOMEN') || param.categoryID eq 'CAT02' || param.categoryID eq 'CAT03' ? '' : 'collapsed'}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseWomen"
-                                        aria-expanded="${param.categoryID.startsWith('WOMEN') || param.categoryID eq 'CAT02' || param.categoryID eq 'CAT03' ? 'true' : 'false'}"
-                                        style="font-size: 0.88rem;">
-                                    <i class="fa-solid fa-person-dress me-2 text-danger"></i> THỜI TRANG NỮ
-                                </button>
-                            </h2>
-                            <div id="collapseWomen" class="accordion-collapse collapse ${param.categoryID.startsWith('WOMEN') || param.categoryID eq 'CAT02' || param.categoryID eq 'CAT03' ? 'show' : ''}">
-                                <div class="list-group list-group-flush rounded-0 bg-light">
-                                    <c:forEach var="cat" items="${CATEGORIES}">
-                                        <c:if test="${cat.categoryID.startsWith('WOMEN') || cat.name.contains('Nữ') || cat.categoryID eq 'CAT02' || cat.categoryID eq 'CAT03'}">
-                                            <a href="product?categoryID=${cat.categoryID}"
-                                               class="sidebar-cate-link ps-4 ${param.categoryID eq cat.categoryID ? 'active' : ''}">
-                                                <span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> ${cat.name}</span>
-                                            </a>
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3. TRẺ EM -->
-                        <div class="accordion-item rounded-0">
-                            <h2 class="accordion-header" id="headingKids">
-                                <button class="accordion-button rounded-0 fw-bold py-3 ${param.categoryID.startsWith('KIDS') || param.categoryID eq 'CAT04' ? '' : 'collapsed'}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseKids"
-                                        aria-expanded="${param.categoryID.startsWith('KIDS') || param.categoryID eq 'CAT04' ? 'true' : 'false'}"
-                                        style="font-size: 0.88rem;">
-                                    <i class="fa-solid fa-children me-2 text-danger"></i> TRẺ EM (KIDS)
-                                </button>
-                            </h2>
-                            <div id="collapseKids" class="accordion-collapse collapse ${param.categoryID.startsWith('KIDS') || param.categoryID eq 'CAT04' ? 'show' : ''}">
-                                <div class="list-group list-group-flush rounded-0 bg-light">
-                                    <c:forEach var="cat" items="${CATEGORIES}">
-                                        <c:if test="${cat.categoryID.startsWith('KIDS') || cat.name.contains('Trẻ Em') || param.categoryID eq 'CAT04'}">
-                                            <a href="product?categoryID=${cat.categoryID}"
-                                               class="sidebar-cate-link ps-4 ${param.categoryID eq cat.categoryID ? 'active' : ''}">
-                                                <span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> ${cat.name}</span>
-                                            </a>
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VIP Promo Card -->
-                <div class="p-3 bg-dark text-white rounded-0 border mb-4 text-center">
-                    <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px;">MEMBER EXCLUSIVE</span>
-                    <h6 class="fw-bold text-uppercase mb-1 text-white" style="font-size: 0.85rem;">ƯU ĐÃI THÀNH VIÊN</h6>
-                    <p class="small text-secondary mb-3" style="font-size: 0.78rem;">Đăng ký tài khoản ngay để nhận mã giảm <strong>10%</strong> cho đơn hàng đầu tiên!</p>
-                    <a href="register" class="btn btn-danger btn-sm rounded-0 w-100 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px; background-color: var(--color-primary);">
-                        ĐĂNG KÝ NGAY
-                    </a>
-                </div>
-            </div>
+    <!-- UNIQLO-Style Visual Category Icons Showcase Section -->
+    <div class="uniqlo-category-section shadow-sm rounded-0 mb-4">
+        <!-- Category Group Tabs -->
+        <div class="category-tab-nav">
+            <a href="product?categoryID=WOMEN_01" class="category-tab-btn ${param.categoryID.startsWith('WOMEN') ? 'active' : ''}">NỮ (WOMEN)</a>
+            <a href="product?categoryID=MEN_01" class="category-tab-btn ${param.categoryID.startsWith('MEN') || empty param.categoryID ? 'active' : ''}">NAM (MEN)</a>
+            <a href="product?categoryID=KIDS_01" class="category-tab-btn ${param.categoryID.startsWith('KIDS') ? 'active' : ''}">TRẺ EM (KIDS)</a>
         </div>
 
-        <!-- Right Side: Products Catalog Grid -->
-        <div class="col-lg-9 col-md-8">
+        <!-- Category Icons Grid -->
+        <div class="uniqlo-category-grid">
+            <c:choose>
+                <c:when test="${param.categoryID.startsWith('WOMEN')}">
+                    <!-- WOMEN CATEGORIES -->
+                    <a href="product?categoryID=WOMEN_01" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_01' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/t-shirt-icon-women.avif" alt="Áo Thun Nữ">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Thun & Nỉ</span>
+                    </a>
+                    <a href="product?categoryID=WOMEN_02" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_02' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shirt-and-blouses-icon-women.avif" alt="Áo Sơ Mi & Blouse">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Sơ Mi & Blouse</span>
+                    </a>
+                    <a href="product?categoryID=WOMEN_03" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_03' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/sweaters-icon-women.avif" alt="Áo Len & Cardigan">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Len</span>
+                    </a>
+                    <a href="product?categoryID=WOMEN_03" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/outerwear-icon-women.avif" alt="Áo Khoác Nữ">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Khoác</span>
+                    </a>
+                    <a href="product?categoryID=WOMEN_04" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_04' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/bottom-icon-women.jpg" alt="Quần & Váy">
+                        </div>
+                        <span class="uniqlo-cat-title">Quần & Váy</span>
+                    </a>
+                    <a href="product?categoryID=WOMEN_04" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" alt="Shorts & Culottes">
+                        </div>
+                        <span class="uniqlo-cat-title">Shorts & Culottes</span>
+                    </a>
+                </c:when>
+
+                <c:when test="${param.categoryID.startsWith('KIDS')}">
+                    <!-- KIDS CATEGORIES -->
+                    <a href="product?categoryID=KIDS_01" class="uniqlo-cat-item ${param.categoryID eq 'KIDS_01' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/t-shirt-icon-kids.avif" alt="Áo Thun Trẻ Em">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Thun</span>
+                    </a>
+                    <a href="product?categoryID=KIDS_01" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shirts-icon-kids.avif" alt="Áo Sơ Mi Trẻ Em">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Sơ Mi</span>
+                    </a>
+                    <a href="product?categoryID=KIDS_02" class="uniqlo-cat-item ${param.categoryID eq 'KIDS_02' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/outerwear-icon-kids.avif" alt="Áo Khoác Trẻ Em">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Khoác</span>
+                    </a>
+                    <a href="product?categoryID=KIDS_03" class="uniqlo-cat-item ${param.categoryID eq 'KIDS_03' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/dresses-icon-kids.avif" alt="Đầm & Váy">
+                        </div>
+                        <span class="uniqlo-cat-title">Đầm & Váy</span>
+                    </a>
+                    <a href="product?categoryID=KIDS_03" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/bottoms-icon-kids.avif" alt="Quần Dài Trẻ Em">
+                        </div>
+                        <span class="uniqlo-cat-title">Quần Dài</span>
+                    </a>
+                    <a href="product?categoryID=KIDS_03" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shorts-kids.avif" alt="Quần Shorts Trẻ Em">
+                        </div>
+                        <span class="uniqlo-cat-title">Quần Shorts</span>
+                    </a>
+                </c:when>
+
+                <c:otherwise>
+                    <!-- MEN CATEGORIES (Default) -->
+                    <a href="product?categoryID=MEN_01" class="uniqlo-cat-item ${param.categoryID eq 'MEN_01' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/t-shirt-icon-men.avif" alt="Áo Thun">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Thun & Nỉ</span>
+                    </a>
+                    <a href="product?categoryID=MEN_01" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/polos-icon-men.avif" alt="Áo Polo">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Polo</span>
+                    </a>
+                    <a href="product?categoryID=MEN_02" class="uniqlo-cat-item ${param.categoryID eq 'MEN_02' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/shirts-icon-men.avif" alt="Áo Sơ Mi">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Sơ Mi</span>
+                    </a>
+                    <a href="product?categoryID=MEN_03" class="uniqlo-cat-item ${param.categoryID eq 'MEN_03' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/sweaters-icon-men.avif" alt="Áo Len & Cardigan">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Len</span>
+                    </a>
+                    <a href="product?categoryID=MEN_03" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/outerwear-icon-men.avif" alt="Áo Khoác">
+                        </div>
+                        <span class="uniqlo-cat-title">Áo Khoác</span>
+                    </a>
+                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item ${param.categoryID eq 'MEN_04' ? 'fw-bold text-danger' : ''}">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/pants-men.avif" alt="Quần Dài">
+                        </div>
+                        <span class="uniqlo-cat-title">Quần Dài</span>
+                    </a>
+                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/jeans-men.png" alt="Quần Jeans">
+                        </div>
+                        <span class="uniqlo-cat-title">Quần Jeans</span>
+                    </a>
+                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item">
+                        <div class="uniqlo-cat-thumb">
+                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/short-men.avif" alt="Quần Shorts">
+                        </div>
+                        <span class="uniqlo-cat-title">Quần Shorts</span>
+                    </a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Full Width Products Catalog Grid (5 Columns) -->
+        <div class="col-12">
             <c:choose>
                 <c:when test="${empty PRODUCTS}">
                     <div class="text-center py-5 bg-white border border-dark-subtle p-5">
@@ -338,8 +475,8 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <!-- Products Grid -->
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+                    <!-- Products Grid (5 Columns) -->
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-5 g-3 g-md-4">
                         <c:forEach var="p" items="${PRODUCTS}">
                             <div class="col">
                                 <div class="card h-100 one61-catalog-card rounded-0">
