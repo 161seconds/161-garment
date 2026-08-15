@@ -470,14 +470,13 @@
                     <a class="header-icon-btn" href="#storeSection" title="Yêu thích">
                         <i class="fa-regular fa-heart"></i>
                     </a>
+                    <a class="header-icon-btn" href="#" title="Tài khoản">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </a>
                     <a class="header-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
                         title="Giỏ hàng">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="cart-badge" id="headerCartCount">2</span>
-                    </a>
-                    <a class="header-icon-btn" href="javascript:void(0)" onclick="openCheckoutModal()"
-                        title="Thanh toán VietQR">
-                        <i class="fa-solid fa-qrcode text-warning"></i>
                     </a>
                 </div>
             </div>
@@ -1069,6 +1068,35 @@
             document.getElementById('mQrImage').src = qrUrl;
         }
 
+        function resetCheckoutModal() {
+            const deliveryStep = document.getElementById('mDeliveryStep');
+            const paymentStep = document.getElementById('mPaymentStep');
+            const successStep = document.getElementById('mSuccessStep');
+
+            if (deliveryStep) deliveryStep.style.display = 'block';
+            if (paymentStep) paymentStep.style.display = 'none';
+            if (successStep) successStep.style.display = 'none';
+
+            const b1 = document.getElementById('mBadgeStep1');
+            if (b1) {
+                b1.className = 'stepper-badge active-step';
+                b1.textContent = '1';
+            }
+            const t1 = document.getElementById('mTextStep1');
+            if (t1) t1.className = 'small fw-bold text-uppercase';
+
+            const line = document.getElementById('mStepperLine');
+            if (line) line.className = 'stepper-line';
+
+            const b2 = document.getElementById('mBadgeStep2');
+            if (b2) {
+                b2.className = 'stepper-badge';
+                b2.textContent = '2';
+            }
+            const t2 = document.getElementById('mTextStep2');
+            if (t2) t2.className = 'small fw-bold text-uppercase text-muted';
+        }
+
         function openCheckoutModal() {
             if (!cart || cart.length === 0) {
                 alert('Giỏ hàng của bạn đang trống! Vui lòng chọn ít nhất 1 sản phẩm trước khi tiến hành thanh toán.');
@@ -1082,10 +1110,16 @@
             const offcanvasInstance = bootstrap.Offcanvas.getInstance(cartOffcanvasEl);
             if (offcanvasInstance) offcanvasInstance.hide();
 
+            resetCheckoutModal();
+
             const checkoutModalEl = document.getElementById('checkoutModal');
             const modalInstance = new bootstrap.Modal(checkoutModalEl);
             modalInstance.show();
         }
+
+        document.getElementById('checkoutModal')?.addEventListener('hidden.bs.modal', function () {
+            resetCheckoutModal();
+        });
 
         function addToCart(pid) {
             const p = PRODUCTS.find(x => x.id === pid);
