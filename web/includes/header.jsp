@@ -6,22 +6,26 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>ONE61 Garment | Thời Trang Tối Giản Cao Cấp</title>
+            <title>ONE61 Garmentory | Thời Trang Tối Giản Cao Cấp</title>
             <!-- Bootstrap 5 CSS -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
             <!-- FontAwesome 6 -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-            <!-- Fonts -->
-            <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;700&display=swap"
+            <!-- Google Fonts: Be Vietnam Pro & Inter with 100% Native Vietnamese Typography -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
                 rel="stylesheet">
+            <!-- ONE61 Global Alert & Modal System -->
+            <script src="${pageContext.request.contextPath}/js/one61-alert.js"></script>
             <style>
                 :root {
-                    --color-primary: #E00000;
-                    /* Uniqlo Red */
+                    --color-primary: #ED1D24;
+                    /* ONE61 Red */
                     --color-on-primary: #FFFFFF;
                     --color-secondary: #F4F4F4;
                     /* Light Gray */
-                    --color-accent: #E00000;
+                    --color-accent: #ED1D24;
                     --color-on-accent: #FFFFFF;
                     --color-background: #FFFFFF;
                     /* White */
@@ -31,16 +35,20 @@
                     /* Solid White */
                     --color-muted: #767676;
                     --color-border: #E5E5E5;
+                    --font-main: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    --font-heading: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
                 }
 
                 body {
                     background-color: var(--color-background);
                     color: var(--color-foreground);
-                    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                    font-family: var(--font-main);
                     display: flex;
                     flex-direction: column;
                     min-height: 100vh;
                     -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    letter-spacing: -0.01em;
                 }
 
                 h1,
@@ -48,10 +56,10 @@
                 h3,
                 h4,
                 h5,
-                h6 {
-                    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                    font-weight: 700;
-                    letter-spacing: -0.5px;
+                h6,
+                .brand-box {
+                    font-family: var(--font-heading);
+                    letter-spacing: -0.02em;
                 }
 
                 /* Top Notification Bar */
@@ -299,7 +307,7 @@
                         <!-- Brand Logo -->
                         <a class="navbar-brand-wrapper me-2" href="home">
                             <span class="brand-box">ONE61</span>
-                            <span class="brand-box">GARMENT</span>
+                            <span class="brand-box">GARMENTORY</span>
                         </a>
 
                         <!-- Category Navigation Links (Always Visible) -->
@@ -422,8 +430,9 @@
                         <!-- Right Action Icons -->
                         <div class="d-flex align-items-center gap-1 ms-2">
                             <!-- Wishlist -->
-                            <a class="header-icon-btn" href="#" title="Yêu thích">
+                            <a class="header-icon-btn position-relative" href="#" onclick="showWishlistModal(); return false;" title="Danh sách Yêu thích">
                                 <i class="fa-regular fa-heart"></i>
+                                <span class="wishlist-badge cart-badge" id="headerWishlistCount" style="display: none; background-color: var(--color-primary, #ED1D24);">0</span>
                             </a>
 
                             <!-- Cart -->
@@ -480,7 +489,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <div class="d-flex align-items-center gap-2 ms-2">
-                                        <a class="btn btn-outline-light btn-sm rounded-0 fw-bold px-3 text-uppercase"
+                                        <a class="btn btn-outline-dark btn-sm rounded-0 fw-bold px-3 text-uppercase"
                                             href="login" style="font-size: 0.75rem;">
                                             Đăng nhập
                                         </a>

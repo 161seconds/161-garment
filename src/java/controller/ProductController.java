@@ -64,6 +64,17 @@ public class ProductController extends HttpServlet {
             String productID = request.getParameter("id");
             ProductDTO product = pDao.getProductByID(productID);
             request.setAttribute("PRODUCT", product);
+
+            String catName = "Thời Trang";
+            if (product != null && product.getCategoryID() != null && categories != null) {
+                for (CategoryDTO c : categories) {
+                    if (c.getCategoryID().equalsIgnoreCase(product.getCategoryID())) {
+                        catName = c.getName();
+                        break;
+                    }
+                }
+            }
+            request.setAttribute("CATEGORY_NAME", catName);
             request.getRequestDispatcher("product-detail.jsp").forward(request, response);
         }
     }

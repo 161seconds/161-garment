@@ -4,123 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh Toán & Đặt Hàng | ONE61 GARMENT</title>
-    <!-- Google Fonts -->
+    <title>Thanh Toán & Đặt Hàng | ONE61 GARMENTORY</title>
+    <!-- Google Fonts: Be Vietnam Pro & Inter with 100% Native Vietnamese Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome 6 Pro -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --color-primary: #ED1D24;
-            --color-dark: #111111;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-heading: 'Outfit', sans-serif;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--color-dark);
-            background-color: #FAFAFA;
-        }
-
-        .brand-logo-wrap {
-            display: inline-flex;
-            align-items: center;
-            gap: 2px;
-            text-decoration: none;
-        }
-
-        .brand-box {
-            background-color: var(--color-primary);
-            color: #FFFFFF;
-            font-family: var(--font-heading);
-            font-weight: 900;
-            font-size: 0.95rem;
-            line-height: 1;
-            letter-spacing: -0.5px;
-            padding: 7px 7px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .stepper-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .stepper-badge {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
-            background-color: #E0E0E0;
-            color: #777;
-        }
-
-        .stepper-badge.active {
-            background-color: var(--color-primary);
-            color: #fff;
-        }
-
-        .stepper-badge.completed {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .stepper-line {
-            width: 80px;
-            height: 2px;
-            background-color: #E0E0E0;
-            margin: 0 12px;
-        }
-
-        .stepper-line.active {
-            background-color: var(--color-primary);
-        }
-
-        .qr-card-box {
-            border: 2px solid #E0E0E0;
-            border-radius: 0;
-            background: #fff;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .pulse-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #28a745;
-            box-shadow: 0 0 0 rgba(40, 167, 69, 0.4);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
-        }
-    </style>
+    <!-- Dedicated Modular Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/checkout.css">
 </head>
 
-<body>
+<body class="bg-light d-flex flex-column min-vh-100">
     <nav class="navbar navbar-light bg-white border-bottom py-3">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="brand-logo-wrap" href="index.html">
                 <span class="brand-box">ONE61</span>
-                <span class="brand-box">GARMENT</span>
+                <span class="brand-box">GARMENTORY</span>
             </a>
             <div class="small fw-semibold text-secondary">
                 <i class="fa-solid fa-lock text-success me-1"></i> Thanh toán an toàn 256-bit SSL
@@ -128,7 +31,7 @@
         </div>
     </nav>
 
-    <div class="container my-4 flex-grow-1" style="max-width: 1000px;">
+    <main class="container my-4 flex-grow-1" style="max-width: 1000px;">
         <!-- Stepper -->
         <div class="stepper-wrap">
             <div class="d-flex align-items-center gap-2">
@@ -262,149 +165,19 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-top text-dark py-4 mt-5 text-center small text-secondary">
-        © 2026 ONE61 GARMENT. All Rights Reserved.
+    <footer class="bg-white border-top text-dark py-4 mt-auto text-center small text-secondary">
+        © 2026 ONE61 GARMENTORY. All Rights Reserved.
     </footer>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        const SEPAY_API_TOKEN = atob('SkhOSklQVk1UWEpCWjFKWklDRU9ETEw4QVVWVjBaQUdNR1FSUFZTNTJNNVJPV1VZSVJUMlAzRUY2VUQ4OUFPTg==');
-        let pollingInterval = null;
-
-        function getCart() {
-            return JSON.parse(localStorage.getItem('one61_cart') || '[]');
-        }
-
-        function calculateTotals() {
-            const cart = getCart();
-            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-            const shipping = subtotal >= 499000 || subtotal === 0 ? 0 : 30000;
-            const total = subtotal + shipping;
-            return { subtotal, shipping, total, cart };
-        }
-
-        function renderCheckoutSummary() {
-            const { subtotal, shipping, total, cart } = calculateTotals();
-            const mini = document.getElementById('checkoutMiniCart');
-            
-            if (cart.length === 0) {
-                mini.innerHTML = '<p class="small text-muted">Giỏ hàng trống.</p>';
-            } else {
-                mini.innerHTML = cart.map(i => `
-                    <div class="d-flex justify-content-between align-items-center mb-2 small">
-                        <div>
-                            <span class="fw-bold text-dark">${i.name}</span>
-                            <div class="text-muted" style="font-size: 0.75rem;">SL: ${i.qty} | ${i.color} - ${i.size}</div>
-                        </div>
-                        <span class="fw-semibold">${(i.price * i.qty).toLocaleString('vi-VN')} đ</span>
-                    </div>
-                `).join('');
-            }
-
-            document.getElementById('coSubtotal').textContent = subtotal.toLocaleString('vi-VN') + ' đ';
-            document.getElementById('coShipping').textContent = shipping === 0 ? 'MIỄN PHÍ' : shipping.toLocaleString('vi-VN') + ' đ';
-            document.getElementById('coTotal').textContent = total.toLocaleString('vi-VN') + ' đ';
-            document.getElementById('qrAmount').textContent = total.toLocaleString('vi-VN') + ' đ';
-            document.getElementById('sumFinalTotal').textContent = total.toLocaleString('vi-VN') + ' đ';
-        }
-
-        function goToStepPayment() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const addr = document.getElementById('custAddress').value.trim();
-
-            if (!name || !phone || !addr) {
-                alert('Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng!');
-                return;
-            }
-
-            const { total } = calculateTotals();
-            if (total <= 0) {
-                alert('Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm!');
-                window.location.href = 'product.html';
-                return;
-            }
-
-            const cleanPhone = phone.replace(/[^0-9]/g, '');
-            const transferContent = '161GM ' + cleanPhone;
-
-            document.getElementById('sumName').textContent = name;
-            document.getElementById('sumPhone').textContent = phone;
-            document.getElementById('sumAddress').textContent = addr;
-            document.getElementById('qrContent').textContent = transferContent;
-
-            const qrUrl = 'https://qr.sepay.vn/img?acc=08222216167810&bank=MBBank&amount=' + total + '&des=' + encodeURIComponent(transferContent) + '&template=compact';
-            document.getElementById('vietQrImg').src = qrUrl;
-
-            document.getElementById('stepDelivery').style.display = 'none';
-            document.getElementById('stepPayment').style.display = 'block';
-
-            document.getElementById('badgeStep1').className = 'stepper-badge completed';
-            document.getElementById('badgeStep1').innerHTML = '<i class="fa-solid fa-check"></i>';
-            document.getElementById('stepperLine').className = 'stepper-line active';
-            document.getElementById('badgeStep2').className = 'stepper-badge active';
-            document.getElementById('textStep2').className = 'small fw-bold text-uppercase text-dark';
-
-            startPaymentPolling(cleanPhone);
-        }
-
-        function backToStepDelivery() {
-            if (pollingInterval) clearInterval(pollingInterval);
-            document.getElementById('stepPayment').style.display = 'none';
-            document.getElementById('stepDelivery').style.display = 'block';
-
-            document.getElementById('badgeStep1').className = 'stepper-badge active';
-            document.getElementById('badgeStep1').textContent = '1';
-            document.getElementById('stepperLine').className = 'stepper-line';
-            document.getElementById('badgeStep2').className = 'stepper-badge';
-            document.getElementById('textStep2').className = 'small fw-semibold text-uppercase text-muted';
-        }
-
-        function startPaymentPolling(phone) {
-            if (pollingInterval) clearInterval(pollingInterval);
-            const { total } = calculateTotals();
-
-            pollingInterval = setInterval(async () => {
-                try {
-                    const res = await fetch('https://my.sepay.vn/userapi/transactions/list', {
-                        headers: { 'Authorization': 'Bearer ' + SEPAY_API_TOKEN }
-                    });
-                    if (!res.ok) return;
-                    const data = await res.json();
-                    if (!data.transactions) return;
-
-                    const match = data.transactions.find(tx => {
-                        const amountMatch = parseFloat(tx.amount_in || tx.transferAmount || 0) >= total;
-                        const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
-                        return amountMatch && (content.includes('161GM') || content.includes(phone));
-                    });
-
-                    if (match) {
-                        clearInterval(pollingInterval);
-                        confirmPaymentSuccess(match.id);
-                    }
-                } catch (e) {
-                    console.log('Polling check:', e);
-                }
-            }, 3000);
-        }
-
-        function confirmPaymentSuccess(txId) {
-            if (pollingInterval) clearInterval(pollingInterval);
-            const orderId = txId || 'ORD' + Date.now().toString().slice(-6);
-            localStorage.removeItem('one61_cart');
-            window.location.href = 'order-success.html?orderID=' + orderId + '&method=QR_CODE';
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderCheckoutSummary();
-        });
-    </script>
+    <!-- Dedicated Modular JS -->
+    <script src="js/one61-alert.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
 </body>
 
 </html>

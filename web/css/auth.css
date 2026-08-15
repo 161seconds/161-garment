@@ -1,0 +1,27 @@
+/**
+ * ONE61 GARMENTORY - Authentication Pages (Login & Register)
+ */
+
+body.auth-page {
+    background-color: var(--color-bg-light, #FAFAFA);
+}
+
+.auth-card {
+    border: 1px solid var(--color-gray-border, #E5E5E5);
+    border-radius: 0;
+    padding: 2rem;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.auth-card .form-control {
+    border-radius: 0;
+    border-color: #D1D5DB;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+}
+
+.auth-card .form-control:focus {
+    border-color: #111111;
+    box-shadow: none;
+}

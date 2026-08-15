@@ -1,0 +1,59 @@
+/**
+ * ONE61 GARMENTORY - Cart Page Styling
+ * Cart Table, Quantity Stepper, Order Summary Box, Coupon Bar
+ */
+
+.cart-item-row {
+    transition: background-color 0.2s ease;
+}
+
+.cart-item-row:hover {
+    background-color: #fafafa;
+}
+
+.cart-item-img {
+    width: 90px;
+    height: 105px;
+    object-fit: cover;
+    background-color: #f7f7f7;
+}
+
+.qty-stepper {
+    display: inline-flex;
+    border: 1px solid #111;
+    height: 36px;
+    align-items: center;
+    background: #fff;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 100%;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+.qty-btn:hover {
+    background: #f0f0f0;
+}
+
+.qty-input {
+    width: 38px;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+.order-summary-card {
+    background-color: #FAFAFA;
+    border: 1px solid var(--color-gray-border, #E5E5E5);
+    padding: 1.5rem;
+}

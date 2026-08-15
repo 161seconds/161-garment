@@ -1,0 +1,165 @@
+/**
+ * ONE61 GARMENTORY - Global Core Design System
+ * Minimalist Japanese Aesthetics (LifeWear Architecture)
+ */
+
+:root {
+    --color-primary: #ED1D24;
+    --color-primary-hover: #c7141a;
+    --color-dark: #111111;
+    --color-secondary: #767676;
+    --color-gray-light: #F4F4F4;
+    --color-gray-border: #E5E5E5;
+    --color-bg-light: #FAFAFA;
+    --color-white: #FFFFFF;
+    
+    --font-main: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Base & Typography */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-box, .btn-brand {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+}
+
+/* Brand Logo (Uniqlo Dual Red Box Architecture) */
+.brand-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    user-select: none;
+}
+
+.brand-box {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 0.95rem;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    padding: 7px 7px;
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.brand-logo-wrap:hover .brand-box {
+    opacity: 0.95;
+}
+
+/* Navbar & Navigation Links */
+.main-nav-link {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--color-dark) !important;
+    letter-spacing: 0.5px;
+    padding: 8px 16px !important;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.15s ease;
+}
+
+.main-nav-link:hover,
+.main-nav-link.active {
+    color: var(--color-primary) !important;
+}
+
+.nav-icon-link {
+    color: var(--color-dark);
+    font-size: 1.15rem;
+    padding: 8px 10px;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.nav-icon-link:hover {
+    color: var(--color-primary);
+}
+
+.cart-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+}
+
+/* Buttons */
+.btn-brand-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+}
+
+.btn-brand-primary:hover {
+    background-color: var(--color-primary-hover);
+    color: #ffffff;
+}
+
+.btn-brand-dark {
+    background-color: var(--color-dark);
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+}
+
+.btn-brand-dark:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.hover-white:hover {
+    color: #ffffff !important;
+}
+
+/* Footer Styling */
+footer {
+    border-top: 1px solid var(--color-gray-border);
+    background-color: var(--color-white);
+}
+
+footer a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--color-primary);
+}

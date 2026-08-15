@@ -4,219 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tất Cả Sản Phẩm | ONE61 GARMENT</title>
-    <!-- Google Fonts -->
+    <title>Danh Mục Sản Phẩm | ONE61 GARMENTORY</title>
+    <!-- Google Fonts: Be Vietnam Pro & Inter with 100% Native Vietnamese Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome 6 Pro -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --color-primary: #ED1D24;
-            --color-dark: #111111;
-            --color-gray-light: #F4F4F4;
-            --color-gray-border: #E5E5E5;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-heading: 'Outfit', sans-serif;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--color-dark);
-            background-color: #FFFFFF;
-        }
-
-        .brand-logo-wrap {
-            display: inline-flex;
-            align-items: center;
-            gap: 2px;
-            text-decoration: none;
-        }
-
-        .brand-box {
-            background-color: var(--color-primary);
-            color: #FFFFFF;
-            font-family: var(--font-heading);
-            font-weight: 900;
-            font-size: 0.95rem;
-            line-height: 1;
-            letter-spacing: -0.5px;
-            padding: 7px 7px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .main-nav-link {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: #111111 !important;
-            letter-spacing: 0.5px;
-            padding: 8px 16px !important;
-            text-decoration: none;
-            transition: color 0.15s ease;
-        }
-
-        .main-nav-link:hover, .main-nav-link.active {
-            color: var(--color-primary) !important;
-        }
-
-        .nav-icon-link {
-            color: #111111;
-            font-size: 1.15rem;
-            padding: 8px 10px;
-            position: relative;
-            text-decoration: none;
-        }
-
-        .nav-icon-link:hover {
-            color: var(--color-primary);
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background-color: var(--color-primary);
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 2px 5px;
-            border-radius: 10px;
-            min-width: 16px;
-            text-align: center;
-        }
-
-        .product-card {
-            border: 1px solid var(--color-gray-border);
-            border-radius: 0;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            background: #fff;
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-            border-color: #000;
-        }
-
-        .product-img-wrapper {
-            position: relative;
-            overflow: hidden;
-            background: #f8f8f8;
-            padding-top: 100%;
-        }
-
-        .product-img-wrapper img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .product-card:hover .product-img-wrapper img {
-            transform: scale(1.05);
-        }
-
-        .product-action-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(4px);
-            opacity: 0;
-            transform: translateY(100%);
-            transition: all 0.25s ease;
-            display: flex;
-            gap: 6px;
-            z-index: 2;
-        }
-
-        .product-card:hover .product-action-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: #f8f8f8;
-            color: var(--color-primary);
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-        }
-    </style>
+    <!-- Dedicated Modular Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
 </head>
 
-<body>
-    <!-- Top Bar -->
-    <div class="border-bottom py-1 small bg-light">
-        <div class="container d-flex justify-content-end align-items-center gap-3">
-            <a href="#" class="text-secondary text-decoration-none"><i class="fa-solid fa-location-dot me-1"></i> Tìm cửa hàng</a>
-            <span class="text-secondary">|</span>
-            <a href="#" class="text-secondary text-decoration-none"><i class="fa-solid fa-headset me-1"></i> Hotline: 1900 161 161</a>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Top Utility Bar -->
+    <div class="bg-dark text-white py-1 small">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span style="font-size: 0.75rem;"><i class="fa-solid fa-truck-fast me-1 text-danger"></i> MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC CHO ĐƠN HÀNG TỪ 499.000 Đ</span>
+            <div class="d-none d-md-flex gap-3" style="font-size: 0.75rem;">
+                <a href="javascript:void(0)" onclick="window.showStoreLocator()" class="text-white-50 text-decoration-none hover-white"><i class="fa-solid fa-location-dot me-1"></i> Hệ thống Showroom</a>
+                <a href="tel:1900161161" class="text-white-50 text-decoration-none hover-white"><i class="fa-solid fa-headset me-1"></i> Hotline: 1900 161 161</a>
+            </div>
         </div>
     </div>
 
     <!-- Main Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-2">
         <div class="container">
-            <a class="brand-logo-wrap me-4" href="index.html">
+            <a class="brand-logo-wrap" href="index.html">
                 <span class="brand-box">ONE61</span>
-                <span class="brand-box">GARMENT</span>
+                <span class="brand-box">GARMENTORY</span>
             </a>
 
-            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="main-nav-link" href="index.html">TRANG CHỦ</a></li>
-                    <li class="nav-item"><a class="main-nav-link active" href="product.html">TẤT CẢ SẢN PHẨM</a></li>
-                    <li class="nav-item"><a class="main-nav-link" href="product.html?cat=WOMEN">NỮ</a></li>
-                    <li class="nav-item"><a class="main-nav-link" href="product.html?cat=MEN">NAM</a></li>
-                    <li class="nav-item"><a class="main-nav-link" href="product.html?cat=KIDS">TRẺ EM</a></li>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="main-nav-link" href="javascript:void(0)" onclick="filterCategory('WOMEN')">NỮ</a></li>
+                    <li class="nav-item"><a class="main-nav-link" href="javascript:void(0)" onclick="filterCategory('MEN')">NAM</a></li>
+                    <li class="nav-item"><a class="main-nav-link" href="javascript:void(0)" onclick="filterCategory('KIDS')">TRẺ EM</a></li>
+                    <li class="nav-item"><a class="main-nav-link active" href="javascript:void(0)" onclick="filterCategory('ALL')">TẤT CẢ SẢN PHẨM</a></li>
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center gap-3">
-                <a href="login.html" class="nav-icon-link" title="Tài khoản"><i class="fa-regular fa-user"></i></a>
+            <div class="d-flex align-items-center gap-2">
+                <a href="javascript:void(0)" onclick="window.showWishlistModal()" class="nav-icon-link position-relative" title="Yêu thích">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="wishlist-badge cart-badge" id="headerWishlistCount" style="display: none; background-color: var(--color-primary, #ED1D24);">0</span>
+                </a>
                 <a href="cart.html" class="nav-icon-link" title="Giỏ hàng">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-badge" id="navCartCount">0</span>
                 </a>
+                <div class="d-flex align-items-center gap-2 ms-2">
+                    <a class="btn btn-outline-dark btn-sm rounded-0 fw-bold px-3 text-uppercase" href="login.html" style="font-size: 0.75rem;">
+                        Đăng nhập
+                    </a>
+                    <a class="btn btn-danger btn-sm rounded-0 fw-bold px-3 text-uppercase" href="register.html" style="background-color: var(--color-primary, #ED1D24); border-color: var(--color-primary, #ED1D24); font-size: 0.75rem;">
+                        Đăng ký
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Breadcrumb Navigation -->
-    <div class="bg-light border-bottom py-2">
+    <div class="bg-white border-bottom py-2">
         <div class="container">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 small">
-                    <li class="breadcrumb-item"><a href="index.html" class="text-secondary text-decoration-none"><i class="fa-solid fa-house me-1"></i>Trang chủ</a></li>
-                    <li class="breadcrumb-item active text-dark fw-semibold" id="breadcrumbCurrentCat">Tất cả sản phẩm</li>
+                <ol class="breadcrumb mb-0 small text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-secondary text-decoration-none">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="product.html" class="text-secondary text-decoration-none">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active text-dark fw-bold" id="breadcrumbCurrentCat">Tất cả sản phẩm</li>
                 </ol>
             </nav>
         </div>
     </div>
 
     <!-- Main Products Catalog -->
-    <div class="container my-4 flex-grow-1">
+    <main class="container my-4 flex-grow-1">
+        <!-- Catalog Header Banner -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center pb-3 mb-4 border-bottom gap-3">
             <div>
-                <span class="badge bg-danger rounded-0 px-2 py-1 mb-1 text-uppercase" style="letter-spacing: 1px;">ONE61 Garment</span>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.5px;">ONE61 LifeWear</span>
+                    <span class="text-muted small">Bộ sưu tập 2026</span>
+                </div>
                 <h2 class="fw-bold text-uppercase tracking-tight m-0" id="catalogTitle">TẤT CẢ SẢN PHẨM</h2>
-                <p class="text-muted small m-0 mt-1">Khám phá phong cách thời trang tối giản LifeWear chuẩn Nhật Bản</p>
+                <p class="text-muted small m-0 mt-1">Trang phục tối giản, thiết kế tinh tế với chất liệu sợi dệt cao cấp chuẩn Nhật Bản.</p>
             </div>
             <div class="d-flex align-items-center gap-3">
-                <span class="small text-muted text-nowrap">Hiển thị: <strong class="text-dark" id="productCount">12</strong> sản phẩm</span>
-                <select class="form-select form-select-sm rounded-0 border-dark-subtle" style="width: 170px;" onchange="sortProducts(this.value)">
+                <span class="small text-muted text-nowrap">Hiển thị: <strong class="text-dark" id="productCount">16</strong> sản phẩm</span>
+                <select class="form-select form-select-sm rounded-0 border-dark-subtle fw-semibold" style="width: 175px; font-size: 0.8rem;" onchange="sortProducts(this.value)">
                     <option value="default">Sắp xếp: Mặc định</option>
                     <option value="price-asc">Giá: Thấp đến Cao</option>
                     <option value="price-desc">Giá: Cao đến Thấp</option>
@@ -229,68 +112,83 @@
             <!-- Left Sidebar -->
             <div class="col-lg-3 col-md-4">
                 <div class="sticky-top" style="top: 80px; z-index: 10;">
+                    <!-- Category Filter Box -->
                     <div class="card border border-dark-subtle rounded-0 mb-4 bg-white shadow-sm">
                         <div class="card-header bg-dark text-white rounded-0 py-3 d-flex align-items-center justify-content-between">
                             <span class="fw-bold text-uppercase small tracking-wider m-0">
-                                <i class="fa-solid fa-filter me-2 text-danger"></i> DANH MỤC SẢN PHẨM
+                                <i class="fa-solid fa-bars-staggered me-2 text-danger"></i> DANH MỤC SẢN PHẨM
                             </span>
                         </div>
                         
                         <div class="border-bottom">
                             <a href="javascript:void(0)" onclick="filterCategory('ALL')"
-                               class="d-flex justify-content-between align-items-center p-3 fw-bold text-decoration-none text-danger bg-light border-start border-danger border-4 ps-3" id="catLinkALL">
-                                <span><i class="fa-solid fa-border-all me-2 text-muted"></i> TẤT CẢ SẢN PHẨM</span>
+                               class="sidebar-cate-link active" id="catLinkALL">
+                                <span><i class="fa-solid fa-border-all me-2 text-muted"></i> Tất cả sản phẩm</span>
                                 <i class="fa-solid fa-chevron-right small text-muted"></i>
                             </a>
                         </div>
 
                         <div class="accordion accordion-flush" id="categoryAccordion">
+                            <!-- MEN -->
                             <div class="accordion-item rounded-0 border-bottom">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button rounded-0 fw-bold py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMen" style="font-size: 0.9rem;">
+                                    <button class="accordion-button rounded-0 fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMen" style="font-size: 0.88rem;">
                                         <i class="fa-solid fa-person me-2 text-danger"></i> THỜI TRANG NAM
                                     </button>
                                 </h2>
                                 <div id="collapseMen" class="accordion-collapse collapse show">
                                     <div class="list-group list-group-flush rounded-0 bg-light">
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_01')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Thun Nam</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_02')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Sơ Mi Nam</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_03')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Khoác Nam</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_04')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Quần Dài Nam</a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_01')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Thun Nam</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_02')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Sơ Mi Nam</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_03')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Khoác Nam</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('MEN_04')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Quần Dài Nam</span></a>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- WOMEN -->
                             <div class="accordion-item rounded-0 border-bottom">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button rounded-0 fw-bold py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWomen" style="font-size: 0.9rem;">
+                                    <button class="accordion-button rounded-0 fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWomen" style="font-size: 0.88rem;">
                                         <i class="fa-solid fa-person-dress me-2 text-danger"></i> THỜI TRANG NỮ
                                     </button>
                                 </h2>
                                 <div id="collapseWomen" class="accordion-collapse collapse show">
                                     <div class="list-group list-group-flush rounded-0 bg-light">
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_01')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Thun Nữ</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_02')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Sơ Mi Nữ</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_03')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Khoác Nữ</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_04')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Quần & Váy Nữ</a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_01')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Thun Nữ</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_02')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Sơ Mi Nữ</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_03')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Khoác Nữ</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('WOMEN_04')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Quần & Váy Nữ</span></a>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- KIDS -->
                             <div class="accordion-item rounded-0">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button rounded-0 fw-bold py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKids" style="font-size: 0.9rem;">
+                                    <button class="accordion-button rounded-0 fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKids" style="font-size: 0.88rem;">
                                         <i class="fa-solid fa-children me-2 text-danger"></i> TRẺ EM (KIDS)
                                     </button>
                                 </h2>
                                 <div id="collapseKids" class="accordion-collapse collapse show">
                                     <div class="list-group list-group-flush rounded-0 bg-light">
-                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_01')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Áo Trẻ Em</a>
-                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_02')" class="list-group-item list-group-item-action border-0 py-2 ps-4 small fw-semibold bg-transparent text-secondary"><i class="fa-solid fa-angle-right me-2 text-muted"></i> Quần Trẻ Em</a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_01')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Trẻ Em</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_02')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Áo Khoác Trẻ Em</span></a>
+                                        <a href="javascript:void(0)" onclick="filterCategory('KIDS_03')" class="sidebar-cate-link ps-4"><span><i class="fa-solid fa-angle-right me-2 text-muted" style="font-size: 0.75rem;"></i> Quần Trẻ Em</span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- VIP Promo Card -->
+                    <div class="p-3 bg-dark text-white rounded-0 border mb-4 text-center">
+                        <span class="badge bg-danger rounded-0 px-2 py-1 mb-2 text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px;">MEMBER EXCLUSIVE</span>
+                        <h6 class="fw-bold text-uppercase mb-1 text-white" style="font-size: 0.85rem;">ƯU ĐÃI THÀNH VIÊN</h6>
+                        <p class="small text-secondary mb-3" style="font-size: 0.78rem;">Đăng ký tài khoản ngay để nhận mã giảm <strong>10%</strong> cho đơn hàng đầu tiên!</p>
+                        <a href="register.html" class="btn btn-danger btn-sm rounded-0 w-100 fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px; background-color: var(--color-primary);">
+                            ĐĂNG KÝ NGAY
+                        </a>
                     </div>
                 </div>
             </div>
@@ -300,135 +198,21 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="productsGrid"></div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-top text-dark py-5 mt-5">
+    <footer class="bg-white border-top text-dark py-5 mt-auto">
         <div class="container text-center small text-secondary">
-            © 2026 ONE61 GARMENT. All Rights Reserved.
+            © 2026 ONE61 GARMENTORY. All Rights Reserved.
         </div>
     </footer>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        const PRODUCTS_DATA = [
-            { id: "P01", name: "Áo Thun Cổ Tròn Cotton 100%", cat: "MEN_01", cateGroup: "MEN", price: 299000, img: "../web/img-prj301/ao-thun-01.avif", desc: "Chất liệu cotton 100% mềm mại, thoáng mát cả ngày, thấm hút mồ hôi tối ưu." },
-            { id: "P02", name: "Áo Thun AIRism Siêu Thoáng Mát", cat: "WOMEN_01", cateGroup: "WOMEN", price: 349000, img: "../web/img-prj301/ao-thun-02.avif", desc: "Công nghệ sợi vải AIRism mượt mà, làm mát tức thì, chống tia UV hiệu quả." },
-            { id: "P03", name: "Áo Thun Trơn Dáng Rộng Unisex", cat: "MEN_01", cateGroup: "MEN", price: 399000, img: "../web/img-prj301/ao-thun-03.avif", desc: "Form áo Oversize thời thượng, dễ dàng phối nhiều phong cách đường phố." },
-            { id: "P04", name: "Áo Thun Họa Tiết Graphic LifeWear", cat: "MEN_01", cateGroup: "MEN", price: 449000, img: "../web/img-prj301/ao-thun-04.avif", desc: "Họa tiết nghệ thuật đương đại phong cách Tokyo, công nghệ in bền màu." },
-            { id: "P05", name: "Áo Thun Dài Tay Cổ Lọ Nữ", cat: "WOMEN_01", cateGroup: "WOMEN", price: 399000, img: "../web/img-prj301/ao-thun-05.avif", desc: "Thiết kế cổ lọ ấm áp, ôm dáng nhẹ nhàng, chất vải co giãn 4 chiều mềm mại." },
-            { id: "P06", name: "Áo Khoác Parka Chống Nắng UV Protection", cat: "WOMEN_03", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/ao-khoac-01.avif", desc: "Chỉ số chống nắng UPF 50+, chất liệu chống thấm nước bền bỉ, gấp gọn bỏ túi." },
-            { id: "P07", name: "Áo Khoác Gió Siêu Nhẹ Pocketable", cat: "MEN_03", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/ao-khoac-03.avif", desc: "Trọng lượng siêu nhẹ, cản gió và mưa phùn hiệu quả, tiện lợi mang theo hàng ngày." },
-            { id: "P08", name: "Áo Khoác Cardigan Len Mềm", cat: "WOMEN_03", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/ao-khoac-04.avif", desc: "Chất len dệt cao cấp mềm mịn không ngứa, phom suông thanh lịch chuẩn công sở." },
-            { id: "P09", name: "Áo Khoác Bomber Thể Thao", cat: "MEN_03", cateGroup: "MEN", price: 999000, img: "../web/img-prj301/ao-khoac-05.avif", desc: "Thiết kế bo gấu năng động, chất vải gió dày dặn giữ nhiệt và cản gió tốt." },
-            { id: "P10", name: "Áo Khoác Nỉ Hoodie Có Mũ", cat: "KIDS_02", cateGroup: "KIDS", price: 549000, img: "../web/img-prj301/ao-khoac-06.avif", desc: "Chất nỉ bông mềm êm ái, an toàn cho làn da nhạy cảm của bé, giữ ấm ngày lạnh." },
-            { id: "P11", name: "Quần Barrel Pants Phom Rộng Nhật Bản", cat: "WOMEN_04", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/quan-dai-01.avif", desc: "Thiết kế ống cong Barrel tạo điểm nhấn thời thượng, tôn dáng chân dài tự nhiên." },
-            { id: "P12", name: "Quần Smart Ankle Pants Co Giãn", cat: "MEN_04", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/quan-dai-02.avif", desc: "Co giãn 2 chiều cực thoải mái, phom đứng chuẩn mực cho quý ông công sở." },
-            { id: "P13", name: "Quần Chino Ống Suông Cao Cấp", cat: "MEN_04", cateGroup: "MEN", price: 749000, img: "../web/img-prj301/quan-dai-03.avif", desc: "Chất vải cotton Twill dày dặn, đứng phom, phong cách vintage lịch lãm." },
-            { id: "P14", name: "Quần Jeans Dáng Suông Cổ Điển", cat: "WOMEN_04", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/quan-dai-04.avif", desc: "Chất liệu denim 100% cotton chải mềm, màu sắc wash tự nhiên không bai dão." },
-            { id: "P15", name: "Quần Kaki Co Giãn Thoải Mái", cat: "KIDS_03", cateGroup: "KIDS", price: 449000, img: "../web/img-prj301/quan-dai-05.avif", desc: "Lưng thun co giãn mềm mại, thoải mái cho bé chạy nhảy vận động cả ngày." },
-            { id: "P16", name: "Quần Jogger Nỉ Thể Thao", cat: "MEN_04", cateGroup: "MEN", price: 599000, img: "../web/img-prj301/quan-dai-06.avif", desc: "Bo gấu thể thao khỏe khoắn, chất nỉ da cá thoáng khí thích hợp tập luyện và dạo phố." }
-        ];
-
-        let currentList = [...PRODUCTS_DATA];
-
-        function renderProducts(list) {
-            const grid = document.getElementById('productsGrid');
-            document.getElementById('productCount').textContent = list.length;
-            
-            if (list.length === 0) {
-                grid.innerHTML = '<div class="col-12 text-center py-5"><h5 class="text-muted">Không tìm thấy sản phẩm phù hợp</h5></div>';
-                return;
-            }
-
-            grid.innerHTML = list.map(p => `
-                <div class="col">
-                    <div class="card h-100 product-card">
-                        <div class="product-img-wrapper">
-                            <a href="product-detail.html?id=${p.id}">
-                                <img src="${p.img}" alt="${p.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80';">
-                            </a>
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.65rem;">NEW</span>
-                            </div>
-                            <div class="product-action-overlay">
-                                <a href="product-detail.html?id=${p.id}" class="btn btn-light btn-sm rounded-0 flex-grow-1 fw-bold text-uppercase small shadow-sm">
-                                    <i class="fa-regular fa-eye me-1"></i> Chi tiết
-                                </a>
-                                <button onclick="addToCart('${p.id}')" class="btn btn-danger btn-sm rounded-0 fw-bold px-3 shadow-sm" style="background-color: var(--color-primary);" title="Thêm vào giỏ">
-                                    <i class="fa-solid fa-cart-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body p-3 d-flex flex-column">
-                            <div class="text-uppercase text-muted mb-1 font-monospace" style="font-size: 0.7rem;">${p.cat}</div>
-                            <h6 class="card-title fw-bold text-uppercase mb-2" style="font-size: 0.88rem; line-height: 1.4;">
-                                <a href="product-detail.html?id=${p.id}" class="text-dark text-decoration-none">${p.name}</a>
-                            </h6>
-                            <p class="card-text text-muted small text-truncate mb-3">${p.desc}</p>
-                            <div class="mt-auto d-flex justify-content-between align-items-center pt-2 border-top">
-                                <div class="fw-bold fs-6 text-danger">${p.price.toLocaleString('vi-VN')} đ</div>
-                                <div class="small text-success"><i class="fa-solid fa-check"></i> Còn hàng</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterCategory(catPrefix) {
-            if (catPrefix === 'ALL') {
-                currentList = [...PRODUCTS_DATA];
-                document.getElementById('catalogTitle').textContent = 'TẤT CẢ SẢN PHẨM';
-                document.getElementById('breadcrumbCurrentCat').textContent = 'Tất cả sản phẩm';
-            } else {
-                currentList = PRODUCTS_DATA.filter(p => p.cat.startsWith(catPrefix));
-                document.getElementById('catalogTitle').textContent = 'DANH MỤC ' + catPrefix;
-                document.getElementById('breadcrumbCurrentCat').textContent = catPrefix;
-            }
-            renderProducts(currentList);
-        }
-
-        function sortProducts(type) {
-            if (type === 'price-asc') currentList.sort((a, b) => a.price - b.price);
-            else if (type === 'price-desc') currentList.sort((a, b) => b.price - a.price);
-            else if (type === 'name') currentList.sort((a, b) => a.name.localeCompare(b.name));
-            else currentList = [...PRODUCTS_DATA];
-            renderProducts(currentList);
-        }
-
-        function updateCartBadge() {
-            let cart = JSON.parse(localStorage.getItem('one61_cart') || '[]');
-            let count = cart.reduce((sum, item) => sum + item.qty, 0);
-            const badge = document.getElementById('navCartCount');
-            if (badge) badge.textContent = count;
-        }
-
-        function addToCart(prodId) {
-            let p = PRODUCTS_DATA.find(x => x.id === prodId);
-            if (!p) return;
-            let cart = JSON.parse(localStorage.getItem('one61_cart') || '[]');
-            let exist = cart.find(x => x.id === prodId);
-            if (exist) {
-                exist.qty += 1;
-            } else {
-                cart.push({ id: p.id, name: p.name, price: p.price, img: p.img, qty: 1, color: '32 BEIGE', size: 'M' });
-            }
-            localStorage.setItem('one61_cart', JSON.stringify(cart));
-            updateCartBadge();
-            alert('Đã thêm sản phẩm [' + p.name + '] vào giỏ hàng!');
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const cat = urlParams.get('cat');
-            if (cat) filterCategory(cat);
-            else renderProducts(currentList);
-            updateCartBadge();
-        });
-    </script>
+    <!-- Dedicated Modular JS -->
+    <script src="js/one61-alert.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/product.js"></script>
 </body>
 
 </html>

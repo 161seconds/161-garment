@@ -1,0 +1,157 @@
+/**
+ * ONE61 GARMENTORY - Catalog / Product Listing Styling
+ * 3:3.5 Fashion Aspect Ratio Cards, Slide-Up Overlay, Sidebar Filter
+ */
+
+/* Product Card Luxury Aesthetics */
+.one61-catalog-card {
+    border: 1px solid var(--color-gray-border, #E5E5E5);
+    background: #ffffff;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.one61-catalog-card:hover {
+    border-color: var(--color-dark, #111111);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.one61-img-box {
+    position: relative;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    padding-top: 115%; /* 3:3.5 Fashion Aspect Ratio */
+}
+
+.one61-img-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.one61-catalog-card:hover .one61-img-box img {
+    transform: scale(1.05);
+}
+
+.card-quick-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+
+.one61-catalog-card:hover .card-quick-actions {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.btn-quick-view {
+    background: #ffffff;
+    color: #111111;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border-radius: 0;
+    flex-grow: 1;
+    padding: 8px 12px;
+    text-transform: uppercase;
+    border: none;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-quick-view:hover {
+    background: #111111;
+    color: #ffffff;
+}
+
+.btn-quick-add {
+    background: var(--color-primary, #ED1D24);
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-quick-add:hover {
+    background: var(--color-primary-hover, #c7141a);
+}
+
+.floating-wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111111;
+    cursor: pointer;
+    z-index: 6;
+    transition: all 0.2s ease;
+}
+
+.floating-wishlist-btn:hover {
+    background: #ffffff;
+    color: var(--color-primary, #ED1D24);
+    transform: scale(1.1);
+}
+
+.color-swatch-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Sidebar Navigation Link */
+.sidebar-cate-link {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333333;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+}
+
+.sidebar-cate-link:hover {
+    background-color: #F8F9FA;
+    color: var(--color-primary, #ED1D24);
+    border-left-color: var(--color-primary, #ED1D24);
+}
+
+.sidebar-cate-link.active {
+    background-color: #FDF2F2;
+    color: var(--color-primary, #ED1D24);
+    font-weight: 700;
+    border-left-color: var(--color-primary, #ED1D24);
+}

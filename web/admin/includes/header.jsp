@@ -5,24 +5,28 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${param.title != null ? param.title : 'ONE61 Garment | Admin Portal'}</title>
+    <title>${param.title != null ? param.title : 'ONE61 Garmentory | Admin Portal'}</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome 6 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter & Outfit with Full Vietnamese Support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --admin-red: #E00000;
+            --admin-red: #ED1D24;
             --admin-dark: #111111;
             --admin-gray: #767676;
             --admin-border: #E5E5E5;
             --admin-bg: #F8F9FA;
             --admin-card-bg: #FFFFFF;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: var(--font-main);
             background-color: var(--admin-bg);
             color: var(--admin-dark);
             min-height: 100vh;
@@ -116,7 +120,7 @@
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/admin/dashboard.jsp">
                 <span class="admin-brand-box">ONE61</span>
-                <span class="fw-bold tracking-wider">GARMENT ADMIN</span>
+                <span class="fw-bold tracking-wider">GARMENTORY ADMIN</span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
                 <span class="navbar-toggler-icon"></span>

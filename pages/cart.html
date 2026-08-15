@@ -4,121 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ Hàng | ONE61 GARMENT</title>
-    <!-- Google Fonts -->
+    <title>Giỏ Hàng | ONE61 GARMENTORY</title>
+    <!-- Google Fonts: Be Vietnam Pro & Inter with 100% Native Vietnamese Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome 6 Pro -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --color-primary: #ED1D24;
-            --color-dark: #111111;
-            --color-gray-light: #F4F4F4;
-            --color-gray-border: #E5E5E5;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-heading: 'Outfit', sans-serif;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--color-dark);
-            background-color: #FFFFFF;
-        }
-
-        .brand-logo-wrap {
-            display: inline-flex;
-            align-items: center;
-            gap: 2px;
-            text-decoration: none;
-        }
-
-        .brand-box {
-            background-color: var(--color-primary);
-            color: #FFFFFF;
-            font-family: var(--font-heading);
-            font-weight: 900;
-            font-size: 0.95rem;
-            line-height: 1;
-            letter-spacing: -0.5px;
-            padding: 7px 7px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .main-nav-link {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: #111111 !important;
-            letter-spacing: 0.5px;
-            padding: 8px 16px !important;
-            text-decoration: none;
-        }
-
-        .main-nav-link:hover {
-            color: var(--color-primary) !important;
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background-color: var(--color-primary);
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 2px 5px;
-            border-radius: 10px;
-            min-width: 16px;
-            text-align: center;
-        }
-
-        .qty-stepper {
-            display: inline-flex;
-            border: 1px solid #111;
-            height: 36px;
-            align-items: center;
-            background: #fff;
-        }
-
-        .qty-btn {
-            width: 32px;
-            height: 100%;
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .qty-btn:hover {
-            background: #f0f0f0;
-        }
-
-        .qty-input {
-            width: 38px;
-            border: none;
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            background: transparent;
-        }
-    </style>
+    <!-- Dedicated Modular Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Top Bar -->
     <div class="border-bottom py-1 small bg-light">
         <div class="container d-flex justify-content-end align-items-center gap-3">
-            <a href="#" class="text-secondary text-decoration-none"><i class="fa-solid fa-location-dot me-1"></i> Tìm cửa hàng</a>
+            <a href="javascript:void(0)" onclick="window.showStoreLocator()" class="text-secondary text-decoration-none"><i class="fa-solid fa-location-dot me-1"></i> Tìm cửa hàng</a>
             <span class="text-secondary">|</span>
-            <a href="#" class="text-secondary text-decoration-none"><i class="fa-solid fa-headset me-1"></i> Hotline: 1900 161 161</a>
+            <a href="tel:1900161161" class="text-secondary text-decoration-none"><i class="fa-solid fa-headset me-1"></i> Hotline: 1900 161 161</a>
         </div>
     </div>
 
@@ -127,7 +33,7 @@
         <div class="container">
             <a class="brand-logo-wrap me-4" href="index.html">
                 <span class="brand-box">ONE61</span>
-                <span class="brand-box">GARMENT</span>
+                <span class="brand-box">GARMENTORY</span>
             </a>
 
             <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
@@ -141,6 +47,10 @@
             </div>
 
             <div class="d-flex align-items-center gap-3">
+                <a href="javascript:void(0)" onclick="window.showWishlistModal()" class="text-dark text-decoration-none px-2 position-relative" title="Yêu thích">
+                    <i class="fa-regular fa-heart fs-5"></i>
+                    <span class="cart-badge bg-danger wishlist-badge" style="display: none;">0</span>
+                </a>
                 <a href="login.html" class="text-dark text-decoration-none px-2" title="Tài khoản"><i class="fa-regular fa-user fs-5"></i></a>
                 <a href="cart.html" class="text-dark text-decoration-none px-2 position-relative" title="Giỏ hàng">
                     <i class="fa-solid fa-cart-shopping fs-5"></i>
@@ -151,165 +61,28 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container my-5 flex-grow-1" style="min-height: 50vh;">
+    <main class="container my-5 flex-grow-1" style="min-height: 50vh;">
         <div class="d-flex justify-content-between align-items-center pb-3 mb-4 border-bottom">
             <h3 class="fw-bold text-uppercase tracking-tight m-0">GIỎ HÀNG CỦA BẠN</h3>
             <span class="small text-muted" id="cartTotalItemsCount">0 sản phẩm</span>
         </div>
 
         <div id="cartContent"></div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-top text-dark py-5 mt-5">
+    <footer class="bg-white border-top text-dark py-5 mt-auto">
         <div class="container text-center small text-secondary">
-            © 2026 ONE61 GARMENT. All Rights Reserved.
+            © 2026 ONE61 GARMENTORY. All Rights Reserved.
         </div>
     </footer>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        function getCart() {
-            return JSON.parse(localStorage.getItem('one61_cart') || '[]');
-        }
-
-        function saveCart(cart) {
-            localStorage.setItem('one61_cart', JSON.stringify(cart));
-            renderCart();
-            updateCartBadge();
-        }
-
-        function updateCartBadge() {
-            const cart = getCart();
-            const count = cart.reduce((sum, item) => sum + item.qty, 0);
-            document.getElementById('navCartCount').textContent = count;
-            document.getElementById('cartTotalItemsCount').textContent = count + ' sản phẩm';
-        }
-
-        function updateQuantity(index, delta) {
-            let cart = getCart();
-            if (!cart[index]) return;
-            cart[index].qty += delta;
-            if (cart[index].qty <= 0) {
-                cart.splice(index, 1);
-            }
-            saveCart(cart);
-        }
-
-        function removeItem(index) {
-            let cart = getCart();
-            if (confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) {
-                cart.splice(index, 1);
-                saveCart(cart);
-            }
-        }
-
-        function renderCart() {
-            const cart = getCart();
-            const container = document.getElementById('cartContent');
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-5 border bg-light">
-                        <i class="fa-solid fa-cart-shopping fs-1 text-muted mb-3 d-block"></i>
-                        <h5 class="mb-3 text-muted">Giỏ hàng của bạn đang trống!</h5>
-                        <p class="small text-secondary mb-4">Hãy khám phá bộ sưu tập LifeWear mới nhất từ ONE61 Garment.</p>
-                        <a href="product.html" class="btn btn-dark rounded-0 px-4 py-2 fw-bold text-uppercase small">TIẾP TỤC MUA SẮM</a>
-                    </div>
-                `;
-                return;
-            }
-
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const shipping = subtotal >= 499000 ? 0 : 30000;
-            const total = subtotal + shipping;
-
-            container.innerHTML = `
-                <div class="row g-4">
-                    <div class="col-lg-8">
-                        <div class="border">
-                            <table class="table align-middle mb-0">
-                                <thead class="table-light small text-uppercase fw-bold">
-                                    <tr>
-                                        <th class="ps-3 py-3">Sản phẩm</th>
-                                        <th class="text-center py-3">Đơn giá</th>
-                                        <th class="text-center py-3" style="width: 140px;">Số lượng</th>
-                                        <th class="text-center py-3">Thành tiền</th>
-                                        <th class="text-center py-3">Xóa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${cart.map((item, idx) => `
-                                        <tr>
-                                            <td class="ps-3 py-3">
-                                                <div class="d-flex align-items-center gap-3">
-                                                    <img src="${item.img}" width="70" class="border rounded-0 object-fit-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=200';">
-                                                    <div>
-                                                        <a href="product-detail.html?id=${item.id}" class="fw-bold text-dark text-decoration-none small d-block mb-1">${item.name}</a>
-                                                        <div class="text-muted small" style="font-size: 0.75rem;">
-                                                            Màu: <strong>${item.color || '32 BEIGE'}</strong> | Size: <strong>${item.size || 'M'}</strong>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-center fw-bold small">${item.price.toLocaleString('vi-VN')} đ</td>
-                                            <td class="text-center">
-                                                <div class="qty-stepper mx-auto">
-                                                    <button type="button" class="qty-btn" onclick="updateQuantity(${idx}, -1)">-</button>
-                                                    <input type="number" class="qty-input" value="${item.qty}" readonly>
-                                                    <button type="button" class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
-                                                </div>
-                                            </td>
-                                            <td class="text-center fw-bold text-danger small">${(item.price * item.qty).toLocaleString('vi-VN')} đ</td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-link text-muted p-0" onclick="removeItem(${idx})" title="Xóa">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-3">
-                            <a href="product.html" class="text-dark small fw-bold text-decoration-none"><i class="fa-solid fa-arrow-left me-1"></i> TIẾP TỤC MUA SẮM</a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card border rounded-0 p-4 bg-light">
-                            <h5 class="fw-bold text-uppercase border-bottom pb-3 mb-3">TỔNG ĐƠN HÀNG</h5>
-                            <div class="d-flex justify-content-between mb-2 small">
-                                <span class="text-secondary">Tạm tính:</span>
-                                <strong class="text-dark">${subtotal.toLocaleString('vi-VN')} đ</strong>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3 small">
-                                <span class="text-secondary">Phí vận chuyển:</span>
-                                <strong class="${shipping === 0 ? 'text-success' : 'text-dark'}">
-                                    ${shipping === 0 ? 'MIỄN PHÍ' : shipping.toLocaleString('vi-VN') + ' đ'}
-                                </strong>
-                            </div>
-                            <hr>
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <span class="fw-bold fs-6">TỔNG CỘNG:</span>
-                                <span class="fs-4 fw-bold text-danger font-monospace">${total.toLocaleString('vi-VN')} đ</span>
-                            </div>
-                            <a href="checkout.html" class="btn btn-danger btn-lg rounded-0 w-100 fw-bold text-uppercase py-3 small shadow-sm" style="background-color: var(--color-primary); letter-spacing: 1px;">
-                                TIẾN HÀNH ĐẶT HÀNG <i class="fa-solid fa-arrow-right ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderCart();
-            updateCartBadge();
-        });
-    </script>
+    <!-- Dedicated Modular JS -->
+    <script src="js/one61-alert.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

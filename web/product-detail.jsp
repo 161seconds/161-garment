@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="includes/header.jsp">
-    <jsp:param name="title" value="${PRODUCT.name} | ONE61 Garment" />
+    <jsp:param name="title" value="${PRODUCT.name} | ONE61 Garmentory" />
 </jsp:include>
 
 <style>
@@ -233,7 +233,7 @@
             <ol class="breadcrumb mb-0 small text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
                 <li class="breadcrumb-item"><a href="home" class="text-secondary text-decoration-none">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="product" class="text-secondary text-decoration-none">Sản phẩm</a></li>
-                <li class="breadcrumb-item"><a href="product?categoryID=${PRODUCT.categoryID}" class="text-secondary text-decoration-none">${PRODUCT.categoryID}</a></li>
+                <li class="breadcrumb-item"><a href="product?categoryID=${PRODUCT.categoryID}" class="text-secondary text-decoration-none">${not empty CATEGORY_NAME ? CATEGORY_NAME : 'Thời Trang'}</a></li>
                 <li class="breadcrumb-item active text-dark fw-bold" aria-current="page">${PRODUCT.name}</li>
             </ol>
         </nav>
@@ -388,7 +388,7 @@
 
                     <!-- Secondary Actions: Wishlist & Share -->
                     <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-wishlist flex-grow-1 d-flex align-items-center justify-content-center gap-2" onclick="toggleWishlist(this)">
+                        <button type="button" id="btnWishlistToggle" class="btn btn-wishlist flex-grow-1 d-flex align-items-center justify-content-center gap-2" onclick="toggleWishlist(this)">
                             <i class="fa-regular fa-heart"></i> THÊM VÀO YÊU THÍCH
                         </button>
                         <button type="button" class="btn btn-wishlist px-3" onclick="copyProductLink()" title="Chia sẻ sản phẩm">
@@ -405,8 +405,8 @@
                             ${PRODUCT.quantity > 0 ? 'Còn hàng' : 'Hết hàng'}
                         </span>
                     </div>
-                    <p class="text-muted mb-2" style="font-size: 0.8rem;">Bạn có thể kiểm tra tồn kho tại các showroom ONE61 Garment gần nhất.</p>
-                    <a href="#" class="fw-bold text-dark text-decoration-underline" onclick="alert('Hệ thống cửa hàng ONE61 Garment: \n1. Vincom Đồng Khởi, Q.1, TP.HCM\n2. Vincom Bà Triệu, Hai Bà Trưng, Hà Nội'); return false;">
+                    <p class="text-muted mb-2" style="font-size: 0.8rem;">Bạn có thể kiểm tra tồn kho tại các showroom ONE61 Garmentory gần nhất.</p>
+                    <a href="#" class="fw-bold text-dark text-decoration-underline" onclick="showStoreLocator(); return false;">
                         Chọn cửa hàng để xem kho &gt;
                     </a>
                 </div>
@@ -521,22 +521,76 @@
         input.value = val;
     }
 
+    const CURRENT_PROD_ID = '${PRODUCT.productID}';
+    const CURRENT_PROD_NAME = '${PRODUCT.name}';
+    const CURRENT_PROD_PRICE = '${PRODUCT.price}';
+    const CURRENT_PROD_IMG = '${PRODUCT.image}';
+
+    function getWishlist() {
+        return JSON.parse(localStorage.getItem('one61_wishlist') || '[]');
+    }
+
+    function checkWishlistState() {
+        const wishlist = getWishlist();
+        const exists = wishlist.some(item => item.id === CURRENT_PROD_ID);
+        const btn = document.getElementById('btnWishlistToggle');
+        if (btn) {
+            if (exists) {
+                btn.innerHTML = '<i class="fa-solid fa-heart text-danger"></i> ĐÃ THÊM VÀO YÊU THÍCH';
+                btn.classList.add('border-danger', 'text-danger');
+            } else {
+                btn.innerHTML = '<i class="fa-regular fa-heart"></i> THÊM VÀO YÊU THÍCH';
+                btn.classList.remove('border-danger', 'text-danger');
+            }
+        }
+    }
+
     function toggleWishlist(btn) {
-        const icon = btn.querySelector('i');
-        if (icon.classList.contains('fa-regular')) {
-            icon.className = 'fa-solid fa-heart text-danger';
+        let wishlist = getWishlist();
+        const index = wishlist.findIndex(item => item.id === CURRENT_PROD_ID);
+        if (index === -1) {
+            // Add to wishlist
+            wishlist.push({
+                id: CURRENT_PROD_ID,
+                name: CURRENT_PROD_NAME,
+                price: CURRENT_PROD_PRICE,
+                img: CURRENT_PROD_IMG
+            });
+            localStorage.setItem('one61_wishlist', JSON.stringify(wishlist));
             btn.innerHTML = '<i class="fa-solid fa-heart text-danger"></i> ĐÃ THÊM VÀO YÊU THÍCH';
+            btn.classList.add('border-danger', 'text-danger');
+            if (typeof one61Toast === 'function') {
+                one61Toast('Đã lưu [' + CURRENT_PROD_NAME + '] vào Danh sách Yêu thích!', 'success');
+            } else {
+                alert('Đã lưu [' + CURRENT_PROD_NAME + '] vào Danh sách Yêu thích!');
+            }
         } else {
-            icon.className = 'fa-regular fa-heart';
+            // Remove from wishlist
+            wishlist.splice(index, 1);
+            localStorage.setItem('one61_wishlist', JSON.stringify(wishlist));
             btn.innerHTML = '<i class="fa-regular fa-heart"></i> THÊM VÀO YÊU THÍCH';
+            btn.classList.remove('border-danger', 'text-danger');
+            if (typeof one61Toast === 'function') {
+                one61Toast('Đã xóa khỏi Danh sách Yêu thích', 'info');
+            } else {
+                alert('Đã xóa khỏi Danh sách Yêu thích');
+            }
         }
     }
 
     function copyProductLink() {
         navigator.clipboard.writeText(window.location.href).then(() => {
-            alert('Đã sao chép liên kết sản phẩm vào bộ nhớ tạm!');
+            if (typeof one61Toast === 'function') {
+                one61Toast('Đã sao chép liên kết sản phẩm vào bộ nhớ tạm!', 'success');
+            } else {
+                alert('Đã sao chép liên kết sản phẩm vào bộ nhớ tạm!');
+            }
         });
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        checkWishlistState();
+    });
 </script>
 
 <jsp:include page="includes/footer.jsp" />
