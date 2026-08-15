@@ -40,25 +40,33 @@ function renderProducts(list) {
 
     list.forEach(p => {
         const col = document.createElement('div');
-        col.className = 'col-lg-4 col-md-6 col-6';
+        col.className = 'col';
         col.innerHTML = `
-            <div class="product-card h-100 p-2">
-                <div class="product-img-wrapper mb-2">
+            <div class="card h-100 one61-catalog-card rounded-0">
+                <!-- Full-Bleed Product Image -->
+                <div class="one61-img-box">
                     <a href="product-detail.html?id=${p.id}">
                         <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.src='../web/img-prj301/ao-thun-01.avif'">
                     </a>
+                    <div class="position-absolute top-0 start-0 m-2" style="z-index: 4;">
+                        <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.5px;">NEW</span>
+                    </div>
                 </div>
-                <div class="p-1">
-                    <h6 class="small fw-bold mb-1 text-truncate" title="${p.name}">
+
+                <!-- Product Body -->
+                <div class="card-body p-3 d-flex flex-column">
+                    <span class="text-muted small text-uppercase font-monospace" style="font-size: 0.68rem; letter-spacing: 0.5px;">ONE61 ESSENTIALS</span>
+                    <h6 class="card-title fw-bold fs-6 mb-1 text-truncate mt-1">
                         <a href="product-detail.html?id=${p.id}" class="text-dark text-decoration-none">${p.name}</a>
                     </h6>
-                    <div class="fw-bold text-danger mb-2">${formatVND(p.price)}</div>
-                    <div class="d-flex gap-1">
-                        <a href="product-detail.html?id=${p.id}" class="btn btn-light btn-sm rounded-0 border flex-grow-1 fw-bold small text-uppercase">
-                            <i class="fa-regular fa-eye me-1"></i> Chi tiết
-                        </a>
-                        <button class="btn btn-dark btn-sm rounded-0 px-3 fw-bold small text-uppercase" onclick="addToCart('${p.id}')" title="Thêm vào giỏ">
-                            <i class="fa-solid fa-cart-plus"></i>
+                    <p class="card-text text-muted small mb-3 text-truncate" style="font-size: 0.8rem;">${p.desc}</p>
+
+                    <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
+                        <span class="fw-bold fs-6" style="color: var(--color-primary, #ED1D24); font-family: 'Be Vietnam Pro', sans-serif;">
+                            ${formatVND(p.price)}
+                        </span>
+                        <button class="btn btn-outline-dark btn-sm rounded-0 fw-bold px-2 py-1 text-uppercase" onclick="addToCart('${p.id}')" title="Thêm vào giỏ" style="font-size: 0.75rem;">
+                            <i class="fa-solid fa-cart-plus me-1"></i> Mua
                         </button>
                     </div>
                 </div>
@@ -71,7 +79,7 @@ function renderProducts(list) {
 }
 
 // Category Filter
-function filterCategory(cat) {
+function filterCategory(cat, smoothScroll = false) {
     let filtered = PRODUCTS;
     if (cat === 'WOMEN') {
         filtered = PRODUCTS.filter(p => p.cateGroup === 'WOMEN');
@@ -91,6 +99,21 @@ function filterCategory(cat) {
     renderProducts(filtered);
     const badge = document.getElementById('activeFilterBadge');
     if (badge) badge.textContent = cat;
+
+    // Update Pills Active State
+    document.querySelectorAll('.category-pill-btn').forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`'${cat}'`)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    if (smoothScroll) {
+        const store = document.getElementById('storeSection');
+        if (store) store.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 function handleSearch(q) {
