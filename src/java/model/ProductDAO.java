@@ -3,33 +3,38 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DBUtils;
 
 public class ProductDAO {
 
+    private ProductDTO extractProduct(ResultSet rs) throws SQLException {
+        return new ProductDTO(
+            rs.getString("productID"),
+            rs.getNString("name"),
+            rs.getNString("description"),
+            rs.getDouble("price"),
+            rs.getInt("quantity"),
+            rs.getString("image"),
+            rs.getString("categoryID"),
+            rs.getString("parentID"),
+            rs.getTimestamp("createDate"),
+            rs.getBoolean("status")
+        );
+    }
+
     public List<ProductDTO> getAllProducts() {
         List<ProductDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM [Product] WHERE status = 1";
+        String sql = "SELECT * FROM [Product] WHERE parentID IS NULL AND status = 1";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql);
              ResultSet rs = ptm.executeQuery()) {
              
             while (rs.next()) {
-                ProductDTO product = new ProductDTO(
-                    rs.getString("productID"),
-                    rs.getNString("name"),
-                    rs.getNString("description"),
-                    rs.getDouble("price"),
-                    rs.getInt("quantity"),
-                    rs.getString("image"),
-                    rs.getString("categoryID"),
-                    rs.getTimestamp("createDate"),
-                    rs.getBoolean("status")
-                );
-                list.add(product);
+                list.add(extractProduct(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,17 +52,7 @@ public class ProductDAO {
             ptm.setString(1, productID);
             try (ResultSet rs = ptm.executeQuery()) {
                 if (rs.next()) {
-                    product = new ProductDTO(
-                        rs.getString("productID"),
-                        rs.getNString("name"),
-                        rs.getNString("description"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("image"),
-                        rs.getString("categoryID"),
-                        rs.getTimestamp("createDate"),
-                        rs.getBoolean("status")
-                    );
+                    product = extractProduct(rs);
                 }
             }
         } catch (Exception e) {
@@ -68,7 +63,7 @@ public class ProductDAO {
     
     public List<ProductDTO> getProductsByCategory(String categoryID) {
         List<ProductDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM [Product] WHERE categoryID = ? AND status = 1";
+        String sql = "SELECT * FROM [Product] WHERE categoryID = ? AND parentID IS NULL AND status = 1";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
@@ -76,18 +71,7 @@ public class ProductDAO {
             ptm.setString(1, categoryID);
             try (ResultSet rs = ptm.executeQuery()) {
                 while (rs.next()) {
-                    ProductDTO product = new ProductDTO(
-                        rs.getString("productID"),
-                        rs.getNString("name"),
-                        rs.getNString("description"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("image"),
-                        rs.getString("categoryID"),
-                        rs.getTimestamp("createDate"),
-                        rs.getBoolean("status")
-                    );
-                    list.add(product);
+                    list.add(extractProduct(rs));
                 }
             }
         } catch (Exception e) {
@@ -98,8 +82,8 @@ public class ProductDAO {
 
     public boolean insertProduct(ProductDTO product) {
         boolean check = false;
-        String sql = "INSERT INTO [Product] (productID, name, description, price, quantity, image, categoryID, createDate, status) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE(), 1)";
+        String sql = "INSERT INTO [Product] (productID, name, description, price, quantity, image, categoryID, parentID, createDate, status) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), 1)";
                    
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
@@ -111,6 +95,7 @@ public class ProductDAO {
             ptm.setInt(5, product.getQuantity());
             ptm.setString(6, product.getImage());
             ptm.setString(7, product.getCategoryID());
+            ptm.setString(8, product.getParentID());
             
             check = ptm.executeUpdate() > 0;
             
@@ -122,7 +107,7 @@ public class ProductDAO {
 
     public boolean updateProduct(ProductDTO product) {
         boolean check = false;
-        String sql = "UPDATE [Product] SET name = ?, description = ?, price = ?, quantity = ?, image = ?, categoryID = ?, status = ? WHERE productID = ?";
+        String sql = "UPDATE [Product] SET name = ?, description = ?, price = ?, quantity = ?, image = ?, categoryID = ?, parentID = ?, status = ? WHERE productID = ?";
                    
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
@@ -133,8 +118,9 @@ public class ProductDAO {
             ptm.setInt(4, product.getQuantity());
             ptm.setString(5, product.getImage());
             ptm.setString(6, product.getCategoryID());
-            ptm.setBoolean(7, product.isStatus());
-            ptm.setString(8, product.getProductID());
+            ptm.setString(7, product.getParentID());
+            ptm.setBoolean(8, product.isStatus());
+            ptm.setString(9, product.getProductID());
             
             check = ptm.executeUpdate() > 0;
             
@@ -146,12 +132,13 @@ public class ProductDAO {
 
     public boolean deleteProduct(String productID) {
         boolean check = false;
-        String sql = "UPDATE [Product] SET status = 0 WHERE productID = ?";
+        String sql = "UPDATE [Product] SET status = 0 WHERE productID = ? OR parentID = ?";
                    
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
              
             ptm.setString(1, productID);
+            ptm.setString(2, productID);
             check = ptm.executeUpdate() > 0;
             
         } catch (Exception e) {
@@ -159,9 +146,10 @@ public class ProductDAO {
         }
         return check;
     }
+
     public int getTotalProducts(String categoryID) {
         int total = 0;
-        String sql = "SELECT COUNT(*) FROM [Product] WHERE status = 1";
+        String sql = "SELECT COUNT(*) FROM [Product] WHERE parentID IS NULL AND status = 1";
         if (categoryID != null && !categoryID.isEmpty()) {
             sql += " AND categoryID = ?";
         }
@@ -184,7 +172,7 @@ public class ProductDAO {
 
     public List<ProductDTO> getProductsByPage(String categoryID, int offset, int fetch) {
         List<ProductDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM [Product] WHERE status = 1";
+        String sql = "SELECT * FROM [Product] WHERE parentID IS NULL AND status = 1";
         if (categoryID != null && !categoryID.isEmpty()) {
             sql += " AND categoryID = ?";
         }
@@ -202,18 +190,26 @@ public class ProductDAO {
             
             try (ResultSet rs = ptm.executeQuery()) {
                 while (rs.next()) {
-                    ProductDTO product = new ProductDTO(
-                        rs.getString("productID"),
-                        rs.getNString("name"),
-                        rs.getNString("description"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("image"),
-                        rs.getString("categoryID"),
-                        rs.getTimestamp("createDate"),
-                        rs.getBoolean("status")
-                    );
-                    list.add(product);
+                    list.add(extractProduct(rs));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<ProductDTO> getChildProducts(String parentID) {
+        List<ProductDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM [Product] WHERE parentID = ? AND status = 1 ORDER BY productID ASC";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setString(1, parentID);
+            try (ResultSet rs = ptm.executeQuery()) {
+                while (rs.next()) {
+                    list.add(extractProduct(rs));
                 }
             }
         } catch (Exception e) {

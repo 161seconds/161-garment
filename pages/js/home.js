@@ -5,22 +5,45 @@
 
 // Sample Product Database
 const PRODUCTS = [
-    { id: "PROD01", name: "Áo Thun Cổ Tròn Cotton 100%", cate: "MEN_01", cateGroup: "MEN", price: 299000, img: "../web/img-prj301/ao-thun-01.avif" },
-    { id: "PROD02", name: "Áo Thun AIRism Siêu Thoáng Mát", cate: "WOMEN_01", cateGroup: "WOMEN", price: 349000, img: "../web/img-prj301/ao-thun-02.avif" },
-    { id: "PROD03", name: "Áo Thun Trơn Dáng Rộng Unisex", cate: "MEN_01", cateGroup: "MEN", price: 399000, img: "../web/img-prj301/ao-thun-03.avif" },
-    { id: "PROD04", name: "Áo Thun Họa Tiết Graphic LifeWear", cate: "MEN_01", cateGroup: "MEN", price: 449000, img: "../web/img-prj301/ao-thun-04.avif" },
-    { id: "PROD05", name: "Áo Thun Dài Tay Cổ Lọ Nữ", cate: "WOMEN_01", cateGroup: "WOMEN", price: 399000, img: "../web/img-prj301/ao-thun-05.avif" },
-    { id: "PROD06", name: "Áo Khoác Parka Chống Nắng UV Protection", cate: "WOMEN_03", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/ao-khoac-01.avif" },
-    { id: "PROD07", name: "Áo Khoác Gió Siêu Nhẹ Pocketable", cate: "MEN_03", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/ao-khoac-03.avif" },
-    { id: "PROD08", name: "Áo Khoác Cardigan Len Mềm", cate: "WOMEN_03", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/ao-khoac-04.avif" },
-    { id: "PROD09", name: "Áo Khoác Bomber Thể Thao", cate: "MEN_03", cateGroup: "MEN", price: 999000, img: "../web/img-prj301/ao-khoac-05.avif" },
-    { id: "PROD10", name: "Áo Khoác Nỉ Hoodie Có Mũ", cate: "KIDS_02", cateGroup: "KIDS", price: 549000, img: "../web/img-prj301/ao-khoac-06.avif" },
-    { id: "PROD11", name: "Quần Barrel Pants Phom Rộng Nhật Bản", cate: "WOMEN_04", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/quan-dai-01.avif" },
-    { id: "PROD12", name: "Quần Smart Ankle Pants Co Giãn", cate: "MEN_04", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/quan-dai-02.avif" },
-    { id: "PROD13", name: "Quần Chino Ống Suông Cao Cấp", cate: "MEN_04", cateGroup: "MEN", price: 749000, img: "../web/img-prj301/quan-dai-03.avif" },
-    { id: "PROD14", name: "Quần Jeans Dáng Suông Cổ Điển", cate: "WOMEN_04", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/quan-dai-04.avif" },
-    { id: "PROD15", name: "Quần Kaki Co Giãn Thoải Mái", cate: "KIDS_03", cateGroup: "KIDS", price: 449000, img: "../web/img-prj301/quan-dai-05.avif" },
-    { id: "PROD16", name: "Quần Jogger Nỉ Thể Thao", cate: "MEN_04", cateGroup: "MEN", price: 599000, img: "../web/img-prj301/quan-dai-06.avif" }
+    // MEN: Sơ Mi (MEN_01)
+    { id: "PROD01", name: "Áo Sơ Mi Oxford Nam Dài Tay", cate: "MEN_01", cateGroup: "MEN", price: 599000, img: "../web/img-prj301/products/men/cover/cover-shirts-men-1.avif" },
+    { id: "PROD02", name: "Áo Sơ Mi Linen Cổ Tàu Thoáng Khí", cate: "MEN_01", cateGroup: "MEN", price: 699000, img: "../web/img-prj301/products/men/cover/cover-shirts-men-2.avif" },
+    { id: "PROD03", name: "Áo Sơ Mi Cộc Tay Phom Rộng", cate: "MEN_01", cateGroup: "MEN", price: 499000, img: "../web/img-prj301/products/men/cover/cover-shirts-men-3.avif" },
+
+    // MEN: Áo Khoác (MEN_02)
+    { id: "PROD04", name: "Áo Khoác Gió Nam Chống Thấm Nước", cate: "MEN_02", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/products/men/cover/cover-outerwear-men-1.avif" },
+    { id: "PROD05", name: "Áo Khoác Blazer Nam Công Sở", cate: "MEN_02", cateGroup: "MEN", price: 1299000, img: "../web/img-prj301/products/men/cover/cover-outerwear-men-2.avif" },
+    { id: "PROD06", name: "Áo Khoác Bomber Kaki Dáng Trẻ", cate: "MEN_02", cateGroup: "MEN", price: 899000, img: "../web/img-prj301/products/men/cover/cover-outerwear-men-3.avif" },
+
+    // MEN: Quần Dài (MEN_03)
+    { id: "PROD07", name: "Quần Smart Pants Co Giãn 2 Chiều", cate: "MEN_03", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/products/men/cover/cover-pants-men-1.avif" },
+    { id: "PROD08", name: "Quần Kaki Chino Dáng Suông Nam", cate: "MEN_03", cateGroup: "MEN", price: 699000, img: "../web/img-prj301/products/men/cover/cover-pants-men-2.avif" },
+    { id: "PROD09", name: "Quần Jogger Kaki Túi Hộp Năng Động", cate: "MEN_03", cateGroup: "MEN", price: 599000, img: "../web/img-prj301/products/men/cover/cover-pants-men-3.avif" },
+
+    // MEN: Quần Jeans (MEN_04)
+    { id: "PROD10", name: "Quần Jeans Nam Slim Fit Co Giãn", cate: "MEN_04", cateGroup: "MEN", price: 899000, img: "../web/img-prj301/products/men/cover/cover-jeans-men-1.avif" },
+    { id: "PROD11", name: "Quần Jeans Ống Suông Regular Vintage", cate: "MEN_04", cateGroup: "MEN", price: 949000, img: "../web/img-prj301/products/men/cover/cover-jeans-men-2.avif" },
+    { id: "PROD12", name: "Quần Jeans Relaxed Fit Dáng Rộng", cate: "MEN_04", cateGroup: "MEN", price: 849000, img: "../web/img-prj301/products/men/cover/cover-jeans-men-3.avif" },
+
+    // WOMEN: Sơ Mi & Blouse (WOMEN_01)
+    { id: "PROD13", name: "Áo Sơ Mi Rayon Nữ Mềm Rủ", cate: "WOMEN_01", cateGroup: "WOMEN", price: 549000, img: "../web/img-prj301/products/women/cover/cover-shirt-and-blouses-women-1.avif" },
+    { id: "PROD14", name: "Áo Blouse Cổ Thắt Nơ Nữ Tính", cate: "WOMEN_01", cateGroup: "WOMEN", price: 599000, img: "../web/img-prj301/products/women/cover/cover-shirt-and-blouses-women-2.avif" },
+    { id: "PROD15", name: "Áo Sơ Mi Vải Đũi Cổ Chữ V", cate: "WOMEN_01", cateGroup: "WOMEN", price: 499000, img: "../web/img-prj301/products/women/cover/cover-shirt-and-blouses-women-3.avif" },
+
+    // WOMEN: Áo Khoác (WOMEN_02)
+    { id: "PROD16", name: "Áo Khoác Chống Tia UV AirSense Nữ", cate: "WOMEN_02", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/products/women/cover/cover-outerwear-women-1.avif" },
+    { id: "PROD17", name: "Áo Khoác Dạ Tweed Sang Trọng", cate: "WOMEN_02", cateGroup: "WOMEN", price: 1399000, img: "../web/img-prj301/products/women/cover/cover-outerwear-women-2.avif" },
+    { id: "PROD18", name: "Áo Khoác Trench Coat Dáng Dài", cate: "WOMEN_02", cateGroup: "WOMEN", price: 1599000, img: "../web/img-prj301/products/women/cover/cover-outerwear-women-3.avif" },
+
+    // WOMEN: Quần & Váy (WOMEN_03)
+    { id: "PROD19", name: "Quần Ống Suông Xếp Ly Pleated Pants", cate: "WOMEN_03", cateGroup: "WOMEN", price: 799000, img: "../web/img-prj301/products/women/cover/cover-bottom-women-1.avif" },
+    { id: "PROD20", name: "Chân Váy Midi Dáng Chữ A Tôn Dáng", cate: "WOMEN_03", cateGroup: "WOMEN", price: 649000, img: "../web/img-prj301/products/women/cover/cover-bottom-women-2.avif" },
+    { id: "PROD21", name: "Quần Tây Nữ Ống Đứng Ankle Pants", cate: "WOMEN_03", cateGroup: "WOMEN", price: 749000, img: "../web/img-prj301/products/women/cover/cover-bottom-women-3.avif" },
+
+    // WOMEN: Shorts & Culottes (WOMEN_04)
+    { id: "PROD22", name: "Quần Shorts Kaki Lưng Cao Nữ", cate: "WOMEN_04", cateGroup: "WOMEN", price: 449000, img: "../web/img-prj301/products/women/cover/cover-shorts-and-culott-1.avif" },
+    { id: "PROD23", name: "Quần Giả Váy Xếp Nếp Thời Thượng", cate: "WOMEN_04", cateGroup: "WOMEN", price: 499000, img: "../web/img-prj301/products/women/cover/cover-shorts-and-culott-2.avif" },
+    { id: "PROD24", name: "Quần Culottes Ống Rộng Vải Linen", cate: "WOMEN_04", cateGroup: "WOMEN", price: 549000, img: "../web/img-prj301/products/women/cover/cover-shorts-and-culott-3.avif" }
 ];
 
 let cart = [
@@ -32,13 +55,29 @@ function formatVND(n) {
     return new Intl.NumberFormat('vi-VN').format(n) + ' đ';
 }
 
-// Render Catalog Products
-function renderProducts(list) {
+const HOME_PAGE_SIZE = 10;
+let homeCurrentPage = 1;
+let currentHomeList = [...PRODUCTS];
+
+function setHomePage(page) {
+    homeCurrentPage = page;
+    renderProducts(currentHomeList, page);
+}
+
+// Render Catalog Products with Pagination
+function renderProducts(list, page = 1) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
     container.innerHTML = '';
+    currentHomeList = list;
+    homeCurrentPage = page;
 
-    list.forEach(p => {
+    const total = list.length;
+    const endPage = Math.ceil(total / HOME_PAGE_SIZE);
+    const startIdx = (page - 1) * HOME_PAGE_SIZE;
+    const paginatedItems = list.slice(startIdx, startIdx + HOME_PAGE_SIZE);
+
+    paginatedItems.forEach(p => {
         const col = document.createElement('div');
         col.className = 'col';
         col.innerHTML = `
@@ -46,7 +85,7 @@ function renderProducts(list) {
                 <!-- Full-Bleed Product Image -->
                 <div class="one61-img-box">
                     <a href="product-detail.html?id=${p.id}">
-                        <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.src='../web/img-prj301/ao-thun-01.avif'">
+                        <img src="${p.img}" alt="${p.name}" class="product-img" onerror="this.src='../web/img-prj301/products/men/cover/cover-shirts-men-1.avif'">
                     </a>
                     <div class="position-absolute top-0 start-0 m-2" style="z-index: 4;">
                         <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.5px;">NEW</span>
@@ -59,7 +98,7 @@ function renderProducts(list) {
                     <h6 class="card-title fw-bold fs-6 mb-1 text-truncate mt-1">
                         <a href="product-detail.html?id=${p.id}" class="text-dark text-decoration-none">${p.name}</a>
                     </h6>
-                    <p class="card-text text-muted small mb-3 text-truncate" style="font-size: 0.8rem;">${p.desc}</p>
+                    <p class="card-text text-muted small mb-3 text-truncate" style="font-size: 0.8rem;">${p.desc || ''}</p>
 
                     <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
                         <span class="fw-bold fs-6" style="color: var(--color-primary, #ED1D24); font-family: 'Be Vietnam Pro', sans-serif;">
@@ -75,7 +114,43 @@ function renderProducts(list) {
         container.appendChild(col);
     });
     const lbl = document.getElementById('productCountLabel');
-    if (lbl) lbl.textContent = 'Đang hiển thị ' + list.length + ' sản phẩm';
+    if (lbl) lbl.textContent = 'Đang hiển thị ' + paginatedItems.length + ' / ' + total + ' sản phẩm (Trang ' + page + '/' + (endPage || 1) + ')';
+
+    renderHomePagination(endPage, page);
+}
+
+function renderHomePagination(endPage, currentPage) {
+    let pagContainer = document.getElementById('homePaginationContainer');
+    if (!pagContainer) {
+        const prodGrid = document.getElementById('productsContainer');
+        if (prodGrid && prodGrid.parentElement) {
+            pagContainer = document.createElement('div');
+            pagContainer.id = 'homePaginationContainer';
+            pagContainer.className = 'd-flex justify-content-center align-items-center gap-2 mt-5 pb-3';
+            prodGrid.parentElement.appendChild(pagContainer);
+        }
+    }
+    if (!pagContainer) return;
+    if (endPage <= 1) {
+        pagContainer.innerHTML = '';
+        return;
+    }
+
+    let html = '<ul class="pagination mb-0 rounded-0 gap-1">';
+    html += '<li class="page-item ' + (currentPage <= 1 ? 'disabled' : '') + '">' +
+            '<a class="page-link rounded-0 fw-bold px-3 py-2 text-dark bg-white border" href="javascript:void(0)" onclick="setHomePage(' + (currentPage - 1) + ')">' +
+            '<i class="fa-solid fa-chevron-left"></i></a></li>';
+
+    for (let i = 1; i <= endPage; i++) {
+        html += '<li class="page-item ' + (i === currentPage ? 'active' : '') + '">' +
+                '<a class="page-link rounded-0 fw-bold px-3 py-2 ' + (i === currentPage ? 'bg-danger border-danger text-white' : 'text-dark bg-white border') + '" href="javascript:void(0)" onclick="setHomePage(' + i + ')">' + i + '</a></li>';
+    }
+
+    html += '<li class="page-item ' + (currentPage >= endPage ? 'disabled' : '') + '">' +
+            '<a class="page-link rounded-0 fw-bold px-3 py-2 text-dark bg-white border" href="javascript:void(0)" onclick="setHomePage(' + (currentPage + 1) + ')">' +
+            '<i class="fa-solid fa-chevron-right"></i></a></li>';
+    html += '</ul>';
+    pagContainer.innerHTML = html;
 }
 
 // Category Filter

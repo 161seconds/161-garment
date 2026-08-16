@@ -108,6 +108,42 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Pagination -->
+    <c:if test="${endPage > 1}">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mt-4 pt-3 border-top">
+            <span class="small text-muted">
+                Hiển thị trang <strong>${currentPage}</strong> / ${endPage} (Tổng cộng <strong>${totalProducts}</strong> sản phẩm)
+            </span>
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm mb-0 rounded-0 gap-1">
+                    <!-- Prev Button -->
+                    <li class="page-item ${currentPage <= 1 ? 'disabled' : ''}">
+                        <a class="page-link rounded-0 fw-bold px-3 text-dark bg-white border"
+                           href="${pageContext.request.contextPath}/admin/product?action=list&page=${currentPage - 1}">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
+
+                    <!-- Page Numbers -->
+                    <c:forEach begin="1" end="${endPage}" var="i">
+                        <li class="page-item ${i == currentPage ? 'active' : ''}">
+                            <a class="page-link rounded-0 fw-bold px-3 ${i == currentPage ? 'bg-danger border-danger text-white' : 'text-dark bg-white border'}"
+                               href="${pageContext.request.contextPath}/admin/product?action=list&page=${i}">${i}</a>
+                        </li>
+                    </c:forEach>
+
+                    <!-- Next Button -->
+                    <li class="page-item ${currentPage >= endPage ? 'disabled' : ''}">
+                        <a class="page-link rounded-0 fw-bold px-3 text-dark bg-white border"
+                           href="${pageContext.request.contextPath}/admin/product?action=list&page=${currentPage + 1}">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </c:if>
 </div>
 
 <jsp:include page="includes/footer.jsp" />

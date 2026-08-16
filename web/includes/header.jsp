@@ -535,37 +535,25 @@
                                     <div class="row row-cols-2 g-2">
                                         <div class="col">
                                             <a href="product?categoryID=WOMEN_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/t-shirt-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Thun">
-                                                <span class="small fw-semibold">Áo Thun & Nỉ</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=WOMEN_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shirt-and-blouses-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Sơ Mi">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shirt-and-blouses-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Sơ Mi & Blouse">
                                                 <span class="small fw-semibold">Sơ Mi & Blouse</span>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="product?categoryID=WOMEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/sweaters-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Len">
-                                                <span class="small fw-semibold">Áo Len & Cardigan</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=WOMEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/outerwear-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác">
+                                            <a href="product?categoryID=WOMEN_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/outerwear-icon-women.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác Nữ">
                                                 <span class="small fw-semibold">Áo Khoác Nữ</span>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="product?categoryID=WOMEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                            <a href="product?categoryID=WOMEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
                                                 <img src="${pageContext.request.contextPath}/img-prj301/categories/women/bottom-icon-women.jpg" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần & Váy">
                                                 <span class="small fw-semibold">Quần & Váy Nữ</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a href="product?categoryID=WOMEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Shorts">
+                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Shorts & Culottes">
                                                 <span class="small fw-semibold">Shorts & Culottes</span>
                                             </a>
                                         </div>
@@ -580,7 +568,7 @@
                                     NAM
                                 </a>
                                 <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-3"
-                                    style="min-width: 540px;">
+                                    style="min-width: 480px;">
                                     <li class="dropdown-header text-uppercase fw-bold text-danger pb-2 d-flex justify-content-between align-items-center"
                                         style="font-size: 0.78rem;">
                                         <span>THỜI TRANG NAM (MEN)</span>
@@ -589,36 +577,18 @@
                                     <div class="row row-cols-2 g-2">
                                         <div class="col">
                                             <a href="product?categoryID=MEN_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/t-shirt-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Thun">
-                                                <span class="small fw-semibold">Áo Thun & Nỉ</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=MEN_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/polos-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Polo">
-                                                <span class="small fw-semibold">Áo Polo</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=MEN_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
                                                 <img src="${pageContext.request.contextPath}/img-prj301/categories/men/shirts-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Sơ Mi">
                                                 <span class="small fw-semibold">Áo Sơ Mi Nam</span>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="product?categoryID=MEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/sweaters-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Len">
-                                                <span class="small fw-semibold">Áo Len & Cardigan</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=MEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                            <a href="product?categoryID=MEN_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
                                                 <img src="${pageContext.request.contextPath}/img-prj301/categories/men/outerwear-icon-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác">
                                                 <span class="small fw-semibold">Áo Khoác Nam</span>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="product?categoryID=MEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
+                                            <a href="product?categoryID=MEN_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
                                                 <img src="${pageContext.request.contextPath}/img-prj301/categories/men/pants-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Dài">
                                                 <span class="small fw-semibold">Quần Dài & Kaki</span>
                                             </a>
@@ -626,13 +596,7 @@
                                         <div class="col">
                                             <a href="product?categoryID=MEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
                                                 <img src="${pageContext.request.contextPath}/img-prj301/categories/men/jeans-men.png" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Jeans">
-                                                <span class="small fw-semibold">Quần Jeans</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=MEN_04" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/men/short-men.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Shorts">
-                                                <span class="small fw-semibold">Quần Shorts Nam</span>
+                                                <span class="small fw-semibold">Quần Jeans Nam</span>
                                             </a>
                                         </div>
                                     </div>
