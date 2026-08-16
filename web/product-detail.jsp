@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="includes/header.jsp">
     <jsp:param name="title" value="${PRODUCT.name} | ONE61 Garmentory" />
 </jsp:include>
@@ -242,42 +243,39 @@
 
 <div class="product-detail-container">
     <div class="row g-4">
-        <!-- Left: Lookbook Multi-Angle Gallery Grid (2 Columns) -->
+        <!-- Left: Lookbook Dynamic Gallery Grid (2 Columns, Flexible Count from Child Products) -->
         <div class="col-lg-7 col-md-12">
             <div class="lookbook-grid">
-                <!-- Image 1: Main Front View -->
-                <div class="lookbook-item">
-                    <img id="mainProductImg" src="${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}" 
-                         alt="${PRODUCT.name} - Front View"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80';">
-                    <span class="lookbook-tag"><i class="fa-solid fa-camera"></i> Mặt trước</span>
-                </div>
-
-                <!-- Image 2: Full Body Styling View -->
-                <div class="lookbook-item">
-                    <img src="${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}" 
-                         alt="${PRODUCT.name} - Full Body Look"
-                         style="filter: brightness(0.98);"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80';">
-                    <span class="lookbook-tag"><i class="fa-solid fa-person"></i> Phối đồ</span>
-                </div>
-
-                <!-- Image 3: Detail Texture Angle -->
-                <div class="lookbook-item">
-                    <img src="${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}" 
-                         alt="${PRODUCT.name} - Texture Detail"
-                         style="filter: contrast(1.05);"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80';">
-                    <span class="lookbook-tag"><i class="fa-solid fa-magnifying-glass"></i> Chi tiết vải</span>
-                </div>
-
-                <!-- Image 4: Alternate Angle / Lifestyle -->
-                <div class="lookbook-item">
-                    <img src="${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}" 
-                         alt="${PRODUCT.name} - Lifestyle"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80';">
-                    <span class="lookbook-tag"><i class="fa-solid fa-shirt"></i> Form dáng</span>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty CHILD_PRODUCTS}">
+                        <c:forEach items="${CHILD_PRODUCTS}" var="child" varStatus="st">
+                            <div class="lookbook-item">
+                                <img <c:if test="${st.first}">id="mainProductImg"</c:if> 
+                                     src="${pageContext.request.contextPath}/img-prj301/${child.image}" 
+                                     alt="${PRODUCT.name} - Ảnh ${st.index + 1}"
+                                     onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}';">
+                                <span class="lookbook-tag">
+                                    <i class="fa-solid fa-camera"></i>
+                                    <c:choose>
+                                        <c:when test="${st.index == 0}">Mặt trước</c:when>
+                                        <c:when test="${st.index == 1}">Phối đồ</c:when>
+                                        <c:when test="${st.index == 2}">Chi tiết vải</c:when>
+                                        <c:when test="${st.index == 3}">Form dáng</c:when>
+                                        <c:otherwise>Góc chụp ${st.index + 1}</c:otherwise>
+                                    </c:choose>
+                                </span>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Fallback to Cover Image -->
+                        <div class="lookbook-item">
+                            <img id="mainProductImg" src="${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}" 
+                                 alt="${PRODUCT.name}">
+                            <span class="lookbook-tag"><i class="fa-solid fa-camera"></i> Ảnh bìa</span>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
 

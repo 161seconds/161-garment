@@ -328,35 +328,23 @@
                     <!-- WOMEN CATEGORIES -->
                     <a href="product?categoryID=WOMEN_01" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_01' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
-                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/t-shirt-icon-women.avif" alt="Áo Thun Nữ">
-                        </div>
-                        <span class="uniqlo-cat-title">Áo Thun & Nỉ</span>
-                    </a>
-                    <a href="product?categoryID=WOMEN_02" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_02' ? 'fw-bold text-danger' : ''}">
-                        <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shirt-and-blouses-icon-women.avif" alt="Áo Sơ Mi & Blouse">
                         </div>
-                        <span class="uniqlo-cat-title">Áo Sơ Mi & Blouse</span>
+                        <span class="uniqlo-cat-title">Sơ Mi & Blouse</span>
                     </a>
-                    <a href="product?categoryID=WOMEN_03" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_03' ? 'fw-bold text-danger' : ''}">
-                        <div class="uniqlo-cat-thumb">
-                            <img src="${pageContext.request.contextPath}/img-prj301/categories/women/sweaters-icon-women.avif" alt="Áo Len & Cardigan">
-                        </div>
-                        <span class="uniqlo-cat-title">Áo Len</span>
-                    </a>
-                    <a href="product?categoryID=WOMEN_03" class="uniqlo-cat-item">
+                    <a href="product?categoryID=WOMEN_02" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_02' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/women/outerwear-icon-women.avif" alt="Áo Khoác Nữ">
                         </div>
                         <span class="uniqlo-cat-title">Áo Khoác</span>
                     </a>
-                    <a href="product?categoryID=WOMEN_04" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_04' ? 'fw-bold text-danger' : ''}">
+                    <a href="product?categoryID=WOMEN_03" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_03' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/women/bottom-icon-women.jpg" alt="Quần & Váy">
                         </div>
                         <span class="uniqlo-cat-title">Quần & Váy</span>
                     </a>
-                    <a href="product?categoryID=WOMEN_04" class="uniqlo-cat-item">
+                    <a href="product?categoryID=WOMEN_04" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_04' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" alt="Shorts & Culottes">
                         </div>
@@ -366,53 +354,29 @@
 
                 <c:otherwise>
                     <!-- MEN CATEGORIES (Default) -->
-                    <a href="product?categoryID=MEN_01" class="uniqlo-cat-item ${param.categoryID eq 'MEN_01' ? 'fw-bold text-danger' : ''}">
-                        <div class="uniqlo-cat-thumb">
-                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/t-shirt-icon-men.avif" alt="Áo Thun">
-                        </div>
-                        <span class="uniqlo-cat-title">Áo Thun & Nỉ</span>
-                    </a>
-                    <a href="product?categoryID=MEN_01" class="uniqlo-cat-item">
-                        <div class="uniqlo-cat-thumb">
-                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/polos-icon-men.avif" alt="Áo Polo">
-                        </div>
-                        <span class="uniqlo-cat-title">Áo Polo</span>
-                    </a>
-                    <a href="product?categoryID=MEN_02" class="uniqlo-cat-item ${param.categoryID eq 'MEN_02' ? 'fw-bold text-danger' : ''}">
+                    <a href="product?categoryID=MEN_01" class="uniqlo-cat-item ${param.categoryID eq 'MEN_01' || empty param.categoryID ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/men/shirts-icon-men.avif" alt="Áo Sơ Mi">
                         </div>
                         <span class="uniqlo-cat-title">Áo Sơ Mi</span>
                     </a>
-                    <a href="product?categoryID=MEN_03" class="uniqlo-cat-item ${param.categoryID eq 'MEN_03' ? 'fw-bold text-danger' : ''}">
-                        <div class="uniqlo-cat-thumb">
-                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/sweaters-icon-men.avif" alt="Áo Len & Cardigan">
-                        </div>
-                        <span class="uniqlo-cat-title">Áo Len</span>
-                    </a>
-                    <a href="product?categoryID=MEN_03" class="uniqlo-cat-item">
+                    <a href="product?categoryID=MEN_02" class="uniqlo-cat-item ${param.categoryID eq 'MEN_02' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/men/outerwear-icon-men.avif" alt="Áo Khoác">
                         </div>
                         <span class="uniqlo-cat-title">Áo Khoác</span>
                     </a>
-                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item ${param.categoryID eq 'MEN_04' ? 'fw-bold text-danger' : ''}">
+                    <a href="product?categoryID=MEN_03" class="uniqlo-cat-item ${param.categoryID eq 'MEN_03' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/men/pants-men.avif" alt="Quần Dài">
                         </div>
                         <span class="uniqlo-cat-title">Quần Dài</span>
                     </a>
-                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item">
+                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item ${param.categoryID eq 'MEN_04' ? 'fw-bold text-danger' : ''}">
                         <div class="uniqlo-cat-thumb">
                             <img src="${pageContext.request.contextPath}/img-prj301/categories/men/jeans-men.png" alt="Quần Jeans">
                         </div>
                         <span class="uniqlo-cat-title">Quần Jeans</span>
-                    </a>
-                    <a href="product?categoryID=MEN_04" class="uniqlo-cat-item">
-                        <div class="uniqlo-cat-thumb">
-                            <img src="${pageContext.request.contextPath}/img-prj301/categories/men/short-men.avif" alt="Quần Shorts">
-                        </div>
-                        <span class="uniqlo-cat-title">Quần Shorts</span>
                     </a>
                 </c:otherwise>
             </c:choose>
@@ -491,7 +455,7 @@
                                         </div>
 
                                         <!-- Product Title -->
-                                        <h6 class="card-title fw-bold text-uppercase mb-1" style="font-size: 0.88rem; line-height: 1.35; height: 2.7em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                        <h6 class="card-title fw-bold text-uppercase mb-1" style="font-size: 0.88rem; line-height: 1.35; height: 2.7em; overflow: hidden; display: -webkit-box; line-clamp: 2; -webkit-box-orient: vertical;">
                                             <a href="product?action=detail&id=${p.productID}" class="text-dark text-decoration-none">
                                                 ${p.name}
                                             </a>

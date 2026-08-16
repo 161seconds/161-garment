@@ -10,6 +10,7 @@ public class ProductDTO {
     private int quantity;
     private String image;
     private String categoryID;
+    private String parentID;
     private Timestamp createDate;
     private boolean status;
 
@@ -24,6 +25,20 @@ public class ProductDTO {
         this.quantity = quantity;
         this.image = image;
         this.categoryID = categoryID;
+        this.parentID = null;
+        this.createDate = createDate;
+        this.status = status;
+    }
+
+    public ProductDTO(String productID, String name, String description, double price, int quantity, String image, String categoryID, String parentID, Timestamp createDate, boolean status) {
+        this.productID = productID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+        this.categoryID = categoryID;
+        this.parentID = parentID;
         this.createDate = createDate;
         this.status = status;
     }
@@ -43,6 +58,8 @@ public class ProductDTO {
     public void setImage(String image) { this.image = image; }
     public String getCategoryID() { return categoryID; }
     public void setCategoryID(String categoryID) { this.categoryID = categoryID; }
+    public String getParentID() { return parentID; }
+    public void setParentID(String parentID) { this.parentID = parentID; }
     public Timestamp getCreateDate() { return createDate; }
     public void setCreateDate(Timestamp createDate) { this.createDate = createDate; }
     public boolean isStatus() { return status; }

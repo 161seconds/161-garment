@@ -1,18 +1,19 @@
-USE master;
-GO
+-- =======================================================================
+-- SQL SCRIPT FOR SOMEE.COM / REMOTE HOSTING (RECURSIVE PARENT-CHILD SCHEMA)
+-- (Khong chua USE master / CREATE DATABASE vi Somee khong cho phep)
+-- =======================================================================
 
--- Drop database if it exists
-IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'PRJ301_Ecommerce')
-BEGIN
-    ALTER DATABASE PRJ301_Ecommerce SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE PRJ301_Ecommerce;
-END
-GO
-
-CREATE DATABASE PRJ301_Ecommerce;
-GO
-
-USE PRJ301_Ecommerce;
+-- 0. Xoa cac bang cu theo thu tu khoa ngoai (neu da ton tai tren Somee)
+IF OBJECT_ID('dbo.Payment', 'U') IS NOT NULL DROP TABLE dbo.Payment;
+IF OBJECT_ID('dbo.OrderDetail', 'U') IS NOT NULL DROP TABLE dbo.OrderDetail;
+IF OBJECT_ID('dbo.[Order]', 'U') IS NOT NULL DROP TABLE dbo.[Order];
+IF OBJECT_ID('dbo.Wishlist', 'U') IS NOT NULL DROP TABLE dbo.Wishlist;
+IF OBJECT_ID('dbo.Address', 'U') IS NOT NULL DROP TABLE dbo.Address;
+IF OBJECT_ID('dbo.ProductImage', 'U') IS NOT NULL DROP TABLE dbo.ProductImage;
+IF OBJECT_ID('dbo.Product', 'U') IS NOT NULL DROP TABLE dbo.Product;
+IF OBJECT_ID('dbo.Category', 'U') IS NOT NULL DROP TABLE dbo.Category;
+IF OBJECT_ID('dbo.[User]', 'U') IS NOT NULL DROP TABLE dbo.[User];
+IF OBJECT_ID('dbo.[Role]', 'U') IS NOT NULL DROP TABLE dbo.[Role];
 GO
 
 -- 1. Role Table
@@ -267,8 +268,8 @@ INSERT INTO [Product] (productID, name, description, price, quantity, image, cat
 -- PROD15 (4 content angles)
 ('PROD15_01', N'Áo Sơ Mi Vải Đũi - Góc 1', N'Chi tiết mặt trước', 499000, 35, 'products/women/content/content-shirt-and-blouses-women-3-01.avif', 'WOMEN_01', 'PROD15', 1),
 ('PROD15_02', N'Áo Sơ Mi Vải Đũi - Góc 2', N'Phối đồ người mẫu', 499000, 35, 'products/women/content/content-shirt-and-blouses-women-3-02.avif', 'WOMEN_01', 'PROD15', 1),
-('PROD15_03', N'Áo Sơ Mi Vải Đũi - Góc 3', N'Cận cảnh chất vải', 499000, 35, 'products/women/content/content-shirt-and-blouses-women-3-03.avif', 'WOMEN_01', 'PROD15', 1),
-('PROD15_04', N'Áo Sơ Mi Vải Đũi - Góc 4', N'Chi tiết form dáng', 499000, 35, 'products/women/content/content-shirt-and-blouses-women-3-04.avif', 'WOMEN_01', 'PROD15', 1),
+('PROD15_03', N'Áo Sơ Mi Vải Đũi - Góc 3', N'Cận cảnh chất vải', 499000, 35, 'products/women/content/content-shirt-and-blouses-women-3-02.avif', 'WOMEN_01', 'PROD15', 1),
+('PROD15_04', N'Áo Sơ Mi Vải Đũi - Góc 4', N'Chi tiết form dáng', 499000, 35, 'products/women/content/content-shirt-and-blouses-women-3-03.avif', 'WOMEN_01', 'PROD15', 1),
 
 -- PROD16 (4 content angles)
 ('PROD16_01', N'Áo Khoác Chống UV Nữ - Góc 1', N'Chi tiết mặt trước', 699000, 50, 'products/women/content/content-outerwear-women-1-01.avif', 'WOMEN_02', 'PROD16', 1),

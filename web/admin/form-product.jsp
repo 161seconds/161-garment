@@ -77,9 +77,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-bold small text-uppercase">Tên File Ảnh <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control rounded-0 font-monospace" name="image" placeholder="VD: ao-thun-01.avif" required>
-                        <div class="form-text small">File ảnh phải có sẵn trong thư mục <code>web/img-prj301/</code></div>
+                        <label class="form-label fw-bold small text-uppercase">Đường Dẫn File Ảnh <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control rounded-0 font-monospace" name="image" placeholder="VD: products/men/cover/cover-shirts-men-1.avif" required>
+                        <div class="form-text small">Đường dẫn tương đối trong thư mục <code>web/img-prj301/</code></div>
                     </div>
                 </div>
 

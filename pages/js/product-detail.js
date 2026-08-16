@@ -4,22 +4,283 @@
  */
 
 const PRODUCTS_DATA = [
-    { id: "P01", name: "Áo Thun Cổ Tròn Ngắn Tay Siêu Mịn", cat: "MEN_01", cateGroup: "MEN", price: 299000, img: "../web/img-prj301/ao-thun-01.avif", desc: "Chất liệu cotton 100% mềm mại, thoáng mát cả ngày, thấm hút mồ hôi tối ưu." },
-    { id: "P02", name: "Áo Thun AIRism Trắng Thoáng Khí", cat: "WOMEN_01", cateGroup: "WOMEN", price: 249000, img: "../web/img-prj301/ao-thun-02.avif", desc: "Công nghệ sợi vải AIRism mượt mà, làm mát tức thì, chống tia UV hiệu quả." },
-    { id: "P03", name: "Áo Thun Trơn Dáng Rộng Unisex", cat: "MEN_01", cateGroup: "MEN", price: 399000, img: "../web/img-prj301/ao-thun-03.avif", desc: "Form áo Oversize thời thượng, dễ dàng phối nhiều phong cách đường phố." },
-    { id: "P04", name: "Áo Thun Họa Tiết Graphic LifeWear", cat: "MEN_01", cateGroup: "MEN", price: 449000, img: "../web/img-prj301/ao-thun-04.avif", desc: "Họa tiết nghệ thuật đương đại phong cách Tokyo, công nghệ in bền màu." },
-    { id: "P05", name: "Áo Thun Dài Tay Cổ Lọ Nữ", cat: "WOMEN_01", cateGroup: "WOMEN", price: 399000, img: "../web/img-prj301/ao-thun-05.avif", desc: "Thiết kế cổ lọ ấm áp, ôm dáng nhẹ nhàng, chất vải co giãn 4 chiều mềm mại." },
-    { id: "P06", name: "Áo Khoác Parka Chống Nắng UV Protection", cat: "WOMEN_03", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/ao-khoac-01.avif", desc: "Chỉ số chống nắng UPF 50+, chất liệu chống thấm nước bền bỉ, gấp gọn bỏ túi." },
-    { id: "P07", name: "Áo Khoác Gió Siêu Nhẹ Pocketable", cat: "MEN_03", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/ao-khoac-03.avif", desc: "Trọng lượng siêu nhẹ, cản gió và mưa phùn hiệu quả, tiện lợi mang theo hàng ngày." },
-    { id: "P08", name: "Áo Khoác Cardigan Len Mềm", cat: "WOMEN_03", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/ao-khoac-04.avif", desc: "Chất len dệt cao cấp mềm mịn không ngứa, phom suông thanh lịch chuẩn công sở." },
-    { id: "P09", name: "Áo Khoác Bomber Thể Thao", cat: "MEN_03", cateGroup: "MEN", price: 999000, img: "../web/img-prj301/ao-khoac-05.avif", desc: "Thiết kế bo gấu năng động, chất vải gió dày dặn giữ nhiệt và cản gió tốt." },
-    { id: "P10", name: "Áo Khoác Nỉ Hoodie Có Mũ", cat: "KIDS_02", cateGroup: "KIDS", price: 549000, img: "../web/img-prj301/ao-khoac-06.avif", desc: "Chất nỉ bông mềm êm ái, an toàn cho làn da nhạy cảm của bé, giữ ấm ngày lạnh." },
-    { id: "P11", name: "Quần Barrel Pants Phom Rộng Nhật Bản", cat: "WOMEN_04", cateGroup: "WOMEN", price: 699000, img: "../web/img-prj301/quan-dai-01.avif", desc: "Thiết kế ống cong Barrel tạo điểm nhấn thời thượng, tôn dáng chân dài tự nhiên." },
-    { id: "P12", name: "Quần Smart Ankle Pants Co Giãn", cat: "MEN_04", cateGroup: "MEN", price: 799000, img: "../web/img-prj301/quan-dai-02.avif", desc: "Co giãn 2 chiều cực thoải mái, phom đứng chuẩn mực cho quý ông công sở." },
-    { id: "P13", name: "Quần Chino Ống Suông Cao Cấp", cat: "MEN_04", cateGroup: "MEN", price: 749000, img: "../web/img-prj301/quan-dai-03.avif", desc: "Chất vải cotton Twill dày dặn, đứng phom, phong cách vintage lịch lãm." },
-    { id: "P14", name: "Quần Jeans Dáng Suông Cổ Điển", cat: "WOMEN_04", cateGroup: "WOMEN", price: 899000, img: "../web/img-prj301/quan-dai-04.avif", desc: "Chất liệu denim 100% cotton chải mềm, màu sắc wash tự nhiên không bai dão." },
-    { id: "P15", name: "Quần Kaki Co Giãn Thoải Mái", cat: "KIDS_03", cateGroup: "KIDS", price: 449000, img: "../web/img-prj301/quan-dai-05.avif", desc: "Lưng thun co giãn mềm mại, thoải mái cho bé chạy nhảy vận động cả ngày." },
-    { id: "P16", name: "Quần Jogger Nỉ Thể Thao", cat: "MEN_04", cateGroup: "MEN", price: 599000, img: "../web/img-prj301/quan-dai-06.avif", desc: "Bo gấu thể thao khỏe khoắn, chất nỉ da cá thoáng khí thích hợp tập luyện và dạo phố." }
+    // MEN: Sơ Mi (MEN_01)
+    { 
+        id: "PROD01", name: "Áo Sơ Mi Oxford Nam Dài Tay", cat: "MEN_01", cateGroup: "MEN", price: 599000, 
+        img: "../web/img-prj301/products/men/cover/cover-shirts-men-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-shirts-men-1-01.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-1-02.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-1-03.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-1-04.avif"
+        ],
+        desc: "Chất vải cotton Oxford dệt chéo cao cấp, phom dáng chuẩn công sở và dạo phố." 
+    },
+    { 
+        id: "PROD02", name: "Áo Sơ Mi Linen Cổ Tàu Thoáng Khí", cat: "MEN_01", cateGroup: "MEN", price: 699000, 
+        img: "../web/img-prj301/products/men/cover/cover-shirts-men-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-shirts-men-2-01.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-2-02.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-2-03.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-2-04.avif"
+        ],
+        desc: "Vải sợi lanh Linen 100% tự nhiên thoáng mát, mang lại cảm giác dễ chịu ngày hè." 
+    },
+    { 
+        id: "PROD03", name: "Áo Sơ Mi Cộc Tay Phom Rộng", cat: "MEN_01", cateGroup: "MEN", price: 499000, 
+        img: "../web/img-prj301/products/men/cover/cover-shirts-men-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-shirts-men-3-01.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-3-02.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-3-03.avif",
+            "../web/img-prj301/products/men/content/content-shirts-men-3-04.avif"
+        ],
+        desc: "Thiết kế ngắn tay trẻ trung, phom suông rộng rãi thoải mái cho các hoạt động ngoài trời." 
+    },
+
+    // MEN: Áo Khoác (MEN_02)
+    { 
+        id: "PROD04", name: "Áo Khoác Gió Nam Chống Thấm Nước", cat: "MEN_02", cateGroup: "MEN", price: 799000, 
+        img: "../web/img-prj301/products/men/cover/cover-outerwear-men-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-outerwear-men-1-01.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-1-02.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-1-03.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-1-04.avif"
+        ],
+        desc: "Công nghệ BlockTech cản gió và chống nước tối ưu, siêu nhẹ và dễ gấp gọn." 
+    },
+    { 
+        id: "PROD05", name: "Áo Khoác Blazer Nam Công Sở", cat: "MEN_02", cateGroup: "MEN", price: 1299000, 
+        img: "../web/img-prj301/products/men/cover/cover-outerwear-men-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-outerwear-men-2-01.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-2-02.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-2-03.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-2-04.avif"
+        ],
+        desc: "Thiết kế may đo tỉ mỉ, tôn dáng lịch lãm và sang trọng cho quý ông hiện đại." 
+    },
+    { 
+        id: "PROD06", name: "Áo Khoác Bomber Kaki Dáng Trẻ", cat: "MEN_02", cateGroup: "MEN", price: 899000, 
+        img: "../web/img-prj301/products/men/cover/cover-outerwear-men-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-outerwear-men-3-01.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-3-02.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-3-03.avif",
+            "../web/img-prj301/products/men/content/content-outerwear-men-3-04.avif"
+        ],
+        desc: "Chất kaki cao cấp đứng phom, phong cách street-style năng động và cá tính." 
+    },
+
+    // MEN: Quần Dài (MEN_03)
+    { 
+        id: "PROD07", name: "Quần Smart Pants Co Giãn 2 Chiều", cat: "MEN_03", cateGroup: "MEN", price: 799000, 
+        img: "../web/img-prj301/products/men/cover/cover-pants-men-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-pants-men-1-01.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-1-02.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-1-03.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-1-04.avif"
+        ],
+        desc: "Quần âu dáng slim fit với lưng thun ẩn thoải mái, không nhăn sau khi giặt." 
+    },
+    { 
+        id: "PROD08", name: "Quần Kaki Chino Dáng Suông Nam", cat: "MEN_03", cateGroup: "MEN", price: 699000, 
+        img: "../web/img-prj301/products/men/cover/cover-pants-men-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-pants-men-2-01.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-2-02.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-2-03.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-2-04.avif"
+        ],
+        desc: "Chất vải cotton pha spandex co giãn, phom regular fit chuẩn mực cho mọi dịp." 
+    },
+    { 
+        id: "PROD09", name: "Quần Jogger Kaki Túi Hộp Năng Động", cat: "MEN_03", cateGroup: "MEN", price: 599000, 
+        img: "../web/img-prj301/products/men/cover/cover-pants-men-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-pants-men-3-01.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-3-02.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-3-03.avif",
+            "../web/img-prj301/products/men/content/content-pants-men-3-04.avif"
+        ],
+        desc: "Thiết kế túi hộp tiện dụng, ống bo thun thể thao khỏe khoắn." 
+    },
+
+    // MEN: Quần Jeans (MEN_04)
+    { 
+        id: "PROD10", name: "Quần Jeans Nam Slim Fit Co Giãn", cat: "MEN_04", cateGroup: "MEN", price: 899000, 
+        img: "../web/img-prj301/products/men/cover/cover-jeans-men-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-jeans-men-1-01.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-1-02.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-1-03.avif"
+        ],
+        desc: "Denim Nhật Bản cao cấp dệt sợi đàn hồi, bền màu và mềm mại với làn da." 
+    },
+    { 
+        id: "PROD11", name: "Quần Jeans Ống Suông Regular Vintage", cat: "MEN_04", cateGroup: "MEN", price: 949000, 
+        img: "../web/img-prj301/products/men/cover/cover-jeans-men-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-jeans-men-2-01.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-2-02.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-2-03.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-2-04.avif"
+        ],
+        desc: "Xử lý wash màu cổ điển thời thượng, tôn dáng chân dài và nam tính." 
+    },
+    { 
+        id: "PROD12", name: "Quần Jeans Relaxed Fit Dáng Rộng", cat: "MEN_04", cateGroup: "MEN", price: 849000, 
+        img: "../web/img-prj301/products/men/cover/cover-jeans-men-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/men/content/content-jeans-men-3-01.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-3-02.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-3-03.avif",
+            "../web/img-prj301/products/men/content/content-jeans-men-3-04.avif"
+        ],
+        desc: "Form ống rộng thoải mái tối đa cho ngày dài vận động." 
+    },
+
+    // WOMEN: Sơ Mi & Blouse (WOMEN_01)
+    { 
+        id: "PROD13", name: "Áo Sơ Mi Rayon Nữ Mềm Rủ", cat: "WOMEN_01", cateGroup: "WOMEN", price: 549000, 
+        img: "../web/img-prj301/products/women/cover/cover-shirt-and-blouses-women-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-1-01.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-1-02.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-1-03.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-1-04.avif"
+        ],
+        desc: "Chất lụa Rayon cao cấp chống nhăn, rủ nhẹ nhàng tôn vẻ đẹp thanh tao." 
+    },
+    { 
+        id: "PROD14", name: "Áo Blouse Cổ Thắt Nơ Nữ Tính", cat: "WOMEN_01", cateGroup: "WOMEN", price: 599000, 
+        img: "../web/img-prj301/products/women/cover/cover-shirt-and-blouses-women-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-2-01.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-2-02.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-2-03.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-2-04.avif"
+        ],
+        desc: "Điểm nhấn cổ nơ duyên dáng, dễ dàng kết hợp cùng chân váy hoặc quần âu." 
+    },
+    { 
+        id: "PROD15", name: "Áo Sơ Mi Vải Đũi Cổ Chữ V", cat: "WOMEN_01", cateGroup: "WOMEN", price: 499000, 
+        img: "../web/img-prj301/products/women/cover/cover-shirt-and-blouses-women-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-3-01.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-3-02.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-3-03.avif",
+            "../web/img-prj301/products/women/content/content-shirt-and-blouses-women-3-04.avif"
+        ],
+        desc: "Vải đũi tự nhiên mát lạnh, phom suông phóng khoáng chuẩn phong cách LifeWear." 
+    },
+
+    // WOMEN: Áo Khoác (WOMEN_02)
+    { 
+        id: "PROD16", name: "Áo Khoác Chống Tia UV AirSense Nữ", cat: "WOMEN_02", cateGroup: "WOMEN", price: 699000, 
+        img: "../web/img-prj301/products/women/cover/cover-outerwear-women-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-outerwear-women-1-01.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-1-02.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-1-03.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-1-04.avif"
+        ],
+        desc: "Chỉ số chống nắng UPF 50+, công nghệ dệt siêu nhẹ bảo vệ làn da tuyệt đối." 
+    },
+    { 
+        id: "PROD17", name: "Áo Khoác Dạ Tweed Sang Trọng", cat: "WOMEN_02", cateGroup: "WOMEN", price: 1399000, 
+        img: "../web/img-prj301/products/women/cover/cover-outerwear-women-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-outerwear-women-2-01.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-2-02.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-2-03.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-2-04.avif"
+        ],
+        desc: "Vải dạ dệt kim ánh kim sang trọng, viền chỉ tỉ mỉ chuẩn phong cách Parisian." 
+    },
+    { 
+        id: "PROD18", name: "Áo Khoác Trench Coat Dáng Dài", cat: "WOMEN_02", cateGroup: "WOMEN", price: 1599000, 
+        img: "../web/img-prj301/products/women/cover/cover-outerwear-women-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-outerwear-women-3-01.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-3-02.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-3-03.avif",
+            "../web/img-prj301/products/women/content/content-outerwear-women-3-04.avif"
+        ],
+        desc: "Phom dáng trench coat kinh điển, chống thấm nước nhẹ và cản gió tốt." 
+    },
+
+    // WOMEN: Quần & Váy (WOMEN_03)
+    { 
+        id: "PROD19", name: "Quần Ống Suông Xếp Ly Pleated Pants", cat: "WOMEN_03", cateGroup: "WOMEN", price: 799000, 
+        img: "../web/img-prj301/products/women/cover/cover-bottom-women-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-bottom-women-1-01.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-1-02.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-1-03.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-1-04.avif"
+        ],
+        desc: "Thiết kế xếp ly tinh tế tạo hiệu ứng kéo dài chân, chất vải rủ nhẹ nhàng." 
+    },
+    { 
+        id: "PROD20", name: "Chân Váy Midi Dáng Chữ A Tôn Dáng", cat: "WOMEN_03", cateGroup: "WOMEN", price: 649000, 
+        img: "../web/img-prj301/products/women/cover/cover-bottom-women-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-bottom-women-2-01.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-2-02.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-2-03.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-2-04.avif"
+        ],
+        desc: "Phom chữ A nhẹ nhàng che khuyết điểm, cạp cao tôn vòng eo thon gọn." 
+    },
+    { 
+        id: "PROD21", name: "Quần Tây Nữ Ống Đứng Ankle Pants", cat: "WOMEN_03", cateGroup: "WOMEN", price: 749000, 
+        img: "../web/img-prj301/products/women/cover/cover-bottom-women-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-bottom-women-3-01.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-3-02.avif",
+            "../web/img-prj301/products/women/content/content-bottom-women-3-03.avif"
+        ],
+        desc: "Chiều dài ngang mắt cá chân thanh thoát, lưng co giãn tiện lợi cả ngày làm việc." 
+    },
+
+    // WOMEN: Shorts & Culottes (WOMEN_04)
+    { 
+        id: "PROD22", name: "Quần Shorts Kaki Lưng Cao Nữ", cat: "WOMEN_04", cateGroup: "WOMEN", price: 449000, 
+        img: "../web/img-prj301/products/women/cover/cover-shorts-and-culott-1.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-1-01.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-1-02.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-1-03.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-1-04.avif"
+        ],
+        desc: "Chất kaki co giãn nhẹ, cạp cao tôn dáng, năng động khi phối cùng áo thun và sơ mi." 
+    },
+    { 
+        id: "PROD23", name: "Quần Giả Váy Xếp Nếp Thời Thượng", cat: "WOMEN_04", cateGroup: "WOMEN", price: 499000, 
+        img: "../web/img-prj301/products/women/cover/cover-shorts-and-culott-2.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-2-01.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-2-02.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-2-03.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-2-04.avif"
+        ],
+        desc: "Thiết kế xếp nếp trẻ trung, vừa kín đáo vừa phong cách cho phái đẹp." 
+    },
+    { 
+        id: "PROD24", name: "Quần Culottes Ống Rộng Vải Linen", cat: "WOMEN_04", cateGroup: "WOMEN", price: 549000, 
+        img: "../web/img-prj301/products/women/cover/cover-shorts-and-culott-3.avif", 
+        gallery: [
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-3-01.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-3-02.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-3-03.avif",
+            "../web/img-prj301/products/women/content/content-shorts-and-culott-3-04.avif"
+        ],
+        desc: "Ống rộng bay bổng, chất vải lanh tự nhiên mang lại sự thư thái tuyệt đối." 
+    }
 ];
 
 let selectedProduct = PRODUCTS_DATA[0];
@@ -28,7 +289,7 @@ let selectedSize = 'M';
 
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id') || 'P01';
+    const id = urlParams.get('id') || 'PROD01';
     const found = PRODUCTS_DATA.find(x => x.id === id || x.id === 'PROD' + id.replace('P', ''));
     if (found) selectedProduct = found;
 
@@ -38,18 +299,14 @@ window.addEventListener('DOMContentLoaded', () => {
     if (nameEl) nameEl.textContent = selectedProduct.name;
     
     const CAT_NAMES = {
-        'MEN_01': 'Áo Thun Nam',
-        'MEN_02': 'Áo Sơ Mi Nam',
-        'MEN_03': 'Áo Khoác Nam',
-        'MEN_04': 'Quần Dài Nam',
-        'WOMEN_01': 'Áo Thun Nữ',
-        'WOMEN_02': 'Áo Sơ Mi Nữ',
-        'WOMEN_03': 'Áo Khoác Nữ',
-        'WOMEN_04': 'Quần & Váy Nữ',
-        'KIDS_01': 'Áo Trẻ Em',
-        'KIDS_02': 'Áo Khoác Trẻ Em',
-        'KIDS_03': 'Quần Trẻ Em',
-        'CAT01': 'Áo Thun Nam'
+        'MEN_01': 'Áo Sơ Mi Nam',
+        'MEN_02': 'Áo Khoác Nam',
+        'MEN_03': 'Quần Dài Nam',
+        'MEN_04': 'Quần Jeans Nam',
+        'WOMEN_01': 'Áo Sơ Mi & Blouse Nữ',
+        'WOMEN_02': 'Áo Khoác Nữ',
+        'WOMEN_03': 'Quần & Váy Nữ',
+        'WOMEN_04': 'Shorts & Culottes Nữ'
     };
     const catName = CAT_NAMES[selectedProduct.cat] || (selectedProduct.cat ? selectedProduct.cat.replace(/_/g, ' ') : 'Thời Trang');
     const bCatEl = document.getElementById('breadCat');
@@ -61,10 +318,25 @@ window.addEventListener('DOMContentLoaded', () => {
     const descEl = document.getElementById('prodDesc');
     if (descEl) descEl.innerHTML = selectedProduct.desc + '<ul class="mt-2 mb-0 ps-3"><li>Phong cách LifeWear tối giản chuẩn Nhật Bản.</li><li>Độ bền cao, hạn chế nhăn xù sau nhiều lần giặt.</li></ul>';
 
-    ['img1', 'img2', 'img3', 'img4'].forEach(imgId => {
-        const el = document.getElementById(imgId);
-        if (el) el.src = selectedProduct.img;
-    });
+    // Dynamic Lookbook Rendering based on gallery size
+    const lookbookGrid = document.querySelector('.lookbook-grid');
+    if (lookbookGrid && selectedProduct) {
+        const gallery = (selectedProduct.gallery && selectedProduct.gallery.length > 0) 
+            ? selectedProduct.gallery 
+            : [selectedProduct.img];
+        const tags = ['Mặt trước', 'Phối đồ', 'Chi tiết vải', 'Form dáng'];
+
+        lookbookGrid.innerHTML = gallery.map((gImg, idx) => `
+            <div class="lookbook-item">
+                <img ${idx === 0 ? 'id="mainProductImg"' : ''} src="${gImg}" 
+                     alt="${selectedProduct.name} - Ảnh ${idx + 1}"
+                     onerror="this.src='${selectedProduct.img}';">
+                <span class="lookbook-tag">
+                    <i class="fa-solid fa-camera"></i> ${tags[idx] || ('Góc chụp ' + (idx + 1))}
+                </span>
+            </div>
+        `).join('');
+    }
 
     if (typeof updateGlobalBadges === 'function') updateGlobalBadges();
     checkWishlistState();

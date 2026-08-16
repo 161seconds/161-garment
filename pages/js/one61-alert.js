@@ -211,7 +211,7 @@
 
     window.one61Alert = function (title, htmlContent) {
         const overlay = getOrCreateOverlay();
-        document.getElementById('one61ModalTitle').innerHTML = title || '';
+        document.getElementById('one61ModalTitle').innerHTML = title || 'TH&Ocirc;NG B&Aacute;O';
         document.getElementById('one61ModalBody').innerHTML = htmlContent || '';
         overlay.classList.add('active');
     };
@@ -330,7 +330,7 @@
             const detailUrl = (window.location.pathname.includes('pages/')) 
                 ? 'product-detail.html?id=' + item.id 
                 : 'product?action=detail&id=' + item.id;
-            const imgSrc = item.img || '../web/img-prj301/ao-thun-01.avif';
+            const imgSrc = item.img || '../web/img-prj301/products/men/cover/cover-shirts-men-1.avif';
 
             itemsHtml += `
                 <tr class="border-bottom">

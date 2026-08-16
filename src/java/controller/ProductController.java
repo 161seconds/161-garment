@@ -65,6 +65,9 @@ public class ProductController extends HttpServlet {
             ProductDTO product = pDao.getProductByID(productID);
             request.setAttribute("PRODUCT", product);
 
+            List<ProductDTO> childProducts = pDao.getChildProducts(productID);
+            request.setAttribute("CHILD_PRODUCTS", childProducts);
+
             String catName = "Thời Trang";
             if (product != null && product.getCategoryID() != null && categories != null) {
                 for (CategoryDTO c : categories) {
