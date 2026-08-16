@@ -83,25 +83,6 @@
                         </ul>
                     </li>
 
-                    <!-- TRẺ EM Dropdown -->
-                    <li class="nav-item dropdown dropdown-hover">
-                        <a class="nav-link main-nav-link" onclick="filterCategory('KIDS')">TRẺ EM</a>
-                        <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-2"
-                            style="min-width: 210px;">
-                            <li class="dropdown-header text-uppercase fw-bold text-danger pb-1"
-                                style="font-size: 0.75rem;">Thời Trang Trẻ Em</li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
-                                    onclick="filterCategory('KIDS_01')"><i
-                                        class="fa-solid fa-child me-2 text-muted"></i> Áo Trẻ Em</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
-                                    onclick="filterCategory('KIDS_02')"><i
-                                        class="fa-solid fa-mitten me-2 text-muted"></i> Áo Khoác Trẻ Em</a></li>
-                            <li><a class="dropdown-item py-2 small fw-semibold" href="#"
-                                    onclick="filterCategory('KIDS_03')"><i
-                                        class="fa-solid fa-shoe-prints me-2 text-muted"></i> Quần Trẻ Em</a></li>
-                        </ul>
-                    </li>
-
                     <!-- TẤT CẢ -->
                     <li class="nav-item">
                         <a class="nav-link main-nav-link active-cate" onclick="filterCategory('ALL')">TẤT CẢ</a>
@@ -214,7 +195,7 @@
         </div>
     </div>
 
-    <!-- Featured Category Collections Showcase (4 Visual Lookbook Cards) -->
+    <!-- Featured Category Collections Showcase (3 Visual Lookbook Cards) -->
     <section class="container my-5 pt-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 pb-2 border-bottom">
             <div>
@@ -229,7 +210,7 @@
 
         <div class="row g-3 g-lg-4">
             <!-- 1. WOMEN COLLECTION -->
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg-4">
                 <a href="javascript:void(0)" onclick="filterCategory('WOMEN', true)" class="one61-category-card">
                     <div class="category-img-box">
                         <img src="../web/img-prj301/ao-khoac-01.avif" alt="Thời Trang Nữ" class="category-img">
@@ -247,7 +228,7 @@
             </div>
 
             <!-- 2. MEN COLLECTION -->
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg-4">
                 <a href="javascript:void(0)" onclick="filterCategory('MEN', true)" class="one61-category-card">
                     <div class="category-img-box">
                         <img src="../web/img-prj301/ao-khoac-03.avif" alt="Thời Trang Nam" class="category-img">
@@ -264,26 +245,8 @@
                 </a>
             </div>
 
-            <!-- 3. KIDS COLLECTION -->
-            <div class="col-6 col-lg-3">
-                <a href="javascript:void(0)" onclick="filterCategory('KIDS', true)" class="one61-category-card">
-                    <div class="category-img-box">
-                        <img src="../web/img-prj301/ao-khoac-06.avif" alt="Thời Trang Trẻ Em" class="category-img">
-                        <span class="category-floating-badge">TRẺ EM (KIDS)</span>
-                    </div>
-                    <div class="category-info-box">
-                        <h5 class="category-title">TRẺ EM</h5>
-                        <p class="category-subtitle">Chất liệu 100% an toàn, mềm mại</p>
-                        <div class="category-action-link">
-                            <span>Khám phá ngay</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- 4. BARREL PANTS / OUTERWEAR -->
-            <div class="col-6 col-lg-3">
+            <!-- 3. BARREL PANTS / OUTERWEAR -->
+            <div class="col-6 col-lg-4">
                 <a href="javascript:void(0)" onclick="filterCategory('WOMEN_04', true)" class="one61-category-card">
                     <div class="category-img-box">
                         <img src="../web/img-prj301/quan-dai-01.avif" alt="Quần Barrel & Dài" class="category-img">
@@ -317,9 +280,6 @@
                     </button>
                     <button class="category-pill-btn" onclick="filterCategory('MEN')">
                         <i class="fa-solid fa-person"></i> Nam
-                    </button>
-                    <button class="category-pill-btn" onclick="filterCategory('KIDS')">
-                        <i class="fa-solid fa-child"></i> Trẻ Em
                     </button>
                     <button class="category-pill-btn" onclick="filterCategory('MEN_01')">
                         <i class="fa-solid fa-shirt"></i> Áo Thun

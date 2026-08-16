@@ -87,9 +87,6 @@ function filterCategory(cat, smoothScroll = false) {
     } else if (cat === 'MEN') {
         filtered = PRODUCTS.filter(p => p.cateGroup === 'MEN');
         document.getElementById('catalogTitle').textContent = 'THỜI TRANG NAM';
-    } else if (cat === 'KIDS') {
-        filtered = PRODUCTS.filter(p => p.cateGroup === 'KIDS');
-        document.getElementById('catalogTitle').textContent = 'THỜI TRANG TRẺ EM';
     } else if (cat !== 'ALL') {
         filtered = PRODUCTS.filter(p => p.cate === cat);
         document.getElementById('catalogTitle').textContent = 'BỘ SƯU TẬP ' + cat;
@@ -465,10 +462,22 @@ window.addEventListener('scroll', function () {
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function () {
-    renderProducts(PRODUCTS);
-    renderCart();
-    initSlidingUnderline();
-    document.getElementById('checkoutModal')?.addEventListener('hidden.bs.modal', function () {
-        resetCheckoutModal();
-    });
+    if (typeof renderProducts === 'function' && typeof PRODUCTS !== 'undefined') {
+        renderProducts(PRODUCTS);
+    }
+    if (typeof renderCart === 'function') {
+        renderCart();
+    }
+    if (typeof initSlidingUnderline === 'function') {
+        initSlidingUnderline();
+    }
+    
+    const checkoutModal = document.getElementById('checkoutModal');
+    if (checkoutModal) {
+        checkoutModal.addEventListener('hidden.bs.modal', function () {
+            if (typeof resetCheckoutModal === 'function') {
+                resetCheckoutModal();
+            }
+        });
+    }
 });

@@ -178,7 +178,7 @@
                     </div>
                     <div class="one61-modal-body" id="one61ModalBody"></div>
                     <div class="one61-modal-footer">
-                        <button type="button" class="one61-btn-primary" onclick="window.closeOne61Modal()">ĐÃ HIỂU</button>
+                        <button type="button" class="one61-btn-primary" onclick="window.closeOne61Modal()">&#272;&Atilde; HI&#7874;U</button>
                     </div>
                 </div>
             `;
@@ -211,7 +211,7 @@
 
     window.one61Alert = function (title, htmlContent) {
         const overlay = getOrCreateOverlay();
-        document.getElementById('one61ModalTitle').innerHTML = title || 'THÔNG BÁO';
+        document.getElementById('one61ModalTitle').innerHTML = title || '';
         document.getElementById('one61ModalBody').innerHTML = htmlContent || '';
         overlay.classList.add('active');
     };
@@ -243,33 +243,33 @@
 
     window.showStoreLocator = function () {
         window.one61Alert(
-            '<i class="fa-solid fa-store text-danger me-1"></i> HỆ THỐNG SHOWROOM ONE61',
+            '<i class="fa-solid fa-store text-danger me-1"></i> H&#7878; TH&#7888;NG SHOWROOM ONE61',
             `
             <div style="text-align: left; font-size: 0.9rem;">
                 <div style="background: #F8F9FA; border: 1px solid #E5E5E5; padding: 14px; margin-bottom: 12px;">
                     <strong style="color: #ED1D24; display: block; margin-bottom: 4px;">
-                        <i class="fa-solid fa-location-dot me-1"></i> SHOWROOM 1: TP. HỒ CHÍ MINH
+                        <i class="fa-solid fa-location-dot me-1"></i> SHOWROOM 1: TP. H&#7890; CH&Iacute; MINH
                     </strong>
-                    <div style="font-weight: 700; color: #111;">Vincom Center Đồng Khởi</div>
-                    <div style="color: #555; font-size: 0.85rem;">Tầng 2, 72 Lê Thánh Tôn, P. Bến Nghé, Quận 1, TP.HCM</div>
+                    <div style="font-weight: 700; color: #111;">Vincom Center &#272;&#7891;ng Kh&#7903;i</div>
+                    <div style="color: #555; font-size: 0.85rem;">T&#7847;ng 2, 72 L&ecirc; Th&aacute;nh T&ocirc;n, P. B&#7871;n Ngh&eacute;, Qu&#7853;n 1, TP.HCM</div>
                     <div style="color: #777; font-size: 0.8rem; margin-top: 4px;">
-                        <i class="fa-regular fa-clock me-1"></i> 09:30 - 22:00 (Hàng ngày)
+                        <i class="fa-regular fa-clock me-1"></i> 09:30 - 22:00 (H&agrave;ng ng&agrave;y)
                     </div>
                 </div>
 
                 <div style="background: #F8F9FA; border: 1px solid #E5E5E5; padding: 14px; margin-bottom: 12px;">
                     <strong style="color: #ED1D24; display: block; margin-bottom: 4px;">
-                        <i class="fa-solid fa-location-dot me-1"></i> SHOWROOM 2: HÀ NỘI
+                        <i class="fa-solid fa-location-dot me-1"></i> SHOWROOM 2: H&Agrave; N&#7896;I
                     </strong>
-                    <div style="font-weight: 700; color: #111;">Vincom Center Bà Triệu</div>
-                    <div style="color: #555; font-size: 0.85rem;">Tầng 1, 191 Bà Triệu, P. Lê Đại Hành, Q. Hai Bà Trưng, Hà Nội</div>
+                    <div style="font-weight: 700; color: #111;">Vincom Center B&agrave; Tri&#7879;u</div>
+                    <div style="color: #555; font-size: 0.85rem;">T&#7847;ng 1, 191 B&agrave; Tri&#7879;u, P. L&ecirc; &#272;&#7841;i H&agrave;nh, Q. Hai B&agrave; Tr&#432;ng, H&agrave; N&#7896;i</div>
                     <div style="color: #777; font-size: 0.8rem; margin-top: 4px;">
-                        <i class="fa-regular fa-clock me-1"></i> 09:30 - 22:00 (Hàng ngày)
+                        <i class="fa-regular fa-clock me-1"></i> 09:30 - 22:00 (H&agrave;ng ng&agrave;y)
                     </div>
                 </div>
 
                 <div style="text-align: center; color: #666; font-size: 0.85rem; margin-top: 10px;">
-                    <i class="fa-solid fa-headset text-danger me-1"></i> Hotline hỗ trợ: <strong style="color: #111;">1900 161 161</strong>
+                    <i class="fa-solid fa-headset text-danger me-1"></i> Hotline h&#7895; tr&#7907;: <strong style="color: #111;">1900 161 161</strong>
                 </div>
             </div>
             `
@@ -297,22 +297,22 @@
         window.updateWishlistBadge();
         if (typeof checkWishlistState === 'function') checkWishlistState();
         window.showWishlistModal();
-        window.one61Toast('Đã xóa sản phẩm khỏi Danh sách Yêu thích', 'info');
+        window.one61Toast('&#272;&atilde; x&oacute;a s&#7843;n ph&#7849;m kh&#7887;i Danh s&aacute;ch Y&ecirc;u th&iacute;ch', 'info');
     };
 
     window.showWishlistModal = function () {
         const list = window.getOne61Wishlist();
         if (!list || list.length === 0) {
             window.one61Alert(
-                '<i class="fa-solid fa-heart text-danger me-2"></i> DANH SÁCH YÊU THÍCH (0)',
+                '<i class="fa-solid fa-heart text-danger me-2"></i> DANH S&Aacute;CH Y&Ecirc;U TH&Iacute;CH (0)',
                 `
                 <div class="text-center py-4">
                     <div class="mb-3 text-muted" style="font-size: 3rem;">
                         <i class="fa-regular fa-heart"></i>
                     </div>
-                    <h6 class="fw-bold text-dark text-uppercase">Danh sách yêu thích trống</h6>
-                    <p class="text-muted small mb-4">Bạn chưa lưu sản phẩm nào vào danh sách yêu thích của mình.</p>
-                    <a href="${window.location.pathname.includes('pages/') ? 'product.html' : 'product'}" class="one61-btn-primary text-decoration-none d-inline-block">KHÁM PHÁ SẢN PHẨM NGAY</a>
+                    <h6 class="fw-bold text-dark text-uppercase">Danh s&aacute;ch y&ecirc;u th&iacute;ch tr&#7889;ng</h6>
+                    <p class="text-muted small mb-4">B&#7841;n ch&#432;a l&#432;u s&#7843;n ph&#7849;m n&agrave;o v&agrave;o danh s&aacute;ch y&ecirc;u th&iacute;ch c&#7843;a m&igrave;nh.</p>
+                    <a href="${window.location.pathname.includes('pages/') ? 'product.html' : 'product'}" class="one61-btn-primary text-decoration-none d-inline-block">KH&Aacute;M PH&Aacute; S&#7842;N PH&#7848;M NGAY</a>
                 </div>
                 `
             );
@@ -347,7 +347,7 @@
                         <a href="${detailUrl}" class="btn btn-dark btn-sm rounded-0 fw-bold px-2 py-1 me-1 text-uppercase" style="font-size: 0.72rem;">
                             Xem
                         </a>
-                        <button type="button" class="btn btn-outline-danger btn-sm rounded-0 px-2 py-1" onclick="window.removeFromWishlist('${item.id}')" title="Xóa">
+                        <button type="button" class="btn btn-outline-danger btn-sm rounded-0 px-2 py-1" onclick="window.removeFromWishlist('${item.id}')" title="X&oacute;a">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </td>
@@ -360,26 +360,26 @@
                 </table>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
-                <span class="small text-muted">Tổng cộng: <strong>${list.length}</strong> sản phẩm</span>
+                <span class="small text-muted">T&#7893;ng c&#7897;ng: <strong>${list.length}</strong> s&#7843;n ph&#7849;m</span>
                 <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" style="font-size: 0.75rem;" onclick="localStorage.removeItem('one61_wishlist'); window.updateWishlistBadge(); if (typeof checkWishlistState === 'function') checkWishlistState(); window.showWishlistModal();">
-                    Xóa tất cả
+                    X&oacute;a t&#7845;t c&#7843;
                 </button>
             </div>
         `;
 
         window.one61Alert(
-            `<i class="fa-solid fa-heart text-danger me-2"></i> DANH SÁCH YÊU THÍCH (${list.length})`,
+            `<i class="fa-solid fa-heart text-danger me-2"></i> DANH S&Aacute;CH Y&Ecirc;U TH&Iacute;CH (${list.length})`,
             itemsHtml
         );
     };
 
     // Override native alert globally
     window.alert = function (msg) {
-        if (typeof msg === 'string' && (msg.includes('cửa hàng') || msg.includes('showroom'))) {
+        if (typeof msg === 'string' && (msg.includes('cửa hàng') || msg.includes('showroom') || msg.includes('c&#7843;a h&agrave;ng'))) {
             window.showStoreLocator();
             return;
         }
-        if (typeof msg === 'string' && (msg.includes('giỏ hàng') || msg.includes('sao chép') || msg.includes('thành công') || msg.includes('Yêu thích'))) {
+        if (typeof msg === 'string' && (msg.includes('giỏ hàng') || msg.includes('sao chép') || msg.includes('thành công') || msg.includes('Yêu thích') || msg.includes('Y&ecirc;u th&iacute;ch'))) {
             window.one61Toast(msg, 'success');
             return;
         }

@@ -103,7 +103,7 @@
 
                 <div class="row g-3 g-lg-4">
                     <!-- 1. WOMEN COLLECTION -->
-                    <div class="col-6 col-lg-3">
+                    <div class="col-12 col-md-4">
                         <a href="product?categoryID=WOMEN_03" class="one61-category-card">
                             <div class="category-img-box">
                                 <img src="${pageContext.request.contextPath}/img-prj301/ao-khoac-01.avif" alt="Thời Trang Nữ" class="category-img">
@@ -121,7 +121,7 @@
                     </div>
 
                     <!-- 2. MEN COLLECTION -->
-                    <div class="col-6 col-lg-3">
+                    <div class="col-12 col-md-4">
                         <a href="product?categoryID=MEN_03" class="one61-category-card">
                             <div class="category-img-box">
                                 <img src="${pageContext.request.contextPath}/img-prj301/ao-khoac-03.avif" alt="Thời Trang Nam" class="category-img">
@@ -138,26 +138,8 @@
                         </a>
                     </div>
 
-                    <!-- 3. KIDS COLLECTION -->
-                    <div class="col-6 col-lg-3">
-                        <a href="product?categoryID=KIDS_02" class="one61-category-card">
-                            <div class="category-img-box">
-                                <img src="${pageContext.request.contextPath}/img-prj301/ao-khoac-06.avif" alt="Thời Trang Trẻ Em" class="category-img">
-                                <span class="category-floating-badge">TRẺ EM (KIDS)</span>
-                            </div>
-                            <div class="category-info-box">
-                                <h5 class="category-title">TRẺ EM</h5>
-                                <p class="category-subtitle">Chất liệu 100% an toàn, mềm mại</p>
-                                <div class="category-action-link">
-                                    <span>Khám phá ngay</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- 4. BARREL PANTS / OUTERWEAR -->
-                    <div class="col-6 col-lg-3">
+                    <!-- 3. BARREL PANTS / OUTERWEAR -->
+                    <div class="col-12 col-md-4">
                         <a href="product?categoryID=WOMEN_04" class="one61-category-card">
                             <div class="category-img-box">
                                 <img src="${pageContext.request.contextPath}/img-prj301/quan-dai-01.avif" alt="Quần Barrel & Dài" class="category-img">
@@ -184,7 +166,6 @@
                     <div class="category-tab-nav">
                         <a href="home?categoryID=WOMEN_01#storeSection" class="category-tab-btn ${param.categoryID.startsWith('WOMEN') ? 'active' : ''}">NỮ (WOMEN)</a>
                         <a href="home?categoryID=MEN_01#storeSection" class="category-tab-btn ${param.categoryID.startsWith('MEN') || empty param.categoryID ? 'active' : ''}">NAM (MEN)</a>
-                        <a href="home?categoryID=KIDS_01#storeSection" class="category-tab-btn ${param.categoryID.startsWith('KIDS') ? 'active' : ''}">TRẺ EM (KIDS)</a>
                     </div>
 
                     <!-- Category Icons Grid -->
@@ -227,46 +208,6 @@
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" alt="Shorts & Culottes">
                                     </div>
                                     <span class="uniqlo-cat-title">Shorts & Culottes</span>
-                                </a>
-                            </c:when>
-
-                            <c:when test="${param.categoryID.startsWith('KIDS')}">
-                                <!-- KIDS CATEGORIES -->
-                                <a href="product?categoryID=KIDS_01" class="uniqlo-cat-item ${param.categoryID eq 'KIDS_01' ? 'fw-bold text-danger' : ''}">
-                                    <div class="uniqlo-cat-thumb">
-                                        <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/t-shirt-icon-kids.avif" alt="Áo Thun Trẻ Em">
-                                    </div>
-                                    <span class="uniqlo-cat-title">Áo Thun</span>
-                                </a>
-                                <a href="product?categoryID=KIDS_01" class="uniqlo-cat-item">
-                                    <div class="uniqlo-cat-thumb">
-                                        <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shirts-icon-kids.avif" alt="Áo Sơ Mi Trẻ Em">
-                                    </div>
-                                    <span class="uniqlo-cat-title">Áo Sơ Mi</span>
-                                </a>
-                                <a href="product?categoryID=KIDS_02" class="uniqlo-cat-item ${param.categoryID eq 'KIDS_02' ? 'fw-bold text-danger' : ''}">
-                                    <div class="uniqlo-cat-thumb">
-                                        <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/outerwear-icon-kids.avif" alt="Áo Khoác Trẻ Em">
-                                    </div>
-                                    <span class="uniqlo-cat-title">Áo Khoác</span>
-                                </a>
-                                <a href="product?categoryID=KIDS_03" class="uniqlo-cat-item ${param.categoryID eq 'KIDS_03' ? 'fw-bold text-danger' : ''}">
-                                    <div class="uniqlo-cat-thumb">
-                                        <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/dresses-icon-kids.avif" alt="Đầm & Váy">
-                                    </div>
-                                    <span class="uniqlo-cat-title">Đầm & Váy</span>
-                                </a>
-                                <a href="product?categoryID=KIDS_03" class="uniqlo-cat-item">
-                                    <div class="uniqlo-cat-thumb">
-                                        <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/bottoms-icon-kids.avif" alt="Quần Dài Trẻ Em">
-                                    </div>
-                                    <span class="uniqlo-cat-title">Quần Dài</span>
-                                </a>
-                                <a href="product?categoryID=KIDS_03" class="uniqlo-cat-item">
-                                    <div class="uniqlo-cat-thumb">
-                                        <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shorts-kids.avif" alt="Quần Shorts Trẻ Em">
-                                    </div>
-                                    <span class="uniqlo-cat-title">Quần Shorts</span>
                                 </a>
                             </c:when>
 

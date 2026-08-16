@@ -220,14 +220,6 @@ const CATEGORY_ICONS_DATA = {
         { name: 'Áo Khoác', icon: '../web/img-prj301/categories/women/outerwear-icon-women.avif', cat: 'WOMEN_03' },
         { name: 'Quần & Váy', icon: '../web/img-prj301/categories/women/bottom-icon-women.jpg', cat: 'WOMEN_04' },
         { name: 'Shorts & Culottes', icon: '../web/img-prj301/categories/women/shorts-and-culottes-icon.avif', cat: 'WOMEN_04' }
-    ],
-    KIDS: [
-        { name: 'Áo Thun', icon: '../web/img-prj301/categories/kids/t-shirt-icon-kids.avif', cat: 'KIDS_01' },
-        { name: 'Áo Sơ Mi', icon: '../web/img-prj301/categories/kids/shirts-icon-kids.avif', cat: 'KIDS_01' },
-        { name: 'Áo Khoác', icon: '../web/img-prj301/categories/kids/outerwear-icon-kids.avif', cat: 'KIDS_02' },
-        { name: 'Đầm & Váy', icon: '../web/img-prj301/categories/kids/dresses-icon-kids.avif', cat: 'KIDS_03' },
-        { name: 'Quần Dài', icon: '../web/img-prj301/categories/kids/bottoms-icon-kids.avif', cat: 'KIDS_03' },
-        { name: 'Quần Shorts', icon: '../web/img-prj301/categories/kids/shorts-kids.avif', cat: 'KIDS_03' }
     ]
 };
 
@@ -257,7 +249,7 @@ function switchCategoryTab(group, btn) {
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const cat = urlParams.get('cat');
-    const defaultGroup = (cat && cat.startsWith('WOMEN')) ? 'WOMEN' : ((cat && cat.startsWith('KIDS')) ? 'KIDS' : 'MEN');
+    const defaultGroup = (cat && cat.startsWith('WOMEN')) ? 'WOMEN' : 'MEN';
     renderCategoryGrid(defaultGroup);
     if (cat) filterCategory(cat);
     else renderProducts(currentList);

@@ -66,14 +66,18 @@
 </div>
 
 <script>
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-        var pass = document.getElementById('password').value;
-        var confirm = document.getElementById('confirm').value;
-        if (pass !== confirm) {
-            e.preventDefault();
-            document.getElementById('passError').style.display = 'block';
-        }
-    });
+    var regForm = document.getElementById('registerForm');
+    if (regForm) {
+        regForm.addEventListener('submit', function(e) {
+            var pass = document.getElementById('password')?.value;
+            var confirm = document.getElementById('confirm')?.value;
+            if (pass && confirm && pass !== confirm) {
+                e.preventDefault();
+                var passError = document.getElementById('passError');
+                if (passError) passError.style.display = 'block';
+            }
+        });
+    }
 </script>
 
 <jsp:include page="includes/footer.jsp" />
