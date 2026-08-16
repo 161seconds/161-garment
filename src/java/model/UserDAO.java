@@ -153,4 +153,81 @@ public class UserDAO {
         }
         return user;
     }
+
+    public List<UserDTO> getUsersByPage(int offset, int fetch) {
+        List<UserDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM [User] ORDER BY createDate DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setInt(1, offset);
+            ptm.setInt(2, fetch);
+            try (ResultSet rs = ptm.executeQuery()) {
+                while (rs.next()) {
+                    UserDTO user = new UserDTO();
+                    user.setUserID(rs.getString("userID"));
+                    user.setFullName(rs.getNString("fullName"));
+                    user.setPassword(rs.getString("password"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setRoleID(rs.getString("roleID"));
+                    user.setStatus(rs.getBoolean("status"));
+                    user.setCreateDate(rs.getTimestamp("createDate"));
+                    list.add(user);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public int getTotalUsersCount() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM [User]";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql);
+             ResultSet rs = ptm.executeQuery()) {
+             
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public boolean toggleUserStatus(String userID) {
+        boolean check = false;
+        String sql = "UPDATE [User] SET status = CASE WHEN status = 1 THEN 0 ELSE 1 END WHERE userID = ?";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setString(1, userID);
+            check = ptm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+
+    public boolean updateUserRole(String userID, String roleID) {
+        boolean check = false;
+        String sql = "UPDATE [User] SET roleID = ? WHERE userID = ?";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setString(1, roleID);
+            ptm.setString(2, userID);
+            check = ptm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
 }

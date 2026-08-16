@@ -217,4 +217,118 @@ public class ProductDAO {
         }
         return list;
     }
+
+    public List<ProductDTO> searchProductsAdmin(String keyword, String categoryID, int offset, int fetch) {
+        List<ProductDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM [Product] WHERE parentID IS NULL AND status = 1";
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql += " AND (name LIKE ? OR productID LIKE ?)";
+        }
+        if (categoryID != null && !categoryID.trim().isEmpty() && !categoryID.equalsIgnoreCase("ALL")) {
+            sql += " AND categoryID = ?";
+        }
+        sql += " ORDER BY productID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            int idx = 1;
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                String pattern = "%" + keyword.trim() + "%";
+                ptm.setString(idx++, pattern);
+                ptm.setString(idx++, pattern);
+            }
+            if (categoryID != null && !categoryID.trim().isEmpty() && !categoryID.equalsIgnoreCase("ALL")) {
+                ptm.setString(idx++, categoryID.trim());
+            }
+            ptm.setInt(idx++, offset);
+            ptm.setInt(idx, fetch);
+            
+            try (ResultSet rs = ptm.executeQuery()) {
+                while (rs.next()) {
+                    list.add(extractProduct(rs));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public int countSearchProductsAdmin(String keyword, String categoryID) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM [Product] WHERE parentID IS NULL AND status = 1";
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql += " AND (name LIKE ? OR productID LIKE ?)";
+        }
+        if (categoryID != null && !categoryID.trim().isEmpty() && !categoryID.equalsIgnoreCase("ALL")) {
+            sql += " AND categoryID = ?";
+        }
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            int idx = 1;
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                String pattern = "%" + keyword.trim() + "%";
+                ptm.setString(idx++, pattern);
+                ptm.setString(idx++, pattern);
+            }
+            if (categoryID != null && !categoryID.trim().isEmpty() && !categoryID.equalsIgnoreCase("ALL")) {
+                ptm.setString(idx++, categoryID.trim());
+            }
+            
+            try (ResultSet rs = ptm.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getLowStockCount(int threshold) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM [Product] WHERE parentID IS NULL AND status = 1 AND quantity <= ?";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setInt(1, threshold);
+            try (ResultSet rs = ptm.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public String generateNextProductID() {
+        String sql = "SELECT productID FROM [Product] WHERE parentID IS NULL";
+        int maxId = 0;
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql);
+             ResultSet rs = ptm.executeQuery()) {
+            while (rs.next()) {
+                String id = rs.getString("productID");
+                if (id != null && id.toUpperCase().startsWith("PROD")) {
+                    String numPart = id.substring(4);
+                    try {
+                        int num = Integer.parseInt(numPart);
+                        if (num > maxId) {
+                            maxId = num;
+                        }
+                    } catch (NumberFormatException ignored) {}
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return String.format("PROD%02d", maxId + 1);
+    }
 }

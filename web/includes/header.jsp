@@ -659,7 +659,7 @@
                                             <c:if test="${sessionScope.LOGIN_USER.roleID eq 'ADMIN'}">
                                                 <li>
                                                     <a class="dropdown-item fw-bold text-danger py-2"
-                                                        href="admin/dashboard.jsp">
+                                                        href="${pageContext.request.contextPath}/admin/dashboard">
                                                         <i class="fa-solid fa-shield-halved me-2"></i> Trang Quản Trị
                                                         Admin
                                                     </a>

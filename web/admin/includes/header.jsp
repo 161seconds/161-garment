@@ -118,7 +118,7 @@
     <!-- Admin Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-admin sticky-top">
         <div class="container-fluid px-4">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/admin/dashboard.jsp">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/admin/dashboard">
                 <span class="admin-brand-box">ONE61</span>
                 <span class="fw-bold tracking-wider">GARMENTORY ADMIN</span>
             </a>
