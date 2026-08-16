@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("LOGIN_USER", user);
             
             if ("ADMIN".equals(user.getRoleID())) {
-                response.sendRedirect("admin/dashboard.jsp");
+                response.sendRedirect("admin/dashboard");
             } else {
                 response.sendRedirect("home");
             }

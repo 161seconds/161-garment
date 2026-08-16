@@ -92,6 +92,47 @@ public class CategoryDAO {
         return check;
     }
 
+    public List<CategoryDTO> getAllCategoriesAdmin() {
+        List<CategoryDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM [Category] ORDER BY categoryID ASC";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql);
+             ResultSet rs = ptm.executeQuery()) {
+             
+            while (rs.next()) {
+                CategoryDTO category = new CategoryDTO(
+                    rs.getString("categoryID"),
+                    rs.getNString("name"),
+                    rs.getBoolean("status")
+                );
+                list.add(category);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public int countProductsPerCategory(String categoryID) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM [Product] WHERE categoryID = ? AND parentID IS NULL AND status = 1";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setString(1, categoryID);
+            try (ResultSet rs = ptm.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     public boolean deleteCategory(String categoryID) {
         boolean check = false;
         String sql = "UPDATE [Category] SET status = 0 WHERE categoryID = ?";
