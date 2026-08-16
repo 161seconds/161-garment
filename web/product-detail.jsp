@@ -322,20 +322,7 @@
 
                 <hr class="my-3">
 
-                <!-- 1. Color Selection (Uniqlo Style Swatches) -->
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="small fw-bold text-uppercase">Màu sắc: <span id="selectedColorName" class="text-secondary fw-normal">32 BEIGE</span></span>
-                    </div>
-                    <div class="d-flex gap-2" id="colorSwatchGroup">
-                        <button type="button" class="color-swatch-btn active" style="background-color: #D1C2A5;" onclick="selectColor('32 BEIGE', this)" title="32 BEIGE"></button>
-                        <button type="button" class="color-swatch-btn" style="background-color: #F5F2EB;" onclick="selectColor('01 OFF WHITE', this)" title="01 OFF WHITE"></button>
-                        <button type="button" class="color-swatch-btn" style="background-color: #2B3448;" onclick="selectColor('69 NAVY', this)" title="69 NAVY"></button>
-                        <button type="button" class="color-swatch-btn" style="background-color: #1A1A1A;" onclick="selectColor('09 BLACK', this)" title="09 BLACK"></button>
-                    </div>
-                </div>
-
-                <!-- 2. Size Selection -->
+                <!-- 1. Size Selection -->
                 <div class="mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <span class="small fw-bold text-uppercase">Kích thước: <span id="selectedSizeLabel" class="text-secondary fw-normal">M</span></span>
@@ -354,11 +341,11 @@
                     </div>
                 </div>
 
-                <!-- 3. Quantity & Add To Cart Form -->
+                <!-- 2. Quantity & Add To Cart Form -->
                 <form action="cart" method="POST" id="productPurchaseForm" class="mb-4">
                     <input type="hidden" name="action" value="add">
                     <input type="hidden" name="productID" value="${PRODUCT.productID}">
-                    <input type="hidden" name="color" id="inputColor" value="32 BEIGE">
+                    <input type="hidden" name="color" id="inputColor" value="Tiêu chuẩn">
                     <input type="hidden" name="size" id="inputSize" value="M">
 
                     <div class="d-flex gap-3 align-items-center mb-3">

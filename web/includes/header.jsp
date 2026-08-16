@@ -20,7 +20,7 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
             <!-- ONE61 Global Alert & Modal System -->
-            <script src="${pageContext.request.contextPath}/js/one61-alert.js"></script>
+            <script src="${pageContext.request.contextPath}/js/one61-alert.js" charset="UTF-8"></script>
             <style>
                 /* ONE61 Luxury Category Cards */
                 .one61-category-card {
@@ -391,6 +391,34 @@
                     border: none !important;
                 }
 
+                /* Auth Login Button Styling for Transparent and Scrolled Navbar */
+                .navbar-transparent .header-btn-login {
+                    color: #FFFFFF !important;
+                    border-color: #FFFFFF !important;
+                    background-color: rgba(0, 0, 0, 0.3) !important;
+                    backdrop-filter: blur(4px);
+                    transition: all 0.2s ease;
+                }
+
+                .navbar-transparent .header-btn-login:hover {
+                    background-color: #FFFFFF !important;
+                    color: #111111 !important;
+                    border-color: #FFFFFF !important;
+                }
+
+                .navbar-main.scrolled .header-btn-login,
+                .navbar-main:not(.navbar-transparent) .header-btn-login {
+                    color: #111111 !important;
+                    border-color: #111111 !important;
+                    background-color: transparent !important;
+                }
+
+                .navbar-main.scrolled .header-btn-login:hover,
+                .navbar-main:not(.navbar-transparent) .header-btn-login:hover {
+                    background-color: #111111 !important;
+                    color: #FFFFFF !important;
+                }
+
                 /* Pure CSS Hover dropdown - Immediately hides on mouse leave */
                 .dropdown-hover:hover>.dropdown-menu {
                     display: block !important;
@@ -611,60 +639,6 @@
                                 </ul>
                             </li>
 
-                            <!-- TRẺ EM Dropdown -->
-                            <li class="nav-item dropdown dropdown-hover">
-                                <a class="nav-link main-nav-link ${param.categoryID.startsWith('KIDS') ? 'active-cate text-danger fw-bold' : ''}"
-                                    href="product?categoryID=KIDS_01">
-                                    TRẺ EM
-                                </a>
-                                <ul class="dropdown-menu rounded-0 shadow-lg border border-dark-subtle p-3"
-                                    style="min-width: 480px;">
-                                    <li class="dropdown-header text-uppercase fw-bold text-danger pb-2 d-flex justify-content-between align-items-center"
-                                        style="font-size: 0.78rem;">
-                                        <span>THỜI TRANG TRẺ EM (KIDS)</span>
-                                        <a href="product?categoryID=KIDS_01" class="text-secondary text-decoration-none small fw-normal">Xem tất cả &rarr;</a>
-                                    </li>
-                                    <div class="row row-cols-2 g-2">
-                                        <div class="col">
-                                            <a href="product?categoryID=KIDS_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/t-shirt-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Thun">
-                                                <span class="small fw-semibold">Áo Thun Trẻ Em</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=KIDS_01" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shirts-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Sơ Mi">
-                                                <span class="small fw-semibold">Áo Sơ Mi Bé</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=KIDS_02" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/outerwear-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Áo Khoác">
-                                                <span class="small fw-semibold">Áo Khoác Trẻ Em</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=KIDS_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/dresses-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Đầm Bé Gái">
-                                                <span class="small fw-semibold">Đầm & Váy Bé Gái</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=KIDS_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/bottoms-icon-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Dài">
-                                                <span class="small fw-semibold">Quần Dài Trẻ Em</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="product?categoryID=KIDS_03" class="dropdown-item p-2 d-flex align-items-center gap-2 rounded-0">
-                                                <img src="${pageContext.request.contextPath}/img-prj301/categories/kids/shorts-kids.avif" style="width: 36px; height: 36px; object-fit: contain;" alt="Quần Shorts">
-                                                <span class="small fw-semibold">Quần Shorts Trẻ Em</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </ul>
-                            </li>
-
                             <!-- TẤT CẢ Link -->
                             <li class="nav-item">
                                 <a class="nav-link main-nav-link ${empty param.categoryID ? 'active-cate' : ''}"
@@ -746,7 +720,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <div class="d-flex align-items-center gap-2 ms-2">
-                                        <a class="btn btn-outline-dark btn-sm rounded-0 fw-bold px-3 text-uppercase"
+                                        <a class="btn btn-outline-dark header-btn-login btn-sm rounded-0 fw-bold px-3 text-uppercase"
                                             href="login" style="font-size: 0.75rem;">
                                             Đăng nhập
                                         </a>

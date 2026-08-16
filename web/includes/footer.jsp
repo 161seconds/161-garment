@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    </div> <!-- End container -->
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${param.transparentHeader ne 'true'}">
+    </div> <!-- End main page container -->
+</c:if>
 
     <!-- Footer Section -->
     <footer class="mt-auto border-top bg-white" style="color: var(--color-foreground);">
@@ -195,8 +198,8 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ONE61 Global Alert & Modal System -->
-    <script src="${pageContext.request.contextPath}/js/one61-alert.js"></script>
+    <script src="${pageContext.request.contextPath}/js/one61-alert.js" charset="UTF-8"></script>
     <!-- ONE61 Main Global Scripts -->
-    <script src="${pageContext.request.contextPath}/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js" charset="UTF-8"></script>
 </body>
 </html>

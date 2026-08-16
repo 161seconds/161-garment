@@ -3,20 +3,39 @@
  * Hero Video Carousel, Floating Navbar, Showcase Cards
  */
 
-/* Transparent & Scrolled Navbar */
+/* Standard In-Flow Navbar for Non-Home Pages */
 .navbar-main {
+    background: #FFFFFF;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 0.75rem 0;
+    transition: all 0.25s ease;
+}
+
+.navbar-main.sticky-top {
+    position: sticky !important;
+    top: 0;
+    z-index: 1030;
+    background: #FFFFFF !important;
+}
+
+/* Transparent Header ONLY when .navbar-transparent is applied (Home Hero) */
+.navbar-main.navbar-transparent {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1050;
     background: transparent !important;
+    border-bottom: none !important;
     padding: 1rem 0;
-    transition: all 0.3s ease;
 }
 
+.navbar-main.navbar-transparent.scrolled,
 .navbar-main.scrolled {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: rgba(255, 255, 255, 0.98) !important;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
     padding: 0.65rem 0;
@@ -45,6 +64,34 @@
 .navbar-main.scrolled .main-nav-link {
     color: #111111 !important;
     text-shadow: none !important;
+}
+
+/* Auth Login Button on Transparent vs Scrolled Navbar */
+.navbar-transparent .header-btn-login {
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+}
+
+.navbar-transparent .header-btn-login:hover {
+    background-color: #FFFFFF !important;
+    color: #111111 !important;
+    border-color: #FFFFFF !important;
+}
+
+.navbar-main.scrolled .header-btn-login,
+.navbar-main:not(.navbar-transparent) .header-btn-login {
+    color: #111111 !important;
+    border-color: #111111 !important;
+    background-color: transparent !important;
+}
+
+.navbar-main.scrolled .header-btn-login:hover,
+.navbar-main:not(.navbar-transparent) .header-btn-login:hover {
+    background-color: #111111 !important;
+    color: #FFFFFF !important;
 }
 
 /* Sliding Magic Underline Bar */
