@@ -25,10 +25,6 @@ import utils.EnvUtils;
 @WebServlet(name = "SepayWebhookController", urlPatterns = {"/api/sepay-webhook", "/sepay-webhook"})
 public class SepayWebhookController extends HttpServlet {
 
-    // SePay Keys (Loaded strictly from .env / System Environment via EnvUtils)
-    private static final String SEPAY_WEBHOOK_SECRET = EnvUtils.get("SEPAY_WEBHOOK_SECRET", "");
-    private static final String SEPAY_API_TOKEN = EnvUtils.get("SEPAY_API_TOKEN", "");
-
     // Cache to track confirmed transactions in-memory for instant frontend polling
     public static final Set<String> PAID_PHONE_SET = Collections.synchronizedSet(new HashSet<>());
 
@@ -61,12 +57,16 @@ public class SepayWebhookController extends HttpServlet {
         String jsonPayload = sb.toString();
         System.out.println("[SePay Webhook Received]: " + jsonPayload);
 
+        // Dynamically load keys from Environment Variables on each request
+        String webhookSecret = EnvUtils.get("SEPAY_WEBHOOK_SECRET", "");
+        String apiToken = EnvUtils.get("SEPAY_API_TOKEN", "");
+
         // 2. Multi-Mode Authentication Check
         String authHeader = request.getHeader("Authorization");
         String apiKeyHeader = request.getHeader("X-API-Key");
         if (apiKeyHeader == null) apiKeyHeader = request.getHeader("api-key");
         
-        // SePay HMAC-SHA256 signature header (e.g. x-sepay-signature or X-SePay-Signature)
+        // SePay HMAC-SHA256 signature header
         String signatureHeader = request.getHeader("x-sepay-signature");
         if (signatureHeader == null) signatureHeader = request.getHeader("X-SePay-Signature");
         if (signatureHeader == null) signatureHeader = request.getHeader("x-signature");
@@ -74,15 +74,25 @@ public class SepayWebhookController extends HttpServlet {
         String timestampHeader = request.getHeader("x-sepay-timestamp");
         if (timestampHeader == null) timestampHeader = request.getHeader("X-SePay-Timestamp");
 
-        System.out.println("[SePay Auth Diagnostic] SignatureHeader: [" + signatureHeader + "], AuthHeader: [" + authHeader + "], APIKeyHeader: [" + apiKeyHeader + "]");
+        System.out.println("[SePay Auth Diagnostic] Sig: [" + signatureHeader + "], Auth: [" + authHeader + "], APIKey: [" + apiKeyHeader + "], SecretConfigured: [" + (!webhookSecret.isEmpty()) + "]");
 
         boolean isAuthorized = false;
 
-        // Mode 1: HMAC-SHA256 Signature verification (SePay standard)
-        if (signatureHeader != null && !signatureHeader.trim().isEmpty()) {
-            if (verifyHmacSha256(jsonPayload, timestampHeader, signatureHeader, SEPAY_WEBHOOK_SECRET)) {
+        // If no secret or token is configured on this server, accept incoming test/ping
+        if (webhookSecret.isEmpty() && apiToken.isEmpty()) {
+            isAuthorized = true;
+            System.out.println("[SePay Webhook Notice]: No SEPAY_WEBHOOK_SECRET or SEPAY_API_TOKEN configured in server env. Allowing request in open mode.");
+        }
+
+        // Mode 1: HMAC-SHA256 Signature verification (when secret is configured)
+        if (!isAuthorized && signatureHeader != null && !signatureHeader.trim().isEmpty()) {
+            if (!webhookSecret.isEmpty() && verifyHmacSha256(jsonPayload, timestampHeader, signatureHeader, webhookSecret)) {
                 isAuthorized = true;
                 System.out.println("[SePay Webhook Verified]: HMAC-SHA256 Signature MATCHED!");
+            } else if (webhookSecret.isEmpty()) {
+                // If secret not configured in server environment yet, allow pass
+                isAuthorized = true;
+                System.out.println("[SePay Webhook Notice]: Server has no SEPAY_WEBHOOK_SECRET configured yet. Allowing request.");
             }
         }
 
@@ -94,7 +104,7 @@ public class SepayWebhookController extends HttpServlet {
             } else if (token.toLowerCase().startsWith("bearer ")) {
                 token = token.substring(7).trim();
             }
-            if (isValidKey(token)) {
+            if (isValidKey(token, webhookSecret, apiToken)) {
                 isAuthorized = true;
                 System.out.println("[SePay Webhook Verified]: Valid Authorization Header Token!");
             }
@@ -102,21 +112,16 @@ public class SepayWebhookController extends HttpServlet {
 
         // Mode 3: X-API-Key header
         if (!isAuthorized && apiKeyHeader != null && !apiKeyHeader.trim().isEmpty()) {
-            if (isValidKey(apiKeyHeader.trim())) {
+            if (isValidKey(apiKeyHeader.trim(), webhookSecret, apiToken)) {
                 isAuthorized = true;
                 System.out.println("[SePay Webhook Verified]: Valid X-API-Key Header!");
             }
         }
 
-        // Mode 4: No authentication headers provided or no keys configured (open/development mode)
-        if (!isAuthorized) {
-            if (signatureHeader == null && authHeader == null && apiKeyHeader == null) {
-                isAuthorized = true;
-                System.out.println("[SePay Webhook Notice]: No authentication headers provided (Accepted in open mode)");
-            } else if (SEPAY_WEBHOOK_SECRET.isEmpty() && SEPAY_API_TOKEN.isEmpty()) {
-                isAuthorized = true;
-                System.out.println("[SePay Webhook Notice]: No webhook secret or token configured in .env (Allowing request)");
-            }
+        // Mode 4: No authentication headers provided at all
+        if (!isAuthorized && signatureHeader == null && authHeader == null && apiKeyHeader == null) {
+            isAuthorized = true;
+            System.out.println("[SePay Webhook Notice]: No authentication headers provided (Accepted in open mode)");
         }
 
         if (!isAuthorized) {
@@ -211,10 +216,10 @@ public class SepayWebhookController extends HttpServlet {
         out.print("{\"success\":true}");
     }
 
-    private boolean isValidKey(String token) {
+    private boolean isValidKey(String token, String webhookSecret, String apiToken) {
         if (token == null || token.isEmpty()) return false;
-        if (!SEPAY_API_TOKEN.isEmpty() && (token.equals(SEPAY_API_TOKEN) || token.equalsIgnoreCase(SEPAY_API_TOKEN))) return true;
-        if (!SEPAY_WEBHOOK_SECRET.isEmpty() && (token.equals(SEPAY_WEBHOOK_SECRET) || token.equalsIgnoreCase(SEPAY_WEBHOOK_SECRET))) return true;
+        if (!apiToken.isEmpty() && (token.equals(apiToken) || token.equalsIgnoreCase(apiToken))) return true;
+        if (!webhookSecret.isEmpty() && (token.equals(webhookSecret) || token.equalsIgnoreCase(webhookSecret))) return true;
         return false;
     }
 
