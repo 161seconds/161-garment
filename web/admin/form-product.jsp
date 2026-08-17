@@ -120,21 +120,102 @@
                         </div>
                     </div>
 
-                    <!-- Inventory Quantity -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold small text-uppercase">Số Lượng Tồn Kho <span class="text-danger">*</span></label>
-                        <input type="number" 
-                               class="form-control rounded-0 text-end fw-bold" 
-                               name="quantity" 
-                               id="productQuantityInput"
-                               value="${PRODUCT.quantity != null ? PRODUCT.quantity : 0}" 
-                               placeholder="0" 
-                               min="0" 
-                               max="100000" 
-                               step="1" 
-                               required
-                               onkeydown="preventInvalidNumKeys(event, false)"
-                               oninput="sanitizeQuantity(this)">
+                    <!-- Inventory by Size & Auto Sum -->
+                    <div class="mb-3 p-3 bg-light border border-dark-subtle">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="form-label fw-bold small text-uppercase m-0">
+                                <i class="fa-solid fa-boxes-stacked text-danger me-1"></i> Phân Bổ Tồn Kho Theo Size
+                            </label>
+                            <span class="badge bg-danger rounded-0 px-2 py-1" id="totalSizeSumBadge">
+                                Tổng: ${PRODUCT.quantity != null ? PRODUCT.quantity : 0} cái
+                            </span>
+                        </div>
+                        <p class="text-muted small mb-2" style="font-size: 0.75rem;">
+                            Nhập số lượng cho từng size (ví dụ: Size L: 10, Size XL: 5). Hệ thống sẽ <strong>tự động cộng dồn</strong> vào tổng tồn kho.
+                        </p>
+
+                        <!-- Size Grid Inputs -->
+                        <div class="row g-2 mb-2">
+                            <div class="col-4 col-sm-2">
+                                <div class="border bg-white p-1 text-center">
+                                    <div class="fw-bold small text-muted text-uppercase" style="font-size: 0.7rem;">Size XS</div>
+                                    <input type="number" class="form-control form-control-sm rounded-0 text-center fw-bold size-qty-input border-0 bg-light mt-1" 
+                                           id="size_XS" name="size_XS" min="0" max="50000" placeholder="0" value="0"
+                                           onkeydown="preventInvalidNumKeys(event, false)" oninput="recalculateTotalStock()">
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2">
+                                <div class="border bg-white p-1 text-center">
+                                    <div class="fw-bold small text-muted text-uppercase" style="font-size: 0.7rem;">Size S</div>
+                                    <input type="number" class="form-control form-control-sm rounded-0 text-center fw-bold size-qty-input border-0 bg-light mt-1" 
+                                           id="size_S" name="size_S" min="0" max="50000" placeholder="0" value="0"
+                                           onkeydown="preventInvalidNumKeys(event, false)" oninput="recalculateTotalStock()">
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2">
+                                <div class="border bg-white p-1 text-center">
+                                    <div class="fw-bold small text-muted text-uppercase" style="font-size: 0.7rem;">Size M</div>
+                                    <input type="number" class="form-control form-control-sm rounded-0 text-center fw-bold size-qty-input border-0 bg-light mt-1" 
+                                           id="size_M" name="size_M" min="0" max="50000" placeholder="0" value="0"
+                                           onkeydown="preventInvalidNumKeys(event, false)" oninput="recalculateTotalStock()">
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2">
+                                <div class="border bg-white p-1 text-center">
+                                    <div class="fw-bold small text-muted text-uppercase" style="font-size: 0.7rem;">Size L</div>
+                                    <input type="number" class="form-control form-control-sm rounded-0 text-center fw-bold size-qty-input border-0 bg-light mt-1" 
+                                           id="size_L" name="size_L" min="0" max="50000" placeholder="0" value="0"
+                                           onkeydown="preventInvalidNumKeys(event, false)" oninput="recalculateTotalStock()">
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2">
+                                <div class="border bg-white p-1 text-center">
+                                    <div class="fw-bold small text-muted text-uppercase" style="font-size: 0.7rem;">Size XL</div>
+                                    <input type="number" class="form-control form-control-sm rounded-0 text-center fw-bold size-qty-input border-0 bg-light mt-1" 
+                                           id="size_XL" name="size_XL" min="0" max="50000" placeholder="0" value="0"
+                                           onkeydown="preventInvalidNumKeys(event, false)" oninput="recalculateTotalStock()">
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-2">
+                                <div class="border bg-white p-1 text-center">
+                                    <div class="fw-bold small text-muted text-uppercase" style="font-size: 0.7rem;">Size XXL</div>
+                                    <input type="number" class="form-control form-control-sm rounded-0 text-center fw-bold size-qty-input border-0 bg-light mt-1" 
+                                           id="size_XXL" name="size_XXL" min="0" max="50000" placeholder="0" value="0"
+                                           onkeydown="preventInvalidNumKeys(event, false)" oninput="recalculateTotalStock()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Action Buttons -->
+                        <div class="d-flex flex-wrap gap-1 mb-3">
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-0 px-2 py-0" style="font-size: 0.7rem;" onclick="addStockToAllSizes(5)">+5 Tất Cả</button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-0 px-2 py-0" style="font-size: 0.7rem;" onclick="addStockToAllSizes(10)">+10 Tất Cả</button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-0 px-2 py-0" style="font-size: 0.7rem;" onclick="addStockToAllSizes(20)">+20 Tất Cả</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm rounded-0 px-2 py-0 ms-auto" style="font-size: 0.7rem;" onclick="resetAllSizes()">Đặt Lại 0</button>
+                        </div>
+
+                        <!-- Total Calculated Quantity (Synced) -->
+                        <div>
+                            <label class="form-label fw-bold small text-uppercase d-flex justify-content-between align-items-center mb-1">
+                                <span>Tổng Tồn Kho (Auto Sum) <span class="text-danger">*</span></span>
+                                <small class="text-success fw-bold" id="autoSumStatusText"><i class="fa-solid fa-circle-check me-1"></i>Đã khớp tổng size</small>
+                            </label>
+                            <div class="input-group">
+                                <input type="number" 
+                                       class="form-control rounded-0 text-end fw-bold bg-white fs-6" 
+                                       name="quantity" 
+                                       id="productQuantityInput"
+                                       value="${PRODUCT.quantity != null ? PRODUCT.quantity : 0}" 
+                                       placeholder="0" 
+                                       min="0" 
+                                       max="100000" 
+                                       step="1" 
+                                       required
+                                       onkeydown="preventInvalidNumKeys(event, false)"
+                                       oninput="handleManualTotalInput(this)">
+                                <span class="input-group-text rounded-0 bg-dark text-white fw-bold px-3">Sản phẩm</span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Cover Image Upload Section -->
@@ -305,6 +386,88 @@
         }
         document.getElementById('priceFormattedBadge').textContent = num.toLocaleString('vi-VN') + ' đ';
     }
+
+    // Recalculate total stock from size inputs
+    function recalculateTotalStock() {
+        const sizeInputs = document.querySelectorAll('.size-qty-input');
+        let total = 0;
+        sizeInputs.forEach(input => {
+            let val = parseInt(input.value.replace(/[^0-9]/g, '') || 0, 10);
+            if (val < 0) val = 0;
+            if (val > 50000) val = 50000;
+            input.value = val;
+            total += val;
+        });
+
+        const qtyInput = document.getElementById('productQuantityInput');
+        if (qtyInput) {
+            qtyInput.value = total;
+        }
+
+        const badge = document.getElementById('totalSizeSumBadge');
+        if (badge) {
+            badge.textContent = 'T\u1ed5ng: ' + total.toLocaleString('vi-VN') + ' c\u00e1i';
+        }
+
+        const status = document.getElementById('autoSumStatusText');
+        if (status) {
+            status.innerHTML = '<i class="fa-solid fa-circle-check me-1"></i>\u0110\u00e3 kh\u1edbp t\u1ed5ng size';
+            status.className = 'text-success fw-bold';
+        }
+    }
+
+    // Quick add stock to all size fields
+    function addStockToAllSizes(amount) {
+        const sizeInputs = document.querySelectorAll('.size-qty-input');
+        sizeInputs.forEach(input => {
+            let val = parseInt(input.value || 0, 10);
+            val = Math.max(0, val + amount);
+            input.value = val;
+        });
+        recalculateTotalStock();
+    }
+
+    // Reset all size fields to 0
+    function resetAllSizes() {
+        const sizeInputs = document.querySelectorAll('.size-qty-input');
+        sizeInputs.forEach(input => {
+            input.value = 0;
+        });
+        recalculateTotalStock();
+    }
+
+    // When admin manually enters total quantity into main input, distribute across sizes
+    function handleManualTotalInput(input) {
+        let val = input.value.replace(/[^0-9]/g, '');
+        let num = parseInt(val || 0, 10);
+        if (num < 0) num = 0;
+        if (num > 100000) num = 100000;
+        input.value = num;
+
+        // Distribute proportionally across the 6 sizes
+        const sizes = document.querySelectorAll('.size-qty-input');
+        if (sizes.length > 0) {
+            let base = Math.floor(num / sizes.length);
+            let rem = num % sizes.length;
+            sizes.forEach((sInput, idx) => {
+                sInput.value = base + (idx < rem ? 1 : 0);
+            });
+        }
+
+        const badge = document.getElementById('totalSizeSumBadge');
+        if (badge) {
+            badge.textContent = 'T\u1ed5ng: ' + num.toLocaleString('vi-VN') + ' c\u00e1i';
+        }
+    }
+
+    // Initialize size distribution on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const qtyInput = document.getElementById('productQuantityInput');
+        const initialQty = parseInt(qtyInput ? qtyInput.value : 0, 10);
+        if (initialQty > 0) {
+            handleManualTotalInput(qtyInput);
+        }
+    });
 
     // Sanitize quantity to non-negative whole integer
     function sanitizeQuantity(input) {

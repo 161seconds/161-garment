@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import utils.DBUtils;
 
 public class OrderDAO {
@@ -47,6 +49,17 @@ public class OrderDAO {
                     }
                     ptmDetail.close();
                     
+                    // Deduct stock quantity from Product inventory atomically
+                    String sqlStock = "UPDATE [Product] SET quantity = CASE WHEN quantity >= ? THEN quantity - ? ELSE 0 END WHERE productID = ?";
+                    PreparedStatement ptmStock = conn.prepareStatement(sqlStock);
+                    for (OrderDetailDTO detail : details) {
+                        ptmStock.setInt(1, detail.getQuantity());
+                        ptmStock.setInt(2, detail.getQuantity());
+                        ptmStock.setString(3, detail.getProductID());
+                        ptmStock.executeUpdate();
+                    }
+                    ptmStock.close();
+
                     // Commit
                     conn.commit();
                     check = true;
@@ -218,7 +231,7 @@ public class OrderDAO {
 
     public double getTotalRevenue() {
         double total = 0;
-        String sql = "SELECT SUM(totalMoney) FROM [Order] WHERE status IN ('PROCESSING', 'SHIPPED', 'DELIVERED', 'SUCCESS')";
+        String sql = "SELECT SUM(totalMoney) FROM [Order] WHERE status NOT IN ('CANCELLED', 'FAILED')";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql);
@@ -262,19 +275,71 @@ public class OrderDAO {
 
     public boolean updateOrderStatus(String orderID, String status) {
         boolean check = false;
-        String sql = "UPDATE [Order] SET status = ? WHERE orderID = ?";
+        String getCurrentStatusSql = "SELECT status FROM [Order] WHERE orderID = ?";
+        String updateOrderSql = "UPDATE [Order] SET status = ? WHERE orderID = ?";
                    
-        try (Connection conn = DBUtils.getConnection();
-             PreparedStatement ptm = conn.prepareStatement(sql)) {
-             
-            ptm.setString(1, status);
-            ptm.setString(2, orderID);
-            
-            check = ptm.executeUpdate() > 0;
-            
+        try (Connection conn = DBUtils.getConnection()) {
+            if (conn != null) {
+                conn.setAutoCommit(false);
+                String oldStatus = null;
+
+                try (PreparedStatement ptmGet = conn.prepareStatement(getCurrentStatusSql)) {
+                    ptmGet.setString(1, orderID);
+                    try (ResultSet rs = ptmGet.executeQuery()) {
+                        if (rs.next()) {
+                            oldStatus = rs.getString("status");
+                        }
+                    }
+                }
+
+                try (PreparedStatement ptmUpdate = conn.prepareStatement(updateOrderSql)) {
+                    ptmUpdate.setString(1, status);
+                    ptmUpdate.setString(2, orderID);
+                    check = ptmUpdate.executeUpdate() > 0;
+                }
+
+                // If transitioning to CANCELLED from a non-cancelled state, restore product stock
+                if (check && "CANCELLED".equalsIgnoreCase(status) && oldStatus != null && !"CANCELLED".equalsIgnoreCase(oldStatus)) {
+                    String restoreStockSql = "UPDATE p "
+                                           + "SET p.quantity = p.quantity + od.quantity "
+                                           + "FROM [Product] p "
+                                           + "INNER JOIN [OrderDetail] od ON p.productID = od.productID "
+                                           + "WHERE od.orderID = ?";
+                    try (PreparedStatement ptmRestore = conn.prepareStatement(restoreStockSql)) {
+                        ptmRestore.setString(1, orderID);
+                        ptmRestore.executeUpdate();
+                    }
+                }
+
+                conn.commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return check;
+    }
+
+    public Map<String, Integer> getOrderStatusCounts() {
+        Map<String, Integer> counts = new HashMap<>();
+        counts.put("PENDING", 0);
+        counts.put("PROCESSING", 0);
+        counts.put("SHIPPING", 0);
+        counts.put("COMPLETED", 0);
+        counts.put("CANCELLED", 0);
+
+        String sql = "SELECT status, COUNT(*) as total FROM [Order] GROUP BY status";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql);
+             ResultSet rs = ptm.executeQuery()) {
+            while (rs.next()) {
+                String st = rs.getString("status");
+                if (st != null) {
+                    counts.put(st.toUpperCase(), rs.getInt("total"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return counts;
     }
 }

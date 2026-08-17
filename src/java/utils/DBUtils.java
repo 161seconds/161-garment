@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class DBUtils {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        String dbName = EnvUtils.get("DB_NAME", "PRJ301_Ecommerce");
-        String dbUser = EnvUtils.get("DB_USERNAME", "sa");
-        String dbPass = EnvUtils.get("DB_PASSWORD", "12345");
-        String dbHost = EnvUtils.get("DB_HOST", "localhost");
-        String dbPort = EnvUtils.get("DB_PORT", "1433");
+        String dbName = EnvUtils.get("DB_NAME");
+        String dbUser = EnvUtils.get("DB_USERNAME");
+        String dbPass = EnvUtils.get("DB_PASSWORD");
+        String dbHost = EnvUtils.get("DB_HOST");
+        String dbPort = EnvUtils.get("DB_PORT");
 
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         

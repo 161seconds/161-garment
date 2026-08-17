@@ -109,6 +109,46 @@
         </div>
     </div>
 
+    <!-- Order Status Summary Strip -->
+    <div class="row g-2 mb-4">
+        <div class="col-6 col-md-3">
+            <a href="${pageContext.request.contextPath}/admin/order?action=list&status=PENDING" class="card rounded-0 border p-2 bg-light text-decoration-none d-flex flex-row align-items-center justify-content-between hover-shadow">
+                <div>
+                    <span class="text-muted small text-uppercase" style="font-size: 0.7rem;">Chờ Xử Lý</span>
+                    <h6 class="fw-bold m-0 text-warning-emphasis">${STAT_ORDER_COUNTS['PENDING'] != null ? STAT_ORDER_COUNTS['PENDING'] : 0} đơn</h6>
+                </div>
+                <span class="badge bg-warning text-dark rounded-0 px-2 py-1"><i class="fa-solid fa-clock"></i></span>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="${pageContext.request.contextPath}/admin/order?action=list&status=SHIPPED" class="card rounded-0 border p-2 bg-light text-decoration-none d-flex flex-row align-items-center justify-content-between hover-shadow">
+                <div>
+                    <span class="text-muted small text-uppercase" style="font-size: 0.7rem;">Đang Giao Hàng</span>
+                    <h6 class="fw-bold m-0 text-info">${STAT_ORDER_COUNTS['SHIPPED'] != null ? STAT_ORDER_COUNTS['SHIPPED'] : 0} đơn</h6>
+                </div>
+                <span class="badge bg-info text-white rounded-0 px-2 py-1"><i class="fa-solid fa-truck"></i></span>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="${pageContext.request.contextPath}/admin/order?action=list&status=DELIVERED" class="card rounded-0 border p-2 bg-light text-decoration-none d-flex flex-row align-items-center justify-content-between hover-shadow">
+                <div>
+                    <span class="text-muted small text-uppercase" style="font-size: 0.7rem;">Giao Thành Công</span>
+                    <h6 class="fw-bold m-0 text-success">${STAT_ORDER_COUNTS['DELIVERED'] != null ? STAT_ORDER_COUNTS['DELIVERED'] : 0} đơn</h6>
+                </div>
+                <span class="badge bg-success rounded-0 px-2 py-1"><i class="fa-solid fa-check"></i></span>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="${pageContext.request.contextPath}/admin/order?action=list&status=CANCELLED" class="card rounded-0 border p-2 bg-light text-decoration-none d-flex flex-row align-items-center justify-content-between hover-shadow">
+                <div>
+                    <span class="text-muted small text-uppercase" style="font-size: 0.7rem;">Đã Hủy</span>
+                    <h6 class="fw-bold m-0 text-danger">${STAT_ORDER_COUNTS['CANCELLED'] != null ? STAT_ORDER_COUNTS['CANCELLED'] : 0} đơn</h6>
+                </div>
+                <span class="badge bg-danger rounded-0 px-2 py-1"><i class="fa-solid fa-xmark"></i></span>
+            </a>
+        </div>
+    </div>
+
     <!-- Quick Operations & Recent Orders Table -->
     <div class="row g-4">
         <!-- Quick Operations -->

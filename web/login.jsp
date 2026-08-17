@@ -20,6 +20,11 @@
                             <i class="fa-solid fa-circle-exclamation me-1"></i> ${ERROR}
                         </div>
                     </c:if>
+                    <c:if test="${param.error eq 'deactivated'}">
+                        <div class="alert alert-danger rounded-0 small py-2 text-center mb-3">
+                            <i class="fa-solid fa-user-lock me-1"></i> Tài khoản của bạn đã bị tạm khóa bởi Quản trị viên!
+                        </div>
+                    </c:if>
                     <c:if test="${not empty SUCCESS}">
                         <div class="alert alert-success rounded-0 small py-2 text-center mb-3">
                             <i class="fa-solid fa-circle-check me-1"></i> ${SUCCESS}
@@ -29,9 +34,9 @@
                     <form action="login" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold small text-uppercase">
-                                <i class="fa-solid fa-envelope me-1 text-danger"></i> Địa chỉ Gmail / Email <span class="text-danger">*</span>
+                                <i class="fa-solid fa-user me-1 text-danger"></i> Email hoặc Tên Đăng Nhập <span class="text-danger">*</span>
                             </label>
-                            <input type="email" class="form-control rounded-0 fw-semibold" id="email" name="email" value="${not empty enteredEmail ? enteredEmail : ''}" placeholder="VD: customer@gmail.com" autocomplete="email" required>
+                            <input type="text" class="form-control rounded-0 fw-semibold" id="email" name="email" value="${not empty enteredEmail ? enteredEmail : ''}" placeholder="Nhập Gmail hoặc tài khoản (VD: admin)" autocomplete="username" required>
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label fw-bold small text-uppercase">

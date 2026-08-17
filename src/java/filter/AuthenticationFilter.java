@@ -26,9 +26,14 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
 
-        boolean isLoggedIn = (session != null && session.getAttribute("LOGIN_USER") != null);
+        model.UserDTO loginUser = (session != null) ? (model.UserDTO) session.getAttribute("LOGIN_USER") : null;
 
-        if (isLoggedIn) {
+        if (loginUser != null) {
+            if (!loginUser.isStatus()) {
+                session.invalidate();
+                res.sendRedirect(req.getContextPath() + "/login?error=deactivated");
+                return;
+            }
             chain.doFilter(request, response);
         } else {
             res.sendRedirect(req.getContextPath() + "/login");

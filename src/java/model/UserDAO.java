@@ -15,16 +15,20 @@ import utils.PasswordUtils;
 
 public class UserDAO {
 
-    public UserDTO checkLogin(String email, String password) {
+    public UserDTO checkLogin(String identifier, String password) {
         UserDTO user = null;
-        String sql = "SELECT * FROM [User] WHERE LOWER(email) = LOWER(?) AND password = ? AND status = 1";
+        String sql = "SELECT * FROM [User] WHERE (LOWER(email) = LOWER(?) OR LOWER(userID) = LOWER(?)) AND (password = ? OR password = ?) AND status = 1";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
              
-            String cleanEmail = (email != null) ? email.trim() : "";
-            ptm.setString(1, cleanEmail);
-            ptm.setString(2, PasswordUtils.hashPassword(password));
+            String cleanId = (identifier != null) ? identifier.trim() : "";
+            String hashedPassword = PasswordUtils.hashPassword(password);
+
+            ptm.setString(1, cleanId);
+            ptm.setString(2, cleanId);
+            ptm.setString(3, hashedPassword);
+            ptm.setString(4, password);
             
             try (ResultSet rs = ptm.executeQuery()) {
                 if (rs.next()) {
