@@ -6,3 +6,7 @@ nbproject/private/
 .env
 .env.local
 .env.*.local
+.LCK*
+*.LCK*
+*~
+*.bak
