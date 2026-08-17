@@ -8,8 +8,23 @@ import java.util.List;
 import utils.DBUtils;
 
 public class CategoryDAO {
+
+    // Fast In-Memory Cache with 5-minute TTL to eliminate remote DB latency on navigation
+    private static List<CategoryDTO> CACHED_CATEGORIES = null;
+    private static long LAST_CACHE_TIME = 0;
+    private static final long CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+    public static synchronized void invalidateCache() {
+        CACHED_CATEGORIES = null;
+        LAST_CACHE_TIME = 0;
+    }
     
     public List<CategoryDTO> getAllCategories() {
+        long now = System.currentTimeMillis();
+        if (CACHED_CATEGORIES != null && (now - LAST_CACHE_TIME) < CACHE_TTL_MS) {
+            return new ArrayList<>(CACHED_CATEGORIES);
+        }
+
         List<CategoryDTO> list = new ArrayList<>();
         String sql = "SELECT * FROM [Category] WHERE status = 1";
         
@@ -25,13 +40,25 @@ public class CategoryDAO {
                 );
                 list.add(category);
             }
+            CACHED_CATEGORIES = new ArrayList<>(list);
+            LAST_CACHE_TIME = now;
         } catch (Exception e) {
             e.printStackTrace();
+            if (CACHED_CATEGORIES != null) {
+                return new ArrayList<>(CACHED_CATEGORIES);
+            }
         }
         return list;
     }
 
     public CategoryDTO getCategoryByID(String categoryID) {
+        if (categoryID == null) return null;
+        for (CategoryDTO c : getAllCategories()) {
+            if (c.getCategoryID().equalsIgnoreCase(categoryID)) {
+                return c;
+            }
+        }
+
         CategoryDTO category = null;
         String sql = "SELECT * FROM [Category] WHERE categoryID = ?";
         
@@ -66,7 +93,7 @@ public class CategoryDAO {
             ptm.setBoolean(3, category.isStatus());
             
             check = ptm.executeUpdate() > 0;
-            
+            if (check) invalidateCache();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,7 +112,7 @@ public class CategoryDAO {
             ptm.setString(3, category.getCategoryID());
             
             check = ptm.executeUpdate() > 0;
-            
+            if (check) invalidateCache();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,7 +169,7 @@ public class CategoryDAO {
              
             ptm.setString(1, categoryID);
             check = ptm.executeUpdate() > 0;
-            
+            if (check) invalidateCache();
         } catch (Exception e) {
             e.printStackTrace();
         }
