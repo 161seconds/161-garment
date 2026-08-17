@@ -62,7 +62,7 @@
                                 <select class="form-select form-select-sm rounded-0 fw-bold ${u.roleID eq 'ADMIN' ? 'text-danger border-danger-subtle' : 'text-primary'}" 
                                         name="roleID" 
                                         onchange="this.form.submit()" 
-                                        ${u.userID eq sessionScope.LOGIN_USER.userID ? 'disabled title=\"Không thể tự đổi quyền chính mình\"' : ''}>
+                                        ${u.userID eq sessionScope.LOGIN_USER.userID ? 'disabled title="Không thể tự đổi quyền chính mình"' : ''}>
                                     <option value="ADMIN" ${u.roleID eq 'ADMIN' ? 'selected' : ''}>Quản trị viên (ADMIN)</option>
                                     <option value="CUS" ${u.roleID eq 'CUS' ? 'selected' : ''}>Khách hàng (CUS)</option>
                                 </select>

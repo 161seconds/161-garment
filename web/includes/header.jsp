@@ -666,9 +666,8 @@
                                                 </li>
                                             </c:if>
                                             <li>
-                                                <a class="dropdown-item py-2" href="#">
-                                                    <i class="fa-solid fa-box-archive me-2 text-muted"></i> Đơn hàng của
-                                                    tôi
+                                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/my-orders">
+                                                    <i class="fa-solid fa-box-archive me-2 text-muted"></i> Đơn hàng của tôi
                                                 </a>
                                             </li>
                                             <li>

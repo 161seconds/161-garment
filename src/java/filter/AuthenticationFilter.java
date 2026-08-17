@@ -11,9 +11,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.UserDTO;
 
-@WebFilter(filterName = "AuthenticationFilter", urlPatterns = {"/cart", "/checkout", "/admin/*"})
+@WebFilter(filterName = "AuthenticationFilter", urlPatterns = {"/checkout", "/my-orders", "/orders", "/admin/*"})
 public class AuthenticationFilter implements Filter {
 
     @Override
