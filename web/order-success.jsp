@@ -56,11 +56,11 @@
 
             <!-- Action Buttons -->
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                <a href="home" class="btn btn-danger rounded-0 px-4 py-3 fw-bold text-uppercase small shadow-sm" style="background-color: var(--color-primary); letter-spacing: 0.5px;">
-                    <i class="fa-solid fa-bag-shopping me-2"></i> TIẾP TỤC MUA SẮM
+                <a href="${pageContext.request.contextPath}/my-orders" class="btn btn-danger rounded-0 px-4 py-3 fw-bold text-uppercase small shadow-sm" style="background-color: var(--color-primary); letter-spacing: 0.5px;">
+                    <i class="fa-solid fa-box-archive me-2"></i> XEM ĐƠN HÀNG CỦA TÔI
                 </a>
                 <a href="product" class="btn btn-outline-dark rounded-0 px-4 py-3 fw-bold text-uppercase small">
-                    <i class="fa-solid fa-shirt me-2"></i> XEM BỘ SƯU TẬP MỚI
+                    <i class="fa-solid fa-shirt me-2"></i> TIẾP TỤC MUA SẮM
                 </a>
             </div>
         </div>

@@ -38,6 +38,7 @@ public class CartController extends HttpServlet {
                 if (qtyParam != null && !qtyParam.isEmpty()) {
                     try {
                         addQty = Integer.parseInt(qtyParam);
+                        if (addQty < 1) addQty = 1;
                     } catch (Exception e) {
                         addQty = 1;
                     }
@@ -50,43 +51,83 @@ public class CartController extends HttpServlet {
                     boolean exist = false;
                     for (CartItemDTO item : cart) {
                         if (item.getProduct().getProductID().equals(productID)) {
-                            item.setQuantity(item.getQuantity() + addQty);
+                            int newTotal = item.getQuantity() + addQty;
+                            if (product.getQuantity() > 0 && newTotal > product.getQuantity()) {
+                                newTotal = product.getQuantity();
+                            }
+                            item.setQuantity(newTotal);
                             exist = true;
                             break;
                         }
                     }
                     if (!exist) {
+                        if (product.getQuantity() > 0 && addQty > product.getQuantity()) {
+                            addQty = product.getQuantity();
+                        }
                         cart.add(new CartItemDTO(product, addQty));
                     }
                     session.setAttribute("SUCCESS_MSG", "Đã thêm " + addQty + " sản phẩm [" + product.getName() + "] vào giỏ hàng!");
+                }
+            } else if (action.equals("inc")) {
+                String productID = request.getParameter("id");
+                for (CartItemDTO item : cart) {
+                    if (item.getProduct().getProductID().equals(productID)) {
+                        if (item.getProduct().getQuantity() > item.getQuantity()) {
+                            item.setQuantity(item.getQuantity() + 1);
+                        }
+                        break;
+                    }
+                }
+            } else if (action.equals("dec")) {
+                String productID = request.getParameter("id");
+                for (int i = 0; i < cart.size(); i++) {
+                    CartItemDTO item = cart.get(i);
+                    if (item.getProduct().getProductID().equals(productID)) {
+                        if (item.getQuantity() > 1) {
+                            item.setQuantity(item.getQuantity() - 1);
+                        } else {
+                            cart.remove(i);
+                        }
+                        break;
+                    }
                 }
             } else if (action.equals("remove")) {
                 String productID = request.getParameter("id");
                 cart.removeIf(item -> item.getProduct().getProductID().equals(productID));
             } else if (action.equals("update")) {
                 String productID = request.getParameter("id");
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-                for (CartItemDTO item : cart) {
-                    if (item.getProduct().getProductID().equals(productID)) {
-                        if (quantity > 0) {
-                            item.setQuantity(quantity);
-                        } else {
-                            cart.remove(item);
+                try {
+                    int quantity = Integer.parseInt(request.getParameter("quantity"));
+                    for (CartItemDTO item : cart) {
+                        if (item.getProduct().getProductID().equals(productID)) {
+                            if (quantity > 0) {
+                                if (item.getProduct().getQuantity() > 0 && quantity > item.getProduct().getQuantity()) {
+                                    quantity = item.getProduct().getQuantity();
+                                }
+                                item.setQuantity(quantity);
+                            } else {
+                                cart.remove(item);
+                            }
+                            break;
                         }
-                        break;
                     }
-                }
+                } catch (NumberFormatException ignored) {}
+            } else if (action.equals("clear")) {
+                cart.clear();
             }
         }
         
         session.setAttribute("CART", cart);
         
-        // Caculate total
+        // Calculate total amount and total items
         double total = 0;
+        int totalItems = 0;
         for (CartItemDTO item : cart) {
             total += item.getProduct().getPrice() * item.getQuantity();
+            totalItems += item.getQuantity();
         }
         request.setAttribute("TOTAL", total);
+        request.setAttribute("TOTAL_ITEMS", totalItems);
         
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }

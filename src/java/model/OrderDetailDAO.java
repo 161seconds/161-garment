@@ -11,7 +11,10 @@ public class OrderDetailDAO {
 
     public List<OrderDetailDTO> getOrderDetails(String orderID) {
         List<OrderDetailDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM [OrderDetail] WHERE orderID = ?";
+        String sql = "SELECT od.orderID, od.productID, od.price, od.quantity, p.name AS productName, p.image AS productImage "
+                   + "FROM [OrderDetail] od "
+                   + "LEFT JOIN [Product] p ON od.productID = p.productID "
+                   + "WHERE od.orderID = ?";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
@@ -23,7 +26,9 @@ public class OrderDetailDAO {
                         rs.getString("orderID"),
                         rs.getString("productID"),
                         rs.getDouble("price"),
-                        rs.getInt("quantity")
+                        rs.getInt("quantity"),
+                        rs.getNString("productName"),
+                        rs.getString("productImage")
                     );
                     list.add(detail);
                 }
