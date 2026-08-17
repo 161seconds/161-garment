@@ -306,7 +306,7 @@ public class UserDAO {
             ptm.setInt(2, fetch);
             try (ResultSet rs = ptm.executeQuery()) {
                 while (rs.next()) {
-                    user = new UserDTO();
+                    UserDTO user = new UserDTO();
                     user.setUserID(rs.getString("userID"));
                     user.setFullName(rs.getNString("fullName"));
                     user.setPassword(rs.getString("password"));
