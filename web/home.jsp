@@ -100,59 +100,31 @@
                 </div>
 
                 <div class="row g-3 g-lg-4">
-                    <!-- 1. WOMEN COLLECTION -->
-                    <div class="col-12 col-md-4">
-                        <a href="product?categoryID=WOMEN_02" class="one61-category-card">
-                            <div class="category-img-box">
-                                <img src="${pageContext.request.contextPath}/img-prj301/products/women/cover/cover-outerwear-women-1.avif" alt="Thời Trang Nữ" class="category-img">
-                                <span class="category-floating-badge">BST NỮ 2026</span>
+                    <c:forEach var="feat" items="${FEATURED_CATEGORIES}">
+                        <c:if test="${feat.status}">
+                            <div class="col-12 col-md-4">
+                                <a href="product?categoryID=${feat.categoryID}" class="one61-category-card">
+                                    <div class="category-img-box">
+                                        <img src="${pageContext.request.contextPath}/img-prj301/${feat.image}" 
+                                             alt="${feat.title}" 
+                                             class="category-img"
+                                             onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif';">
+                                        <c:if test="${not empty feat.badge}">
+                                            <span class="category-floating-badge">${feat.badge}</span>
+                                        </c:if>
+                                    </div>
+                                    <div class="category-info-box">
+                                        <h5 class="category-title">${feat.title}</h5>
+                                        <p class="category-subtitle">${feat.subtitle}</p>
+                                        <div class="category-action-link">
+                                            <span>Khám phá ngay</span>
+                                            <i class="fa-solid fa-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="category-info-box">
-                                <h5 class="category-title">THỜI TRANG NỮ</h5>
-                                <p class="category-subtitle">Thanh lịch, dịu mát & tôn dáng tối ưu</p>
-                                <div class="category-action-link">
-                                    <span>Khám phá ngay</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- 2. MEN COLLECTION -->
-                    <div class="col-12 col-md-4">
-                        <a href="product?categoryID=MEN_02" class="one61-category-card">
-                            <div class="category-img-box">
-                                <img src="${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-outerwear-men-1.avif" alt="Thời Trang Nam" class="category-img">
-                                <span class="category-floating-badge">BST NAM 2026</span>
-                            </div>
-                            <div class="category-info-box">
-                                <h5 class="category-title">THỜI TRANG NAM</h5>
-                                <p class="category-subtitle">Phóng khoáng, chỉn chu & năng động</p>
-                                <div class="category-action-link">
-                                    <span>Khám phá ngay</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- 3. BARREL PANTS / OUTERWEAR -->
-                    <div class="col-12 col-md-4">
-                        <a href="product?categoryID=WOMEN_03" class="one61-category-card">
-                            <div class="category-img-box">
-                                <img src="${pageContext.request.contextPath}/img-prj301/products/women/cover/cover-bottom-women-1.avif" alt="Quần Barrel & Dài" class="category-img">
-                                <span class="category-floating-badge" style="background-color: var(--color-primary, #ED1D24);">HOT TREND</span>
-                            </div>
-                            <div class="category-info-box">
-                                <h5 class="category-title">QUẦN BARREL</h5>
-                                <p class="category-subtitle">Thiết kế phom cong thời thượng</p>
-                                <div class="category-action-link">
-                                    <span>Khám phá ngay</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                        </c:if>
+                    </c:forEach>
                 </div>
             </section>
 

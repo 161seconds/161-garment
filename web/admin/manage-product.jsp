@@ -79,7 +79,7 @@
                         <td class="text-center fw-bold text-secondary font-monospace">${p.productID}</td>
                         <td class="text-center p-2">
                             <div style="background: #F4F4F4; width: 55px; height: 55px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden;">
-                                <img src="${pageContext.request.contextPath}/img-prj301/${p.image}" alt="${p.name}" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif'">
+                                <img src="${pageContext.request.contextPath}/img-prj301/${p.image}" alt="${p.name}" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif';">
                             </div>
                         </td>
                         <td>

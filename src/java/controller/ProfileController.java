@@ -117,8 +117,8 @@ public class ProfileController extends HttpServlet {
         String errorMsg = null;
         if (oldPassword == null || oldPassword.trim().isEmpty()) {
             errorMsg = "Vui lòng nhập mật khẩu hiện tại!";
-        } else if (newPassword == null || newPassword.length() < 6) {
-            errorMsg = "Mật khẩu mới phải có độ dài tối thiểu từ 6 ký tự trở lên!";
+        } else if (!utils.PasswordUtils.isValidComplexity(newPassword)) {
+            errorMsg = utils.PasswordUtils.getPasswordRequirementsMessage();
         } else if (!newPassword.equals(confirmPassword)) {
             errorMsg = "Xác nhận mật khẩu mới không khớp!";
         }

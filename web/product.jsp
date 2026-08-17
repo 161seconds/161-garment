@@ -268,21 +268,38 @@
     <!-- Header Banner -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center pb-3 mb-4 border-bottom gap-3">
         <div>
-            <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.5px;">ONE61 LifeWear</span>
-                <span class="text-muted small">Bộ sưu tập 2026</span>
-            </div>
-            <h2 class="fw-bold text-uppercase tracking-tight m-0" style="font-family: 'Outfit', sans-serif;">
-                <c:choose>
-                    <c:when test="${not empty param.categoryID}">
-                        <c:forEach var="c" items="${CATEGORIES}">
-                            <c:if test="${c.categoryID eq param.categoryID}">${c.name}</c:if>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>TẤT CẢ SẢN PHẨM</c:otherwise>
-                </c:choose>
-            </h2>
-            <p class="text-muted small m-0 mt-1">Trang phục tối giản, thiết kế tinh tế với chất liệu sợi dệt cao cấp chuẩn Nhật Bản.</p>
+            <c:choose>
+                <c:when test="${not empty param.keyword}">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.5px;">TÌM KIẾM</span>
+                        <span class="text-muted small">Từ khóa: "<strong>${param.keyword}</strong>"</span>
+                    </div>
+                    <h2 class="fw-bold text-uppercase tracking-tight m-0" style="font-family: 'Outfit', sans-serif;">
+                        KẾT QUẢ TÌM KIẾM (${totalProducts != null ? totalProducts : PRODUCTS.size()})
+                    </h2>
+                    <p class="text-muted small m-0 mt-1">
+                        Hiển thị các sản phẩm phù hợp với từ khóa "<strong>${param.keyword}</strong>". 
+                        <a href="product" class="text-danger text-decoration-none fw-bold ms-2"><i class="fa-solid fa-xmark me-1"></i>Xóa bộ lọc tìm kiếm</a>
+                    </p>
+                </c:when>
+                <c:otherwise>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <span class="badge bg-danger rounded-0 px-2 py-1 text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.5px;">ONE61 LifeWear</span>
+                        <span class="text-muted small">Bộ sưu tập 2026</span>
+                    </div>
+                    <h2 class="fw-bold text-uppercase tracking-tight m-0" style="font-family: 'Outfit', sans-serif;">
+                        <c:choose>
+                            <c:when test="${not empty param.categoryID}">
+                                <c:forEach var="c" items="${CATEGORIES}">
+                                    <c:if test="${c.categoryID eq param.categoryID}">${c.name}</c:if>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>TẤT CẢ SẢN PHẨM</c:otherwise>
+                        </c:choose>
+                    </h2>
+                    <p class="text-muted small m-0 mt-1">Trang phục tối giản, thiết kế tinh tế với chất liệu sợi dệt cao cấp chuẩn Nhật Bản.</p>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <div class="d-flex align-items-center gap-3">
@@ -290,14 +307,45 @@
                 Hiển thị: <strong class="text-dark">${PRODUCTS.size()}</strong> sản phẩm
             </span>
             <div class="dropdown">
-                <button class="btn btn-outline-dark btn-sm rounded-0 dropdown-toggle fw-semibold px-3" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.8rem;">
-                    <i class="fa-solid fa-arrow-down-short-wide me-1"></i> Sắp xếp
+                <button class="btn btn-sm rounded-0 dropdown-toggle fw-semibold px-3 border border-dark bg-white text-dark shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 0.8rem;">
+                    <i class="fa-solid fa-arrow-down-short-wide me-1 text-secondary"></i> 
+                    <c:choose>
+                        <c:when test="${param.sort eq 'price-asc'}"><span class="text-danger fw-bold">Giá: Thấp đến Cao</span></c:when>
+                        <c:when test="${param.sort eq 'price-desc'}"><span class="text-danger fw-bold">Giá: Cao đến Thấp</span></c:when>
+                        <c:when test="${param.sort eq 'newest'}"><span class="text-danger fw-bold">Mới nhất</span></c:when>
+                        <c:when test="${param.sort eq 'popular'}"><span class="text-danger fw-bold">Bán chạy nhất</span></c:when>
+                        <c:otherwise>Sắp xếp</c:otherwise>
+                    </c:choose>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end rounded-0 shadow-sm border border-dark-subtle">
-                    <li><a class="dropdown-item small" href="product?sort=newest${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">Mới nhất</a></li>
-                    <li><a class="dropdown-item small" href="product?sort=price-asc${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">Giá: Thấp đến Cao</a></li>
-                    <li><a class="dropdown-item small" href="product?sort=price-desc${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">Giá: Cao đến Thấp</a></li>
-                    <li><a class="dropdown-item small" href="product?sort=popular${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">Bán chạy nhất</a></li>
+                <ul class="dropdown-menu dropdown-menu-end rounded-0 shadow-sm border border-dark-subtle py-1" style="min-width: 190px;">
+                    <li>
+                        <a class="dropdown-item small d-flex align-items-center justify-content-between py-2 ${param.sort eq 'newest' ? 'fw-bold text-danger bg-light' : 'text-dark'}" 
+                           href="product?sort=newest${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}">
+                            <span>Mới nhất</span>
+                            <c:if test="${param.sort eq 'newest'}"><i class="fa-solid fa-check text-danger ms-2"></i></c:if>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item small d-flex align-items-center justify-content-between py-2 ${param.sort eq 'price-asc' ? 'fw-bold text-danger bg-light' : 'text-dark'}" 
+                           href="product?sort=price-asc${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}">
+                            <span>Giá: Thấp đến Cao</span>
+                            <c:if test="${param.sort eq 'price-asc'}"><i class="fa-solid fa-check text-danger ms-2"></i></c:if>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item small d-flex align-items-center justify-content-between py-2 ${param.sort eq 'price-desc' ? 'fw-bold text-danger bg-light' : 'text-dark'}" 
+                           href="product?sort=price-desc${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}">
+                            <span>Giá: Cao đến Thấp</span>
+                            <c:if test="${param.sort eq 'price-desc'}"><i class="fa-solid fa-check text-danger ms-2"></i></c:if>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item small d-flex align-items-center justify-content-between py-2 ${param.sort eq 'popular' ? 'fw-bold text-danger bg-light' : 'text-dark'}" 
+                           href="product?sort=popular${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}">
+                            <span>Bán chạy nhất</span>
+                            <c:if test="${param.sort eq 'popular'}"><i class="fa-solid fa-check text-danger ms-2"></i></c:if>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -487,21 +535,21 @@
                             <ul class="pagination justify-content-center">
                                 <li class="page-item ${currentPage <= 1 ? 'disabled' : ''}">
                                     <a class="page-link rounded-0 border-dark text-dark"
-                                       href="product?page=${currentPage - 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">
+                                       href="product?page=${currentPage - 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}">
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                 </li>
                                 <c:forEach begin="1" end="${endPage}" var="i">
                                     <li class="page-item ${currentPage == i ? 'active' : ''}">
                                         <a class="page-link rounded-0 ${currentPage == i ? 'bg-danger border-danger text-white' : 'border-dark text-dark'}"
-                                           href="product?page=${i}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">
+                                           href="product?page=${i}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}">
                                             ${i}
                                         </a>
                                     </li>
                                 </c:forEach>
                                 <li class="page-item ${currentPage >= endPage ? 'disabled' : ''}">
                                     <a class="page-link rounded-0 border-dark text-dark"
-                                       href="product?page=${currentPage + 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}">
+                                       href="product?page=${currentPage + 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}">
                                         <i class="fa-solid fa-chevron-right"></i>
                                     </a>
                                 </li>
@@ -516,13 +564,20 @@
 
 <script>
     function toggleQuickWishlist(id, name, price, img, btn) {
-        let wishlist = JSON.parse(localStorage.getItem('one61_wishlist') || '[]');
+        let wishlist = (typeof window.getOne61Wishlist === 'function') 
+            ? window.getOne61Wishlist() 
+            : JSON.parse(localStorage.getItem('one61_wishlist_' + (window.CURRENT_USER_ID || 'guest')) || '[]');
+            
         const idx = wishlist.findIndex(item => item.id === id);
         const icon = btn.querySelector('i');
         
         if (idx === -1) {
             wishlist.push({ id, name, price, img });
-            localStorage.setItem('one61_wishlist', JSON.stringify(wishlist));
+            if (typeof window.saveOne61Wishlist === 'function') {
+                window.saveOne61Wishlist(wishlist);
+            } else {
+                localStorage.setItem('one61_wishlist_' + (window.CURRENT_USER_ID || 'guest'), JSON.stringify(wishlist));
+            }
             if (icon) {
                 icon.className = 'fa-solid fa-heart text-danger';
             }
@@ -531,7 +586,11 @@
             }
         } else {
             wishlist.splice(idx, 1);
-            localStorage.setItem('one61_wishlist', JSON.stringify(wishlist));
+            if (typeof window.saveOne61Wishlist === 'function') {
+                window.saveOne61Wishlist(wishlist);
+            } else {
+                localStorage.setItem('one61_wishlist_' + (window.CURRENT_USER_ID || 'guest'), JSON.stringify(wishlist));
+            }
             if (icon) {
                 icon.className = 'fa-regular fa-heart';
             }
@@ -543,6 +602,22 @@
             window.updateWishlistBadge();
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof window.updateWishlistBadge === 'function') {
+            window.updateWishlistBadge();
+        }
+        const wishlist = (typeof window.getOne61Wishlist === 'function') ? window.getOne61Wishlist() : [];
+        const wishIds = new Set(wishlist.map(w => w.id));
+        document.querySelectorAll('.floating-wishlist-btn').forEach(btn => {
+            const onclickAttr = btn.getAttribute('onclick') || '';
+            const match = onclickAttr.match(/toggleQuickWishlist\('([^']+)'/);
+            if (match && wishIds.has(match[1])) {
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = 'fa-solid fa-heart text-danger';
+            }
+        });
+    });
 </script>
 
 <jsp:include page="includes/footer.jsp" />

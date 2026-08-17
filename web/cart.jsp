@@ -75,7 +75,7 @@
                                                              alt="${item.product.name}" 
                                                              class="w-100 h-100" 
                                                              style="object-fit: cover;"
-                                                             onerror="this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif'">
+                                                             onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif';">
                                                     </a>
                                                     <div>
                                                         <span class="badge bg-light text-muted border rounded-0 font-monospace mb-1" style="font-size: 0.68rem;">${item.product.productID}</span>

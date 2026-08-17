@@ -164,9 +164,11 @@ public class AdminController extends HttpServlet {
         } else if (action.equals("edit")) {
             String productID = request.getParameter("id");
             ProductDTO product = productDAO.getProductByID(productID);
+            List<ProductDTO> childProducts = productDAO.getChildProducts(productID);
             List<CategoryDTO> categories = categoryDAO.getAllCategoriesAdmin();
 
             request.setAttribute("PRODUCT", product);
+            request.setAttribute("CHILD_PRODUCTS", childProducts);
             request.setAttribute("CATEGORIES", categories);
             request.getRequestDispatcher("/admin/form-product.jsp").forward(request, response);
 
@@ -216,7 +218,7 @@ public class AdminController extends HttpServlet {
                 return;
             }
 
-            // Populate and save
+            // Populate and save master product
             ProductDTO product = new ProductDTO();
             if (!isEditMode && (prodID == null || prodID.trim().isEmpty())) {
                 prodID = productDAO.generateNextProductID();
@@ -230,8 +232,8 @@ public class AdminController extends HttpServlet {
             product.setParentID(null);
             product.setStatus(true);
 
-            // Handle file upload or text path
-            String imagePath = handleImageUpload(request);
+            // Handle cover image upload or text path
+            String imagePath = handleImageUpload(request, "imageFile");
             if (imagePath == null || imagePath.isEmpty()) {
                 imagePath = request.getParameter("image");
                 if (imagePath == null || imagePath.isEmpty()) {
@@ -249,9 +251,24 @@ public class AdminController extends HttpServlet {
 
             if (isEditMode) {
                 productDAO.updateProduct(product);
-                response.sendRedirect(request.getContextPath() + "/admin/product?action=list&success=updated");
             } else {
                 productDAO.insertProduct(product);
+            }
+
+            // Handle 4 Lookbook/Content Child Images
+            for (int i = 1; i <= 4; i++) {
+                String contentImg = handleImageUpload(request, "contentImage_" + i);
+                if (contentImg == null || contentImg.isEmpty()) {
+                    contentImg = request.getParameter("contentImageHidden_" + i);
+                }
+                if (contentImg != null && !contentImg.trim().isEmpty()) {
+                    productDAO.upsertChildProduct(prodID.trim(), i, contentImg.trim(), name.trim(), categoryID, price);
+                }
+            }
+
+            if (isEditMode) {
+                response.sendRedirect(request.getContextPath() + "/admin/product?action=list&success=updated");
+            } else {
                 response.sendRedirect(request.getContextPath() + "/admin/product?action=list&success=added");
             }
 
@@ -268,7 +285,9 @@ public class AdminController extends HttpServlet {
         request.setAttribute("CATEGORIES", categories);
         if (isEditMode) {
             ProductDTO product = productDAO.getProductByID(prodID);
+            List<ProductDTO> childProducts = productDAO.getChildProducts(prodID);
             request.setAttribute("PRODUCT", product);
+            request.setAttribute("CHILD_PRODUCTS", childProducts);
         } else {
             String nextProductID = productDAO.generateNextProductID();
             request.setAttribute("NEXT_PRODUCT_ID", nextProductID);
@@ -279,9 +298,9 @@ public class AdminController extends HttpServlet {
     // ==========================================
     // FILE UPLOAD HELPER
     // ==========================================
-    private String handleImageUpload(HttpServletRequest request) {
+    private String handleImageUpload(HttpServletRequest request, String partName) {
         try {
-            Part filePart = request.getPart("imageFile");
+            Part filePart = request.getPart(partName);
             if (filePart != null && filePart.getSize() > 0) {
                 String submittedFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                 if (submittedFileName != null && !submittedFileName.isEmpty()) {
@@ -333,8 +352,12 @@ public class AdminController extends HttpServlet {
                 productCounts.put(cat.getCategoryID(), categoryDAO.countProductsPerCategory(cat.getCategoryID()));
             }
 
+            model.FeaturedCategoryDAO featDao = new model.FeaturedCategoryDAO();
+            List<model.FeaturedCategoryDTO> featuredList = featDao.getAllFeaturedCategories(getServletContext());
+
             request.setAttribute("CATEGORIES", categories);
             request.setAttribute("PRODUCT_COUNTS", productCounts);
+            request.setAttribute("FEATURED_CATEGORIES", featuredList);
             request.getRequestDispatcher("/admin/manage-category.jsp").forward(request, response);
 
         } else if (action.equals("add")) {
@@ -354,6 +377,27 @@ public class AdminController extends HttpServlet {
             CategoryDTO cat = new CategoryDTO(categoryID, name, status);
             categoryDAO.updateCategory(cat);
             response.sendRedirect(request.getContextPath() + "/admin/category?action=list&success=updated");
+
+        } else if (action.equals("update_featured")) {
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                String title = request.getParameter("title");
+                String subtitle = request.getParameter("subtitle");
+                String badge = request.getParameter("badge");
+                String categoryID = request.getParameter("categoryID");
+                boolean status = request.getParameter("status") != null;
+                String currentImage = request.getParameter("currentImage");
+
+                String uploadedImage = handleImageUpload(request, "imageFile");
+                String finalImage = (uploadedImage != null && !uploadedImage.isEmpty()) ? uploadedImage : currentImage;
+
+                model.FeaturedCategoryDTO item = new model.FeaturedCategoryDTO(id, title, subtitle, badge, categoryID, finalImage, status);
+                model.FeaturedCategoryDAO featDao = new model.FeaturedCategoryDAO();
+                featDao.updateFeaturedCategory(getServletContext(), item);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            response.sendRedirect(request.getContextPath() + "/admin/category?action=list&tab=featured&success=featured_updated");
 
         } else if (action.equals("delete")) {
             String categoryID = request.getParameter("id");

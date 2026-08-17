@@ -57,14 +57,20 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        if (password == null || password.length() < 6) {
-            request.setAttribute("ERROR", "Mật khẩu phải có độ dài tối thiểu từ 6 ký tự!");
+        if (!utils.PasswordUtils.isValidComplexity(password)) {
+            request.setAttribute("ERROR", utils.PasswordUtils.getPasswordRequirementsMessage());
+            request.setAttribute("fullName", fullName);
+            request.setAttribute("email", email);
+            request.setAttribute("phone", phone);
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;
         }
 
         if (!password.equals(confirm)) {
             request.setAttribute("ERROR", "Mật khẩu xác nhận không khớp!");
+            request.setAttribute("fullName", fullName);
+            request.setAttribute("email", email);
+            request.setAttribute("phone", phone);
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;
         }

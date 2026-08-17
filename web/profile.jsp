@@ -182,10 +182,9 @@
                                 <i class="fa-regular fa-eye"></i>
                             </button>
                         </div>
-                        <div class="form-text small text-muted">Mật khẩu nên kết hợp chữ hoa, chữ thường, chữ số để tăng độ an toàn.</div>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label class="form-label fw-bold small text-uppercase">Xác nhận mật khẩu mới <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <input type="password" class="form-control rounded-0" id="confirmPassword" name="confirmPassword" required minlength="6" placeholder="Nhập lại mật khẩu mới...">
@@ -194,6 +193,20 @@
                             </button>
                         </div>
                     </div>
+
+                    <div class="p-2 mb-3 bg-light border border-dark-subtle small">
+                        <div class="fw-bold text-dark mb-1" style="font-size: 0.75rem;">
+                            <i class="fa-solid fa-shield-halved text-danger me-1"></i> TIÊU CHUẨN MẬT KHẨU MỚI:
+                        </div>
+                        <ul class="mb-0 ps-3 text-muted" style="font-size: 0.75rem; line-height: 1.4;">
+                            <li>Độ dài tối thiểu từ <strong>6 ký tự</strong></li>
+                            <li>Có ít nhất <strong>1 chữ cái in hoa (A-Z)</strong></li>
+                            <li>Có ít nhất <strong>1 chữ số (0-9)</strong></li>
+                            <li>Có ít nhất <strong>1 ký tự đặc biệt</strong> (VD: @, #, $, %, !, *, ?, &amp;...)</li>
+                        </ul>
+                    </div>
+
+                    <div id="profilePassError" class="alert alert-danger rounded-0 small py-2 text-center mb-3" style="display:none;"></div>
 
                     <div class="pt-2 border-top d-flex justify-content-end">
                         <button type="submit" class="btn btn-danger rounded-0 px-4 py-2 fw-bold text-uppercase" style="background-color: var(--color-primary, #ED1D24); font-size: 0.82rem; letter-spacing: 0.5px;">
@@ -296,6 +309,41 @@
             icon.classList.add('fa-eye');
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const passForm = document.querySelector('#tabPanelSecurity form');
+        if (passForm) {
+            passForm.addEventListener('submit', function(e) {
+                const newPass = document.getElementById('newPassword')?.value || '';
+                const confirmPass = document.getElementById('confirmPassword')?.value || '';
+                const errBox = document.getElementById('profilePassError');
+
+                const hasUpper = /[A-Z]/.test(newPass);
+                const hasDigit = /[0-9]/.test(newPass);
+                const hasSpecial = /[^A-Za-z0-9\s]/.test(newPass);
+
+                if (newPass.length < 6 || !hasUpper || !hasDigit || !hasSpecial) {
+                    e.preventDefault();
+                    if (errBox) {
+                        errBox.textContent = 'Mật khẩu mới phải từ 6 ký tự, gồm ít nhất 1 chữ hoa, 1 chữ số và 1 ký tự đặc biệt!';
+                        errBox.style.display = 'block';
+                    }
+                    return;
+                }
+
+                if (newPass !== confirmPass) {
+                    e.preventDefault();
+                    if (errBox) {
+                        errBox.textContent = 'Xác nhận mật khẩu mới không khớp!';
+                        errBox.style.display = 'block';
+                    }
+                    return;
+                }
+
+                if (errBox) errBox.style.display = 'none';
+            });
+        }
+    });
 </script>
 
 <jsp:include page="includes/footer.jsp" />

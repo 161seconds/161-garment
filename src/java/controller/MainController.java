@@ -24,6 +24,10 @@ public class MainController extends HttpServlet {
         List<CategoryDTO> categories = cDao.getAllCategories();
         request.setAttribute("CATEGORIES", categories);
 
+        model.FeaturedCategoryDAO featDao = new model.FeaturedCategoryDAO();
+        List<model.FeaturedCategoryDTO> featuredCategories = featDao.getAllFeaturedCategories(getServletContext());
+        request.setAttribute("FEATURED_CATEGORIES", featuredCategories);
+
         String categoryID = request.getParameter("categoryID");
         int pageSize = 10;
         int page = 1;

@@ -30,7 +30,7 @@
                 </c:choose>
             </h4>
             <p class="text-muted small m-0">
-                ${isEdit ? 'Cập nhật thông tin chi tiết, giá bán và hình ảnh sản phẩm trong hệ thống' : 'Điền thông tin chi tiết và tải ảnh sản phẩm lên hệ thống'}
+                ${isEdit ? 'Cập nhật thông tin chi tiết, giá bán, ảnh bìa và bộ 4 ảnh Lookbook đa góc cạnh' : 'Điền thông tin chi tiết, tải ảnh bìa và tải bộ 4 ảnh chi tiết Lookbook'}
             </p>
         </div>
         <div>
@@ -45,12 +45,12 @@
         <input type="hidden" name="action" value="${isEdit ? 'update_submit' : 'add_submit'}">
         <input type="hidden" name="image" id="imagePathHidden" value="${PRODUCT.image}">
         
-        <div class="row g-4">
+        <div class="row g-4 mb-4">
             <!-- Left Column: Core Info -->
             <div class="col-lg-7">
-                <div class="card admin-card p-3 mb-4">
+                <div class="card admin-card p-3 h-100">
                     <h6 class="fw-bold text-uppercase pb-2 border-bottom mb-3">
-                        <i class="fa-solid fa-circle-info me-1 text-danger"></i> Thông Tin Chung
+                        <i class="fa-solid fa-circle-info me-1 text-danger"></i> 1. Thông Tin Chung
                     </h6>
                     
                     <div class="row g-3">
@@ -86,11 +86,11 @@
                 </div>
             </div>
 
-            <!-- Right Column: Pricing, Inventory & Image Upload -->
+            <!-- Right Column: Pricing, Inventory & Cover Image Upload -->
             <div class="col-lg-5">
-                <div class="card admin-card p-3 mb-4">
+                <div class="card admin-card p-3 h-100">
                     <h6 class="fw-bold text-uppercase pb-2 border-bottom mb-3">
-                        <i class="fa-solid fa-tag me-1 text-danger"></i> Giá Cả & Tồn Kho
+                        <i class="fa-solid fa-tag me-1 text-danger"></i> 2. Giá Cả & Ảnh Bìa Chính
                     </h6>
                     
                     <!-- Selling Price -->
@@ -118,9 +118,6 @@
                                    oninput="formatPricePreview(this)">
                             <span class="input-group-text rounded-0 bg-light">VNĐ</span>
                         </div>
-                        <div class="form-text small" style="font-size: 0.72rem;">
-                            Từ 1.000đ đến 100.000.000đ (Không nhập số âm, ký tự đặc biệt)
-                        </div>
                     </div>
 
                     <!-- Inventory Quantity -->
@@ -138,52 +135,146 @@
                                required
                                onkeydown="preventInvalidNumKeys(event, false)"
                                oninput="sanitizeQuantity(this)">
-                        <div class="form-text small" style="font-size: 0.72rem;">
-                            Số lượng nguyên từ 0 đến 100.000 chiếc (Không nhập số âm hoặc số thập phân)
-                        </div>
                     </div>
 
-                    <!-- Image Upload Section -->
-                    <div class="mb-3">
+                    <!-- Cover Image Upload Section -->
+                    <div class="mb-2">
                         <label class="form-label fw-bold small text-uppercase d-flex justify-content-between align-items-center">
-                            <span>Tải Ảnh Sản Phẩm <span class="text-danger">*</span></span>
-                            <small class="text-muted text-lowercase fw-normal">(JPG, PNG, WEBP, AVIF)</small>
+                            <span>Ảnh Bìa Đại Diện (Cover) <span class="text-danger">*</span></span>
+                            <small class="text-muted text-lowercase fw-normal">(Hiển thị ở trang chủ & danh mục)</small>
                         </label>
-                        
-                        <!-- File Upload Input -->
-                        <div class="input-group">
-                            <input type="file" class="form-control rounded-0" name="imageFile" id="imageFileInput" accept="image/*" onchange="handleFileSelect(this)">
-                        </div>
+                        <input type="file" class="form-control rounded-0" name="imageFile" id="imageFileInput" accept="image/*" onchange="handleFileSelect(this)">
                     </div>
 
-                    <!-- Image Preview Box -->
-                    <div class="mt-3 p-3 bg-light text-center border">
-                        <div class="small text-muted fw-bold text-uppercase mb-2" style="font-size: 0.75rem;">
-                            <i class="fa-regular fa-image me-1"></i> Xem trước hình ảnh:
-                        </div>
-                        <div style="width: 140px; height: 170px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <!-- Cover Image Preview Box -->
+                    <div class="p-2 bg-light text-center border mt-2">
+                        <div style="width: 110px; height: 130px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                             <img id="imgPreview" 
                                  src="${not empty PRODUCT.image ? pageContext.request.contextPath.concat('/img-prj301/').concat(PRODUCT.image) : pageContext.request.contextPath.concat('/img-prj301/products/men/cover/cover-shirts-men-1.avif')}" 
                                  alt="Product Preview" 
                                  style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                                 onerror="this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif'">
+                                 onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif';">
                         </div>
-                        <div id="imgFileNameDisplay" class="small text-muted text-truncate mt-2 font-monospace" style="font-size: 0.75rem;">
-                            ${not empty PRODUCT.image ? PRODUCT.image : 'Chưa chọn file mới'}
+                        <div id="imgFileNameDisplay" class="small text-muted text-truncate mt-1 font-monospace" style="font-size: 0.72rem;">
+                            ${not empty PRODUCT.image ? PRODUCT.image : 'Chưa chọn ảnh mới'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: 4 Lookbook/Content Gallery Images -->
+        <div class="card admin-card p-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center pb-2 border-bottom mb-3">
+                <h6 class="fw-bold text-uppercase m-0">
+                    <i class="fa-solid fa-images me-1 text-danger"></i> 3. Bộ 4 Ảnh Chi Tiết / Lookbook Gallery (Multi-Angle Content)
+                </h6>
+                <small class="text-muted">Các góc ảnh đa chiều hiển thị trong trang chi tiết sản phẩm</small>
+            </div>
+
+            <div class="row g-3">
+                <!-- Content Image 1 -->
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="border p-3 bg-light text-center h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="fw-bold small text-uppercase mb-1 text-danger">Ảnh Chi Tiết 1</div>
+                            <div style="width: 100%; height: 160px; background: #FFFFFF; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px;">
+                                <img id="contentPreview_1" 
+                                     src="${not empty CHILD_PRODUCTS[0].image ? pageContext.request.contextPath.concat('/img-prj301/').concat(CHILD_PRODUCTS[0].image) : pageContext.request.contextPath.concat('/img-prj301/products/men/content/content-shirts-men-1-01.avif')}" 
+                                     alt="Content 1" 
+                                     style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                                     onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/content/content-shirts-men-1-01.avif';">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" name="contentImageHidden_1" value="${CHILD_PRODUCTS[0].image}">
+                            <input type="file" class="form-control form-control-sm rounded-0 mb-1" name="contentImage_1" accept="image/*" onchange="previewContentImg(this, 1)">
+                            <div id="contentFileName_1" class="text-muted font-monospace text-truncate" style="font-size: 0.68rem;">
+                                ${not empty CHILD_PRODUCTS[0].image ? CHILD_PRODUCTS[0].image : 'Mặc định ảnh 1'}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Submit Button Area -->
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-admin-primary flex-grow-1 py-2">
-                        <i class="fa-solid fa-floppy-disk me-1"></i> ${isEdit ? 'Lưu Thay Đổi' : 'Lưu Sản Phẩm Mới'}
-                    </button>
-                    <a href="${pageContext.request.contextPath}/admin/product?action=list" class="btn btn-outline-dark rounded-0 px-3 py-2">
-                        Hủy Bỏ
-                    </a>
+                <!-- Content Image 2 -->
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="border p-3 bg-light text-center h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="fw-bold small text-uppercase mb-1 text-danger">Ảnh Chi Tiết 2</div>
+                            <div style="width: 100%; height: 160px; background: #FFFFFF; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px;">
+                                <img id="contentPreview_2" 
+                                     src="${not empty CHILD_PRODUCTS[1].image ? pageContext.request.contextPath.concat('/img-prj301/').concat(CHILD_PRODUCTS[1].image) : pageContext.request.contextPath.concat('/img-prj301/products/men/content/content-shirts-men-1-02.avif')}" 
+                                     alt="Content 2" 
+                                     style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                                     onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/content/content-shirts-men-1-02.avif';">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" name="contentImageHidden_2" value="${CHILD_PRODUCTS[1].image}">
+                            <input type="file" class="form-control form-control-sm rounded-0 mb-1" name="contentImage_2" accept="image/*" onchange="previewContentImg(this, 2)">
+                            <div id="contentFileName_2" class="text-muted font-monospace text-truncate" style="font-size: 0.68rem;">
+                                ${not empty CHILD_PRODUCTS[1].image ? CHILD_PRODUCTS[1].image : 'Mặc định ảnh 2'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Image 3 -->
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="border p-3 bg-light text-center h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="fw-bold small text-uppercase mb-1 text-danger">Ảnh Chi Tiết 3</div>
+                            <div style="width: 100%; height: 160px; background: #FFFFFF; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px;">
+                                <img id="contentPreview_3" 
+                                     src="${not empty CHILD_PRODUCTS[2].image ? pageContext.request.contextPath.concat('/img-prj301/').concat(CHILD_PRODUCTS[2].image) : pageContext.request.contextPath.concat('/img-prj301/products/men/content/content-shirts-men-1-03.avif')}" 
+                                     alt="Content 3" 
+                                     style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                                     onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/content/content-shirts-men-1-03.avif';">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" name="contentImageHidden_3" value="${CHILD_PRODUCTS[2].image}">
+                            <input type="file" class="form-control form-control-sm rounded-0 mb-1" name="contentImage_3" accept="image/*" onchange="previewContentImg(this, 3)">
+                            <div id="contentFileName_3" class="text-muted font-monospace text-truncate" style="font-size: 0.68rem;">
+                                ${not empty CHILD_PRODUCTS[2].image ? CHILD_PRODUCTS[2].image : 'Mặc định ảnh 3'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Image 4 -->
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="border p-3 bg-light text-center h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="fw-bold small text-uppercase mb-1 text-danger">Ảnh Chi Tiết 4</div>
+                            <div style="width: 100%; height: 160px; background: #FFFFFF; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px;">
+                                <img id="contentPreview_4" 
+                                     src="${not empty CHILD_PRODUCTS[3].image ? pageContext.request.contextPath.concat('/img-prj301/').concat(CHILD_PRODUCTS[3].image) : pageContext.request.contextPath.concat('/img-prj301/products/men/content/content-shirts-men-1-04.avif')}" 
+                                     alt="Content 4" 
+                                     style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                                     onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/content/content-shirts-men-1-04.avif';">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" name="contentImageHidden_4" value="${CHILD_PRODUCTS[3].image}">
+                            <input type="file" class="form-control form-control-sm rounded-0 mb-1" name="contentImage_4" accept="image/*" onchange="previewContentImg(this, 4)">
+                            <div id="contentFileName_4" class="text-muted font-monospace text-truncate" style="font-size: 0.68rem;">
+                                ${not empty CHILD_PRODUCTS[3].image ? CHILD_PRODUCTS[3].image : 'Mặc định ảnh 4'}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Submit Button Area -->
+        <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+            <a href="${pageContext.request.contextPath}/admin/product?action=list" class="btn btn-outline-dark rounded-0 px-4 py-2 fw-bold text-uppercase">
+                Hủy Bỏ
+            </a>
+            <button type="submit" class="btn btn-danger rounded-0 px-5 py-2 fw-bold text-uppercase" style="background-color: var(--color-primary, #ED1D24); letter-spacing: 0.5px;">
+                <i class="fa-solid fa-floppy-disk me-1"></i> ${isEdit ? 'Lưu Thay Đổi Sản Phẩm' : 'Lưu Sản Phẩm Mới'}
+            </button>
         </div>
     </form>
 </div>
@@ -202,7 +293,6 @@
 
     // Real-time formatted currency badge
     function formatPricePreview(input) {
-        // Strip any non-digit
         let val = input.value.replace(/[^0-9]/g, '');
         if (val === '') {
             document.getElementById('priceFormattedBadge').textContent = '0 đ';
@@ -253,6 +343,7 @@
         return true;
     }
 
+    // Cover image preview handler
     function handleFileSelect(input) {
         if (input.files && input.files[0]) {
             const file = input.files[0];
@@ -264,7 +355,26 @@
                 }
                 const label = document.getElementById('imgFileNameDisplay');
                 if (label) {
-                    label.textContent = 'File đã chọn: ' + file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
+                    label.textContent = file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // 4 Content images preview handler
+    function previewContentImg(input, index) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const preview = document.getElementById('contentPreview_' + index);
+                if (preview) {
+                    preview.src = e.target.result;
+                }
+                const label = document.getElementById('contentFileName_' + index);
+                if (label) {
+                    label.textContent = file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
                 }
             };
             reader.readAsDataURL(file);

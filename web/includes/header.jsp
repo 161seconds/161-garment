@@ -614,13 +614,18 @@
                     <!-- Right Box: Middle Search Bar + Action Icons -->
                     <div class="d-flex align-items-center gap-2">
                         <!-- Middle Search Bar (Pill Shape) -->
-                        <div class="search-box-container d-none d-md-block position-relative" style="width: 250px;">
-                            <input type="text" class="form-control rounded-pill pe-4 ps-3 py-1 border-dark-subtle small"
-                                placeholder="Bạn đang tìm sản phẩm gì?"
-                                style="font-size: 0.8rem; background-color: #F8F9FA;">
-                            <i class="fa-solid fa-magnifying-glass text-muted position-absolute top-50 end-0 translate-middle-y me-3"
-                                style="font-size: 0.8rem;"></i>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/product" method="GET" class="search-box-container d-none d-md-block position-relative m-0" style="width: 250px;">
+                            <input type="text" 
+                                   name="keyword" 
+                                   value="${param.keyword}" 
+                                   class="form-control rounded-pill pe-4 ps-3 py-1 border-dark-subtle small"
+                                   placeholder="Tìm kiếm sản phẩm..."
+                                   style="font-size: 0.8rem; background-color: #F8F9FA;"
+                                   autocomplete="off">
+                            <button type="submit" class="btn p-0 border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" title="Tìm kiếm">
+                                <i class="fa-solid fa-magnifying-glass text-muted" style="font-size: 0.8rem;"></i>
+                            </button>
+                        </form>
 
                         <!-- Right Action Icons -->
                         <div class="d-flex align-items-center gap-1 ms-2">
@@ -706,6 +711,7 @@
             </nav>
 
             <script>
+                window.CURRENT_USER_ID = '${sessionScope.LOGIN_USER != null ? sessionScope.LOGIN_USER.userID : "guest"}';
                 (function () {
                     function initSlidingUnderline() {
                         const nav = document.getElementById('mainCategoryNav');

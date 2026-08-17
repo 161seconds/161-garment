@@ -26,6 +26,8 @@ public class ProductController extends HttpServlet {
 
         if (action == null || action.equals("list")) {
             String categoryID = request.getParameter("categoryID");
+            String keyword = request.getParameter("keyword");
+            String sort = request.getParameter("sort");
             
             int pageSize = 10;
             int page = 1;
@@ -37,12 +39,19 @@ public class ProductController extends HttpServlet {
                     page = 1;
                 }
             }
-            
-            int totalProducts = pDao.getTotalProducts(categoryID);
-            int endPage = totalProducts / pageSize;
-            if (totalProducts % pageSize != 0) {
-                endPage++;
+
+            int totalProducts;
+            List<ProductDTO> products;
+
+            boolean hasKeyword = (keyword != null && !keyword.trim().isEmpty());
+
+            if (hasKeyword) {
+                totalProducts = pDao.countSearchProductsAdmin(keyword.trim(), categoryID);
+            } else {
+                totalProducts = pDao.getTotalProducts(categoryID);
             }
+            
+            int endPage = (totalProducts % pageSize == 0) ? (totalProducts / pageSize) : (totalProducts / pageSize + 1);
             
             if (page < 1) {
                 page = 1;
@@ -52,11 +61,20 @@ public class ProductController extends HttpServlet {
             }
             
             int offset = (page - 1) * pageSize;
-            List<ProductDTO> products = pDao.getProductsByPage(categoryID, offset, pageSize);
+
+            if (hasKeyword) {
+                products = pDao.searchProductsAdmin(keyword.trim(), categoryID, offset, pageSize, sort);
+            } else {
+                products = pDao.getProductsByPage(categoryID, offset, pageSize, sort);
+            }
             
             request.setAttribute("PRODUCTS", products);
+            request.setAttribute("totalProducts", totalProducts);
             request.setAttribute("endPage", endPage);
             request.setAttribute("currentPage", page);
+            request.setAttribute("keyword", keyword);
+            request.setAttribute("categoryID", categoryID);
+            request.setAttribute("sort", sort);
             
             request.getRequestDispatcher("product.jsp").forward(request, response);
             
