@@ -101,6 +101,7 @@ public class AdminController extends HttpServlet {
         int totalProducts = productDAO.getTotalProducts(null);
         int totalUsers = userDAO.getTotalUsersCount();
         int lowStockCount = productDAO.getLowStockCount(5);
+        Map<String, Integer> orderCounts = orderDAO.getOrderStatusCounts();
         List<OrderDTO> recentOrders = orderDAO.getRecentOrders(6);
 
         request.setAttribute("STAT_REVENUE", totalRevenue);
@@ -108,6 +109,7 @@ public class AdminController extends HttpServlet {
         request.setAttribute("STAT_PRODUCTS", totalProducts);
         request.setAttribute("STAT_USERS", totalUsers);
         request.setAttribute("STAT_LOW_STOCK", lowStockCount);
+        request.setAttribute("STAT_ORDER_COUNTS", orderCounts);
         request.setAttribute("RECENT_ORDERS", recentOrders);
 
         request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);

@@ -58,6 +58,46 @@ public class OrderHistoryController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/my-orders?success=cancelled");
                 return;
             }
+        } else if (action.equals("reorder")) {
+            String orderID = request.getParameter("id");
+            OrderDTO order = orderDAO.getOrderByID(orderID);
+            if (order != null && order.getUserID().equals(loginUser.getUserID())) {
+                List<OrderDetailDTO> details = orderDetailDAO.getOrderDetails(orderID);
+                model.ProductDAO productDAO = new model.ProductDAO();
+                List<model.CartItemDTO> cart = (List<model.CartItemDTO>) session.getAttribute("CART");
+                if (cart == null) {
+                    cart = new java.util.ArrayList<>();
+                }
+
+                for (OrderDetailDTO d : details) {
+                    model.ProductDTO p = productDAO.getProductByID(d.getProductID());
+                    if (p != null && p.isStatus()) {
+                        boolean found = false;
+                        for (model.CartItemDTO ci : cart) {
+                            if (ci.getProduct().getProductID().equals(p.getProductID())) {
+                                int newQty = ci.getQuantity() + d.getQuantity();
+                                if (p.getQuantity() > 0 && newQty > p.getQuantity()) {
+                                    newQty = p.getQuantity();
+                                }
+                                ci.setQuantity(newQty);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            int addQty = d.getQuantity();
+                            if (p.getQuantity() > 0 && addQty > p.getQuantity()) {
+                                addQty = p.getQuantity();
+                            }
+                            cart.add(new model.CartItemDTO(p, addQty));
+                        }
+                    }
+                }
+                session.setAttribute("CART", cart);
+                session.setAttribute("SUCCESS_MSG", "Đã thêm các sản phẩm từ đơn hàng #" + orderID + " vào giỏ hàng!");
+                response.sendRedirect(request.getContextPath() + "/cart");
+                return;
+            }
         }
 
         // List user's orders

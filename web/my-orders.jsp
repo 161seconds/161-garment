@@ -199,8 +199,14 @@
                                         <i class="fa-solid fa-ban me-1"></i> Hủy Đơn
                                     </a>
                                 </c:if>
+                                <a href="my-orders?action=reorder&id=${order.orderID}" 
+                                   class="btn btn-danger btn-sm rounded-0 fw-bold px-3 py-2 text-uppercase" 
+                                   style="background-color: var(--color-primary, #ED1D24); border-color: var(--color-primary, #ED1D24); font-size: 0.78rem;"
+                                   title="Thêm lại các sản phẩm này vào giỏ hàng">
+                                    <i class="fa-solid fa-rotate-right me-1"></i> Mua Lại
+                                </a>
                                 <a href="product" class="btn btn-outline-dark btn-sm rounded-0 fw-bold px-3 py-2" style="font-size: 0.78rem;">
-                                    <i class="fa-solid fa-bag-shopping me-1"></i> Tiếp Tục Mua Sắm
+                                    <i class="fa-solid fa-bag-shopping me-1"></i> Mua Thêm
                                 </a>
                             </div>
                         </div>
