@@ -255,14 +255,7 @@
                                      alt="${PRODUCT.name} - Ảnh ${st.index + 1}"
                                      onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/${PRODUCT.image}';">
                                 <span class="lookbook-tag">
-                                    <i class="fa-solid fa-camera"></i>
-                                    <c:choose>
-                                        <c:when test="${st.index == 0}">Mặt trước</c:when>
-                                        <c:when test="${st.index == 1}">Phối đồ</c:when>
-                                        <c:when test="${st.index == 2}">Chi tiết vải</c:when>
-                                        <c:when test="${st.index == 3}">Form dáng</c:when>
-                                        <c:otherwise>Góc chụp ${st.index + 1}</c:otherwise>
-                                    </c:choose>
+                                    <i class="fa-solid fa-camera"></i> Ảnh ${st.index + 1}
                                 </span>
                             </div>
                         </c:forEach>
@@ -512,7 +505,9 @@
     const CURRENT_PROD_IMG = '${PRODUCT.image}';
 
     function getWishlist() {
-        return JSON.parse(localStorage.getItem('one61_wishlist') || '[]');
+        return (typeof window.getOne61Wishlist === 'function') 
+            ? window.getOne61Wishlist() 
+            : JSON.parse(localStorage.getItem('one61_wishlist_' + (window.CURRENT_USER_ID || 'guest')) || '[]');
     }
 
     function checkWishlistState() {
@@ -541,7 +536,11 @@
                 price: CURRENT_PROD_PRICE,
                 img: CURRENT_PROD_IMG
             });
-            localStorage.setItem('one61_wishlist', JSON.stringify(wishlist));
+            if (typeof window.saveOne61Wishlist === 'function') {
+                window.saveOne61Wishlist(wishlist);
+            } else {
+                localStorage.setItem('one61_wishlist_' + (window.CURRENT_USER_ID || 'guest'), JSON.stringify(wishlist));
+            }
             btn.innerHTML = '<i class="fa-solid fa-heart text-danger"></i> ĐÃ THÊM VÀO YÊU THÍCH';
             btn.classList.add('border-danger', 'text-danger');
             if (typeof one61Toast === 'function') {
@@ -552,7 +551,11 @@
         } else {
             // Remove from wishlist
             wishlist.splice(index, 1);
-            localStorage.setItem('one61_wishlist', JSON.stringify(wishlist));
+            if (typeof window.saveOne61Wishlist === 'function') {
+                window.saveOne61Wishlist(wishlist);
+            } else {
+                localStorage.setItem('one61_wishlist_' + (window.CURRENT_USER_ID || 'guest'), JSON.stringify(wishlist));
+            }
             btn.innerHTML = '<i class="fa-regular fa-heart"></i> THÊM VÀO YÊU THÍCH';
             btn.classList.remove('border-danger', 'text-danger');
             if (typeof one61Toast === 'function') {
@@ -560,6 +563,9 @@
             } else {
                 alert('Đã xóa khỏi Danh sách Yêu thích');
             }
+        }
+        if (typeof window.updateWishlistBadge === 'function') {
+            window.updateWishlistBadge();
         }
     }
 

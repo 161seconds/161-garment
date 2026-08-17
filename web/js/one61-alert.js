@@ -276,9 +276,18 @@
         );
     };
 
-    // 4. Wishlist Modal & Helpers
+    // 4. Wishlist Modal & Helpers (Scoped per user account)
+    window.getOne61WishlistKey = function () {
+        const uid = (window.CURRENT_USER_ID && window.CURRENT_USER_ID.trim() !== '') ? window.CURRENT_USER_ID : 'guest';
+        return 'one61_wishlist_' + uid;
+    };
+
     window.getOne61Wishlist = function () {
-        return JSON.parse(localStorage.getItem('one61_wishlist') || '[]');
+        return JSON.parse(localStorage.getItem(window.getOne61WishlistKey()) || '[]');
+    };
+
+    window.saveOne61Wishlist = function (list) {
+        localStorage.setItem(window.getOne61WishlistKey(), JSON.stringify(list));
     };
 
     window.updateWishlistBadge = function () {
@@ -293,7 +302,7 @@
     window.removeFromWishlist = function (prodId) {
         let list = window.getOne61Wishlist();
         list = list.filter(item => item.id !== prodId);
-        localStorage.setItem('one61_wishlist', JSON.stringify(list));
+        window.saveOne61Wishlist(list);
         window.updateWishlistBadge();
         if (typeof checkWishlistState === 'function') checkWishlistState();
         window.showWishlistModal();
@@ -326,7 +335,7 @@
         `;
 
         list.forEach(item => {
-            const priceFormatted = Number(item.price || 0).toLocaleString('vi-VN') + ' đ';
+            const priceFormatted = Number(item.price || 0).toLocaleString('vi-VN') + ' &#273;';
             const detailUrl = (window.location.pathname.includes('pages/')) 
                 ? 'product-detail.html?id=' + item.id 
                 : 'product?action=detail&id=' + item.id;
@@ -361,7 +370,7 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
                 <span class="small text-muted">T&#7893;ng c&#7897;ng: <strong>${list.length}</strong> s&#7843;n ph&#7849;m</span>
-                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" style="font-size: 0.75rem;" onclick="localStorage.removeItem('one61_wishlist'); window.updateWishlistBadge(); if (typeof checkWishlistState === 'function') checkWishlistState(); window.showWishlistModal();">
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" style="font-size: 0.75rem;" onclick="localStorage.removeItem(window.getOne61WishlistKey()); window.updateWishlistBadge(); if (typeof checkWishlistState === 'function') checkWishlistState(); window.showWishlistModal();">
                     X&oacute;a t&#7845;t c&#7843;
                 </button>
             </div>

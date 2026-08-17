@@ -22,11 +22,21 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userID = request.getParameter("userID");
+        String email = request.getParameter("email");
+        if (email == null || email.trim().isEmpty()) {
+            email = request.getParameter("userID");
+        }
         String password = request.getParameter("password");
 
+        if (email == null || email.trim().isEmpty() || !email.contains("@")) {
+            request.setAttribute("ERROR", "Vui lòng nhập địa chỉ Gmail/Email hợp lệ để đăng nhập!");
+            request.setAttribute("enteredEmail", email);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
         UserDAO dao = new UserDAO();
-        UserDTO user = dao.checkLogin(userID, password);
+        UserDTO user = dao.checkLogin(email.trim(), password);
 
         if (user != null) {
             HttpSession session = request.getSession();
@@ -38,7 +48,8 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect("home");
             }
         } else {
-            request.setAttribute("ERROR", "Tài khoản hoặc mật khẩu không chính xác!");
+            request.setAttribute("ERROR", "Địa chỉ Gmail hoặc mật khẩu không chính xác!");
+            request.setAttribute("enteredEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }

@@ -15,18 +15,16 @@ import utils.PasswordUtils;
 
 public class UserDAO {
 
-    public UserDTO checkLogin(String identifier, String password) {
+    public UserDTO checkLogin(String email, String password) {
         UserDTO user = null;
-        String sql = "SELECT * FROM [User] WHERE (userID = ? OR email = ? OR phone = ?) AND password = ? AND status = 1";
+        String sql = "SELECT * FROM [User] WHERE LOWER(email) = LOWER(?) AND password = ? AND status = 1";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
              
-            String cleanIdentifier = (identifier != null) ? identifier.trim() : "";
-            ptm.setString(1, cleanIdentifier);
-            ptm.setString(2, cleanIdentifier);
-            ptm.setString(3, cleanIdentifier);
-            ptm.setString(4, PasswordUtils.hashPassword(password));
+            String cleanEmail = (email != null) ? email.trim() : "";
+            ptm.setString(1, cleanEmail);
+            ptm.setString(2, PasswordUtils.hashPassword(password));
             
             try (ResultSet rs = ptm.executeQuery()) {
                 if (rs.next()) {
@@ -203,14 +201,23 @@ public class UserDAO {
     }
 
     public boolean changePassword(String userID, String oldPassword, String newPassword) {
-        UserDTO existing = checkLogin(userID, oldPassword);
-        if (existing == null) {
-            return false; // Old password does not match
+        String verifySql = "SELECT userID FROM [User] WHERE userID = ? AND password = ? AND status = 1";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(verifySql)) {
+            ptm.setString(1, userID);
+            ptm.setString(2, PasswordUtils.hashPassword(oldPassword));
+            try (ResultSet rs = ptm.executeQuery()) {
+                if (!rs.next()) {
+                    return false; // Old password does not match
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
 
         boolean check = false;
         String sql = "UPDATE [User] SET password = ? WHERE userID = ?";
-                   
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
              

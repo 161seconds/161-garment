@@ -28,12 +28,16 @@
 
                     <form action="login" method="POST">
                         <div class="mb-3">
-                            <label for="userID" class="form-label fw-bold small text-uppercase">Email / Số điện thoại / Mã ID <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control rounded-0 fw-semibold" id="userID" name="userID" placeholder="Nhập Email, SĐT hoặc Mã ID..." required>
+                            <label for="email" class="form-label fw-bold small text-uppercase">
+                                <i class="fa-solid fa-envelope me-1 text-danger"></i> Địa chỉ Gmail / Email <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" class="form-control rounded-0 fw-semibold" id="email" name="email" value="${not empty enteredEmail ? enteredEmail : ''}" placeholder="VD: customer@gmail.com" autocomplete="email" required>
                         </div>
                         <div class="mb-4">
-                            <label for="password" class="form-label fw-bold small text-uppercase">Mật khẩu <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control rounded-0" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                            <label for="password" class="form-label fw-bold small text-uppercase">
+                                <i class="fa-solid fa-lock me-1 text-danger"></i> Mật khẩu <span class="text-danger">*</span>
+                            </label>
+                            <input type="password" class="form-control rounded-0" id="password" name="password" placeholder="Nhập mật khẩu" autocomplete="current-password" required>
                         </div>
                         <button type="submit" class="btn btn-danger rounded-0 w-100 py-3 fw-bold text-uppercase mb-3" style="background-color: var(--color-primary, #ED1D24); border-color: var(--color-primary, #ED1D24); letter-spacing: 1px;">
                             ĐĂNG NHẬP

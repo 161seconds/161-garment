@@ -142,7 +142,7 @@
                                                      alt="${item.productName}" 
                                                      class="w-100 h-100" 
                                                      style="object-fit: cover;"
-                                                     onerror="this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif'">
+                                                     onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/img-prj301/products/men/cover/cover-shirts-men-1.avif';">
                                             </a>
                                             <div>
                                                 <h6 class="fw-bold m-0 mb-1" style="font-size: 0.9rem;">

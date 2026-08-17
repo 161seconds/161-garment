@@ -25,4 +25,35 @@ public class PasswordUtils {
             throw new RuntimeException("SHA-256 algorithm not found", e);
         }
     }
+
+    /**
+     * Validates password complexity:
+     * - Minimum 6 characters
+     * - At least 1 uppercase letter (A-Z)
+     * - At least 1 number/digit (0-9)
+     * - At least 1 special character (!@#$%^&*...)
+     */
+    public static boolean isValidComplexity(String password) {
+        if (password == null || password.length() < 6) {
+            return false;
+        }
+        boolean hasUpper = false;
+        boolean hasDigit = false;
+        boolean hasSpecial = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (!Character.isWhitespace(c) && !Character.isLetterOrDigit(c)) {
+                hasSpecial = true;
+            }
+        }
+        return hasUpper && hasDigit && hasSpecial;
+    }
+
+    public static String getPasswordRequirementsMessage() {
+        return "Mật khẩu phải từ 6 ký tự trở lên, bao gồm ít nhất 1 chữ in hoa (A-Z), 1 chữ số (0-9) và 1 ký tự đặc biệt (ví dụ: @, #, $, %, !...)!";
+    }
 }

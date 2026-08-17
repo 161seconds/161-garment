@@ -170,13 +170,31 @@ public class ProductDAO {
         return total;
     }
 
-    public List<ProductDTO> getProductsByPage(String categoryID, int offset, int fetch) {
+    private String getOrderByClause(String sort) {
+        if (sort == null || sort.trim().isEmpty()) {
+            return " ORDER BY productID ASC";
+        }
+        switch (sort.trim().toLowerCase()) {
+            case "price-asc":
+                return " ORDER BY price ASC, productID ASC";
+            case "price-desc":
+                return " ORDER BY price DESC, productID ASC";
+            case "newest":
+                return " ORDER BY productID DESC";
+            case "popular":
+                return " ORDER BY quantity DESC, productID ASC";
+            default:
+                return " ORDER BY productID ASC";
+        }
+    }
+
+    public List<ProductDTO> getProductsByPage(String categoryID, int offset, int fetch, String sort) {
         List<ProductDTO> list = new ArrayList<>();
         String sql = "SELECT * FROM [Product] WHERE parentID IS NULL AND status = 1";
         if (categoryID != null && !categoryID.isEmpty()) {
             sql += " AND categoryID = ?";
         }
-        sql += " ORDER BY productID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        sql += getOrderByClause(sort) + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
@@ -199,6 +217,10 @@ public class ProductDAO {
         return list;
     }
 
+    public List<ProductDTO> getProductsByPage(String categoryID, int offset, int fetch) {
+        return getProductsByPage(categoryID, offset, fetch, null);
+    }
+
     public List<ProductDTO> getChildProducts(String parentID) {
         List<ProductDTO> list = new ArrayList<>();
         String sql = "SELECT * FROM [Product] WHERE parentID = ? AND status = 1 ORDER BY productID ASC";
@@ -218,7 +240,7 @@ public class ProductDAO {
         return list;
     }
 
-    public List<ProductDTO> searchProductsAdmin(String keyword, String categoryID, int offset, int fetch) {
+    public List<ProductDTO> searchProductsAdmin(String keyword, String categoryID, int offset, int fetch, String sort) {
         List<ProductDTO> list = new ArrayList<>();
         String sql = "SELECT * FROM [Product] WHERE parentID IS NULL AND status = 1";
         if (keyword != null && !keyword.trim().isEmpty()) {
@@ -227,7 +249,7 @@ public class ProductDAO {
         if (categoryID != null && !categoryID.trim().isEmpty() && !categoryID.equalsIgnoreCase("ALL")) {
             sql += " AND categoryID = ?";
         }
-        sql += " ORDER BY productID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        sql += getOrderByClause(sort) + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
@@ -253,6 +275,10 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public List<ProductDTO> searchProductsAdmin(String keyword, String categoryID, int offset, int fetch) {
+        return searchProductsAdmin(keyword, categoryID, offset, fetch, null);
     }
 
     public int countSearchProductsAdmin(String keyword, String categoryID) {
@@ -330,5 +356,58 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return String.format("PROD%02d", maxId + 1);
+    }
+
+    public boolean upsertChildProduct(String parentID, int index, String image, String name, String categoryID, double price) {
+        if (parentID == null || image == null || image.trim().isEmpty()) {
+            return false;
+        }
+
+        String childID = parentID + "-c" + index;
+        String checkSql = "SELECT 1 FROM [Product] WHERE productID = ?";
+        boolean exists = false;
+
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(checkSql)) {
+            ptm.setString(1, childID);
+            try (ResultSet rs = ptm.executeQuery()) {
+                exists = rs.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String childName = (name != null ? name : "Product") + " - View " + index;
+
+        if (exists) {
+            String updateSql = "UPDATE [Product] SET image = ?, name = ?, categoryID = ?, price = ?, status = 1 WHERE productID = ?";
+            try (Connection conn = DBUtils.getConnection();
+                 PreparedStatement ptm = conn.prepareStatement(updateSql)) {
+                ptm.setString(1, image);
+                ptm.setNString(2, childName);
+                ptm.setString(3, categoryID);
+                ptm.setDouble(4, price);
+                ptm.setString(5, childID);
+                return ptm.executeUpdate() > 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            String insertSql = "INSERT INTO [Product] (productID, name, description, price, quantity, image, categoryID, parentID, createDate, status) "
+                             + "VALUES (?, ?, '', ?, 0, ?, ?, ?, GETDATE(), 1)";
+            try (Connection conn = DBUtils.getConnection();
+                 PreparedStatement ptm = conn.prepareStatement(insertSql)) {
+                ptm.setString(1, childID);
+                ptm.setNString(2, childName);
+                ptm.setDouble(3, price);
+                ptm.setString(4, image);
+                ptm.setString(5, categoryID);
+                ptm.setString(6, parentID);
+                return ptm.executeUpdate() > 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }
