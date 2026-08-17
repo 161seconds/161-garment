@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import utils.DBUtils;
 import utils.PasswordUtils;
 
@@ -108,6 +110,74 @@ public class UserDAO {
             e.printStackTrace();
         }
         return check;
+    }
+    
+    public boolean updateProfile(String userID, String fullName, String email, String phone) {
+        boolean check = false;
+        String sql = "UPDATE [User] SET fullName = ?, email = ?, phone = ? WHERE userID = ?";
+                   
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setNString(1, fullName);
+            ptm.setString(2, email);
+            ptm.setString(3, phone);
+            ptm.setString(4, userID);
+            
+            check = ptm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+
+    public boolean changePassword(String userID, String oldPassword, String newPassword) {
+        UserDTO existing = checkLogin(userID, oldPassword);
+        if (existing == null) {
+            return false; // Old password does not match
+        }
+
+        boolean check = false;
+        String sql = "UPDATE [User] SET password = ? WHERE userID = ?";
+                   
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setString(1, PasswordUtils.hashPassword(newPassword));
+            ptm.setString(2, userID);
+            
+            check = ptm.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+
+    public Map<String, Object> getUserOrderStats(String userID) {
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalOrders", 0);
+        stats.put("processingOrders", 0);
+        stats.put("totalSpent", 0.0);
+
+        String sql = "SELECT COUNT(*) AS totalOrders, "
+                   + "SUM(CASE WHEN status IN ('PENDING', 'PROCESSING', 'SHIPPED') THEN 1 ELSE 0 END) AS processingOrders, "
+                   + "ISNULL(SUM(CASE WHEN status NOT IN ('CANCELLED') THEN totalMoney ELSE 0 END), 0) AS totalSpent "
+                   + "FROM [Order] WHERE userID = ?";
+
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+            ptm.setString(1, userID);
+            try (ResultSet rs = ptm.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("totalOrders", rs.getInt("totalOrders"));
+                    stats.put("processingOrders", rs.getInt("processingOrders"));
+                    stats.put("totalSpent", rs.getDouble("totalSpent"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stats;
     }
     
     public boolean deleteUser(String userID) {
