@@ -46,12 +46,13 @@ public class SepayWebhookController extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        // 1. Read Raw JSON body sent by SePay
+        // 1. Read Raw JSON body preserving exact characters and whitespace
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
+            char[] buffer = new char[2048];
+            int charsRead;
+            while ((charsRead = reader.read(buffer)) != -1) {
+                sb.append(buffer, 0, charsRead);
             }
         }
         String jsonPayload = sb.toString();
@@ -61,12 +62,11 @@ public class SepayWebhookController extends HttpServlet {
         String webhookSecret = EnvUtils.get("SEPAY_WEBHOOK_SECRET", "");
         String apiToken = EnvUtils.get("SEPAY_API_TOKEN", "");
 
-        // 2. Multi-Mode Authentication Check
+        // 2. Extract Authentication Headers
         String authHeader = request.getHeader("Authorization");
         String apiKeyHeader = request.getHeader("X-API-Key");
         if (apiKeyHeader == null) apiKeyHeader = request.getHeader("api-key");
         
-        // SePay HMAC-SHA256 signature header
         String signatureHeader = request.getHeader("x-sepay-signature");
         if (signatureHeader == null) signatureHeader = request.getHeader("X-SePay-Signature");
         if (signatureHeader == null) signatureHeader = request.getHeader("x-signature");
@@ -74,23 +74,22 @@ public class SepayWebhookController extends HttpServlet {
         String timestampHeader = request.getHeader("x-sepay-timestamp");
         if (timestampHeader == null) timestampHeader = request.getHeader("X-SePay-Timestamp");
 
-        System.out.println("[SePay Auth Diagnostic] Sig: [" + signatureHeader + "], Auth: [" + authHeader + "], APIKey: [" + apiKeyHeader + "], SecretConfigured: [" + (!webhookSecret.isEmpty()) + "]");
+        System.out.println("[SePay Diagnostic] Sig: [" + signatureHeader + "], Time: [" + timestampHeader + "], Auth: [" + authHeader + "], SecretConfigured: [" + (!webhookSecret.isEmpty()) + "]");
 
         boolean isAuthorized = false;
 
-        // If no secret or token is configured on this server, accept incoming test/ping
+        // If no secret or token is configured on this server environment, allow request in open mode
         if (webhookSecret.isEmpty() && apiToken.isEmpty()) {
             isAuthorized = true;
-            System.out.println("[SePay Webhook Notice]: No SEPAY_WEBHOOK_SECRET or SEPAY_API_TOKEN configured in server env. Allowing request in open mode.");
+            System.out.println("[SePay Webhook Notice]: No SEPAY_WEBHOOK_SECRET configured in server env. Allowing in open mode.");
         }
 
-        // Mode 1: HMAC-SHA256 Signature verification (when secret is configured)
+        // Mode 1: HMAC-SHA256 Signature verification (SePay standard: timestamp + "." + rawBody)
         if (!isAuthorized && signatureHeader != null && !signatureHeader.trim().isEmpty()) {
             if (!webhookSecret.isEmpty() && verifyHmacSha256(jsonPayload, timestampHeader, signatureHeader, webhookSecret)) {
                 isAuthorized = true;
                 System.out.println("[SePay Webhook Verified]: HMAC-SHA256 Signature MATCHED!");
             } else if (webhookSecret.isEmpty()) {
-                // If secret not configured in server environment yet, allow pass
                 isAuthorized = true;
                 System.out.println("[SePay Webhook Notice]: Server has no SEPAY_WEBHOOK_SECRET configured yet. Allowing request.");
             }
@@ -231,21 +230,22 @@ public class SepayWebhookController extends HttpServlet {
         try {
             String cleanSig = signatureHeader.trim().toLowerCase();
             if (cleanSig.startsWith("sha256=")) {
-                cleanSig = cleanSig.substring(7);
+                cleanSig = cleanSig.substring(7).trim();
             }
 
-            // Test Case 1: hash_hmac('sha256', rawBody, secretKey)
-            String hash1 = calculateHmac(rawBody, secretKey);
-            if (MessageDigest.isEqual(cleanSig.getBytes(StandardCharsets.UTF_8), hash1.getBytes(StandardCharsets.UTF_8))) {
-                return true;
-            }
-
-            // Test Case 2: hash_hmac('sha256', timestamp + "." + rawBody, secretKey)
+            // Standard SePay format: hash_hmac('sha256', timestamp + "." + rawBody, secretKey)
             if (timestamp != null && !timestamp.isEmpty()) {
-                String hash2 = calculateHmac(timestamp + "." + rawBody, secretKey);
-                if (MessageDigest.isEqual(cleanSig.getBytes(StandardCharsets.UTF_8), hash2.getBytes(StandardCharsets.UTF_8))) {
+                String dataToSign = timestamp + "." + rawBody;
+                String hash1 = calculateHmac(dataToSign, secretKey);
+                if (MessageDigest.isEqual(cleanSig.getBytes(StandardCharsets.UTF_8), hash1.getBytes(StandardCharsets.UTF_8))) {
                     return true;
                 }
+            }
+
+            // Fallback format: hash_hmac('sha256', rawBody, secretKey)
+            String hash2 = calculateHmac(rawBody, secretKey);
+            if (MessageDigest.isEqual(cleanSig.getBytes(StandardCharsets.UTF_8), hash2.getBytes(StandardCharsets.UTF_8))) {
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
