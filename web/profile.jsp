@@ -104,9 +104,9 @@
                     <input type="hidden" name="action" value="update-info">
 
                     <div class="mb-3">
-                        <label class="form-label fw-bold small text-uppercase">Tên đăng nhập (User ID)</label>
-                        <input type="text" class="form-control rounded-0 bg-light fw-bold font-monospace" value="${sessionScope.LOGIN_USER.userID}" readonly disabled>
-                        <div class="form-text small text-muted">Tên đăng nhập là định danh cố định không thể thay đổi.</div>
+                        <label class="form-label fw-bold small text-uppercase">Mã Thành Viên (Mã ID Định Danh)</label>
+                        <input type="text" class="form-control rounded-0 bg-light fw-bold font-monospace text-danger" value="${sessionScope.LOGIN_USER.userID}" readonly disabled>
+                        <div class="form-text small text-muted">Mã thành viên được hệ thống tự động cấp phát cố định. Bạn có thể dùng <strong>Email</strong> hoặc <strong>Số điện thoại</strong> để đăng nhập.</div>
                     </div>
 
                     <div class="mb-3">

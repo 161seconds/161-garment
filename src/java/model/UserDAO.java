@@ -8,20 +8,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import utils.DBUtils;
 import utils.PasswordUtils;
 
 public class UserDAO {
 
-    public UserDTO checkLogin(String userID, String password) {
+    public UserDTO checkLogin(String identifier, String password) {
         UserDTO user = null;
-        String sql = "SELECT * FROM [User] WHERE userID = ? AND password = ? AND status = 1";
+        String sql = "SELECT * FROM [User] WHERE (userID = ? OR email = ? OR phone = ?) AND password = ? AND status = 1";
         
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ptm = conn.prepareStatement(sql)) {
              
-            ptm.setString(1, userID);
-            ptm.setString(2, PasswordUtils.hashPassword(password));
+            String cleanIdentifier = (identifier != null) ? identifier.trim() : "";
+            ptm.setString(1, cleanIdentifier);
+            ptm.setString(2, cleanIdentifier);
+            ptm.setString(3, cleanIdentifier);
+            ptm.setString(4, PasswordUtils.hashPassword(password));
             
             try (ResultSet rs = ptm.executeQuery()) {
                 if (rs.next()) {
@@ -40,6 +45,72 @@ public class UserDAO {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public synchronized String generateNextUserID() {
+        int maxIndex = 0;
+        String sql = "SELECT userID FROM [User]";
+        Pattern pattern = Pattern.compile("(?:USR|usr|user|USER|CUS|cus)([0-9]+)");
+
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql);
+             ResultSet rs = ptm.executeQuery()) {
+
+            while (rs.next()) {
+                String id = rs.getString("userID");
+                if (id != null) {
+                    Matcher m = pattern.matcher(id);
+                    if (m.find()) {
+                        try {
+                            int num = Integer.parseInt(m.group(1));
+                            if (num > maxIndex) {
+                                maxIndex = num;
+                            }
+                        } catch (NumberFormatException ignored) {}
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (maxIndex == 0) {
+            int total = getTotalUsersCount();
+            maxIndex = Math.max(total, 0);
+        }
+
+        int nextIndex = maxIndex + 1;
+        return String.format("USR%02d", nextIndex);
+    }
+
+    public boolean isEmailExists(String email) {
+        if (email == null || email.trim().isEmpty()) return false;
+        String sql = "SELECT 1 FROM [User] WHERE email = ?";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+            ptm.setString(1, email.trim());
+            try (ResultSet rs = ptm.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isPhoneExists(String phone) {
+        if (phone == null || phone.trim().isEmpty()) return false;
+        String sql = "SELECT 1 FROM [User] WHERE phone = ?";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+            ptm.setString(1, phone.trim());
+            try (ResultSet rs = ptm.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean insertUser(UserDTO user) {
@@ -235,7 +306,7 @@ public class UserDAO {
             ptm.setInt(2, fetch);
             try (ResultSet rs = ptm.executeQuery()) {
                 while (rs.next()) {
-                    UserDTO user = new UserDTO();
+                    user = new UserDTO();
                     user.setUserID(rs.getString("userID"));
                     user.setFullName(rs.getNString("fullName"));
                     user.setPassword(rs.getString("password"));
