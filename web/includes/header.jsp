@@ -666,6 +666,11 @@
                                                 </li>
                                             </c:if>
                                             <li>
+                                                <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/profile">
+                                                    <i class="fa-solid fa-gear me-2 text-muted"></i> Cài đặt tài khoản
+                                                </a>
+                                            </li>
+                                            <li>
                                                 <a class="dropdown-item py-2" href="${pageContext.request.contextPath}/my-orders">
                                                     <i class="fa-solid fa-box-archive me-2 text-muted"></i> Đơn hàng của tôi
                                                 </a>
