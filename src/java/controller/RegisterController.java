@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.UserDAO;
 import model.UserDTO;
-import utils.CSRFUtils;
 
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
@@ -22,15 +21,47 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         
-        // Validate CSRF (nếu có form register phức tạp, ở đây tạm thời dùng cơ bản)
-        
-        String userID = request.getParameter("userID");
         String fullName = request.getParameter("fullName");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
+
+        UserDAO dao = new UserDAO();
+
+        // Validation
+        if (fullName == null || fullName.trim().isEmpty()) {
+            request.setAttribute("ERROR", "Vui lòng nhập họ và tên!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        if (email == null || !email.trim().contains("@")) {
+            request.setAttribute("ERROR", "Địa chỉ email không hợp lệ!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        if (dao.isEmailExists(email.trim())) {
+            request.setAttribute("ERROR", "Địa chỉ email này đã được đăng ký!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        if (phone != null && !phone.trim().isEmpty() && dao.isPhoneExists(phone.trim())) {
+            request.setAttribute("ERROR", "Số điện thoại này đã được đăng ký!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        if (password == null || password.length() < 6) {
+            request.setAttribute("ERROR", "Mật khẩu phải có độ dài tối thiểu từ 6 ký tự!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
 
         if (!password.equals(confirm)) {
             request.setAttribute("ERROR", "Mật khẩu xác nhận không khớp!");
@@ -38,27 +69,29 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
+        // Auto-generate User ID (e.g. USR01, USR02, USR25)
+        String newUserID = dao.generateNextUserID();
+
         UserDTO user = new UserDTO();
-        user.setUserID(userID);
-        user.setFullName(fullName);
-        user.setPassword(password); // UserDAO sẽ tự hash password
-        user.setEmail(email);
-        user.setPhone(phone);
+        user.setUserID(newUserID);
+        user.setFullName(fullName.trim());
+        user.setPassword(password); // UserDAO will hash using SHA-256
+        user.setEmail(email.trim());
+        user.setPhone(phone != null ? phone.trim() : "");
         user.setRoleID("CUS");
         user.setStatus(true);
 
-        UserDAO dao = new UserDAO();
         try {
             boolean check = dao.insertUser(user);
             if (check) {
-                request.setAttribute("SUCCESS", "Đăng ký thành công! Vui lòng đăng nhập.");
+                request.setAttribute("SUCCESS", "Đăng ký thành công! Mã thành viên: " + newUserID + ". Bạn có thể đăng nhập bằng Email hoặc Số điện thoại.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                request.setAttribute("ERROR", "Đăng ký thất bại!");
+                request.setAttribute("ERROR", "Đăng ký thất bại. Vui lòng thử lại!");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            request.setAttribute("ERROR", "ID User hoặc Email đã tồn tại!");
+            request.setAttribute("ERROR", "Có lỗi xảy ra trong quá trình đăng ký tài khoản!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
