@@ -4,6 +4,7 @@
 -- =======================================================================
 
 -- 0. Xoa cac bang cu theo thu tu khoa ngoai (neu da ton tai tren Somee)
+IF OBJECT_ID('dbo.CartItem', 'U') IS NOT NULL DROP TABLE dbo.CartItem;
 IF OBJECT_ID('dbo.Payment', 'U') IS NOT NULL DROP TABLE dbo.Payment;
 IF OBJECT_ID('dbo.OrderDetail', 'U') IS NOT NULL DROP TABLE dbo.OrderDetail;
 IF OBJECT_ID('dbo.[Order]', 'U') IS NOT NULL DROP TABLE dbo.[Order];
@@ -103,6 +104,16 @@ CREATE TABLE [Wishlist] (
     productID VARCHAR(50) FOREIGN KEY REFERENCES [Product](productID),
     addedDate DATETIME DEFAULT GETDATE(),
     PRIMARY KEY (userID, productID)
+);
+
+-- 10. CartItem Table (Persistent Shopping Cart)
+CREATE TABLE [CartItem] (
+    cartItemID INT IDENTITY(1,1) PRIMARY KEY,
+    userID VARCHAR(50) FOREIGN KEY REFERENCES [User](userID) ON DELETE CASCADE,
+    productID VARCHAR(50) FOREIGN KEY REFERENCES [Product](productID) ON DELETE CASCADE,
+    quantity INT NOT NULL DEFAULT 1,
+    addedDate DATETIME DEFAULT GETDATE(),
+    CONSTRAINT UQ_Cart_User_Product UNIQUE (userID, productID)
 );
 GO
 
@@ -327,4 +338,38 @@ INSERT INTO [Product] (productID, name, description, price, quantity, image, cat
 -- Address
 INSERT INTO [Address] (userID, receiverName, phone, addressLine, isDefault)
 VALUES ('user1', N'Nguyễn Văn A', '0987654321', N'123 Đường ABC, Quận 1, TP.HCM', 1);
+
+-- Sample Orders
+INSERT INTO [Order] (orderID, userID, orderDate, totalMoney, shippingAddress, note, status)
+VALUES 
+('ORD10001', 'user1', DATEADD(day, -2, GETDATE()), 1248000, N'Nguyễn Văn A (0987654321) - 123 Đường ABC, Quận 1, TP.HCM', N'[Thanh toán COD] Giao hàng giờ hành chính', 'DELIVERED'),
+('ORD10002', 'user1', DATEADD(day, -1, GETDATE()), 799000, N'Nguyễn Văn A (0987654321) - 123 Đường ABC, Quận 1, TP.HCM', N'[Thanh toán VietQR] Đã thanh toán chuyển khoản', 'PROCESSING'),
+('ORD10003', 'user1', GETDATE(), 599000, N'Nguyễn Văn A (0987654321) - 123 Đường ABC, Quận 1, TP.HCM', N'[Thanh toán COD]', 'PENDING');
+
+-- Sample Order Details
+INSERT INTO [OrderDetail] (orderID, productID, price, quantity)
+VALUES
+('ORD10001', 'PROD01', 599000, 1),
+('ORD10001', 'PROD03', 649000, 1),
+('ORD10002', 'PROD13', 799000, 1),
+('ORD10003', 'PROD02', 599000, 1);
+
+-- Sample Payments
+INSERT INTO [Payment] (paymentID, orderID, paymentMethod, paymentDate, amount, status)
+VALUES
+('PAY10001', 'ORD10001', 'COD', DATEADD(day, -2, GETDATE()), 1248000, 'SUCCESS'),
+('PAY10002', 'ORD10002', 'QR_CODE', DATEADD(day, -1, GETDATE()), 799000, 'SUCCESS');
+
+-- Sample Wishlist
+INSERT INTO [Wishlist] (userID, productID, addedDate)
+VALUES
+('user1', 'PROD01', GETDATE()),
+('user1', 'PROD05', GETDATE()),
+('user1', 'PROD13', GETDATE());
+
+-- Sample CartItem (Persistent Shopping Cart)
+INSERT INTO [CartItem] (userID, productID, quantity, addedDate)
+VALUES
+('user1', 'PROD04', 1, GETDATE()),
+('user1', 'PROD14', 2, GETDATE());
 GO

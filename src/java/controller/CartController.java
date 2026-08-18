@@ -21,7 +21,17 @@ public class CartController extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         
-        List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("CART");
+        model.UserDTO loginUser = (model.UserDTO) session.getAttribute("LOGIN_USER");
+        model.CartDAO cartDAO = new model.CartDAO();
+        
+        List<CartItemDTO> cart = null;
+
+        if (loginUser != null) {
+            cart = cartDAO.getCartByUserID(loginUser.getUserID());
+        } else {
+            cart = (List<CartItemDTO>) session.getAttribute("CART");
+        }
+
         if (cart == null) {
             cart = new ArrayList<>();
         }
@@ -48,23 +58,29 @@ public class CartController extends HttpServlet {
                 ProductDTO product = pDao.getProductByID(productID);
                 
                 if (product != null) {
-                    boolean exist = false;
-                    for (CartItemDTO item : cart) {
-                        if (item.getProduct().getProductID().equals(productID)) {
-                            int newTotal = item.getQuantity() + addQty;
-                            if (product.getQuantity() > 0 && newTotal > product.getQuantity()) {
-                                newTotal = product.getQuantity();
-                            }
-                            item.setQuantity(newTotal);
-                            exist = true;
-                            break;
-                        }
+                    if (product.getQuantity() > 0 && addQty > product.getQuantity()) {
+                        addQty = product.getQuantity();
                     }
-                    if (!exist) {
-                        if (product.getQuantity() > 0 && addQty > product.getQuantity()) {
-                            addQty = product.getQuantity();
+
+                    if (loginUser != null) {
+                        cartDAO.addToCart(loginUser.getUserID(), productID, addQty);
+                        cart = cartDAO.getCartByUserID(loginUser.getUserID());
+                    } else {
+                        boolean exist = false;
+                        for (CartItemDTO item : cart) {
+                            if (item.getProduct().getProductID().equals(productID)) {
+                                int newTotal = item.getQuantity() + addQty;
+                                if (product.getQuantity() > 0 && newTotal > product.getQuantity()) {
+                                    newTotal = product.getQuantity();
+                                }
+                                item.setQuantity(newTotal);
+                                exist = true;
+                                break;
+                            }
                         }
-                        cart.add(new CartItemDTO(product, addQty));
+                        if (!exist) {
+                            cart.add(new CartItemDTO(product, addQty));
+                        }
                     }
                     session.setAttribute("SUCCESS_MSG", "Đã thêm " + addQty + " sản phẩm [" + product.getName() + "] vào giỏ hàng!");
                 }
@@ -73,10 +89,18 @@ public class CartController extends HttpServlet {
                 for (CartItemDTO item : cart) {
                     if (item.getProduct().getProductID().equals(productID)) {
                         if (item.getProduct().getQuantity() > item.getQuantity()) {
-                            item.setQuantity(item.getQuantity() + 1);
+                            int newQty = item.getQuantity() + 1;
+                            if (loginUser != null) {
+                                cartDAO.updateQuantity(loginUser.getUserID(), productID, newQty);
+                            } else {
+                                item.setQuantity(newQty);
+                            }
                         }
                         break;
                     }
+                }
+                if (loginUser != null) {
+                    cart = cartDAO.getCartByUserID(loginUser.getUserID());
                 }
             } else if (action.equals("dec")) {
                 String productID = request.getParameter("id");
@@ -84,36 +108,63 @@ public class CartController extends HttpServlet {
                     CartItemDTO item = cart.get(i);
                     if (item.getProduct().getProductID().equals(productID)) {
                         if (item.getQuantity() > 1) {
-                            item.setQuantity(item.getQuantity() - 1);
+                            int newQty = item.getQuantity() - 1;
+                            if (loginUser != null) {
+                                cartDAO.updateQuantity(loginUser.getUserID(), productID, newQty);
+                            } else {
+                                item.setQuantity(newQty);
+                            }
                         } else {
-                            cart.remove(i);
+                            if (loginUser != null) {
+                                cartDAO.removeCartItem(loginUser.getUserID(), productID);
+                            } else {
+                                cart.remove(i);
+                            }
                         }
                         break;
                     }
                 }
+                if (loginUser != null) {
+                    cart = cartDAO.getCartByUserID(loginUser.getUserID());
+                }
             } else if (action.equals("remove")) {
                 String productID = request.getParameter("id");
-                cart.removeIf(item -> item.getProduct().getProductID().equals(productID));
+                if (loginUser != null) {
+                    cartDAO.removeCartItem(loginUser.getUserID(), productID);
+                    cart = cartDAO.getCartByUserID(loginUser.getUserID());
+                } else {
+                    cart.removeIf(item -> item.getProduct().getProductID().equals(productID));
+                }
             } else if (action.equals("update")) {
                 String productID = request.getParameter("id");
                 try {
                     int quantity = Integer.parseInt(request.getParameter("quantity"));
-                    for (CartItemDTO item : cart) {
-                        if (item.getProduct().getProductID().equals(productID)) {
-                            if (quantity > 0) {
-                                if (item.getProduct().getQuantity() > 0 && quantity > item.getProduct().getQuantity()) {
-                                    quantity = item.getProduct().getQuantity();
+                    if (loginUser != null) {
+                        cartDAO.updateQuantity(loginUser.getUserID(), productID, quantity);
+                        cart = cartDAO.getCartByUserID(loginUser.getUserID());
+                    } else {
+                        for (CartItemDTO item : cart) {
+                            if (item.getProduct().getProductID().equals(productID)) {
+                                if (quantity > 0) {
+                                    if (item.getProduct().getQuantity() > 0 && quantity > item.getProduct().getQuantity()) {
+                                        quantity = item.getProduct().getQuantity();
+                                    }
+                                    item.setQuantity(quantity);
+                                } else {
+                                    cart.remove(item);
                                 }
-                                item.setQuantity(quantity);
-                            } else {
-                                cart.remove(item);
+                                break;
                             }
-                            break;
                         }
                     }
                 } catch (NumberFormatException ignored) {}
             } else if (action.equals("clear")) {
-                cart.clear();
+                if (loginUser != null) {
+                    cartDAO.clearCart(loginUser.getUserID());
+                    cart.clear();
+                } else {
+                    cart.clear();
+                }
             }
         }
         
