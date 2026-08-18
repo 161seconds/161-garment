@@ -41,6 +41,15 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("LOGIN_USER", user);
+
+            // Sync and load user's persistent cart from Database
+            model.CartDAO cartDAO = new model.CartDAO();
+            List<model.CartItemDTO> sessionCart = (List<model.CartItemDTO>) session.getAttribute("CART");
+            if (sessionCart != null && !sessionCart.isEmpty()) {
+                cartDAO.mergeSessionCartToDB(user.getUserID(), sessionCart);
+            }
+            List<model.CartItemDTO> persistentCart = cartDAO.getCartByUserID(user.getUserID());
+            session.setAttribute("CART", persistentCart);
             
             if ("ADMIN".equals(user.getRoleID())) {
                 response.sendRedirect("admin/dashboard");

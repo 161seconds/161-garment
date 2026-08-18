@@ -89,6 +89,10 @@ public class CheckoutController extends HttpServlet {
         
         if (check) {
             session.removeAttribute("CART");
+            if (user != null) {
+                model.CartDAO cartDAO = new model.CartDAO();
+                cartDAO.clearCart(user.getUserID());
+            }
             request.setAttribute("SUCCESS_ORDER_ID", orderID);
             request.setAttribute("PAYMENT_METHOD", paymentMethod);
             request.setAttribute("TOTAL_MONEY", total);
