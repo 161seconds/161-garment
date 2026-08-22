@@ -30,6 +30,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 </c:if>
+<c:if test="${param.success eq 'status_toggled'}">
+    <div class="alert alert-success alert-dismissible fade show rounded-0 mb-4" role="alert">
+        <i class="fa-solid fa-circle-check me-2"></i> Đã cập nhật trạng thái hiển thị của danh mục!
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</c:if>
 
 <!-- Navigation Sub-Tabs -->
 <ul class="nav nav-tabs border-bottom-0 mb-3" id="categoryTabs" role="tablist">
@@ -104,12 +110,24 @@
                                                 title="Chỉnh sửa">
                                             <i class="fa-solid fa-pen-to-square"></i> Sửa
                                         </button>
-                                        <a href="${pageContext.request.contextPath}/admin/category?action=delete&id=${cat.categoryID}" 
-                                           class="btn btn-outline-danger rounded-0 px-2" 
-                                           onclick="return confirm('Bạn có chắc chắn muốn ẩn danh mục [${cat.name}] không?');" 
-                                           title="Ẩn">
-                                            <i class="fa-solid fa-eye-slash"></i> Ẩn
-                                        </a>
+                                        <c:choose>
+                                            <c:when test="${cat.status}">
+                                                <a href="${pageContext.request.contextPath}/admin/category?action=toggle_status&id=${cat.categoryID}" 
+                                                   class="btn btn-outline-danger rounded-0 px-2" 
+                                                   onclick="return confirm('Bạn có chắc chắn muốn ẩn danh mục [${cat.name}] không?');" 
+                                                   title="Ẩn danh mục">
+                                                    <i class="fa-solid fa-eye-slash"></i> Ẩn
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="${pageContext.request.contextPath}/admin/category?action=toggle_status&id=${cat.categoryID}" 
+                                                   class="btn btn-outline-success rounded-0 px-2" 
+                                                   onclick="return confirm('Bạn có muốn kích hoạt hiển thị lại danh mục [${cat.name}] không?');" 
+                                                   title="Hiện danh mục">
+                                                    <i class="fa-solid fa-eye"></i> Hiện
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </td>
                             </tr>

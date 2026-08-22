@@ -401,10 +401,10 @@ public class AdminController extends HttpServlet {
             }
             response.sendRedirect(request.getContextPath() + "/admin/category?action=list&tab=featured&success=featured_updated");
 
-        } else if (action.equals("delete")) {
+        } else if (action.equals("toggle_status") || action.equals("delete")) {
             String categoryID = request.getParameter("id");
-            categoryDAO.deleteCategory(categoryID);
-            response.sendRedirect(request.getContextPath() + "/admin/category?action=list&success=deleted");
+            categoryDAO.toggleCategoryStatus(categoryID);
+            response.sendRedirect(request.getContextPath() + "/admin/category?action=list&success=status_toggled");
         }
     }
 

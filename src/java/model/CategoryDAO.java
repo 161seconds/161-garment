@@ -160,6 +160,22 @@ public class CategoryDAO {
         return count;
     }
 
+    public boolean toggleCategoryStatus(String categoryID) {
+        boolean check = false;
+        String sql = "UPDATE [Category] SET status = CASE WHEN status = 1 THEN 0 ELSE 1 END WHERE categoryID = ?";
+                   
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ptm = conn.prepareStatement(sql)) {
+             
+            ptm.setString(1, categoryID);
+            check = ptm.executeUpdate() > 0;
+            if (check) invalidateCache();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+
     public boolean deleteCategory(String categoryID) {
         boolean check = false;
         String sql = "UPDATE [Category] SET status = 0 WHERE categoryID = ?";
