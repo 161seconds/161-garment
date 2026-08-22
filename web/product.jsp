@@ -1,6 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%
+    if (request.getAttribute("PRODUCTS") == null) {
+        String qs = request.getQueryString();
+        response.sendRedirect(request.getContextPath() + "/product" + (qs != null ? "?" + qs : ""));
+        return;
+    }
+%>
 <jsp:include page="includes/header.jsp">
     <jsp:param name="title" value="Tất Cả Sản Phẩm | ONE61 Garmentory" />
 </jsp:include>
@@ -264,7 +271,7 @@
 </div>
 
 <!-- Main Catalog Container -->
-<div class="container my-4 flex-grow-1">
+<div class="container my-4 flex-grow-1" id="catalogSection">
     <!-- Header Banner -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center pb-3 mb-4 border-bottom gap-3">
         <div>
@@ -535,21 +542,21 @@
                             <ul class="pagination justify-content-center">
                                 <li class="page-item ${currentPage <= 1 ? 'disabled' : ''}">
                                     <a class="page-link rounded-0 border-dark text-dark"
-                                       href="product?page=${currentPage - 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}">
+                                       href="product?page=${currentPage - 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}#catalogSection">
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                 </li>
                                 <c:forEach begin="1" end="${endPage}" var="i">
                                     <li class="page-item ${currentPage == i ? 'active' : ''}">
                                         <a class="page-link rounded-0 ${currentPage == i ? 'bg-danger border-danger text-white' : 'border-dark text-dark'}"
-                                           href="product?page=${i}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}">
+                                           href="product?page=${i}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}#catalogSection">
                                             ${i}
                                         </a>
                                     </li>
                                 </c:forEach>
                                 <li class="page-item ${currentPage >= endPage ? 'disabled' : ''}">
                                     <a class="page-link rounded-0 border-dark text-dark"
-                                       href="product?page=${currentPage + 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}">
+                                       href="product?page=${currentPage + 1}${not empty param.categoryID ? '&categoryID='.concat(param.categoryID) : ''}${not empty param.keyword ? '&keyword='.concat(param.keyword) : ''}${not empty param.sort ? '&sort='.concat(param.sort) : ''}#catalogSection">
                                         <i class="fa-solid fa-chevron-right"></i>
                                     </a>
                                 </li>

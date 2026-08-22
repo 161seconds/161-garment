@@ -1,9 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-            <jsp:include page="includes/header.jsp">
-                <jsp:param name="transparentHeader" value="true" />
-            </jsp:include>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%
+    if (request.getAttribute("PRODUCTS") == null) {
+        String qs = request.getQueryString();
+        response.sendRedirect(request.getContextPath() + "/home" + (qs != null ? "?" + qs : ""));
+        return;
+    }
+%>
+<jsp:include page="includes/header.jsp">
+    <jsp:param name="transparentHeader" value="true" />
+</jsp:include>
 
             <!-- Full Width Edge-to-Edge Hero Video Carousel (100vw) Behind Transparent Header -->
             <div id="heroVideoCarousel" class="carousel slide carousel-fade position-relative w-100 overflow-hidden"
@@ -143,25 +150,25 @@
                         <c:choose>
                             <c:when test="${param.categoryID.startsWith('WOMEN')}">
                                 <!-- WOMEN CATEGORIES -->
-                                <a href="home?categoryID=WOMEN_01" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_01' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=WOMEN_01#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_01' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shirt-and-blouses-icon-women.avif" alt="Áo Sơ Mi & Blouse">
                                     </div>
                                     <span class="uniqlo-cat-title">Sơ Mi & Blouse</span>
                                 </a>
-                                <a href="home?categoryID=WOMEN_02" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_02' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=WOMEN_02#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_02' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/women/outerwear-icon-women.avif" alt="Áo Khoác Nữ">
                                     </div>
                                     <span class="uniqlo-cat-title">Áo Khoác</span>
                                 </a>
-                                <a href="home?categoryID=WOMEN_03" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_03' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=WOMEN_03#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_03' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/women/bottom-icon-women.jpg" alt="Quần & Váy">
                                     </div>
                                     <span class="uniqlo-cat-title">Quần & Váy</span>
                                 </a>
-                                <a href="home?categoryID=WOMEN_04" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_04' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=WOMEN_04#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'WOMEN_04' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/women/shorts-and-culottes-icon.avif" alt="Shorts & Culottes">
                                     </div>
@@ -171,25 +178,25 @@
 
                             <c:otherwise>
                                 <!-- MEN CATEGORIES (Default) -->
-                                <a href="home?categoryID=MEN_01" class="uniqlo-cat-item ${param.categoryID eq 'MEN_01' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=MEN_01#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'MEN_01' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/men/shirts-icon-men.avif" alt="Áo Sơ Mi">
                                     </div>
                                     <span class="uniqlo-cat-title">Áo Sơ Mi</span>
                                 </a>
-                                <a href="home?categoryID=MEN_02" class="uniqlo-cat-item ${param.categoryID eq 'MEN_02' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=MEN_02#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'MEN_02' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/men/outerwear-icon-men.avif" alt="Áo Khoác">
                                     </div>
                                     <span class="uniqlo-cat-title">Áo Khoác</span>
                                 </a>
-                                <a href="home?categoryID=MEN_03" class="uniqlo-cat-item ${param.categoryID eq 'MEN_03' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=MEN_03#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'MEN_03' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/men/pants-men.avif" alt="Quần Dài">
                                     </div>
                                     <span class="uniqlo-cat-title">Quần Dài</span>
                                 </a>
-                                <a href="home?categoryID=MEN_04" class="uniqlo-cat-item ${param.categoryID eq 'MEN_04' ? 'fw-bold text-danger' : ''}">
+                                <a href="home?categoryID=MEN_04#storeSection" class="uniqlo-cat-item ${param.categoryID eq 'MEN_04' ? 'fw-bold text-danger' : ''}">
                                     <div class="uniqlo-cat-thumb">
                                         <img src="${pageContext.request.contextPath}/img-prj301/categories/men/jeans-men.png" alt="Quần Jeans">
                                     </div>
@@ -273,7 +280,7 @@
                                     <h5 class="text-muted fw-bold">Không tìm thấy sản phẩm nào!</h5>
                                     <p class="small text-muted mb-3">Vui lòng thử chọn danh mục khác hoặc quay lại sau.
                                     </p>
-                                    <a href="home" class="btn btn-dark rounded-0 fw-bold px-4 btn-sm">Xem tất cả</a>
+                                    <a href="home#storeSection" class="btn btn-dark rounded-0 fw-bold px-4 btn-sm">Xem tất cả</a>
                                 </div>
                             </c:if>
                         </div>
@@ -288,7 +295,7 @@
                                         <!-- Prev Button -->
                                         <li class="page-item ${currentPage <= 1 ? 'disabled' : ''}">
                                             <a class="page-link rounded-0 fw-bold px-3 py-2 text-dark bg-white border"
-                                                href="home?categoryID=${param.categoryID}&page=${currentPage - 1}"
+                                                href="home?${not empty param.categoryID ? 'categoryID='.concat(param.categoryID).concat('&') : ''}page=${currentPage - 1}#storeSection"
                                                 aria-label="Previous">
                                                 <i class="fa-solid fa-chevron-left"></i>
                                             </a>
@@ -298,14 +305,14 @@
                                         <c:forEach begin="1" end="${endPage}" var="i">
                                             <li class="page-item ${i == currentPage ? 'active' : ''}">
                                                 <a class="page-link rounded-0 fw-bold px-3 py-2 ${i == currentPage ? 'bg-danger border-danger text-white' : 'text-dark bg-white border'}"
-                                                    href="home?categoryID=${param.categoryID}&page=${i}">${i}</a>
+                                                    href="home?${not empty param.categoryID ? 'categoryID='.concat(param.categoryID).concat('&') : ''}page=${i}#storeSection">${i}</a>
                                             </li>
                                         </c:forEach>
 
                                         <!-- Next Button -->
                                         <li class="page-item ${currentPage >= endPage ? 'disabled' : ''}">
                                             <a class="page-link rounded-0 fw-bold px-3 py-2 text-dark bg-white border"
-                                                href="home?categoryID=${param.categoryID}&page=${currentPage + 1}"
+                                                href="home?${not empty param.categoryID ? 'categoryID='.concat(param.categoryID).concat('&') : ''}page=${currentPage + 1}#storeSection"
                                                 aria-label="Next">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                             </a>
@@ -314,7 +321,7 @@
                                 </nav>
 
                                 <!-- Direct Page Jump Input -->
-                                <form action="home" method="GET" class="d-flex align-items-center gap-2 small">
+                                <form action="home#storeSection" method="GET" class="d-flex align-items-center gap-2 small">
                                     <c:if test="${not empty param.categoryID}">
                                         <input type="hidden" name="categoryID" value="${param.categoryID}">
                                     </c:if>

@@ -25,16 +25,40 @@ public class EnvUtils {
                 ".env",
                 "../.env",
                 "../../.env",
-                System.getProperty("user.dir") + File.separator + ".env"
+                System.getProperty("user.dir") + File.separator + ".env",
+                System.getProperty("catalina.base") + File.separator + ".env"
             };
 
             File envFile = null;
             for (String path : possiblePaths) {
+                if (path == null) continue;
                 File f = new File(path);
                 if (f.exists() && f.isFile()) {
                     envFile = f;
                     break;
                 }
+            }
+
+            // Also check class protection domain location (inside war/webroot)
+            if (envFile == null) {
+                try {
+                    File classDir = new File(EnvUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                    // classDir is WEB-INF/classes/utils or similar, traverse up
+                    File current = classDir;
+                    for (int i = 0; i < 5 && current != null; i++) {
+                        File candidate = new File(current, ".env");
+                        if (candidate.exists() && candidate.isFile()) {
+                            envFile = candidate;
+                            break;
+                        }
+                        File webInfCandidate = new File(current, "WEB-INF" + File.separator + ".env");
+                        if (webInfCandidate.exists() && webInfCandidate.isFile()) {
+                            envFile = webInfCandidate;
+                            break;
+                        }
+                        current = current.getParentFile();
+                    }
+                } catch (Exception ignored) {}
             }
 
             if (envFile != null) {
